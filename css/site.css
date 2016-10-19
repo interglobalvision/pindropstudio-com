@@ -617,6 +617,36 @@ template {
   border-style: dashed;
 }
 @font-face {
+  font-family: 'Figgins Sans';
+  src: url("fonts/FigginsSans-Bold_gdi.woff") format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Figgins Sans';
+  src: url("fonts/FigginsSans-Regular_gdi.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Scotch Modern';
+  src: url("fonts/Scotch Modern.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Scotch Modern';
+  src: url("fonts/Scotch Modern Italic.woff") format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Scotch Micro';
+  src: url("fonts/Scotch Micro.woff") format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
   font-family: 'fontello';
   src: url("fontello.eot");
   font-weight: normal;
@@ -695,7 +725,7 @@ template {
   content: '\e80c';
 }
 html {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Scotch Modern';
   letter-spacing: 0.001em;
 }
 body {
@@ -705,10 +735,10 @@ p {
   margin-bottom: 1rem;
 }
 .font-sans {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Figgins Sans';
 }
 .font-serif {
-  font-family: Georgia, Times, "Times New Roman", serif;
+  font-family: 'Scotch Modern';
 }
 .font-larger {
   font-size: 1.3rem;
