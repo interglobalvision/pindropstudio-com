@@ -30,7 +30,8 @@
   <header id="header" class="container">
     <div class="grid-row">
       <div class="grid-item item-s-4">
-        <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+        <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
+        <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-logo.svg'); ?>
       </div>
       <div class="grid-item item-s-8">
         <ul id="menu" class="u-inline-list">
