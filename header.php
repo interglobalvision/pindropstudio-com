@@ -27,6 +27,23 @@
 
 <section id="main-container">
 
-  <header id="header">
-    <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+  <header id="header" class="container">
+    <div class="grid-row">
+      <div class="grid-item item-s-4">
+        <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+      </div>
+      <div class="grid-item item-s-8">
+        <ul id="menu" class="u-inline-list">
+          <li>Live</li>
+          <li>Sound & Vision</li>
+          <li>Luminaries</li>
+          <li>News</li>
+          <li>Shop</li>
+          <li>Join</li>
+          <li>Submit</li>
+          <li>About</li>
+          <li>[lock]</li>
+        </ul>
+      </div>
+    </div>
   </header>
