@@ -710,7 +710,7 @@ p a {
   text-decoration: underline;
 }
 html {
-  background-color: #fff;
+  background-color: #f1f1f1;
   color: #373a3c;
 }
 img {
@@ -1000,6 +1000,35 @@ h2,
 h3,
 .font-size-h3 {
   font-size: 24px;
+}
+#header {
+  padding-top: 28px;
+  padding-bottom: 14px;
+}
+#menu-item-logo svg {
+  width: 145px;
+  height: 130px;
+}
+#menu {
+  padding-top: 61px;
+  text-align: right;
+}
+#menu li {
+  margin-left: 14px;
+}
+#menu li:first-child {
+  margin-left: 0;
+}
+#menu a:hover,
+#menu a.active {
+  border-bottom: 1px solid #373a3c;
+  padding-bottom: 3px;
+}
+#menu-item-lock svg {
+  width: 11px;
+  height: 17px;
+  margin-top: -3px;
+  vertical-align: middle;
 }
 @media screen and (min-width: 720px) {
   .margin-top-micro {

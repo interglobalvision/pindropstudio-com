@@ -29,21 +29,21 @@
 
   <header id="header" class="container">
     <div class="grid-row">
-      <div class="grid-item item-s-4">
+      <div id="menu-item-logo" class="grid-item item-s-4">
         <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
         <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-logo.svg'); ?>
       </div>
       <nav class="grid-item item-s-8">
         <ul id="menu" class="fontstyle-micro u-inline-list">
-          <li>Live</li>
-          <li>Sound & Vision</li>
-          <li>Luminaries</li>
-          <li>News</li>
-          <li>Shop</li>
-          <li>Join</li>
-          <li>Submit</li>
-          <li>About</li>
-          <li>[lock]</li>
+          <li><a href="<?php echo home_url('live'); ?>">Live</a></li>
+          <li><a href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>
+          <li><a href="<?php echo home_url('luminaries'); ?>">Luminaries</a></li>
+          <li><a href="<?php echo home_url('news'); ?>">News</a></li>
+          <li><a href="">Shop</a></li>
+          <li><a href="<?php echo home_url('join'); ?>">Join</a></li>
+          <li><a href="<?php echo home_url('submit'); ?>">Submit</a></li>
+          <li><a href="<?php echo home_url('about'); ?>">About</a></li>
+          <li id="menu-item-lock"><a href="<?php echo home_url(); ?>"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-lock.svg'); ?></a></li>
         </ul>
       </nav>
     </div>
