@@ -3,21 +3,22 @@ get_header();
 ?>
 
 <main id="main-content">
-  <section id="posts">
-    <div class="container">
-      <div class="grid-row">
+  <section id="posts" class="container">
+    <div class="grid-row">
 
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 ?>
+        <article <?php post_class('grid-item item-s-12 item-m-4'); ?> id="post-<?php the_ID(); ?>">
 
-        <article <?php post_class('grid-item item-s-12'); ?> id="post-<?php the_ID(); ?>">
+          <?php the_post_thumbnail(); ?>
 
-          <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
+          <h4 class="fontstyle-micro"><?php the_time('d F Y'); ?></h4>
+          <h3><?php the_title(); ?></h3>
 
-          <?php the_content(); ?>
+          <?php the_excerpt(); ?>
 
         </article>
 
@@ -28,8 +29,7 @@ if( have_posts() ) {
         <article class="u-alert grid-item item-s-12"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
 <?php
 } ?>
-      
-      </div>
+
     </div>
   </section>
 
