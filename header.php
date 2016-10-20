@@ -29,11 +29,11 @@
 
   <header id="header" class="container">
     <div class="grid-row">
-      <div id="menu-item-logo" class="grid-item item-s-4">
+      <div id="menu-item-logo" class="grid-item item-s-12 item-m-2">
         <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
         <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-logo.svg'); ?>
       </div>
-      <nav class="grid-item item-s-8">
+      <nav class="grid-item item-s-12 item-m-10">
         <ul id="menu" class="fontstyle-micro u-inline-list">
           <li><a href="<?php echo home_url('live'); ?>">Live</a></li>
           <li><a href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>

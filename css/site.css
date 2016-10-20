@@ -1002,22 +1002,22 @@ h3,
   font-size: 24px;
 }
 #header {
-  padding-top: 28px;
+  padding-top: 14px;
   padding-bottom: 14px;
 }
 #menu-item-logo svg {
-  width: 145px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
 }
 #menu {
-  padding-top: 61px;
-  text-align: right;
+  padding-top: 7px;
+  text-align: left;
 }
 #menu li {
-  margin-left: 14px;
+  margin-right: 14px;
 }
-#menu li:first-child {
-  margin-left: 0;
+#menu li:last-child {
+  margin-right: 0;
 }
 #menu a:hover,
 #menu a.active {
@@ -1292,6 +1292,25 @@ h3,
   .mobile-only {
     display: none !important;
   }
+  #header {
+    padding-top: 42px;
+    padding-bottom: 21px;
+  }
+  #menu-item-logo svg {
+    width: 145px;
+    height: 130px;
+  }
+  #menu {
+    padding-top: 61px;
+    text-align: right;
+  }
+  #menu li {
+    margin-left: 21px;
+    margin-right: 0;
+  }
+  #menu li:first-child {
+    margin-left: 0;
+  }
 }
 @media screen and (min-width: 1024px) {
   .container {
@@ -1554,6 +1573,13 @@ h3,
   }
   .desktop-only {
     display: initial !important;
+  }
+  #header {
+    padding-top: 48px;
+    padding-bottom: 24px;
+  }
+  #menu li {
+    margin-left: 24px;
   }
 }
 @media screen and (min-width: 1280px) {
