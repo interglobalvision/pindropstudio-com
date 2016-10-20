@@ -32,11 +32,11 @@ function menuActiveClasses($item = null, $type = null, $classes = null) {
 
   if (itemIsType($item, $type)) {
     if ($classes) {
-      $returneClasses = 'active '. $classes;
+      $returnClasses = 'active '. $classes;
     } else {
-      $returneClasses = 'active';
+      $returnClasses = 'active';
     }
-    return 'class="' . $returneClasses . '"';
+    return 'class="' . $returnClasses . '"';
   } else {
     if ($classes) {
       return 'class="' . $classes . '"';
