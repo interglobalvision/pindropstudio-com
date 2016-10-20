@@ -12,7 +12,7 @@ function itemIsType($item = null, $type = null) {
       if(is_post_type_archive($item)) {
         return true;
         break;
-      } else if (get_post_type() === $item) {
+      } else if (is_singular($item)) {
         return true;
         break;
       }
