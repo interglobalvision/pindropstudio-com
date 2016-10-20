@@ -33,7 +33,7 @@
         <h1 class="u-visuallyhidden"><?php bloginfo('name'); ?></h1>
         <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-logo.svg'); ?>
       </div>
-      <div class="grid-item item-s-8">
+      <nav class="grid-item item-s-8">
         <ul id="menu" class="fontstyle-micro u-inline-list">
           <li>Live</li>
           <li>Sound & Vision</li>
@@ -45,6 +45,6 @@
           <li>About</li>
           <li>[lock]</li>
         </ul>
-      </div>
+      </nav>
     </div>
   </header>
