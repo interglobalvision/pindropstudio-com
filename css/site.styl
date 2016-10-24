@@ -35,6 +35,7 @@ normalize()
 
 $color-black = rgb(55, 58, 60)
 $color-white = rgb(255, 255, 255)
+$color-gray = rgba(62, 62, 62, 0.2)
 
 // ******************************************************
 
@@ -53,6 +54,18 @@ img
 
 .desktop-only
   display: none !important
+
+// BORDERS
+
+border($top = true, $left = true, $bottom = true, $right = true)
+  if ($top)
+    border-top: solid 1px $color-black
+  if ($left)
+    border-left: solid 1px $color-black
+  if ($bottom)
+    border-bottom: solid 1px $color-black
+  if ($right)
+    border-right: solid 1px $color-black
 
 // ******************************************************
 
