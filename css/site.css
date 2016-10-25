@@ -723,10 +723,24 @@ img {
 .desktop-only {
   display: none !important;
 }
+#shuffle-container {
+  display: block;
+  position: relative;
+  height: 0px;
+  overflow: hidden;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+#shuffle-preloader {
+  min-height: 80vh;
+}
 .container {
   width: 96%;
 }
-.grid-item {
+.grid-item,
+.shuffle-item {
   padding: 0 7px;
 }
 .grid-row .offset-s-0 {
@@ -1030,84 +1044,92 @@ h3,
   margin-top: -3px;
   vertical-align: middle;
 }
+.shuffle-item {
+  margin-bottom: 14px;
+}
+.card {
+  padding: 14px;
+  background-color: #fff;
+}
 @media screen and (min-width: 720px) {
   .margin-top-micro {
-    margin-top: 7px;
+    margin-top: 4.666666666666667px;
   }
   .margin-bottom-micro {
-    margin-bottom: 7px;
+    margin-bottom: 4.666666666666667px;
   }
   .padding-top-micro {
-    padding-top: 7px;
+    padding-top: 4.666666666666667px;
   }
   .padding-bottom-micro {
-    padding-bottom: 7px;
+    padding-bottom: 4.666666666666667px;
   }
   .margin-top-tiny {
-    margin-top: 10.5px;
+    margin-top: 7px;
   }
   .margin-bottom-tiny {
-    margin-bottom: 10.5px;
+    margin-bottom: 7px;
   }
   .padding-top-tiny {
-    padding-top: 10.5px;
+    padding-top: 7px;
   }
   .padding-bottom-tiny {
-    padding-bottom: 10.5px;
+    padding-bottom: 7px;
   }
   .margin-top-small {
-    margin-top: 21px;
+    margin-top: 14px;
   }
   .margin-bottom-small {
-    margin-bottom: 21px;
+    margin-bottom: 14px;
   }
   .padding-top-small {
-    padding-top: 21px;
+    padding-top: 14px;
   }
   .padding-bottom-small {
-    padding-bottom: 21px;
+    padding-bottom: 14px;
   }
   .margin-top-basic {
-    margin-top: 42px;
+    margin-top: 28px;
   }
   .margin-bottom-basic {
-    margin-bottom: 42px;
+    margin-bottom: 28px;
   }
   .padding-top-basic {
-    padding-top: 42px;
+    padding-top: 28px;
   }
   .padding-bottom-basic {
-    padding-bottom: 42px;
+    padding-bottom: 28px;
   }
   .margin-top-mid {
-    margin-top: 73.5px;
+    margin-top: 49px;
   }
   .margin-bottom-mid {
-    margin-bottom: 73.5px;
+    margin-bottom: 49px;
   }
   .padding-top-mid {
-    padding-top: 73.5px;
+    padding-top: 49px;
   }
   .padding-bottom-mid {
-    padding-bottom: 73.5px;
+    padding-bottom: 49px;
   }
   .margin-top-large {
-    margin-top: 105px;
+    margin-top: 70px;
   }
   .margin-bottom-large {
-    margin-bottom: 105px;
+    margin-bottom: 70px;
   }
   .padding-top-large {
-    padding-top: 105px;
+    padding-top: 70px;
   }
   .padding-bottom-large {
-    padding-bottom: 105px;
+    padding-bottom: 70px;
   }
   .container {
     width: 680px;
   }
-  .grid-item {
-    padding: 0 10.5px;
+  .grid-item,
+  .shuffle-item {
+    padding: 0 7px;
   }
   .grid-row .offset-m-0 {
     margin-left: 0%;
@@ -1293,8 +1315,8 @@ h3,
     display: none !important;
   }
   #header {
-    padding-top: 42px;
-    padding-bottom: 21px;
+    padding-top: 28px;
+    padding-bottom: 14px;
   }
   #menu-item-logo svg {
     width: 145px;
@@ -1305,19 +1327,26 @@ h3,
     text-align: right;
   }
   #menu li {
-    margin-left: 21px;
+    margin-left: 14px;
     margin-right: 0;
   }
   #menu li:first-child {
     margin-left: 0;
+  }
+  .shuffle-item {
+    margin-bottom: 14px;
+  }
+  .card {
+    padding: 14px;
   }
 }
 @media screen and (min-width: 1024px) {
   .container {
     width: 1000px;
   }
-  .grid-item {
-    padding: 0 12px;
+  .grid-item,
+  .shuffle-item {
+    padding: 0 8px;
   }
   .grid-row .offset-l-0 {
     margin-left: 0%;
@@ -1500,86 +1529,92 @@ h3,
     max-height: 100%;
   }
   .margin-top-micro {
-    margin-top: 8px;
+    margin-top: 5.333333333333333px;
   }
   .margin-bottom-micro {
-    margin-bottom: 8px;
+    margin-bottom: 5.333333333333333px;
   }
   .padding-top-micro {
-    padding-top: 8px;
+    padding-top: 5.333333333333333px;
   }
   .padding-bottom-micro {
-    padding-bottom: 8px;
+    padding-bottom: 5.333333333333333px;
   }
   .margin-top-tiny {
-    margin-top: 12px;
+    margin-top: 8px;
   }
   .margin-bottom-tiny {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .padding-top-tiny {
-    padding-top: 12px;
+    padding-top: 8px;
   }
   .padding-bottom-tiny {
-    padding-bottom: 12px;
+    padding-bottom: 8px;
   }
   .margin-top-small {
-    margin-top: 24px;
+    margin-top: 16px;
   }
   .margin-bottom-small {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   .padding-top-small {
-    padding-top: 24px;
+    padding-top: 16px;
   }
   .padding-bottom-small {
-    padding-bottom: 24px;
+    padding-bottom: 16px;
   }
   .margin-top-basic {
-    margin-top: 48px;
+    margin-top: 32px;
   }
   .margin-bottom-basic {
-    margin-bottom: 48px;
+    margin-bottom: 32px;
   }
   .padding-top-basic {
-    padding-top: 48px;
+    padding-top: 32px;
   }
   .padding-bottom-basic {
-    padding-bottom: 48px;
+    padding-bottom: 32px;
   }
   .margin-top-mid {
-    margin-top: 84px;
+    margin-top: 56px;
   }
   .margin-bottom-mid {
-    margin-bottom: 84px;
+    margin-bottom: 56px;
   }
   .padding-top-mid {
-    padding-top: 84px;
+    padding-top: 56px;
   }
   .padding-bottom-mid {
-    padding-bottom: 84px;
+    padding-bottom: 56px;
   }
   .margin-top-large {
-    margin-top: 120px;
+    margin-top: 80px;
   }
   .margin-bottom-large {
-    margin-bottom: 120px;
+    margin-bottom: 80px;
   }
   .padding-top-large {
-    padding-top: 120px;
+    padding-top: 80px;
   }
   .padding-bottom-large {
-    padding-bottom: 120px;
+    padding-bottom: 80px;
   }
   .desktop-only {
     display: initial !important;
   }
   #header {
-    padding-top: 48px;
-    padding-bottom: 24px;
+    padding-top: 32px;
+    padding-bottom: 16px;
   }
   #menu li {
-    margin-left: 24px;
+    margin-left: 16px;
+  }
+  .shuffle-item {
+    margin-bottom: 16px;
+  }
+  .card {
+    padding: 16px;
   }
 }
 @media screen and (min-width: 1280px) {

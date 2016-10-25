@@ -4,22 +4,23 @@ get_header();
 
 <main id="main-content">
   <section id="posts" class="container">
-    <div class="grid-row">
+    <div id="shuffle-preloader"></div>
+    <div id="shuffle-container" class="grid-row">
 
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 ?>
-        <article <?php post_class('grid-item item-s-12 item-m-4'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('shuffle-item item-s-12 item-m-4'); ?> id="post-<?php the_ID(); ?>">
+          <div class="card">
+            <?php the_post_thumbnail('post-thumbnail', array('class' => 'margin-bottom-tiny')); ?>
 
-          <?php the_post_thumbnail(); ?>
+            <h4 class="fontstyle-micro margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>
+            <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
 
-          <h4 class="fontstyle-micro"><?php the_time('d F Y'); ?></h4>
-          <h3><?php the_title(); ?></h3>
-
-          <?php the_excerpt(); ?>
-
+            <?php the_excerpt(); ?>
+          </div>
         </article>
 
 <?php
