@@ -35,7 +35,7 @@ normalize()
 
 $color-black = rgb(55, 58, 60)
 $color-white = rgb(255, 255, 255)
-$color-gray = rgba(62, 62, 62, 0.2)
+$color-gray = rgba(62, 62, 62, .2)
 
 // ******************************************************
 
@@ -81,15 +81,12 @@ $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
 $font-size-basic = 16px
-$font-size-h1 = 28px
-$font-size-h2 = 21px
-$font-size-h3 = 16px
 
 grid(96%, $gutter, s)
 
 space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-font-sizes($font-size-basic, $font-size-h1, $font-size-h2, $font-size-h3)
+font-sizes($font-size-basic) 
 
 @import 'responsive/mobile'
 
