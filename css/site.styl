@@ -36,6 +36,7 @@ normalize()
 $color-black = rgb(55, 58, 60)
 $color-white = rgb(255, 255, 255)
 $color-light-gray = rgb(241, 241, 241)
+$color-dark-gray = rgba(55, 58, 60, 0.498039)
 
 $speed-animation-fast = .3s
 
@@ -59,6 +60,23 @@ img
 
 // ******************************************************
 
+// BORDERS
+
+.dotted-divider
+  display: flex
+  justify-content: space-between
+
+.dotted-divider-side
+  border-top-style: dotted
+  border-top-width: 1px
+  border-top-color: $color-dark-gray
+  flex-grow: 2
+
+.dotted-divider-center
+  flex-grow: 0
+
+// ******************************************************
+
 // SHUFFLE
 
 #shuffle-container
@@ -71,6 +89,8 @@ img
 
 #shuffle-preloader
   min-height: 80vh
+
+// ******************************************************
 
 // MEDIA QUERIES
 
