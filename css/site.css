@@ -678,10 +678,10 @@ p {
 .font-uppercase {
   text-transform: uppercase;
 }
-.fontstyle-shadow {
+.font-style-shadow {
   text-shadow: rgba(0,0,0,0.6) 0px 1px 2px;
 }
-.fontstyle-micro {
+.font-style-micro {
   font-family: 'Scotch Micro';
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -984,7 +984,7 @@ img {
 html {
   font-size: 16px;
 }
-.fontstyle-micro {
+.font-style-micro {
   font-size: 11px;
 }
 h1,

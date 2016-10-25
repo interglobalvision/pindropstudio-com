@@ -34,7 +34,7 @@
         <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-logo.svg'); ?>
       </div>
       <nav class="grid-item item-s-8">
-        <ul id="menu" class="fontstyle-micro u-inline-list">
+        <ul id="menu" class="font-style-micro u-inline-list">
           <li>Live</li>
           <li>Sound & Vision</li>
           <li>Luminaries</li>
