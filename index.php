@@ -16,7 +16,7 @@ if( have_posts() ) {
           <div class="card">
             <?php the_post_thumbnail('post-thumbnail', array('class' => 'margin-bottom-tiny')); ?>
 
-            <h4 class="fontstyle-micro margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>
+            <h4 class="font-style-micro margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>
             <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
 
             <?php the_excerpt(); ?>

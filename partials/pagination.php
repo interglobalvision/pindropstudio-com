@@ -4,7 +4,7 @@ if( get_next_posts_link() || get_previous_posts_link() ) {
   <!-- post pagination -->
   <nav id="pagination" class="container">
     <div class="grid-row margin-top-basic margin-bottom-large">
-      <div class="grid-item item-s-12 fontstyle-micro text-align-center">
+      <div class="grid-item item-s-12 font-style-micro text-align-center">
         <div class="dotted-divider">
           <div class="dotted-divider-side dotted-divider-left"></div>
           <div class="dotted-divider-center">

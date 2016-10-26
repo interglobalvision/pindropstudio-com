@@ -1,6 +1,6 @@
   <footer id="footer" class="container">
     <div class="grid-row">
-      <div class="grid-item item-s-12 item-m-6 offset-m-3 fontstyle-micro text-align-center">
+      <div class="grid-item item-s-12 item-m-6 offset-m-3 font-style-micro text-align-center">
         <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-pin.svg'); ?>
         <ul id="footer-menu" class="u-inline-list">
           <li>Live</li>
