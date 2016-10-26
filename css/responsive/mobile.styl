@@ -1,4 +1,33 @@
+// HEADER
 
+#header
+  padding-top: $margin-small
+  padding-bottom: $margin-small
+
+#menu-item-logo
+  svg
+    width: 100px
+    height: 100px
+
+#menu
+  padding-top: $margin-tiny
+  text-align: left
+  li
+    margin-right: $margin-small
+    &:last-child
+      margin-right: 0
+  a:hover, a.active
+    border-bottom: 1px solid $color-black
+    padding-bottom: 3px
+
+#menu-item-lock
+  svg
+    width: 11px
+    height: 17px
+    margin-top: -3px
+    vertical-align: middle
+
+// ******************************************************
 
 // FOOTER
 
@@ -24,3 +53,5 @@
     padding: $margin-tiny
     &:hover
       background-color: $color-gray
+
+// ******************************************************
