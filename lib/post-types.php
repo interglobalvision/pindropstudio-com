@@ -1,60 +1,54 @@
 <?php
-// Menu icons for Custom Post Types
-// https://developer.wordpress.org/resource/dashicons/
-function add_menu_icons_styles(){
-?>
- 
-<style>
-#menu-posts-project .dashicons-admin-post:before {
-    content: '\f319';
+
+// Register Custom Post Type
+function luminaries() {
+
+	$labels = array(
+		'name'                  => _x( 'Luminaries', 'Post Type General Name', 'igv' ),
+		'singular_name'         => _x( 'Luminary', 'Post Type Singular Name', 'igv' ),
+		'menu_name'             => __( 'Luminaries', 'igv' ),
+		'name_admin_bar'        => __( 'Luminaries', 'igv' ),
+		'archives'              => __( 'Item Archives', 'igv' ),
+		'parent_item_colon'     => __( 'Parent Luminary:', 'igv' ),
+		'all_items'             => __( 'All Luminaries', 'igv' ),
+		'add_new_item'          => __( 'Add New Luminary', 'igv' ),
+		'add_new'               => __( 'Add Luminary', 'igv' ),
+		'new_item'              => __( 'New Luminary', 'igv' ),
+		'edit_item'             => __( 'Edit Luminary', 'igv' ),
+		'update_item'           => __( 'Update Luminary', 'igv' ),
+		'view_item'             => __( 'View Luminary', 'igv' ),
+		'search_items'          => __( 'Search Luminaries', 'igv' ),
+		'not_found'             => __( 'Not found', 'igv' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'igv' ),
+		'featured_image'        => __( 'Featured Image', 'igv' ),
+		'set_featured_image'    => __( 'Set featured image', 'igv' ),
+		'remove_featured_image' => __( 'Remove featured image', 'igv' ),
+		'use_featured_image'    => __( 'Use as featured image', 'igv' ),
+		'insert_into_item'      => __( 'Insert into item', 'igv' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', 'igv' ),
+		'items_list'            => __( 'Items list', 'igv' ),
+		'items_list_navigation' => __( 'Items list navigation', 'igv' ),
+		'filter_items_list'     => __( 'Filter items list', 'igv' ),
+	);
+	$args = array(
+		'label'                 => __( 'Luminary', 'igv' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor', 'thumbnail', 'page-attributes', ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'menu_icon'             => 'dashicons-admin-users',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'luminaries', $args );
+
 }
-</style>
- 
-<?php
-}
-add_action( 'admin_head', 'add_menu_icons_styles' );
-
-
-//Register Custom Post Types
-add_action( 'init', 'register_cpt_project' );
-
-function register_cpt_project() {
-
-    $labels = array( 
-        'name' => _x( 'Projects', 'project' ),
-        'singular_name' => _x( 'Project', 'project' ),
-        'add_new' => _x( 'Add New', 'project' ),
-        'add_new_item' => _x( 'Add New Project', 'project' ),
-        'edit_item' => _x( 'Edit Project', 'project' ),
-        'new_item' => _x( 'New Project', 'project' ),
-        'view_item' => _x( 'View Project', 'project' ),
-        'search_items' => _x( 'Search Projects', 'project' ),
-        'not_found' => _x( 'No projects found', 'project' ),
-        'not_found_in_trash' => _x( 'No projects found in Trash', 'project' ),
-        'parent_item_colon' => _x( 'Parent Project:', 'project' ),
-        'menu_name' => _x( 'Projects', 'project' ),
-    );
-
-    $args = array( 
-        'labels' => $labels,
-        'hierarchical' => false,
-        
-        'supports' => array( 'title', 'editor', 'thumbnail' ),
-        
-        'public' => true,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'menu_position' => 5,
-        
-        'show_in_nav_menus' => true,
-        'publicly_queryable' => true,
-        'exclude_from_search' => false,
-        'has_archive' => true,
-        'query_var' => true,
-        'can_export' => true,
-        'rewrite' => true,
-        'capability_type' => 'post'
-    );
-
-    register_post_type( 'project', $args );
-}
+add_action( 'init', 'luminaries', 0 );
