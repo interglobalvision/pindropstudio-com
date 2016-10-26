@@ -8,7 +8,7 @@ get_header();
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
-?>
+  ?>
   <article id="single-luminary" <?php post_class('container'); ?>>
     <div class="grid-row">
       <div class="grid-item item-s-12 text-align-center">
@@ -21,11 +21,9 @@ if( have_posts() ) {
         <?php the_content(); ?>
       </div>
     </div>
-    <div class="grid-row">
-      <div class="grid-item item-s-12">
-        >>>related
-      </div>
-    </div>
+    <?php
+      get_template_part('partials/related-posts');
+    ?>
   </article>
 <?php
   }
