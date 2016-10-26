@@ -15,7 +15,7 @@ if( have_posts() ) {
 
           <?php the_post_thumbnail(); ?>
 
-          <h4 class="fontstyle-micro"><?php the_time('d F Y'); ?></h4>
+          <h4 class="font-style-micro"><?php the_time('d F Y'); ?></h4>
           <h3><?php the_title(); ?></h3>
 
           <?php the_excerpt(); ?>

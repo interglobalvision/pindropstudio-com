@@ -678,10 +678,10 @@ p {
 .font-uppercase {
   text-transform: uppercase;
 }
-.fontstyle-shadow {
+.font-style-shadow {
   text-shadow: rgba(0,0,0,0.6) 0px 1px 2px;
 }
-.fontstyle-micro {
+.font-style-micro {
   font-family: 'Scotch Micro';
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -984,7 +984,7 @@ img {
 html {
   font-size: 16px;
 }
-.fontstyle-micro {
+.font-style-micro {
   font-size: 11px;
 }
 h1,
@@ -1029,6 +1029,36 @@ h3,
   height: 17px;
   margin-top: -3px;
   vertical-align: middle;
+}
+#footer {
+  padding-top: 14px;
+  padding-bottom: 28px;
+}
+#footer-pin-holder {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+#footer-pin-holder svg {
+  height: 130px;
+}
+.footer-menu {
+  margin-bottom: 28px;
+}
+.footer-menu li {
+  margin: 0 7px;
+}
+#footer-social-menu {
+  margin-bottom: 49px;
+}
+#footer-social-menu a {
+  border-top: solid 1px #373a3c;
+  border-left: solid 1px #373a3c;
+  border-bottom: solid 1px #373a3c;
+  border-right: solid 1px #373a3c;
+  padding: 7px;
+}
+#footer-social-menu a:hover {
+  background-color: rgba(62,62,62,0.2);
 }
 @media screen and (min-width: 720px) {
   .margin-top-micro {
