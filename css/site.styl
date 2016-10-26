@@ -84,8 +84,9 @@ img
   position: relative
   height: 0px
   overflow: hidden
-  opacity: 0
   transition: opacity $speed-animation-fast
+  &.hidden 
+    opacity: 0
 
 #shuffle-preloader
   min-height: 80vh

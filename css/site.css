@@ -752,10 +752,12 @@ img {
   position: relative;
   height: 0px;
   overflow: hidden;
+  transition: opacity 0.3s;
+}
+#shuffle-container.hidden {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
   opacity: 0;
-  transition: opacity 0.3s;
 }
 #shuffle-preloader {
   min-height: 80vh;

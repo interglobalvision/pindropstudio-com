@@ -54,7 +54,7 @@ Site.News = {
     var _this = this;
 
     $('#shuffle-preloader').remove();
-    $(_this.shuffleContainer).css('opacity', 1)
+    $(_this.shuffleContainer).removeClass('hidden');
 
     _this.shuffleInstance = new Shuffle(_this.shuffleContainer, {
       itemSelector: '.shuffle-item',
