@@ -23,7 +23,7 @@
         <?php the_post_thumbnail('post-thumbnail', array('class' => 'margin-bottom-tiny')); ?>
         <h3 class="margin-bottom-small"><?php the_title(); ?></h3>
       </a>
-      <a class="link-button font-uppercase" href="<?php the_permalink(); ?>">Read More</a>
+      <a href="<?php the_permalink(); ?>" class="link-button font-uppercase" >Read More</a>
     </div>
   </div>
 <?php

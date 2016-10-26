@@ -20,7 +20,7 @@
           <li><a href="<?php echo home_url('contact'); ?>">Contact</a></li>
           <li><a href="<?php echo home_url('credits'); ?>">Credits</a></li>
         </ul>
-        <ul id="footer-social-menu" class="footer-menu u-inline-list">
+        <ul id="footer-social-menu" class="footer-menu u-inline-list margin-bottom-mid">
         <?php
           $twitter = IGV_get_option('_igv_site_options', '_igv_socialmedia_twitter');
           $facebook = IGV_get_option('_igv_site_options', '_igv_socialmedia_facebook_url');
@@ -28,17 +28,17 @@
 
           if ($twitter) {
         ?>
-          <li><a href="https://twitter.com/<?php echo $twitter; ?>" target="_blank" rel="noreferrer">Twitter</a></li>
+          <li><a href="https://twitter.com/<?php echo $twitter; ?>" class="link-button" target="_blank" rel="noreferrer">Twitter</a></li>
         <?php
           }
           if ($facebook) {
         ?>
-          <li><a href="<?php echo $facebook; ?>" target="_blank" rel="noreferrer">Facebook</a></li>
+          <li><a href="<?php echo $facebook; ?>" target="_blank" class="link-button" rel="noreferrer">Facebook</a></li>
         <?php
           }
           if ($instagram) {
         ?>
-          <li><a href="https://instagram.com/<?php echo $instagram; ?>" target="_blank" rel="noreferrer">Instagram</a></li>
+          <li><a href="https://instagram.com/<?php echo $instagram; ?>" target="_blank" class="link-button" rel="noreferrer">Instagram</a></li>
         <?php
           }
         ?>
