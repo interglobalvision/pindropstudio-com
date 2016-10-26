@@ -6,7 +6,7 @@ $suffix = '_options';
 $page_key = $prefix . 'site' . $suffix;
 $page_title = 'Site Options';
 $metabox = array(
-  'id'         => $page_key, //id used as tab page slug, must be unique
+  'id'         => $page_key, // id used as tab page slug, must be unique
   'title'      => $page_title,
   'show_on'    => array( 'key' => 'options-page', 'value' => array( $page_key ), ), //value must be same as id
   'show_names' => true,
@@ -63,7 +63,7 @@ $metabox = array(
       'type' => 'text',
     ),
 
-    // BOILER
+    // ANALYTICS
 
     array(
       'name' => __( 'Analytics', 'cmb2' ),
@@ -78,28 +78,6 @@ $metabox = array(
       'type' => 'text',
     ),
 
-    // BOILER
-
-    array(
-      'name' => __( 'Title for options section', 'cmb2' ),
-      'desc' => __( '', 'cmb2' ),
-      'id'   => $prefix . 'general_title',
-      'type' => 'title',
-    ),
-    array(
-      'name' => __( 'Test Text', 'IGV' ),
-      'desc' => __( 'field description (optional)', 'IGV' ),
-      'id'   => $prefix . 'test_text',
-      'type' => 'text',
-      'default' => 'Default Text',
-    ),
-    array(
-      'name'    => __( 'Test Color Picker', 'IGV' ),
-      'desc'    => __( 'field description (optional)', 'IGV' ),
-      'id'      => $prefix . 'test_colorpicker',
-      'type'    => 'colorpicker',
-      'default' => '#bada55',
-    )
   )
 );
 

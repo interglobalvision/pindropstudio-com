@@ -1086,6 +1086,36 @@ h3,
   padding: 14px;
   background-color: #fff;
 }
+#footer {
+  padding-top: 14px;
+  padding-bottom: 28px;
+}
+#footer-pin-holder {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+#footer-pin-holder svg {
+  height: 130px;
+}
+.footer-menu {
+  margin-bottom: 28px;
+}
+.footer-menu li {
+  margin: 0 7px;
+}
+#footer-social-menu {
+  margin-bottom: 49px;
+}
+#footer-social-menu a {
+  border-top: solid 1px #373a3c;
+  border-left: solid 1px #373a3c;
+  border-bottom: solid 1px #373a3c;
+  border-right: solid 1px #373a3c;
+  padding: 7px;
+}
+#footer-social-menu a:hover {
+  background-color: rgba(62,62,62,0.2);
+}
 @media screen and (min-width: 720px) {
   .margin-top-micro {
     margin-top: 4.666666666666667px;
