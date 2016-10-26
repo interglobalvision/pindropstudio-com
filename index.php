@@ -5,14 +5,14 @@ get_header();
 <main id="main-content">
   <section id="posts" class="container">
     <div id="shuffle-preloader"></div>
-    <div id="shuffle-container" class="grid-row">
+    <div id="shuffle-container" class="grid-row hidden">
 
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 ?>
-        <article <?php post_class('shuffle-item item-s-12 item-m-4'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
           <div class="card">
             <?php the_post_thumbnail('post-thumbnail', array('class' => 'margin-bottom-tiny')); ?>
 
