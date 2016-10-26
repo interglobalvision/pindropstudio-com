@@ -16,7 +16,7 @@ if( have_posts() ) {
       </div>
     </div>
     <div class="grid-row">
-      <div class="grid-item item-s-12 item-m-8 offset-m-2">
+      <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic">
         <h1 class="text-align-center"><?php the_title(); ?></h1>
         <?php the_content(); ?>
       </div>
