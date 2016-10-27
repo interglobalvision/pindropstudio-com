@@ -113,11 +113,11 @@ Site.Luminaries.Archive = {
         return +b.getAttribute('data-sort-order') - +a.getAttribute('data-sort-order');
       } else {
         // this sorts by alphabetical order abc...
-        if (a.getAttribute('data-sort-alphabetical') == 'a'){
+        if (a.getAttribute('data-sort-alphabetical') === 'a'){
           return 0;
         }
 
-        if ( b.getAttribute('data-sort-alphabetical') == 'a'){
+        if ( b.getAttribute('data-sort-alphabetical') === 'a'){
           return 1;
         }
 
@@ -125,6 +125,6 @@ Site.Luminaries.Archive = {
       }
     }).appendTo($posts);
   }
-}
+};
 
 Site.init();
