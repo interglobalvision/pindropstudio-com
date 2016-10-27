@@ -109,11 +109,10 @@ Site.Luminaries.Archive = {
 
     $posts.find('.type-luminaries').sort(function(a, b) {
       if (type === 'order') {
-
+        // this orders by numerical value with largest numbers first (to match the menu_order)
         return +b.getAttribute('data-sort-order') - +a.getAttribute('data-sort-order');
-
       } else {
-
+        // this sorts by alphabetical order abc...
         if (a.getAttribute('data-sort-alphabetical') == 'a'){
           return 0;
         }
@@ -123,9 +122,7 @@ Site.Luminaries.Archive = {
         }
 
         return (a.getAttribute('data-sort-alphabetical') > b.getAttribute('data-sort-' + type) ? 1 : -1);
-
       }
-
     }).appendTo($posts);
   }
 }
