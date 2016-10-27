@@ -16,6 +16,7 @@ Site = {
     });
 
     Site.News.init();
+    Site.Luminaries.init();
   },
 
   onResize: function() {
@@ -39,7 +40,9 @@ Site.News = {
 
     _this.shuffleContainer = document.getElementById('shuffle-container');
 
-    _this.bind();
+    if (_this.shuffleContainer) {
+      _this.bind();
+    }
   },
 
   bind: function() {
@@ -69,5 +72,62 @@ Site.News = {
     }, true);
   },
 };
+
+Site.Luminaries = {
+  init: function() {
+    if ($('body').hasClass('post-type-archive-luminaries')) {
+      this.Archive.init();
+    } else if ($('body').hasClass('single-luminaries')) {
+
+    }
+  }
+};
+
+Site.Luminaries.Archive = {
+  init: function() {
+    this.bind();
+  },
+
+  bind: function() {
+    var _this = this;
+
+    $('#luminaries-sort-alphabetical').on('click', function() {
+      _this.sort('alphabetical');
+      $(this).hide();
+      $('#luminaries-sort-order').show();
+    });
+
+    $('#luminaries-sort-order').on('click', function() {
+      _this.sort('order');
+      $(this).hide();
+      $('#luminaries-sort-alphabetical').show();
+    });
+  },
+
+  sort: function(type) {
+    var $posts = $('#posts');
+
+    $posts.find('.type-luminaries').sort(function(a, b) {
+      if (type === 'order') {
+
+        return +b.getAttribute('data-sort-order') - +a.getAttribute('data-sort-order');
+
+      } else {
+
+        if (a.getAttribute('data-sort-alphabetical') == 'a'){
+          return 0;
+        }
+
+        if ( b.getAttribute('data-sort-alphabetical') == 'a'){
+          return 1;
+        }
+
+        return (a.getAttribute('data-sort-alphabetical') > b.getAttribute('data-sort-' + type) ? 1 : -1);
+
+      }
+
+    }).appendTo($posts);
+  }
+}
 
 Site.init();

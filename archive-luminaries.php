@@ -3,15 +3,27 @@ get_header();
 ?>
 
 <main id="main-content">
-  <section id="posts" class="container">
+  <section class="container">
     <div class="grid-row">
+      <div class="grid-item item-s-12 margin-bottom-small font-style-micro text-align-center">
+        <div class="dotted-divider">
+          <div class="dotted-divider-side dotted-divider-left"></div>
+          <div class="dotted-divider-center font-uppercase">
+            <span id="luminaries-sort-alphabetical">Sort Alphabetical +</span>
+            <span id="luminaries-sort-order">Sort By Order +</span>
+          </div>
+          <div class="dotted-divider-side dotted-divider-right"></div>
+        </div>
+      </div>
+    </div>
+    <div id="posts" class="grid-row">
 
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 ?>
-        <article <?php post_class('grid-item item-s-6 item-m-3 margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('grid-item item-s-6 item-m-3 margin-bottom-small'); ?> id="post-<?php the_ID(); ?>" data-sort-order="<?php echo $post->menu_order; ?>" data-sort-alphabetical="<?php echo $post->post_name; ?>">
           <a href="<?php the_permalink(); ?>">
           <?php the_post_thumbnail(); ?>
           <h3 class="text-align-center"><?php the_title(); ?></h3>

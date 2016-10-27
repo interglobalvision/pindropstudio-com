@@ -762,6 +762,9 @@ img {
 #shuffle-preloader {
   min-height: 80vh;
 }
+#luminaries-sort-order {
+  display: none;
+}
 .container {
   width: 96%;
 }
