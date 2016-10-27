@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6ce849c7ee7cb4715698c07f08b87cbb",
-    "content-hash": "ecdfb45cc1016d5b3806677ee4a3747e",
+    "hash": "79fb3d1fda560fb532db4ccef6d3063a",
+    "content-hash": "bb8b442ab6b489ae6dc31fae8ee0cccf",
     "packages": [
         {
             "name": "fightbulc/moment",
