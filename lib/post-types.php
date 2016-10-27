@@ -52,3 +52,177 @@ function luminaries() {
 
 }
 add_action( 'init', 'luminaries', 0 );
+
+// OLD TYPES FOR MIGRATION
+
+add_action( 'init', 'register_cpt_programme' );
+
+function register_cpt_programme() {
+
+    $labels = array(
+        'name' => _x( 'Programme', 'programme' ),
+        'singular_name' => _x( 'Programme', 'programme' ),
+        'add_new' => _x( 'Add New', 'programme' ),
+        'add_new_item' => _x( 'Add New Programme', 'programme' ),
+        'edit_item' => _x( 'Edit Programme', 'programme' ),
+        'new_item' => _x( 'New Programme', 'programme' ),
+        'view_item' => _x( 'View Programme', 'programme' ),
+        'search_items' => _x( 'Search Programme', 'programme' ),
+        'not_found' => _x( 'No programme found', 'programme' ),
+        'not_found_in_trash' => _x( 'No programme found in Trash', 'programme' ),
+        'parent_item_colon' => _x( 'Parent Programme:', 'programme' ),
+        'menu_name' => _x( 'Programme', 'programme' ),
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => false,
+
+        'supports' => array( 'title', 'editor', 'thumbnail' ),
+        'taxonomies' => array( 'category', 'post_tag' ),
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+
+        'show_in_nav_menus' => true,
+        'publicly_queryable' => true,
+        'exclude_from_search' => false,
+        'has_archive' => true,
+        'query_var' => true,
+        'can_export' => true,
+        'rewrite' => true,
+        'capability_type' => 'post'
+    );
+
+    register_post_type( 'programme', $args );
+}
+
+add_action( 'init', 'register_cpt_narrator' );
+
+function register_cpt_narrator() {
+
+    $labels = array(
+        'name' => _x( 'Narrators', 'narrator' ),
+        'singular_name' => _x( 'Narrator', 'narrator' ),
+        'add_new' => _x( 'Add New', 'narrator' ),
+        'add_new_item' => _x( 'Add New Narrator', 'narrator' ),
+        'edit_item' => _x( 'Edit Narrator', 'narrator' ),
+        'new_item' => _x( 'New Narrator', 'narrator' ),
+        'view_item' => _x( 'View Narrator', 'narrator' ),
+        'search_items' => _x( 'Search Narrators', 'narrator' ),
+        'not_found' => _x( 'No narrators found', 'narrator' ),
+        'not_found_in_trash' => _x( 'No narrators found in Trash', 'narrator' ),
+        'parent_item_colon' => _x( 'Parent Narrator:', 'narrator' ),
+        'menu_name' => _x( 'Narrators', 'narrator' ),
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => false,
+
+        'supports' => array( 'title', 'editor', 'thumbnail' ),
+
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+
+        'show_in_nav_menus' => true,
+        'publicly_queryable' => true,
+        'exclude_from_search' => false,
+        'has_archive' => true,
+        'query_var' => true,
+        'can_export' => true,
+        'rewrite' => true,
+        'capability_type' => 'post'
+    );
+
+    register_post_type( 'narrator', $args );
+}
+
+add_action( 'init', 'register_cpt_recording' );
+
+function register_cpt_recording() {
+
+    $labels = array(
+        'name' => _x( 'Recordings', 'recording' ),
+        'singular_name' => _x( 'Recording', 'recording' ),
+        'add_new' => _x( 'Add New', 'recording' ),
+        'add_new_item' => _x( 'Add New Recording', 'recording' ),
+        'edit_item' => _x( 'Edit Recording', 'recording' ),
+        'new_item' => _x( 'New Recording', 'recording' ),
+        'view_item' => _x( 'View Recording', 'recording' ),
+        'search_items' => _x( 'Search Recordings', 'recording' ),
+        'not_found' => _x( 'No recordings found', 'recording' ),
+        'not_found_in_trash' => _x( 'No recordings found in Trash', 'recording' ),
+        'parent_item_colon' => _x( 'Parent Recording:', 'recording' ),
+        'menu_name' => _x( 'Recordings', 'recording' ),
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => false,
+
+        'supports' => array( 'title', 'editor', 'thumbnail' ),
+
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+
+        'show_in_nav_menus' => true,
+        'publicly_queryable' => true,
+        'exclude_from_search' => false,
+        'has_archive' => true,
+        'query_var' => true,
+        'can_export' => true,
+        'rewrite' => true,
+        'capability_type' => 'post'
+    );
+
+    register_post_type( 'recording', $args );
+}
+
+add_action( 'init', 'register_cpt_people' );
+
+function register_cpt_people() {
+
+    $labels = array(
+        'name' => _x( 'People', 'people' ),
+        'singular_name' => _x( 'People', 'people' ),
+        'add_new' => _x( 'Add New', 'people' ),
+        'add_new_item' => _x( 'Add New People', 'people' ),
+        'edit_item' => _x( 'Edit People', 'people' ),
+        'new_item' => _x( 'New People', 'people' ),
+        'view_item' => _x( 'View People', 'people' ),
+        'search_items' => _x( 'Search People', 'people' ),
+        'not_found' => _x( 'No people found', 'people' ),
+        'not_found_in_trash' => _x( 'No people found in Trash', 'people' ),
+        'parent_item_colon' => _x( 'Parent People:', 'people' ),
+        'menu_name' => _x( 'People', 'people' ),
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => false,
+
+        'supports' => array( 'title', 'editor', 'thumbnail' ),
+
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+
+        'show_in_nav_menus' => true,
+        'publicly_queryable' => true,
+        'exclude_from_search' => false,
+        'has_archive' => true,
+        'query_var' => true,
+        'can_export' => true,
+        'rewrite' => true,
+        'capability_type' => 'post'
+    );
+
+    register_post_type( 'people', $args );
+}
