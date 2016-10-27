@@ -107,9 +107,10 @@ Site.Luminaries.Archive = {
   sort: function(type) {
     var $posts = $('#posts');
 
+    // this function sorts posts by specified order. all the .-type-luminaries children of #posts are sorted by the javascript sort function. the code is based on SO examples
     $posts.find('.type-luminaries').sort(function(a, b) {
       if (type === 'order') {
-        // this orders by numerical value with largest numbers first (to match the menu_order)
+        // this orders by numerical value with largest numbers first (to match the menu_order). the + is typecasting to enforce integer
         return +b.getAttribute('data-sort-order') - +a.getAttribute('data-sort-order');
       } else {
         // this sorts by alphabetical order abc...
