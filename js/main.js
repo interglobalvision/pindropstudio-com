@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Site, Modernizr, shuffle */
+/* global $, document, Site, imagesLoaded */
 var Shuffle = window.shuffle;
 
 Site = {
