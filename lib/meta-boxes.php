@@ -125,12 +125,6 @@ function igv_cmb_metaboxes() {
   ) );
 
   $partners_metabox->add_group_field( $partners_group, array(
-    'name' => 'Partner URL',
-    'id'   => 'url',
-    'type' => 'text_url',
-  ) );
-
-  $partners_metabox->add_group_field( $partners_group, array(
     'name' => 'Partner Image',
     'id'   => 'image',
     'type' => 'file',
