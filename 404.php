@@ -3,8 +3,14 @@ get_header();
 ?>
 
 <section id="main-content">
-  <h1>Not found</h1>
-  <p>:(</p>
+  <div class="container">
+    <div class="grid-row">
+      <div class="grid-item item-s-12 item-m-8 offset-m-2">
+        <h2 class="margin-bottom-small">404</h2>
+        <h3>Not Found</h3>
+      </div>
+    </div>
+  </div>
 </section>
 
 <?php
