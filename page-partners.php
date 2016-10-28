@@ -13,21 +13,62 @@ if( have_posts() ) {
   <article id="page" <?php post_class('container'); ?>>
     <div class="grid-row margin-top-basic margin-bottom-basic">
       <div class="grid-item item-s-12 font-style-micro text-align-center">
-        <div class="dotted-divider">
-          <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center"><?php the_title(); ?></div>
-          <div class="dotted-divider-side dotted-divider-right"></div>
-        </div>
+        <?php the_title(); ?>
       </div>
     </div>
     <div class="grid-row">
-      <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic">
+      <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-mid">
         <?php the_content(); ?>
       </div>
     </div>
     <?php
       if ($partners) {
-        pr($partners);
+    ?>
+    <div class="grid-row margin-bottom-mid">
+      <div class="grid-item item-s-12">
+        <div class="dotted-divider-full"></div>
+      </div>
+    </div>
+    <div class="grid-row margin-bottom-mid">
+    <?php
+        $i = 0;
+        foreach($partners as $partner) {
+          if ($i % 2 === 0 && $i != 0) {
+    ?>
+    </div>
+    <div class="grid-row margin-bottom-mid">
+      <div class="grid-item item-s-12">
+        <div class="dotted-divider-full"></div>
+      </div>
+    </div>
+    <div class="grid-row margin-bottom-mid">
+    <?php
+          }
+    ?>
+      <div class="grid-item item-s-6 text-align-center">
+    <?php
+        if (!empty($partner['image'])) {
+          echo wp_get_attachment_image($partner['image_id'], 'thumbnail', false, array('class' => 'margin-bottom-small'));
+        } else if (!empty($partner['name'])) {
+          echo '<h3 class="margin-bottom-small">' . $partner['name'] . '</h3>';
+        }
+
+        if (!empty($partner['text'])) {
+          echo '<p>' . $partner['text'] . '</p>';
+        }
+    ?>
+      </div>
+    <?php
+        $i++;
+        }
+    ?>
+    </div>
+    <div class="grid-row">
+      <div class="grid-item item-s-12">
+        <div class="dotted-divider-full"></div>
+      </div>
+    </div>
+    <?php
       }
     ?>
   </article>
