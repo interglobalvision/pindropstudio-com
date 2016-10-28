@@ -723,10 +723,53 @@ img {
 .desktop-only {
   display: none !important;
 }
+.dotted-divider {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+.dotted-divider-side {
+  border-top-style: dotted;
+  border-top-width: 1px;
+  border-top-color: rgba(55,58,60,0.498);
+  -webkit-flex-grow: 2;
+  -ms-flex-grow: 2;
+  -ms-flex-positive: 2;
+      flex-grow: 2;
+}
+.dotted-divider-center {
+  -webkit-flex-grow: 0;
+  -ms-flex-grow: 0;
+  -ms-flex-positive: 0;
+      flex-grow: 0;
+}
+#shuffle-container {
+  display: block;
+  position: relative;
+  height: 0px;
+  overflow: hidden;
+  transition: opacity 0.3s;
+}
+#shuffle-container.hidden {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+#shuffle-preloader {
+  min-height: 80vh;
+}
+#luminaries-sort-order {
+  display: none;
+}
 .container {
   width: 96%;
 }
-.grid-item {
+.grid-item,
+.shuffle-item {
   padding: 0 7px;
 }
 .grid-row .offset-s-0 {
@@ -1001,6 +1044,16 @@ h3,
 .font-size-h3 {
   font-size: 24px;
 }
+.link-button {
+  border-top: solid 1px #373a3c;
+  border-left: solid 1px #373a3c;
+  border-bottom: solid 1px #373a3c;
+  border-right: solid 1px #373a3c;
+  padding: 7px 7px 4.666666666666667px 7px;
+}
+.link-button:hover {
+  background-color: rgba(62,62,62,0.2);
+}
 #header {
   padding-top: 14px;
   padding-bottom: 14px;
@@ -1030,6 +1083,22 @@ h3,
   margin-top: -3px;
   vertical-align: middle;
 }
+.dotted-divider-side {
+  margin-top: 4.666666666666667px;
+}
+.dotted-divider-left {
+  margin-right: 14px;
+}
+.dotted-divider-right {
+  margin-left: 14px;
+}
+.shuffle-item {
+  margin-bottom: 14px;
+}
+.card {
+  padding: 14px;
+  background-color: #fff;
+}
 #footer {
   padding-top: 14px;
   padding-bottom: 28px;
@@ -1047,97 +1116,85 @@ h3,
 .footer-menu li {
   margin: 0 7px;
 }
-#footer-social-menu {
-  margin-bottom: 49px;
-}
-#footer-social-menu a {
-  border-top: solid 1px #373a3c;
-  border-left: solid 1px #373a3c;
-  border-bottom: solid 1px #373a3c;
-  border-right: solid 1px #373a3c;
-  padding: 7px;
-}
-#footer-social-menu a:hover {
-  background-color: rgba(62,62,62,0.2);
-}
 @media screen and (min-width: 720px) {
   .margin-top-micro {
-    margin-top: 7px;
+    margin-top: 4.666666666666667px;
   }
   .margin-bottom-micro {
-    margin-bottom: 7px;
+    margin-bottom: 4.666666666666667px;
   }
   .padding-top-micro {
-    padding-top: 7px;
+    padding-top: 4.666666666666667px;
   }
   .padding-bottom-micro {
-    padding-bottom: 7px;
+    padding-bottom: 4.666666666666667px;
   }
   .margin-top-tiny {
-    margin-top: 10.5px;
+    margin-top: 7px;
   }
   .margin-bottom-tiny {
-    margin-bottom: 10.5px;
+    margin-bottom: 7px;
   }
   .padding-top-tiny {
-    padding-top: 10.5px;
+    padding-top: 7px;
   }
   .padding-bottom-tiny {
-    padding-bottom: 10.5px;
+    padding-bottom: 7px;
   }
   .margin-top-small {
-    margin-top: 21px;
+    margin-top: 14px;
   }
   .margin-bottom-small {
-    margin-bottom: 21px;
+    margin-bottom: 14px;
   }
   .padding-top-small {
-    padding-top: 21px;
+    padding-top: 14px;
   }
   .padding-bottom-small {
-    padding-bottom: 21px;
+    padding-bottom: 14px;
   }
   .margin-top-basic {
-    margin-top: 42px;
+    margin-top: 28px;
   }
   .margin-bottom-basic {
-    margin-bottom: 42px;
+    margin-bottom: 28px;
   }
   .padding-top-basic {
-    padding-top: 42px;
+    padding-top: 28px;
   }
   .padding-bottom-basic {
-    padding-bottom: 42px;
+    padding-bottom: 28px;
   }
   .margin-top-mid {
-    margin-top: 73.5px;
+    margin-top: 49px;
   }
   .margin-bottom-mid {
-    margin-bottom: 73.5px;
+    margin-bottom: 49px;
   }
   .padding-top-mid {
-    padding-top: 73.5px;
+    padding-top: 49px;
   }
   .padding-bottom-mid {
-    padding-bottom: 73.5px;
+    padding-bottom: 49px;
   }
   .margin-top-large {
-    margin-top: 105px;
+    margin-top: 70px;
   }
   .margin-bottom-large {
-    margin-bottom: 105px;
+    margin-bottom: 70px;
   }
   .padding-top-large {
-    padding-top: 105px;
+    padding-top: 70px;
   }
   .padding-bottom-large {
-    padding-bottom: 105px;
+    padding-bottom: 70px;
   }
   .container {
     width: 680px;
   }
-  .grid-item {
-    padding: 0 10.5px;
+  .grid-item,
+  .shuffle-item {
+    padding: 0 7px;
   }
   .grid-row .offset-m-0 {
     margin-left: 0%;
@@ -1322,9 +1379,12 @@ h3,
   .mobile-only {
     display: none !important;
   }
+  .link-button {
+    padding: 7px 7px 4.666666666666667px 7px;
+  }
   #header {
-    padding-top: 42px;
-    padding-bottom: 21px;
+    padding-top: 28px;
+    padding-bottom: 14px;
   }
   #menu-item-logo svg {
     width: 145px;
@@ -1335,19 +1395,35 @@ h3,
     text-align: right;
   }
   #menu li {
-    margin-left: 21px;
+    margin-left: 14px;
     margin-right: 0;
   }
   #menu li:first-child {
     margin-left: 0;
+  }
+  .dotted-divider-side {
+    margin-top: 4.666666666666667px;
+  }
+  .dotted-divider-left {
+    margin-right: 14px;
+  }
+  .dotted-divider-right {
+    margin-left: 14px;
+  }
+  .shuffle-item {
+    margin-bottom: 14px;
+  }
+  .card {
+    padding: 14px;
   }
 }
 @media screen and (min-width: 1024px) {
   .container {
     width: 1000px;
   }
-  .grid-item {
-    padding: 0 12px;
+  .grid-item,
+  .shuffle-item {
+    padding: 0 8px;
   }
   .grid-row .offset-l-0 {
     margin-left: 0%;
@@ -1530,86 +1606,104 @@ h3,
     max-height: 100%;
   }
   .margin-top-micro {
-    margin-top: 8px;
+    margin-top: 5.333333333333333px;
   }
   .margin-bottom-micro {
-    margin-bottom: 8px;
+    margin-bottom: 5.333333333333333px;
   }
   .padding-top-micro {
-    padding-top: 8px;
+    padding-top: 5.333333333333333px;
   }
   .padding-bottom-micro {
-    padding-bottom: 8px;
+    padding-bottom: 5.333333333333333px;
   }
   .margin-top-tiny {
-    margin-top: 12px;
+    margin-top: 8px;
   }
   .margin-bottom-tiny {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .padding-top-tiny {
-    padding-top: 12px;
+    padding-top: 8px;
   }
   .padding-bottom-tiny {
-    padding-bottom: 12px;
+    padding-bottom: 8px;
   }
   .margin-top-small {
-    margin-top: 24px;
+    margin-top: 16px;
   }
   .margin-bottom-small {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   .padding-top-small {
-    padding-top: 24px;
+    padding-top: 16px;
   }
   .padding-bottom-small {
-    padding-bottom: 24px;
+    padding-bottom: 16px;
   }
   .margin-top-basic {
-    margin-top: 48px;
+    margin-top: 32px;
   }
   .margin-bottom-basic {
-    margin-bottom: 48px;
+    margin-bottom: 32px;
   }
   .padding-top-basic {
-    padding-top: 48px;
+    padding-top: 32px;
   }
   .padding-bottom-basic {
-    padding-bottom: 48px;
+    padding-bottom: 32px;
   }
   .margin-top-mid {
-    margin-top: 84px;
+    margin-top: 56px;
   }
   .margin-bottom-mid {
-    margin-bottom: 84px;
+    margin-bottom: 56px;
   }
   .padding-top-mid {
-    padding-top: 84px;
+    padding-top: 56px;
   }
   .padding-bottom-mid {
-    padding-bottom: 84px;
+    padding-bottom: 56px;
   }
   .margin-top-large {
-    margin-top: 120px;
+    margin-top: 80px;
   }
   .margin-bottom-large {
-    margin-bottom: 120px;
+    margin-bottom: 80px;
   }
   .padding-top-large {
-    padding-top: 120px;
+    padding-top: 80px;
   }
   .padding-bottom-large {
-    padding-bottom: 120px;
+    padding-bottom: 80px;
   }
   .desktop-only {
     display: initial !important;
   }
+  .link-button {
+    padding: 8px 8px 5.333333333333333px 8px;
+  }
   #header {
-    padding-top: 48px;
-    padding-bottom: 24px;
+    padding-top: 32px;
+    padding-bottom: 16px;
   }
   #menu li {
-    margin-left: 24px;
+    margin-left: 16px;
+  }
+  .dotted-divider-side {
+    margin-top: 5.333333333333333px;
+  }
+  .dotted-divider-left {
+    margin-right: 16px;
+  }
+  .dotted-divider-right {
+    margin-left: 16px;
+  }
+  .shuffle-item {
+    margin-bottom: 16px;
+  }
+  .card {
+    padding: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
