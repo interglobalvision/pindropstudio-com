@@ -37,7 +37,7 @@ $color-black = rgb(55, 58, 60)
 $color-white = rgb(255, 255, 255)
 $color-gray = rgba(62, 62, 62, .2)
 $color-light-gray = rgb(241, 241, 241)
-$color-dark-gray = rgba(55, 58, 60, 0.498039)
+$color-dark-gray = rgba(55, 58, 60, .498039)
 
 $speed-animation-fast = .3s
 
@@ -54,10 +54,10 @@ img
   height: auto
 
 .mobile-only
-  display: initial !important
+  display: initial
 
 .desktop-only
-  display: none !important
+  display: none
 
 // BORDERS
 
@@ -80,10 +80,10 @@ border($top = true, $left = true, $bottom = true, $right = true)
   justify-content: space-between
 
 .dotted-divider-side
-  border-top-style: dotted
-  border-top-width: 1px
-  border-top-color: $color-dark-gray
   flex-grow: 2
+  border-top-width: 1px
+  border-top-style: dotted
+  border-top-color: $color-dark-gray
 
 .dotted-divider-center
   flex-grow: 0
@@ -93,10 +93,10 @@ border($top = true, $left = true, $bottom = true, $right = true)
 // SHUFFLE
 
 #shuffle-container
-  display: block
   position: relative
-  height: 0px
+  display: block
   overflow: hidden
+  height: 0
   transition: opacity $speed-animation-fast
   &.hidden
     opacity: 0
@@ -154,7 +154,7 @@ font-sizes($font-size-basic)
   font-size($font-size-basic)
 
   .mobile-only
-    display: none !important
+    display: none
 
   @import 'responsive/tablet'
 
@@ -182,7 +182,7 @@ font-sizes($font-size-basic)
   font-size($font-size-basic)
 
   .desktop-only
-    display: initial !important
+    display: initial
 
   @import 'responsive/desktop'
 
