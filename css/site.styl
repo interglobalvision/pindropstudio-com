@@ -158,6 +158,10 @@ font-sizes($font-size-basic)
 
   @import 'responsive/tablet'
 
+@media screen and (min-width: 860px)
+
+  grid(750px, false, m)
+
 @media screen and (min-width: 1024px)
 
   $gutter = 16px
@@ -171,7 +175,7 @@ font-sizes($font-size-basic)
 
   $font-size-basic = 16px
 
-  grid(1000px, $gutter, l)
+  grid(900px, $gutter, l)
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
@@ -184,16 +188,16 @@ font-sizes($font-size-basic)
 
 @media screen and (min-width: 1280px)
 
-  grid(1200px)
+  grid(1100px)
 
 @media screen and (min-width: 1366px)
 
   grid(1300px)
 
-@media screen and (min-width: 1680px)
-
-  grid(1600px)
-
-@media screen and (min-width: 1920px)
-
-  grid(1800px)
+// @media screen and (min-width: 1680px)
+//
+//   grid(1600px)
+//
+// @media screen and (min-width: 1920px)
+//
+//   grid(1800px)
