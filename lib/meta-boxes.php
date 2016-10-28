@@ -91,6 +91,53 @@ function igv_cmb_metaboxes() {
     'type'    => 'text_url',
   ) );
 
+  // PAGE: PARTNERS
+
+  $partners_metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'partners_metabox',
+    'title'         => __( 'Partners', 'cmb2' ),
+    'object_types' => array( 'page' ),
+    'show_on'      => array( 'key' => 'id', 'value' => get_id_by_slug('partners') ),
+  ) );
+
+  $partners_group = $partners_metabox->add_field( array(
+      'id'          => $prefix . 'partners_metabox_group',
+      'type'        => 'group',
+      'description' => __( 'Add Partners', 'cmb2' ),
+      'options'     => array(
+        'group_title'   => __( 'Partner {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+        'add_button'    => __( 'Add Another Partner', 'cmb2' ),
+        'remove_button' => __( 'Remove Partner', 'cmb2' ),
+        'sortable'      => true, // beta
+      ),
+  ) );
+
+  $partners_metabox->add_group_field( $partners_group, array(
+    'name' => 'Partner Name',
+    'id'   => 'name',
+    'type' => 'text',
+  ) );
+
+  $partners_metabox->add_group_field( $partners_group, array(
+    'name' => 'Partner Text',
+    'id'   => 'text',
+    'type' => 'textarea',
+  ) );
+
+  $partners_metabox->add_group_field( $partners_group, array(
+    'name' => 'Partner URL',
+    'id'   => 'url',
+    'type' => 'text_url',
+  ) );
+
+  $partners_metabox->add_group_field( $partners_group, array(
+    'name' => 'Partner Image',
+    'id'   => 'image',
+    'type' => 'file',
+  ) );
+
+  // **********************************************************
+
   // HISTORICAL FOR MIGRATION
 
   $prefix = '_cmb_';
