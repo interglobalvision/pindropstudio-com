@@ -747,6 +747,12 @@ img {
   -ms-flex-positive: 0;
       flex-grow: 0;
 }
+.dotted-divider-full {
+  height: 1px;
+  border-top-width: 1px;
+  border-top-style: dotted;
+  border-top-color: rgba(55,58,60,0.498);
+}
 #shuffle-container {
   position: relative;
   display: block;
