@@ -40,9 +40,9 @@ function igv_cmb_metaboxes() {
    */
 
    $luminary_meta = new_cmb2_box( array(
-    'id'            => $prefix . 'luminary_meta',
-    'title'         => esc_html__( 'Luminary Metabox', 'cmb2' ),
-    'object_types'  => array( 'luminaries', ), // Post type
+    'id'            => $prefix . 'related_meta',
+    'title'         => esc_html__( 'Related Posts Metabox', 'cmb2' ),
+    'object_types'  => array( 'event', 'luminaries', ), // Post type
   ) );
 
   $luminary_meta->add_field( array(
@@ -50,7 +50,7 @@ function igv_cmb_metaboxes() {
     'desc'       => esc_html__( 'select multiple other posts here to display as related posts', 'cmb2' ),
     'id'         => $prefix . 'related_posts',
     'type'       => 'post_search_text',
-    'post_type'  => array('post', 'page', 'luminaries'),
+    'post_type'  => array('post', 'page', 'event', 'luminaries'),
   ) );
 
   /**
