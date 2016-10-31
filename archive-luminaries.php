@@ -10,7 +10,7 @@ get_header();
           <div class="dotted-divider-side dotted-divider-left"></div>
           <div class="dotted-divider-center font-uppercase">
             <span id="luminaries-sort-alphabetical">Sort Alphabetical +</span>
-            <span id="luminaries-sort-order">Sort By Order +</span>
+            <span id="luminaries-sort-order">Sort Original +</span>
           </div>
           <div class="dotted-divider-side dotted-divider-right"></div>
         </div>
