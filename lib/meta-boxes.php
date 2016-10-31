@@ -39,13 +39,30 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
    */
 
-   $luminary_meta = new_cmb2_box( array(
+   // LUMINARIES METABOXES
+
+  $luminaries_meta = new_cmb2_box( array(
+    'id'            => $prefix . 'luminaries_meta',
+    'title'         => esc_html__( 'Luminary Meta', 'cmb2' ),
+    'object_types'  => array( 'luminaries', ), // Post type
+  ) );
+
+  $luminaries_meta->add_field( array(
+    'name'    => 'Surname',
+    'desc'    => esc_html__( 'for alphabetical sorting', 'cmb2' ),
+    'id'      => $prefix . 'surname',
+    'type'    => 'text',
+  ) );
+
+   // RELATED POSTS METABOXES
+
+   $related_meta = new_cmb2_box( array(
     'id'            => $prefix . 'related_meta',
     'title'         => esc_html__( 'Related Posts Metabox', 'cmb2' ),
     'object_types'  => array( 'event', 'luminaries', ), // Post type
   ) );
 
-  $luminary_meta->add_field( array(
+  $related_meta->add_field( array(
     'name'       => esc_html__( 'Related posts', 'cmb2' ),
     'desc'       => esc_html__( 'select multiple other posts here to display as related posts', 'cmb2' ),
     'id'         => $prefix . 'related_posts',
