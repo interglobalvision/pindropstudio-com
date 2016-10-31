@@ -8,7 +8,7 @@ get_header();
       <div class="grid-item item-s-12 margin-bottom-small font-style-micro text-align-center">
         <div class="dotted-divider">
           <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center font-uppercase">
+          <div class="dotted-divider-center font-uppercase u-pointer">
             <span id="luminaries-sort-alphabetical">Sort Alphabetical +</span>
             <span id="luminaries-sort-order">Sort Original +</span>
           </div>
