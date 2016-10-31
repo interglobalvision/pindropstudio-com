@@ -20,10 +20,12 @@ get_header();
 
 <?php
 if( have_posts() ) {
+  $i = $wp_query->post_count;
   while( have_posts() ) {
     the_post();
+    $surname = get_post_meta($post->ID, '_igv_surname', true);
 ?>
-        <article <?php post_class('grid-item item-s-6 item-m-3 margin-bottom-small'); ?> id="post-<?php the_ID(); ?>" data-sort-order="<?php echo $post->menu_order; ?>" data-sort-alphabetical="<?php echo $post->post_name; ?>">
+        <article <?php post_class('grid-item item-s-6 item-m-3 margin-bottom-small'); ?> id="post-<?php the_ID(); ?>" data-sort-order="<?php echo ($i + $post->menu_order); ?>" data-sort-alphabetical="<?php echo ($surname ? $surname : 'zz'); ?>">
           <a href="<?php the_permalink(); ?>">
           <?php the_post_thumbnail(); ?>
           <h3 class="text-align-center"><?php the_title(); ?></h3>
@@ -31,6 +33,7 @@ if( have_posts() ) {
         </article>
 
 <?php
+    $i--;
   }
 } else {
 ?>
