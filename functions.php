@@ -58,7 +58,7 @@ add_action( 'init', 'cmb_initialize_cmb_meta_boxes', 9999 );
 function composer_autoload() {
   require_once( 'vendor/autoload.php' );
 }
-/* add_action( 'init', 'composer_autoload', 9999 ); */
+add_action( 'init', 'composer_autoload', 9999 );
 
 // Add libs
 
