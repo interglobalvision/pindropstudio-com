@@ -20,7 +20,7 @@
   <div class="grid-item item-s-12 item-m-4 text-align-center">
     <div class="card">
       <a href="<?php the_permalink(); ?>">
-        <?php the_post_thumbnail('post-thumbnail', array('class' => 'margin-bottom-tiny')); ?>
+        <?php the_post_thumbnail('l-4', array('class' => 'margin-bottom-tiny')); ?>
         <h3 class="margin-bottom-small"><?php the_title(); ?></h3>
       </a>
       <a href="<?php the_permalink(); ?>" class="link-button font-uppercase" >Read More</a>

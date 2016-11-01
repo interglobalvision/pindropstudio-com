@@ -28,7 +28,7 @@ if( have_posts() ) {
           if ($gallery) {
             echo do_shortcode($gallery);
           } else {
-            the_post_thumbnail('post-thumbnail');
+            the_post_thumbnail('l-8');
           } ?>
       </div>
     </div>
@@ -107,7 +107,7 @@ if( have_posts() ) {
           setup_postdata($post);
     ?>
       <div class="grid-item item-s-12 item-m-4 text-align-center">
-        <a href="<?php the_permalink(); ?>">
+        <a href="<?php the_permalink('l-4-square'); ?>">
           <?php the_post_thumbnail('post-thumbnail', array('class' => 'margin-bottom-basic')); ?>
           <h3 class="margin-bottom-small"><?php the_title(); ?></h3>
         </a>
