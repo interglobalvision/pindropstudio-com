@@ -48,7 +48,7 @@ if( have_posts() ) {
       <div class="grid-item item-s-6 text-align-center">
     <?php
         if (!empty($partner['image'])) {
-          echo wp_get_attachment_image($partner['image_id'], 'thumbnail', false, array('class' => 'margin-bottom-small'));
+          echo wp_get_attachment_image($partner['image_id'], 'l-4', false, array('class' => 'margin-bottom-small'));
         } else if (!empty($partner['name'])) {
           echo '<h3 class="margin-bottom-small">' . $partner['name'] . '</h3>';
         }
