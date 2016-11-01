@@ -59,7 +59,7 @@ function igv_cmb_metaboxes() {
    $related_meta = new_cmb2_box( array(
     'id'            => $prefix . 'related_meta',
     'title'         => esc_html__( 'Related Posts Metabox', 'cmb2' ),
-    'object_types'  => array( 'event', 'luminaries', ), // Post type
+    'object_types'  => array( 'post', 'event', 'luminaries', ), // Post type
   ) );
 
   $related_meta->add_field( array(
