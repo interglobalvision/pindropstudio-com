@@ -75,7 +75,7 @@ function igv_cmb_metaboxes() {
    * */
   $event_metabox = new_cmb2_box( array(
     'id'            => $prefix . 'event_meta',
-    'title'         => __( 'Meta', 'cmb2' ),
+    'title'         => __( 'Event Meta', 'cmb2' ),
     'object_types'  => array( 'event', ), // Post type
     'context'       => 'normal',
     'priority'      => 'high',
@@ -106,6 +106,54 @@ function igv_cmb_metaboxes() {
     'name'    => 'Booking link',
     'id'      => $prefix . 'event_booking_url',
     'type'    => 'text_url',
+  ) );
+
+  $event_metabox->add_field( array(
+    'name'    => 'Vimeo video',
+    'description' => __( 'Just the ID of the Vimeo video', 'cmb2' ),
+    'id'      => $prefix . 'vimeo_id',
+    'type'    => 'text',
+  ) );
+
+  $event_metabox->add_field( array(
+    'name'    => 'Video caption (optional)',
+    'id'      => $prefix . 'video_caption',
+    'type'    => 'text',
+  ) );
+
+  $event_metabox->add_field( array(
+    'name'    => 'Soundcloud audio',
+    'description' => __( 'the URL of the Soundcloud recording', 'cmb2' ),
+    'id'      => $prefix . 'soundcloud_url',
+    'type'    => 'text_url',
+  ) );
+
+  $event_metabox->add_field( array(
+    'name'    => 'Audio caption (optional)',
+    'id'      => $prefix . 'audio_caption',
+    'type'    => 'text',
+  ) );
+
+  $event_metabox->add_field( array(
+    'name'    => 'Copy after embeds',
+    'description' => __( 'optional copy after the embed blocks', 'cmb2' ),
+    'id'      => $prefix . 'extra_content',
+    'type'    => 'wysiwyg',
+  ) );
+
+  $event_metabox->add_field( array(
+    'name'    => 'Luminary',
+    'description' => __( 'one (or more) Luminaries to related to this event', 'cmb2' ),
+    'id'      => $prefix . 'related_luminaries',
+    'type'       => 'post_search_text',
+    'post_type'  => array('luminaries'),
+  ) );
+
+  $event_metabox->add_field( array(
+    'name'    => 'Gallery',
+    'description' => __( 'a Wordpress gallery', 'cmb2' ),
+    'id'      => $prefix . 'gallery',
+    'type'    => 'wysiwyg',
   ) );
 
   // PAGE: PARTNERS
@@ -155,7 +203,7 @@ function igv_cmb_metaboxes() {
 
   $migration_postype_metabox = new_cmb2_box( array(
     'id'            => $prefix . 'migration_postype_metabox',
-    'title'         => __( 'Meta', 'cmb2' ),
+    'title'         => __( 'OLD Event Meta FOR MIGRATION ONLY', 'cmb2' ),
     'object_types'  => array( 'programme', 'event'), // Post type
     'context'       => 'normal',
     'priority'      => 'high',

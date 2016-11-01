@@ -12,7 +12,7 @@ Site = {
     });
 
     $(document).ready(function () {
-
+      Site.Galleries.init();
     });
 
     Site.News.init();
@@ -71,6 +71,33 @@ Site.News = {
       _this.shuffleInstance.update();
     }, true);
   },
+};
+
+Site.Galleries = {
+  init: function() {
+    var _this = this;
+    var $galleries = $('.swiper-container');
+
+    if ($galleries.length) {
+      $galleries.each(function(index, container) {
+        _this.initGalleryInstance(index, container);
+      });
+    }
+  },
+
+  initGalleryInstance: function(index, container) {
+    var _this = this;
+
+    _this['gallery-instance' + index] = new Swiper(container, {
+      speed: 400,
+      pagination: '.swiper-pagination',
+      paginationType: 'fraction',
+      loop: true,
+      onTap: function(swiper, event) {
+        swiper.slideNext();
+      }
+    });
+  }
 };
 
 Site.Luminaries = {

@@ -109,7 +109,7 @@ function my_gallery_shortcode($attr) {
 
   $selector = "gallery-{$instance}";
 
-  $gallery_div = "<div id='$selector' class='swiper-container gallery galleryid-{$id}'><div class='swiper-wrapper'>";
+  $gallery_div = "<div id='$selector' class='swiper-container gallery galleryid-{$id} u-pointer'><div class='swiper-wrapper'>";
   $output = $gallery_div;
 
   $i = 0;
@@ -133,12 +133,12 @@ function my_gallery_shortcode($attr) {
       $tag = null;
     }
 
-    $output .= "<div>{$img}{$tag}</div>";
+    $output .= "<div class='swiper-slide'>{$img}{$tag}</div>";
   }
 
   // Finish markup and return
 
-  $output .= "</div></div>\n";
+  $output .= "</div><div class='swiper-pagination'></div></div>\n";
 
   return $output;
 }
