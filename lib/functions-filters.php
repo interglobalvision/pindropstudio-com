@@ -11,6 +11,26 @@ function luminaries_archive_query($query) {
 }
 add_action('pre_get_posts','luminaries_archive_query');
 
+// Show menu_order in post lists
+
+function add_menuorder_col($cols){
+  $cols['menuorder'] = __('Sort Order');
+  return $cols;
+}
+add_filter('manage_luminaries_posts_columns', 'add_menuorder_col');
+
+function display_menuorder_col($col, $id){
+  switch($col) {
+    case 'menuorder':
+
+    global $post;
+    echo $post->menu_order;
+
+    break;
+  }
+}
+add_action('manage_posts_custom_column', 'display_menuorder_col', 5, 2);
+
 // Page Slug Body Class
 function add_slug_body_class( $classes ) {
   global $post;
