@@ -1191,6 +1191,9 @@ html {
 body {
   line-height: 1.5;
 }
+h1 {
+  margin: 0;
+}
 p {
   margin-bottom: 1rem;
 }
