@@ -1,5 +1,4 @@
-  <?php
-
+<?php
 // Custom functions (like special queries, etc)
 
 function itemIsType($item = null, $type = null) {
