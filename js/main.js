@@ -15,6 +15,8 @@ Site = {
       Site.Galleries.init();
     });
 
+    _this.fixWidows();
+
     Site.News.init();
     Site.Luminaries.init();
   },

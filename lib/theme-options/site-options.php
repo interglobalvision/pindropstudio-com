@@ -4,7 +4,7 @@ $prefix = '_igv_';
 $suffix = '_options';
 
 $page_key = $prefix . 'site' . $suffix;
-$page_title = 'Site Options';
+$page_title = 'Meta, Social & SEO Options';
 $metabox = array(
   'id'         => $page_key, // id used as tab page slug, must be unique
   'title'      => $page_title,
