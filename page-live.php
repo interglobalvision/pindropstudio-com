@@ -42,7 +42,7 @@ get_header();
         $forthcoming_iterator = 0;
         while ($forthcoming_events->have_posts()) {
           $forthcoming_events->the_post();
-          get_template_part('partials/custom-pages/live/event-forthcoming');
+          include(locate_template('partials/custom-pages/live/event-forthcoming.php'));
           $forthcoming_iterator++;
         }
     ?>

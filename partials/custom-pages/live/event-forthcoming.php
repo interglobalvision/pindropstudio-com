@@ -1,6 +1,4 @@
 <?php
-  global $forthcoming_iterator;
-
   $location = get_post_meta($post->ID, '_igv_event_location', true);
   $address = get_post_meta($post->ID, '_igv_event_address', true);
   $time = get_post_meta($post->ID, '_igv_event_datetime', true);
