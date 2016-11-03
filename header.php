@@ -36,7 +36,7 @@
         </a>
       </div>
       <nav class="grid-item item-s-12 item-m-10">
-        <ul id="menu" class="font-style-micro u-inline-list">
+        <ul id="menu" class="font-style-micro font-size-small u-inline-list">
           <li><a <?php echo menuActiveClasses('live', 'page'); ?>href="<?php echo home_url('live'); ?>">Live</a></li>
           <li><a <?php echo menuActiveClasses('sound-and-vision', 'page'); ?>href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>
           <li><a <?php echo menuActiveClasses('luminaries', 'postype'); ?>href="<?php echo home_url('luminaries'); ?>">Luminaries</a></li>

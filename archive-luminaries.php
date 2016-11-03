@@ -5,7 +5,7 @@ get_header();
 <main id="main-content">
   <section class="container">
     <div class="grid-row">
-      <div class="grid-item item-s-12 margin-bottom-small font-style-micro text-align-center">
+      <div class="grid-item item-s-12 margin-bottom-small font-style-micro font-size-small text-align-center">
         <div class="dotted-divider">
           <div class="dotted-divider-side dotted-divider-left"></div>
           <div class="dotted-divider-center font-uppercase u-pointer">
