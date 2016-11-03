@@ -103,21 +103,7 @@ get_header();
       foreach ($past_events as $post_id) {
         $post = get_post($post_id);
         setup_postdata($post);
-    ?>
-      <div class="grid-item item-s-4 margin-bottom-small text-align-center">
-        <div class="card">
-          <a href="<?php the_permalink(); ?>">
-            <div class="margin-bottom-tiny">
-              <?php the_post_thumbnail('l-4-landscape'); ?>
-            </div>
-          </a>
-          <a href="<?php the_permalink(); ?>">
-            <h3 class="margin-bottom-tiny js-fix-widows"><?php the_title(); ?></h3>
-          </a>
-          <div class="text-align-center"><a href="<?php the_permalink(); ?>" class="link-button">Read More</a></div>
-        </div>
-      </div>
-    <?php
+        get_template_part('partials/custom-pages/live/event-past');
       }
       wp_reset_postdata();
     ?>
