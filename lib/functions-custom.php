@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 // Custom functions (like special queries, etc)
 
@@ -53,12 +53,12 @@ function render_embed_caption($caption) {
 }
 
 function render_live_forthcoming_location($location, $address) {
-  echo '<h4 class="margin-bottom-tiny font-uppercase">' . $location . '</h4>';
+  echo '<h4 class="margin-bottom-tiny font-style-micro">' . $location . '</h4>';
   echo '<h3>' . $address . '</h3>';
 }
 
 function render_live_forthcoming_time($moment) {
-  echo '<h4 class="margin-bottom-tiny font-uppercase">' . $moment->format('l') . '</h4>';
-  echo '<h1 class="margin-bottom-tiny">' . $moment->format('d') . '</h1>';
-  echo '<h4 class="font-uppercase">' . $moment->format('F') . '</h4>';
+  echo '<h4 class="margin-bottom-tiny font-style-micro">' . $moment->format('l') . '</h4>';
+  echo '<h1 class="font-size-big-number margin-bottom-tiny">' . $moment->format('d') . '</h1>';
+  echo '<h4 class="font-style-micro">' . $moment->format('F') . '</h4>';
 }
