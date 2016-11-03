@@ -29,7 +29,7 @@ get_header();
       if ($forthcoming_events->have_posts()) {
     ?>
 
-    <div class="grid-row margin-top-basic margin-bottom-basic">
+    <div class="grid-row margin-top-basic margin-bottom-mid">
       <div class="grid-item item-s-12 font-style-micro text-align-center">
         <div class="dotted-divider">
           <div class="dotted-divider-side dotted-divider-left"></div>
