@@ -1315,6 +1315,9 @@ img {
 #luminaries-sort-order {
   display: none;
 }
+.quote-pin-holder svg {
+  height: 130px;
+}
 .container {
   width: 96%;
 }

@@ -50,7 +50,7 @@ if( have_posts() ) {
 
       if ($quote_text && $quote_person) {
     ?>
-    <div class="grid-row">
+    <div class="grid-row margin-top-large">
       <?php render_quote($quote_text, $quote_person, $quote_luminary); ?>
     </div>
     <?php
