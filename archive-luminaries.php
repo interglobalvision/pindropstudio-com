@@ -4,17 +4,8 @@ get_header();
 
 <main id="main-content">
   <section class="container">
-    <div class="grid-row">
-      <div class="grid-item item-s-12 margin-bottom-small font-style-micro font-size-small text-align-center">
-        <div class="dotted-divider">
-          <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center font-uppercase u-pointer">
-            <span id="luminaries-sort-alphabetical">Sort Alphabetical +</span>
-            <span id="luminaries-sort-order">Sort Original +</span>
-          </div>
-          <div class="dotted-divider-side dotted-divider-right"></div>
-        </div>
-      </div>
+    <div class="grid-row margin-bottom-small">
+      <?php render_divider_with_content('<div class="u-pointer"><span id="luminaries-sort-alphabetical">Sort Alphabetical +</span><span id="luminaries-sort-order">Sort Original +</span></div>'); ?>
     </div>
     <div id="posts" class="grid-row">
 

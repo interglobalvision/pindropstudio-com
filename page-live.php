@@ -30,13 +30,7 @@ get_header();
     ?>
 
     <div class="grid-row margin-top-basic margin-bottom-mid">
-      <div class="grid-item item-s-12 font-style-micro text-align-center">
-        <div class="dotted-divider">
-          <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center">Forthcoming Live Events</div>
-          <div class="dotted-divider-side dotted-divider-right"></div>
-        </div>
-      </div>
+      <?php render_divider_with_content('Forthcoming Live Events'); ?>
     </div>
     <?php
         $forthcoming_iterator = 0;
@@ -52,13 +46,7 @@ get_header();
     ?>
 
     <div class="grid-row margin-top-large margin-bottom-basic">
-      <div class="grid-item item-s-12 font-style-micro text-align-center">
-        <div class="dotted-divider">
-          <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center">Past Events</div>
-          <div class="dotted-divider-side dotted-divider-right"></div>
-        </div>
-      </div>
+      <?php render_divider_with_content('Past Events'); ?>
     </div>
 
     <div class="grid-row justify-center margin-top-basic margin-bottom-basic">
@@ -110,13 +98,10 @@ get_header();
     </div>
 
     <div class="grid-row margin-top-basic margin-bottom-basic">
-      <div class="grid-item item-s-12 font-style-micro text-align-center">
-        <div class="dotted-divider">
-          <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center"><a href="<?php echo home_url('sound-and-vision'); ?>" class="link-button">More Sound & Vision Posts +</a></div>
-          <div class="dotted-divider-side dotted-divider-right"></div>
-        </div>
-      </div>
+      <?php
+        $content = '<a href="' . home_url('sound-and-vision') . '" class="link-button">More Sound & Vision Posts +</a>';
+        render_divider_with_content($content);
+      ?>
     </div>
 
     >>> quote goes here but from other feature branch
