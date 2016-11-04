@@ -42,9 +42,22 @@ if( have_posts() ) {
 } ?>
 
     </div>
-  </section>
 
-  <?php get_template_part('partials/pagination'); ?>
+    <?php
+      $quote_text = IGV_get_option('_igv_quote_options', '_igv_luminaries_quote_text');
+      $quote_person = IGV_get_option('_igv_quote_options', '_igv_luminaries_quote_person');
+      $quote_luminary = IGV_get_option('_igv_quote_options', '_igv_luminaries_quote_luminary');
+
+      if ($quote_text && $quote_person) {
+    ?>
+    <div class="grid-row">
+      <?php render_quote($quote_text, $quote_person, $quote_luminary); ?>
+    </div>
+    <?php
+      }
+    ?>
+
+  </section>
 
 </main>
 
