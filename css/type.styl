@@ -62,6 +62,9 @@ html
 body
   line-height: 1.5
 
+h1
+  margin: 0
+
 p
   margin-bottom: 1rem
 
@@ -130,16 +133,21 @@ font-sizes($size-basic = 16px)
   html
     font-size: $size-basic
 
-  .font-style-micro
+  .font-size-small
     font-size: $size-basic * .6875
 
   h1, .font-size-h1
     font-size: $size-basic * 2.875
-    line-height: .92
+    line-height: 1.2
 
   h2, .font-size-h2
     font-size: $size-basic * 2
-    line-height: .842105263
+    line-height: 1.1875
 
   h3, .font-size-h3
     font-size: $size-basic * 1.5
+    line-height: 1.166666667
+
+  .font-size-big-number
+    font-size: $size-basic * 5.625
+    line-height: .866666667

@@ -1,6 +1,6 @@
   <footer id="footer" class="container">
     <div class="grid-row">
-      <div class="grid-item item-s-12 item-m-8 offset-m-2 font-style-micro text-align-center">
+      <div class="grid-item item-s-12 item-m-8 offset-m-2 font-style-micro font-size-small text-align-center">
         <div id="footer-pin-holder">
           <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-pin.svg'); ?>
         </div>

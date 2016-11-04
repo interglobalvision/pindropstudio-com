@@ -1191,6 +1191,9 @@ html {
 body {
   line-height: 1.5;
 }
+h1 {
+  margin: 0;
+}
 p {
   margin-bottom: 1rem;
 }
@@ -1574,22 +1577,27 @@ img {
 html {
   font-size: 16px;
 }
-.font-style-micro {
+.font-size-small {
   font-size: 11px;
 }
 h1,
 .font-size-h1 {
   font-size: 46px;
-  line-height: 0.92;
+  line-height: 1.2;
 }
 h2,
 .font-size-h2 {
   font-size: 32px;
-  line-height: 0.842105263;
+  line-height: 1.1875;
 }
 h3,
 .font-size-h3 {
   font-size: 24px;
+  line-height: 1.166666667;
+}
+.font-size-big-number {
+  font-size: 90px;
+  line-height: 0.866666667;
 }
 .link-button {
   border-top: solid 1px #373a3c;
@@ -1645,6 +1653,9 @@ h3,
 .card {
   padding: 14px;
   background-color: #fff;
+}
+.live-forthcoming-event-meta {
+  margin-top: 70px;
 }
 #footer {
   padding-top: 14px;
@@ -1963,6 +1974,9 @@ h3,
   .card {
     padding: 14px;
   }
+  .live-forthcoming-event-meta {
+    margin-top: 70px;
+  }
 }
 @media screen and (min-width: 860px) {
   .container {
@@ -2256,6 +2270,9 @@ h3,
   }
   .card {
     padding: 16px;
+  }
+  .live-forthcoming-event-meta {
+    margin-top: 80px;
   }
 }
 @media screen and (min-width: 1280px) {

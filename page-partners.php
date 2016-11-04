@@ -12,7 +12,7 @@ if( have_posts() ) {
   ?>
   <article id="page" <?php post_class('container'); ?>>
     <div class="grid-row margin-top-basic margin-bottom-basic">
-      <div class="grid-item item-s-12 font-style-micro text-align-center">
+      <div class="grid-item item-s-12 font-style-micro font-size-small text-align-center">
         <?php the_title(); ?>
       </div>
     </div>
