@@ -100,7 +100,7 @@ get_header();
       if ($overrides) {
         $past_events = array_merge($overrides, $past_event_ids);
       } else {
-        $past_events = $past_event_ids
+        $past_events = $past_event_ids;
       }
 
       global $post;
