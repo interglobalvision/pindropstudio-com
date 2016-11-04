@@ -19,6 +19,7 @@ Site = {
 
     Site.News.init();
     Site.Luminaries.init();
+    Site.Expandables.init();
   },
 
   onResize: function() {
@@ -155,6 +156,37 @@ Site.Luminaries.Archive = {
       }
     }).appendTo($posts);
   }
+};
+
+Site.Expandables = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+  },
+
+  bind: function() {
+    var _this = this;
+
+    $('.expandable-toggle').click( function() {
+      $toggleBtn = $(this);
+      
+      // Toggle this button
+      $toggleBtn.toggle()
+
+      // Toggle content
+      $toggleBtn.siblings('.expandable-content').slideToggle('fast', function() {
+      if(Site.News.shuffleInstance) {
+        Site.News.shuffleInstance.update();
+      }
+    });
+
+      // Toggle sibling button
+      $toggleBtn.siblings('.expandable-toggle').toggle();
+
+    });
+  },
+
 };
 
 Site.init();

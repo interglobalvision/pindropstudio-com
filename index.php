@@ -11,6 +11,7 @@ get_header();
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
+    $isExpandable = get_post_meta($post->ID, '_igv_is_expandable', true);
 ?>
         <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
           <div class="card">
@@ -19,7 +20,36 @@ if( have_posts() ) {
             <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>
             <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
 
-            <?php the_excerpt(); ?>
+    <?php
+    if ($isExpandable) {
+      $explode_content = explode( '<!--more-->', $post->post_content );
+      $content_before = apply_filters( 'the_content', $explode_content[0] );
+
+      if (sizeof($explode_content) > 1) {
+        $content_after = apply_filters( 'the_content', $explode_content[1] );
+      }
+    ?>
+      <div class="expandable-post">
+        <div class="expandable-excerpt">
+          <?php echo $content_before; ?>
+        </div>
+        <?php
+        if (!empty($content_after)) {
+        ?>
+        <p class="expandable-toggle"><a>Read more expander…</a></p>
+        <div class="expandable-content">
+          <?php echo $content_after; ?>
+        </div>
+        <p class="expandable-toggle expandable-hide"><a>Hide</a></p>
+        <?php
+        }
+        ?>
+      </div>
+    <?php
+    } else {
+      the_content();
+    }
+    ?>
           </div>
         </article>
 
