@@ -50,14 +50,3 @@ function menuActiveClasses($item = null, $type = null, $classes = null) {
 function render_embed_caption($caption) {
   echo '<h5 class="text-align-center margin-top-tiny margin-bottom-tiny">' . $caption . '</h5>';
 }
-
-function render_live_forthcoming_location($location, $address) {
-  echo '<h4 class="margin-bottom-tiny font-style-micro">' . $location . '</h4>';
-  echo '<h3>' . $address . '</h3>';
-}
-
-function render_live_forthcoming_time($moment) {
-  echo '<h4 class="margin-bottom-tiny font-style-micro">' . $moment->format('l') . '</h4>';
-  echo '<h1 class="font-size-big-number margin-bottom-tiny">' . $moment->format('d') . '</h1>';
-  echo '<h4 class="font-style-micro">' . $moment->format('F') . '</h4>';
-}

@@ -1,10 +1,5 @@
 <?php
-  $location = get_post_meta($post->ID, '_igv_event_location', true);
-  $address = get_post_meta($post->ID, '_igv_event_address', true);
-  $time = get_post_meta($post->ID, '_igv_event_datetime', true);
   $booking = get_post_meta($post->ID, '_igv_event_booking_url', true);
-
-  $time_moment = new \Moment\Moment('@' . $time);
 
   if ($forthcoming_iterator !== 0) {
 ?>
@@ -22,9 +17,9 @@
 
     <?php
       if ($forthcoming_iterator % 2 === 0) {
-        render_live_forthcoming_location($location, $address);
+        get_template_part('partials/custom-pages/live/event-forthcoming-location');
       } else {
-        render_live_forthcoming_time($time_moment);
+        get_template_part('partials/custom-pages/live/event-forthcoming-time');
       }
       ?>
   </div>
@@ -34,9 +29,9 @@
   <div class="grid-item item-s-12 item-m-3 text-align-center live-forthcoming-event-meta">
     <?php
       if ($forthcoming_iterator % 2 === 0) {
-        render_live_forthcoming_time($time_moment);
+        get_template_part('partials/custom-pages/live/event-forthcoming-time');
       } else {
-        render_live_forthcoming_location($location, $address);
+        get_template_part('partials/custom-pages/live/event-forthcoming-location');
       }
       ?>
   </div>
