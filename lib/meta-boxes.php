@@ -39,21 +39,6 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
    */
 
-   // POSTS METABOXES
-
-  $post_meta = new_cmb2_box( array(
-    'id'            => $prefix . 'post_meta',
-    'title'         => esc_html__( 'Post Meta', 'cmb2' ),
-    'object_types'  => array( 'post', ), // Post type
-  ) );
-
-  $post_meta->add_field( array(
-    'name'    => 'Expandable',
-    'desc'    => esc_html__( 'Check to make the post expandable in the front-end', 'cmb2' ),
-    'id'      => $prefix . 'is_expandable',
-    'type'    => 'checkbox',
-  ) );
-  
  // LUMINARIES METABOXES
 
   $luminaries_meta = new_cmb2_box( array(
