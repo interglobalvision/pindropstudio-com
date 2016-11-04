@@ -97,7 +97,11 @@ get_header();
 
       $past_event_ids = array_map($filter_ids, $past_events);
 
-      $past_events = array_merge($overrides, $past_event_ids);
+      if ($overrides) {
+        $past_events = array_merge($overrides, $past_event_ids);
+      } else {
+        $past_events = $past_event_ids
+      }
 
       global $post;
       foreach ($past_events as $post_id) {
