@@ -1,6 +1,4 @@
 <?php
-  global $post;
-
   $time = get_post_meta($post->ID, '_igv_event_datetime', true);
   $time_moment = new \Moment\Moment('@' . $time);
 ?>
