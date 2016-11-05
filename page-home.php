@@ -6,6 +6,10 @@ get_header();
 
   <div id="page-home" class="container">
 
+    <div class="grid-row">
+    //>>> carousel
+    </div>
+
     <?php
       $now = new \Moment\Moment('now', 'Europe/London');
       $tomorrow = $now->addDays(1);
@@ -29,7 +33,7 @@ get_header();
       if ($forthcoming_events->have_posts()) {
     ?>
 
-    <div class="grid-row margin-top-basic margin-bottom-mid">
+    <div class="grid-row margin-top-basic margin-bottom-small">
       <?php render_divider('Forthcoming Live Events'); ?>
     </div>
 
@@ -37,22 +41,25 @@ get_header();
     <?php
         while ($forthcoming_events->have_posts()) {
           $forthcoming_events->the_post();
-          get_template_part('partials/custom-pages/home/event-forthcoming.php');
+          get_template_part('partials/custom-pages/home/event-forthcoming');
         }
       }
     ?>
     </div>
-    //>>> more live events link divider
 
-    //>>> wide ad
+    <div class="grid-row margin-top-basic margin-bottom-large">
+      <?php render_divider('<a href="' . home_url('live') . '" class="link-button">More Live Events +</a>'); ?>
+    </div>
 
     <div class="grid-row">
+    //>>> wide ad
+    </div>
+
+    <div class="grid-row margin-bottom-small">
       <?php render_divider('Sound & Vision'); ?>
     </div>
 
-    //>>> 3 Sound & Vision posts (all from theme options? or override like Live page)
-
-    <div class="grid-row justify-center margin-top-basic margin-bottom-basic">
+    <div class="grid-row justify-center margin-bottom-basic">
     <?php
       $overrides = IGV_get_option('_igv_home_options', '_igv_override_events');
       $posts = 3;
@@ -104,19 +111,39 @@ get_header();
     ?>
     </div>
 
-    //>>> quote goes here
+    <?php
+      $quote_text = IGV_get_option('_igv_quote_options', '_igv_home_quote_text');
+      $quote_person = IGV_get_option('_igv_quote_options', '_igv_home_quote_person');
+      $quote_luminary = IGV_get_option('_igv_quote_options', '_igv_home_quote_luminary');
 
+      if ($quote_text && $quote_person) {
+    ?>
+    <div class="grid-row margin-top-large">
+      <?php render_quote($quote_text, $quote_person, $quote_luminary); ?>
+    </div>
+    <?php
+      }
+    ?>
+
+    <div class="grid-row">
     //>>> 2 ads for products?
+    </div>
 
+    <div class="grid-row">
     //>>> connect with pindrop
+    </div>
 
+    <div class="grid-row">
     //>>> wide ad
+    </div>
 
     <div class="grid-row margin-top-basic margin-bottom-mid">
       <?php render_divider('Recent Luminaries'); ?>
     </div>
 
+    <div class="grid-row">
     //>>> 4 recent luminaries
+    </div>
 
   </div>
 
