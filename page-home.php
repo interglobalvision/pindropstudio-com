@@ -51,9 +51,20 @@ get_header();
       <?php render_divider('<a href="' . home_url('live') . '" class="link-button">More Live Events +</a>'); ?>
     </div>
 
-    <div class="grid-row">
-    //>>> wide ad
+    <?php
+      $ad1_text = IGV_get_option('_igv_home_options', '_igv_ad1_text');
+      $ad1_image_id = IGV_get_option('_igv_home_options', '_igv_ad1_image_id');
+      $ad1_link = IGV_get_option('_igv_home_options', '_igv_ad1_link');
+      $ad1_link_external = IGV_get_option('_igv_home_options', '_igv_ad1_link_external');
+
+      if ($ad1_text && $ad1_image_id) {
+    ?>
+    <div class="grid-row margin-bottom-mid">
+      <?php render_ad($ad1_text, $ad1_image_id, $ad1_link, $ad1_link_external); ?>
     </div>
+    <?php
+      }
+    ?>
 
     <div class="grid-row margin-bottom-small">
       <?php render_divider('Sound & Vision'); ?>
@@ -133,9 +144,20 @@ get_header();
     //>>> connect with pindrop
     </div>
 
-    <div class="grid-row">
-    //>>> wide ad
+    <?php
+      $ad2_text = IGV_get_option('_igv_home_options', '_igv_ad2_text');
+      $ad2_image_id = IGV_get_option('_igv_home_options', '_igv_ad2_image_id');
+      $ad2_link = IGV_get_option('_igv_home_options', '_igv_ad2_link');
+      $ad2_link_external = IGV_get_option('_igv_home_options', '_igv_ad2_link_external');
+
+      if ($ad2_text && $ad2_image_id) {
+    ?>
+    <div class="grid-row margin-bottom-mid">
+      <?php render_ad($ad2_text, $ad2_image_id, $ad2_link, $ad2_link_external); ?>
     </div>
+    <?php
+      }
+    ?>
 
     <?php
       $args = array(
