@@ -4,10 +4,10 @@
 
 // Show all posts on luminaries archive
 function luminaries_archive_query($query) {
-    if ($query->is_post_type_archive('luminaries')) {
-      $query->set('posts_per_page', -1);
-      $query->set('orderby', 'menu_order');
-    }
+  if ($query->is_post_type_archive('luminaries') && is_archive()) {
+    $query->set('posts_per_page', -1);
+    $query->set('orderby', 'menu_order');
+  }
 }
 add_action('pre_get_posts','luminaries_archive_query');
 

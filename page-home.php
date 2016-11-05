@@ -137,13 +137,31 @@ get_header();
     //>>> wide ad
     </div>
 
-    <div class="grid-row margin-top-basic margin-bottom-mid">
+    <?php
+      $args = array(
+        'posts_per_page' => 4,
+        'post_type' => 'luminaries',
+      );
+
+      $recent_luminaries = new WP_Query($args);
+
+      if ($recent_luminaries->have_posts()) {
+    ?>
+    <div class="grid-row margin-top-basic margin-bottom-small">
       <?php render_divider('Recent Luminaries'); ?>
     </div>
 
     <div class="grid-row">
-    //>>> 4 recent luminaries
+    <?php
+        while ($recent_luminaries->have_posts()) {
+          $recent_luminaries->the_post();
+          get_template_part('partials/custom-pages/home/luminary-recent');
+        }
+    ?>
     </div>
+    <?php
+      }
+    ?>
 
   </div>
 
