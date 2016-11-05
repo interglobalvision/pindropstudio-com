@@ -21,7 +21,7 @@ if ( get_next_posts_link() || get_previous_posts_link() ) {
         $content .= $next;
       }
 
-      render_divider_with_content($content);
+      render_divider($content);
     ?>
     </div>
   </nav>

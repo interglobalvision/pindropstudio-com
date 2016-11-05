@@ -11,7 +11,7 @@ if( have_posts() ) {
   ?>
   <article id="page" <?php post_class('container'); ?>>
     <div class="grid-row margin-top-basic margin-bottom-basic">
-      <?php render_divider_with_content(get_the_title()); ?>
+      <?php render_divider(get_the_title()); ?>
     </div>
     <div class="grid-row">
       <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic">

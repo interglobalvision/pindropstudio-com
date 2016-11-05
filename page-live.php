@@ -30,7 +30,7 @@ get_header();
     ?>
 
     <div class="grid-row margin-top-basic margin-bottom-mid">
-      <?php render_divider_with_content('Forthcoming Live Events'); ?>
+      <?php render_divider('Forthcoming Live Events'); ?>
     </div>
     <?php
         $forthcoming_iterator = 0;
@@ -46,7 +46,7 @@ get_header();
     ?>
 
     <div class="grid-row margin-top-large margin-bottom-basic">
-      <?php render_divider_with_content('Past Events'); ?>
+      <?php render_divider('Past Events'); ?>
     </div>
 
     <div class="grid-row justify-center margin-top-basic margin-bottom-basic">
@@ -100,7 +100,7 @@ get_header();
     <div class="grid-row margin-top-basic margin-bottom-basic">
       <?php
         $content = '<a href="' . home_url('sound-and-vision') . '" class="link-button">More Sound & Vision Posts +</a>';
-        render_divider_with_content($content);
+        render_divider($content);
       ?>
     </div>
 

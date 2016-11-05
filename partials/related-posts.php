@@ -4,7 +4,7 @@
     $related_posts = explode(', ', $related_posts);
 ?>
 <div class="grid-row margin-bottom-small">
-  <?php render_divider_with_content('Related'); ?>
+  <?php render_divider('Related'); ?>
 </div>
 <div class="grid-row">
 <?php
