@@ -7,7 +7,7 @@ function itemIsType($item = null, $type = null) {
   }
 
   switch($type) {
-    case 'posttype':
+    case 'postype':
       if(is_post_type_archive($item)) {
         return true;
         break;
@@ -29,20 +29,16 @@ function menuActiveClasses($item = null, $type = null, $classes = null) {
     return false;
   }
 
+  $returnClasses = $classes;
+
   if (itemIsType($item, $type)) {
-    if ($classes) {
-      $returnClasses = 'active '. $classes;
-    } else {
-      $returnClasses = 'active';
-    }
-    return 'class="' . $returnClasses . '"';
-  } else {
-    if ($classes) {
-      return 'class="' . $classes . '"';
-    } else {
-      return false;
-    }
+    $returnClasses = 'active ' . $returnClasses;
+  } 
+  if (empty($returnClasses)) {
+    return false;
   }
+
+  return 'class="' . $returnClasses . '"';
 }
 
 // RENDERS
