@@ -46,9 +46,7 @@ if( have_posts() ) {
         $video_caption = get_post_meta($post->ID, '_igv_video_caption', true);
     ?>
     <div class="grid-row margin-bottom-mid">
-      <div class="grid-item item-s-12">
-        <div class="dotted-divider-full"></div>
-      </div>
+      <?php render_divider(); ?>
     </div>
     <div class="grid-row margin-bottom-mid">
       <div class="grid-item item-s-12 item-m-8 offset-m-2">
@@ -69,9 +67,7 @@ if( have_posts() ) {
         $audio_caption = get_post_meta($post->ID, '_igv_audio_caption', true);
     ?>
     <div class="grid-row margin-bottom-mid">
-      <div class="grid-item item-s-12">
-        <div class="dotted-divider-full"></div>
-      </div>
+      <?php render_divider(); ?>
     </div>
     <div class="grid-row margin-bottom-mid">
       <div class="grid-item item-s-12 item-m-8 offset-m-2">

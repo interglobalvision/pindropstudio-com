@@ -4,9 +4,7 @@
   if ($forthcoming_iterator !== 0) {
 ?>
 <div class="grid-row margin-bottom-large">
-  <div class="grid-item item-s-12">
-    <div class="dotted-divider-full"></div>
-  </div>
+  <?php render_divider(); ?>
 </div>
 <?php
   }

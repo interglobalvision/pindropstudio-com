@@ -7,7 +7,7 @@ function itemIsType($item = null, $type = null) {
   }
 
   switch($type) {
-    case 'posttype':
+    case 'postype':
       if(is_post_type_archive($item)) {
         return true;
         break;
@@ -29,23 +29,18 @@ function menuActiveClasses($item = null, $type = null, $classes = null) {
     return false;
   }
 
-  if (itemIsType($item, $type)) {
-    if ($classes) {
-      $returnClasses = 'active '. $classes;
-    } else {
-      $returnClasses = 'active';
-    }
-    return 'class="' . $returnClasses . '"';
-  } else {
-    if ($classes) {
-      return 'class="' . $classes . '"';
-    } else {
-      return false;
-    }
-  }
-}
+  $returnClasses = $classes;
 
-// RENDERS
+  if (itemIsType($item, $type)) {
+    $returnClasses = 'active ' . $returnClasses;
+  }
+
+  if (empty($returnClasses)) {
+    return false;
+  }
+
+  return 'class="' . $returnClasses . '"';
+}
 
 function render_embed_caption($caption) {
   echo '<h5 class="text-align-center margin-top-tiny margin-bottom-tiny">' . $caption . '</h5>';
@@ -80,3 +75,4 @@ function render_quote($text = null, $person = null, $luminary = null) {
 </div>
 <?php
 }
+
