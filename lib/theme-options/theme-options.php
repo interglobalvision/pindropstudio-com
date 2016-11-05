@@ -6,3 +6,4 @@ get_template_part( 'lib/theme-options/theme-options-class' );
 // One file per options page
 get_template_part( 'lib/theme-options/site-options' );
 get_template_part( 'lib/theme-options/live-options' );
+get_template_part( 'lib/theme-options/quote-options' );

@@ -108,7 +108,19 @@ get_header();
       ?>
     </div>
 
-    >>> quote goes here but from other feature branch
+    <?php
+      $quote_text = IGV_get_option('_igv_quote_options', '_igv_live_quote_text');
+      $quote_person = IGV_get_option('_igv_quote_options', '_igv_live_quote_person');
+      $quote_luminary = IGV_get_option('_igv_quote_options', '_igv_live_quote_luminary');
+
+      if ($quote_text && $quote_person) {
+    ?>
+    <div class="grid-row margin-top-large">
+      <?php render_quote($quote_text, $quote_person, $quote_luminary); ?>
+    </div>
+    <?php
+      }
+    ?>
 
   </div>
 
