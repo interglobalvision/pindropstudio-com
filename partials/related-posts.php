@@ -3,14 +3,10 @@
   if ($related_posts) {
     $related_posts = explode(', ', $related_posts);
 ?>
+<div class="grid-row margin-bottom-small">
+  <?php render_divider('Related'); ?>
+</div>
 <div class="grid-row">
-  <div class="grid-item item-s-12 margin-bottom-small font-style-micro font-size-small text-align-center">
-    <div class="dotted-divider">
-      <div class="dotted-divider-side dotted-divider-left"></div>
-      <div class="dotted-divider-center font-uppercase">Related</div>
-      <div class="dotted-divider-side dotted-divider-right"></div>
-    </div>
-  </div>
 <?php
     global $post;
     foreach($related_posts as $post_id) {

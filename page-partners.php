@@ -25,9 +25,7 @@ if( have_posts() ) {
       if ($partners) {
     ?>
     <div class="grid-row margin-bottom-mid">
-      <div class="grid-item item-s-12">
-        <div class="dotted-divider-full"></div>
-      </div>
+      <?php render_divider(); ?>
     </div>
     <div class="grid-row margin-bottom-mid">
     <?php
@@ -37,9 +35,7 @@ if( have_posts() ) {
     ?>
     </div>
     <div class="grid-row margin-bottom-mid">
-      <div class="grid-item item-s-12">
-        <div class="dotted-divider-full"></div>
-      </div>
+      <?php render_divider(); ?>
     </div>
     <div class="grid-row margin-bottom-mid">
     <?php
@@ -64,9 +60,7 @@ if( have_posts() ) {
     ?>
     </div>
     <div class="grid-row">
-      <div class="grid-item item-s-12">
-        <div class="dotted-divider-full"></div>
-      </div>
+      <?php render_divider(); ?>
     </div>
     <?php
       }

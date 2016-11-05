@@ -70,6 +70,7 @@ get_template_part( 'lib/theme-options/theme-options' );
 // Add custom functions
 
 get_template_part( 'lib/functions-misc' );
+get_template_part( 'lib/functions-render' );
 get_template_part( 'lib/functions-custom' );
 get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );

@@ -33,16 +33,11 @@ function menuActiveClasses($item = null, $type = null, $classes = null) {
 
   if (itemIsType($item, $type)) {
     $returnClasses = 'active ' . $returnClasses;
-  } 
+  }
+
   if (empty($returnClasses)) {
     return false;
   }
 
   return 'class="' . $returnClasses . '"';
-}
-
-// RENDERS
-
-function render_embed_caption($caption) {
-  echo '<h5 class="text-align-center margin-top-tiny margin-bottom-tiny">' . $caption . '</h5>';
 }
