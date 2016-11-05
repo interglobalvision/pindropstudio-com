@@ -95,7 +95,7 @@ get_header();
       foreach ($past_events as $post_id) {
         $post = get_post($post_id);
         setup_postdata($post);
-        get_template_part('partials/custom-pages/live/event-past');
+        get_template_part('partials/custom-pages/event-past');
       }
       wp_reset_postdata();
     ?>
