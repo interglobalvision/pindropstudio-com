@@ -1318,6 +1318,23 @@ img {
 .quote-pin-holder svg {
   height: 130px;
 }
+.wide-ad {
+  position: relative;
+  color: #fff;
+}
+.wide-ad-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.wide-ad-link-holder {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.wide-ad-link-holder .link-button {
+  background-color: rgba(62,62,62,0.2);
+}
 .container {
   width: 96%;
 }
@@ -1677,6 +1694,14 @@ h3,
 .footer-menu li {
   margin: 0 7px;
 }
+.wide-ad-text {
+  top: 14px;
+  left: 14px;
+}
+.wide-ad-link-holder {
+  bottom: 14px;
+  right: 14px;
+}
 @media screen and (min-width: 720px) {
   .margin-top-micro {
     margin-top: 4.666666666666667px;
@@ -1980,6 +2005,14 @@ h3,
   .live-forthcoming-event-meta {
     margin-top: 70px;
   }
+  .wide-ad-text {
+    top: 14px;
+    left: 14px;
+  }
+  .wide-ad-link-holder {
+    bottom: 14px;
+    right: 14px;
+  }
 }
 @media screen and (min-width: 860px) {
   .container {
@@ -2276,6 +2309,14 @@ h3,
   }
   .live-forthcoming-event-meta {
     margin-top: 80px;
+  }
+  .wide-ad-text {
+    top: 16px;
+    left: 16px;
+  }
+  .wide-ad-link-holder {
+    bottom: 16px;
+    right: 16px;
   }
 }
 @media screen and (min-width: 1280px) {

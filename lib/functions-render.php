@@ -56,3 +56,32 @@ function render_quote($text = null, $person = null, $luminary = null) {
 </div>
 <?php
 }
+
+function render_ad($text = null, $image_id = null, $link_id = null, $link_external = null) {
+  if ($text === null || $image_id === null) {
+    return false;
+  }
+
+  $link = false;
+
+  if ($link) {
+    $link = '<a href="' . get_permalink($link) . '" class="link-button font-style-micro">Read More</a>';
+  } else {
+    $link = '<a href="' . $link_external . '" class="link-button font-style-micro" target="_blank" rel="noopener">Read More</a>';
+  }
+?>
+<div class="grid-item item-s-12 wide-ad text-align-center">
+  <?php echo wp_get_attachment_image($image_id, 'l-12-wide-ad'); ?>
+  <h2 class="wide-ad-text"><?php echo $text; ?></h2>
+  <?php
+    if ($link) {
+  ?>
+  <div class="wide-ad-link-holder">
+    <?php echo $link; ?>
+  </div>
+  <?php
+    }
+  ?>
+</div>
+<?php
+}
