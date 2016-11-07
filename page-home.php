@@ -103,18 +103,20 @@ get_header();
       $past_event_ids = array_map('array_map_filter_ids', $past_events);
 
       if ($overrides) {
-        $past_events = array_merge($overrides, $past_event_ids);
-      } else {
-        $past_events = $past_event_ids;
+        $past_event_ids = array_merge($overrides, $past_event_ids);
       }
 
-      global $post;
-      foreach ($past_events as $post_id) {
-        $post = get_post($post_id);
-        setup_postdata($post);
-        get_template_part('partials/custom-pages/event-past');
+      $past_events = new WP_Query(array(
+        'post_type' => 'event',
+        'post__in' => $past_event_ids,
+      ));
+
+      if ($past_events->have_posts()) {
+        while ($past_events->have_posts()) {
+          $past_events->the_post();
+          get_template_part('partials/custom-pages/event-past');
+        }
       }
-      wp_reset_postdata();
     ?>
     </div>
 
