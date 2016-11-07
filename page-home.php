@@ -100,11 +100,7 @@ get_header();
 
       $past_events = get_posts($past_args);
 
-      $filter_ids = function($post) {
-        return $post->ID;
-      };
-
-      $past_event_ids = array_map($filter_ids, $past_events);
+      $past_event_ids = array_map('array_map_filter_ids', $past_events);
 
       if ($overrides) {
         $past_events = array_merge($overrides, $past_event_ids);

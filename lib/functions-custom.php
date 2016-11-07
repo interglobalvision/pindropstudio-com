@@ -41,3 +41,8 @@ function menuActiveClasses($item = null, $type = null, $classes = null) {
 
   return 'class="' . $returnClasses . '"';
 }
+
+// Filter callback for array_map
+function array_map_filter_ids($post) {
+  return $post->ID;
+};
