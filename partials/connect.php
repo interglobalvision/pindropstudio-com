@@ -2,6 +2,7 @@
   <?php render_divider('Connect with Pindrop'); ?>
 </div>
 
+<!-- >>> This form needs the url etc to be provided by client -->
 <form>
   <div class="grid-row margin-bottom-mid">
     <div class="grid-item item-s-12 item-m-3 offset-m-1">
