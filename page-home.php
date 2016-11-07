@@ -138,9 +138,7 @@ get_header();
     //>>> 2 ads for products?
     </div>
 
-    <div class="grid-row">
-    //>>> connect with pindrop
-    </div>
+    <?php get_template_part('partials/connect'); ?>
 
     <?php
       $ad2_text = IGV_get_option('_igv_home_options', '_igv_ad2_text');
@@ -167,7 +165,7 @@ get_header();
 
       if ($recent_luminaries->have_posts()) {
     ?>
-    <div class="grid-row margin-top-basic margin-bottom-small">
+    <div class="grid-row margin-top-large margin-bottom-small">
       <?php render_divider('Recent Luminaries'); ?>
     </div>
 
