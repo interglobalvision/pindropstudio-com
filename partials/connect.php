@@ -16,7 +16,7 @@
     <div class="grid-item item-s-12 item-m-1">
       <button type="submit" class="connect-form-submit">
         <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-arrow.svg'); ?>
-      </div>
+      </button>
     </div>
   </div>
 </form>

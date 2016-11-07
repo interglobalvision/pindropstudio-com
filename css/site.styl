@@ -61,15 +61,29 @@ img
 
 // BORDERS
 
-border($top = true, $left = true, $bottom = true, $right = true)
+setBorders($top = true, $left = true, $bottom = true, $right = true, $color = $color-black)
   if ($top)
-    border-top: solid 1px $color-black
+    border-top: solid 1px $color
   if ($left)
-    border-left: solid 1px $color-black
+    border-left: solid 1px $color
   if ($bottom)
-    border-bottom: solid 1px $color-black
+    border-bottom: solid 1px $color
   if ($right)
-    border-right: solid 1px $color-black
+    border-right: solid 1px $color
+
+// ******************************************************
+
+// FORMS
+
+input
+  width: 100%
+  font-family: $font-serif
+  color: $color-light-gray
+  setBorders(true, true, true, true, $color-dark-gray)
+
+.connect-form-submit
+  border: none
+  background: none
 
 // ******************************************************
 
