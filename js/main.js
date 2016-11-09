@@ -170,8 +170,11 @@ Site.Expandables = {
     var _this = this;
 
     $('.expandable-toggle').click( function() {
-      // Toggle this button
-      $(this).toggle();
+
+      // Toggle this button if it doesn't have .no-hide
+      if ($(this).hasClass('no-hide') === false ) {
+        $(this).toggle();
+      }
 
 
       var $expandableId = $(this).data('exapandable-id');
