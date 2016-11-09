@@ -20,11 +20,22 @@ $metabox = array(
       'id'   => $prefix . 'open_submissions',
       'type' => 'group',
       'repetable' => true,
+      'options'     => array(
+        'group_title'   => __( 'Submission {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+        'add_button'    => __( 'Add another open submission', 'cmb2' ),
+        'remove_button' => __( 'Remove Submission', 'cmb2' ),
+        'sortable'      => true, // beta
+      ),
       'fields' => array(
         array(
           'name' => __( 'Title', 'cmb2' ),
           'id'   => $prefix . 'submission_title',
           'type' => 'text',
+        ),
+        array(
+          'name' => __( 'Image', 'cmb2' ),
+          'id'   => $prefix . 'submission_image',
+          'type' => 'file',
         ),
         array(
           'name' => __( 'Description', 'cmb2' ),
