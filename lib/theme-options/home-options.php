@@ -12,6 +12,27 @@ $metabox = array(
   'show_names' => true,
   'fields'     => array(
 
+    // carousel
+    array(
+      'name' => __( 'Carousel and dopple', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'above_title',
+      'type' => 'title',
+    ),
+    array(
+      'name' => __( 'Show Carousel', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'carousel_shown',
+      'type' => 'checkbox',
+    ),
+    array(
+      'name' => __( 'Choose up to 3 posts here to show on the carousel', 'IGV' ),
+      'desc' => __( '', 'IGV' ),
+      'id'   => $prefix . 'carousel_posts',
+      'type' => 'post_search_text',
+      'post_type' => array('post', 'event', 'luminary'),
+    ),
+
     // Sound & Vision section
     array(
       'name' => __( 'Sound & Vision posts override', 'cmb2' ),

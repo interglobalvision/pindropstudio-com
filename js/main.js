@@ -84,7 +84,11 @@ Site.Galleries = {
 
     if ($galleries.length) {
       $galleries.each(function(index, container) {
-        _this.initGalleryInstance(index, container);
+        if ($(this).hasClass('home-carousel')) {
+          _this.initHomeCarousel(index, container);
+        } else {
+          _this.initGalleryInstance(index, container);
+        }
       });
     }
   },
@@ -100,6 +104,23 @@ Site.Galleries = {
       onTap: function(swiper, event) {
         swiper.slideNext();
       }
+    });
+  },
+
+  initHomeCarousel: function(index, container) {
+    var _this = this;
+
+    _this['gallery-instance' + index] = new Swiper(container, {
+      speed: 600,
+      autoplay: 2000,
+      pagination: '.swiper-pagination',
+      paginationType: 'bullets',
+      paginationClickable: true,
+      loop: true,
+      paginationBulletRender: function(swiper, index, className) {
+        console.log(swiper);
+        return '<div class="carousel-pagination-item u-pointer ' + className + '"><span class="carousel-pagination-item-number">' + (index + 1) + '</span></div>';
+      },
     });
   }
 };

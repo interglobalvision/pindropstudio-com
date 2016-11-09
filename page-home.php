@@ -6,9 +6,11 @@ get_header();
 
   <div id="page-home" class="container">
 
-    <div class="grid-row">
-    //>>> carousel
-    </div>
+    <?php
+      if (IGV_get_option('_igv_home_options', '_igv_carousel_shown')) {
+        get_template_part('partials/custom-pages/home/carousel');
+      }
+    ?>
 
     <?php
       $now = new \Moment\Moment('now', 'Europe/London');
