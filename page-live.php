@@ -30,13 +30,7 @@ get_header();
     ?>
 
     <div class="grid-row margin-top-basic margin-bottom-mid">
-      <div class="grid-item item-s-12 font-style-micro text-align-center">
-        <div class="dotted-divider">
-          <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center">Forthcoming Live Events</div>
-          <div class="dotted-divider-side dotted-divider-right"></div>
-        </div>
-      </div>
+      <?php render_divider('Forthcoming Live Events'); ?>
     </div>
     <?php
         $forthcoming_iterator = 0;
@@ -52,13 +46,7 @@ get_header();
     ?>
 
     <div class="grid-row margin-top-large margin-bottom-basic">
-      <div class="grid-item item-s-12 font-style-micro text-align-center">
-        <div class="dotted-divider">
-          <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center">Past Events</div>
-          <div class="dotted-divider-side dotted-divider-right"></div>
-        </div>
-      </div>
+      <?php render_divider('Past Events'); ?>
     </div>
 
     <div class="grid-row justify-center margin-top-basic margin-bottom-basic">
@@ -91,39 +79,46 @@ get_header();
 
       $past_events = get_posts($past_args);
 
-      $filter_ids = function($post) {
-        return $post->ID;
-      };
-
-      $past_event_ids = array_map($filter_ids, $past_events);
+      $past_event_ids = array_map('array_map_filter_ids', $past_events);
 
       if ($overrides) {
-        $past_events = array_merge($overrides, $past_event_ids);
-      } else {
-        $past_events = $past_event_ids;
+        $past_event_ids = array_merge($overrides, $past_event_ids);
       }
 
-      global $post;
-      foreach ($past_events as $post_id) {
-        $post = get_post($post_id);
-        setup_postdata($post);
-        get_template_part('partials/custom-pages/live/event-past');
+      $past_events = new WP_Query(array(
+        'post_type' => 'event',
+        'post__in' => $past_event_ids,
+      ));
+
+      if ($past_events->have_posts()) {
+        while ($past_events->have_posts()) {
+          $past_events->the_post();
+          get_template_part('partials/custom-pages/event-past');
+        }
       }
-      wp_reset_postdata();
     ?>
     </div>
 
     <div class="grid-row margin-top-basic margin-bottom-basic">
-      <div class="grid-item item-s-12 font-style-micro text-align-center">
-        <div class="dotted-divider">
-          <div class="dotted-divider-side dotted-divider-left"></div>
-          <div class="dotted-divider-center"><a href="<?php echo home_url('sound-and-vision'); ?>" class="link-button">More Sound & Vision Posts +</a></div>
-          <div class="dotted-divider-side dotted-divider-right"></div>
-        </div>
-      </div>
+      <?php
+        $content = '<a href="' . home_url('sound-and-vision') . '" class="link-button">More Sound & Vision Posts +</a>';
+        render_divider($content);
+      ?>
     </div>
 
-    >>> quote goes here but from other feature branch
+    <?php
+      $quote_text = IGV_get_option('_igv_quote_options', '_igv_live_quote_text');
+      $quote_person = IGV_get_option('_igv_quote_options', '_igv_live_quote_person');
+      $quote_luminary = IGV_get_option('_igv_quote_options', '_igv_live_quote_luminary');
+
+      if ($quote_text && $quote_person) {
+    ?>
+    <div class="grid-row margin-top-large">
+      <?php render_quote($quote_text, $quote_person, $quote_luminary); ?>
+    </div>
+    <?php
+      }
+    ?>
 
   </div>
 

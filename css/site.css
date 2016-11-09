@@ -1264,6 +1264,19 @@ img {
 .desktop-only {
   display: none;
 }
+input {
+  width: 100%;
+  font-family: 'Scotch Modern';
+  color: #f1f1f1;
+  border-top: solid 1px rgba(55,58,60,0.498);
+  border-left: solid 1px rgba(55,58,60,0.498);
+  border-bottom: solid 1px rgba(55,58,60,0.498);
+  border-right: solid 1px rgba(55,58,60,0.498);
+}
+.connect-form-submit {
+  border: none;
+  background: none;
+}
 .swiper-pagination {
   position: initial;
 }
@@ -1317,6 +1330,26 @@ img {
 }
 .expandable-content {
   display: none;
+}
+.quote-pin-holder svg {
+  height: 130px;
+}
+.wide-ad {
+  position: relative;
+  color: #fff;
+}
+.wide-ad-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.wide-ad-link-holder {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.wide-ad-link-holder .link-button {
+  background-color: rgba(62,62,62,0.2);
 }
 .container {
   width: 96%;
@@ -1602,6 +1635,12 @@ h3,
   font-size: 90px;
   line-height: 0.866666667;
 }
+input {
+  padding: 7px 14px;
+}
+.connect-form-submit {
+  padding-top: 7px;
+}
 .link-button {
   border-top: solid 1px #373a3c;
   border-left: solid 1px #373a3c;
@@ -1676,6 +1715,14 @@ h3,
 }
 .footer-menu li {
   margin: 0 7px;
+}
+.wide-ad-text {
+  top: 14px;
+  left: 14px;
+}
+.wide-ad-link-holder {
+  bottom: 14px;
+  right: 14px;
 }
 @media screen and (min-width: 720px) {
   .margin-top-micro {
@@ -1940,6 +1987,12 @@ h3,
   .mobile-only {
     display: none;
   }
+  input {
+    padding: 7px 14px;
+  }
+  .connect-form-submit {
+    padding-top: 7px;
+  }
   .link-button {
     padding: 7px 7px 4.666666666666667px 7px;
   }
@@ -1979,6 +2032,14 @@ h3,
   }
   .live-forthcoming-event-meta {
     margin-top: 70px;
+  }
+  .wide-ad-text {
+    top: 14px;
+    left: 14px;
+  }
+  .wide-ad-link-holder {
+    bottom: 14px;
+    right: 14px;
   }
 }
 @media screen and (min-width: 860px) {
@@ -2249,6 +2310,12 @@ h3,
   .desktop-only {
     display: initial;
   }
+  input {
+    padding: 8px 16px;
+  }
+  .connect-form-submit {
+    padding-top: 8px;
+  }
   .link-button {
     padding: 8px 8px 5.333333333333333px 8px;
   }
@@ -2276,6 +2343,14 @@ h3,
   }
   .live-forthcoming-event-meta {
     margin-top: 80px;
+  }
+  .wide-ad-text {
+    top: 16px;
+    left: 16px;
+  }
+  .wide-ad-link-holder {
+    bottom: 16px;
+    right: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
