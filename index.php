@@ -29,16 +29,10 @@ if( have_posts() ) {
         <div class="expandable-excerpt">
           <?php echo $content_before; ?>
         </div>
-        <?php
-        if (!empty($content_after)) {
-        ?>
           <p><a class="expandable-toggle" data-exapandable-id="expandable-<?php echo $post->ID; ?>">Read more expander…</a></p>
         <div id="expandable-<?php echo $post->ID; ?>" class="expandable-content">
           <?php echo $content_after; ?>
         </div>
-        <?php
-        }
-        ?>
       </div>
     <?php
     } else {
