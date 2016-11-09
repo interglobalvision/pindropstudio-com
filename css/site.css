@@ -1315,8 +1315,7 @@ img {
 #luminaries-sort-order {
   display: none;
 }
-.expandable-content,
-.expandable-hide {
+.expandable-content {
   display: none;
 }
 .container {

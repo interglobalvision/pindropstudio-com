@@ -32,11 +32,10 @@ if( have_posts() ) {
         <?php
         if (!empty($content_after)) {
         ?>
-        <p class="expandable-toggle"><a>Read more expander…</a></p>
-        <div class="expandable-content">
+          <p><a class="expandable-toggle" data-exapandable-id="expandable-<?php echo $post->ID; ?>">Read more expander…</a></p>
+        <div id="expandable-<?php echo $post->ID; ?>" class="expandable-content">
           <?php echo $content_after; ?>
         </div>
-        <p class="expandable-toggle expandable-hide"><a>Hide</a></p>
         <?php
         }
         ?>
