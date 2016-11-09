@@ -4,6 +4,7 @@ var Shuffle = window.shuffle;
 
 Site = {
   mobileThreshold: 601,
+  animationSpeed: 400,
   init: function() {
     var _this = this;
 
@@ -176,7 +177,7 @@ Site.Expandables = {
       var $expandableId = $(this).data('exapandable-id');
 
       // Toggle content
-      $('#' + $expandableId).slideToggle('fast', function() {
+      $('#' + $expandableId).slideToggle(Site.animationSpeed, function() {
         if(Site.News.shuffleInstance) {
           Site.News.shuffleInstance.update();
         }
