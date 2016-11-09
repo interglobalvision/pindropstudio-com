@@ -39,7 +39,7 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
    */
 
-   // LUMINARIES METABOXES
+ // LUMINARIES METABOXES
 
   $luminaries_meta = new_cmb2_box( array(
     'id'            => $prefix . 'luminaries_meta',

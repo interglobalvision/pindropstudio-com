@@ -1328,6 +1328,9 @@ input {
 #luminaries-sort-order {
   display: none;
 }
+.expandable-content {
+  display: none;
+}
 .quote-pin-holder svg {
   height: 130px;
 }
