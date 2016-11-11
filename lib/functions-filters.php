@@ -78,3 +78,9 @@ add_filter('wp_get_attachment_image_attributes', 'add_lazysize_on_srcset');
 
 // Use this filter to enable the password field on Gravity Forms
 add_filter( 'gform_enable_password_field', '__return_true' );
+
+// Move Gravity Forms jQuery calls to footer
+add_filter("gform_init_scripts_footer", "init_scripts");
+function init_scripts() {
+  return true;
+}
