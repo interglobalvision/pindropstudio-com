@@ -1328,6 +1328,9 @@ input {
 #luminaries-sort-order {
   display: none;
 }
+.drawer-content {
+  display: none;
+}
 .expandable-content {
   display: none;
 }

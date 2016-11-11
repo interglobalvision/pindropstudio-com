@@ -21,6 +21,7 @@ Site = {
     Site.News.init();
     Site.Luminaries.init();
     Site.Expandables.init();
+    Site.Drawers.init();
   },
 
   onResize: function() {
@@ -171,16 +172,38 @@ Site.Expandables = {
 
     $('.expandable-toggle').click( function() {
 
-      // Toggle this button if it doesn't have .no-hide
-      if ($(this).hasClass('no-hide') === false ) {
-        $(this).toggle();
-      }
-
+      $(this).toggle();
 
       var $expandableId = $(this).data('exapandable-id');
 
       // Toggle content
       $('#' + $expandableId).slideToggle(Site.animationSpeed, function() {
+        if(Site.News.shuffleInstance) {
+          Site.News.shuffleInstance.update();
+        }
+      });
+
+    });
+  },
+
+};
+
+Site.Drawers = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+  },
+
+  bind: function() {
+    var _this = this;
+
+    $('.drawer-toggle').click( function() {
+
+      var $drawer = $(this).data('drawer-id');
+
+      // Toggle content
+      $('#' + $drawer).slideToggle(Site.animationSpeed, function() {
         if(Site.News.shuffleInstance) {
           Site.News.shuffleInstance.update();
         }
