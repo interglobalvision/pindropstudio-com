@@ -19,7 +19,7 @@ if( have_posts() ) {
         if (!empty($submission['_igv_submission_image_id'])) {
       ?>
     <div class="grid-row margin-top-basic margin-bottom-basic u-flex-center">
-      <div class="grid-item item-s-6">
+      <div class="grid-item item-s-12 item-m-6">
         <?php echo wp_get_attachment_image($submission['_igv_submission_image_id'], 'l-6'); ?>
       </div>
     </div>
@@ -29,7 +29,7 @@ if( have_posts() ) {
         if (!empty($submission['_igv_submission_title'])) {
       ?>
     <div class="grid-row u-flex-center">
-      <div class="grid-item item-s-9 margin-bottom-basic text-align-center">
+      <div class="grid-item item-s-12 item-m-9 margin-bottom-basic text-align-center">
         <h3><?php echo $submission['_igv_submission_title']; ?></h3>
       </div>
     </div>
@@ -39,7 +39,7 @@ if( have_posts() ) {
         if (!empty($submission['_igv_submission_desc'])) {
       ?>
     <div class="grid-row u-flex-center">
-      <div class="grid-item item-s-8 margin-bottom-basic">
+      <div class="grid-item item-s-12 item-m-8 margin-bottom-basic">
         <?php echo apply_filters('the_content', $submission['_igv_submission_desc']); ?>
       </div>
     </div>
@@ -49,7 +49,7 @@ if( have_posts() ) {
         if (!empty($submission['_igv_submission_button_text'])) {
       ?>
     <div class="grid-row u-flex-center">
-      <div class="grid-item item-s-8 margin-bottom-basic">
+      <div class="grid-item item-s-12 item-m-8 margin-bottom-basic">
       <div class="text-align-center"><a class="drawer-toggle link-button" data-drawer-id="drawer-<?php echo $index; ?>"><?php echo $submission['_igv_submission_button_text']; ?></a></div>
       </div>
     </div>
@@ -59,7 +59,7 @@ if( have_posts() ) {
         if (!empty($submission['_igv_submission_form'])) {
       ?>
     <div id="drawer-<?php echo $index; ?>" class="drawer-content grid-row u-flex-center">
-      <div class="grid-item item-s-8 offset-s-2 margin-bottom-basic">
+      <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic">
         <?php gravity_form($submission['_igv_submission_form']); ?>
       </div>
     </div>

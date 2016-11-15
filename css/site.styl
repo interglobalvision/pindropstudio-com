@@ -39,6 +39,9 @@ $color-gray = rgba(62, 62, 62, .2)
 $color-light-gray = rgb(241, 241, 241)
 $color-dark-gray = rgba(55, 58, 60, .498039)
 
+$color-red = rgba(255, 0, 0, .5)
+$color-blue = rgb(102, 175, 233)
+
 $speed-animation-fast = .3s
 
 // ******************************************************
@@ -75,15 +78,26 @@ setBorders($top = true, $left = true, $bottom = true, $right = true, $color = $c
 
 // FORMS
 
-input
-  width: 100%
+input, textarea
   font-family: $font-serif
-  color: $color-light-gray
+  &:focus
+    outline-color: $color-blue
+    outline-width: 1px
+  +placeholder()
+    color: $color-dark-gray
+
+input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]), textarea
+  width: 100%
+  max-width: 100%
   setBorders(true, true, true, true, $color-dark-gray)
+  background-color: $color-white
 
 .connect-form-submit
   border: none
   background: none
+
+.gform_validation_container, .gform_wrapper .gform_validation_container, body .gform_wrapper .gform_body ul.gform_fields li.gfield.gform_validation_container, body .gform_wrapper li.gform_validation_container, body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container
+  display: none
 
 // ******************************************************
 
