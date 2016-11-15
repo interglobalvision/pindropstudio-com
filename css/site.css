@@ -1310,6 +1310,10 @@ body .gform_wrapper li.gform_validation_container,
 body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   display: none;
 }
+.validation_error,
+.validation_message {
+  color: rgba(255,0,0,0.5);
+}
 .swiper-pagination {
   position: initial;
 }
@@ -1680,8 +1684,11 @@ input,
 textarea {
   padding: 7px 14px;
 }
-.gform_wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]) {
-  padding: 7px 14px;
+input[type=file] {
+  padding: 14px;
+}
+input[type=radio] {
+  margin-right: 14px;
 }
 .connect-form-submit {
   padding-top: 7px;
@@ -1712,6 +1719,9 @@ textarea {
   width: auto;
   margin: 0 auto;
   background-color: transparent;
+}
+.validation_error {
+  margin-bottom: 14px;
 }
 .link-button,
 .gform_button {
@@ -2062,11 +2072,39 @@ textarea {
   .mobile-only {
     display: none;
   }
-  input {
+  input,
+  textarea {
     padding: 7px 14px;
+  }
+  input[type=file] {
+    padding: 14px;
+  }
+  input[type=radio] {
+    margin-right: 14px;
   }
   .connect-form-submit {
     padding-top: 7px;
+  }
+  .gform_heading {
+    margin-top: 28px;
+    margin-bottom: 28px;
+  }
+  .gfield {
+    margin-bottom: 14px;
+  }
+  .gfield label {
+    margin-bottom: 14px;
+  }
+  .gfield .instruction,
+  .gfield #extensions_message,
+  .gfield .validation_message {
+    margin-top: 7px;
+  }
+  .gfield_required {
+    padding-left: 7px;
+  }
+  .validation_error {
+    margin-bottom: 14px;
   }
   .link-button {
     padding: 7px 7px 4.666666666666667px 7px;
@@ -2385,11 +2423,61 @@ textarea {
   .desktop-only {
     display: initial;
   }
-  input {
+  input,
+  textarea {
     padding: 8px 16px;
+  }
+  input[type=file] {
+    padding: 16px;
+  }
+  input[type=radio] {
+    margin-right: 16px;
   }
   .connect-form-submit {
     padding-top: 8px;
+  }
+  .gform_heading {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+  .gfield {
+    margin-bottom: 16px;
+  }
+  .gfield:before,
+  .gfield:after {
+    content: " ";
+    display: table;
+  }
+  .gfield:after {
+    clear: both;
+  }
+  .gfield .gfield_label,
+  .gfield .ginput_container {
+    float: left;
+  }
+  .gfield .gfield_label {
+    width: 30%;
+  }
+  .gfield .ginput_container {
+    width: 70%;
+  }
+  .gfield .validation_message {
+    width: 70%;
+    float: right;
+  }
+  .gfield label {
+    margin-bottom: 16px;
+  }
+  .gfield .instruction,
+  .gfield #extensions_message,
+  .gfield .validation_message {
+    margin-top: 8px;
+  }
+  .gfield_required {
+    padding-left: 8px;
+  }
+  .validation_error {
+    margin-bottom: 16px;
   }
   .link-button {
     padding: 8px 8px 5.333333333333333px 8px;
