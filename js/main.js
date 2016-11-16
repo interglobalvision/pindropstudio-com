@@ -21,6 +21,7 @@ Site = {
     Site.News.init();
     Site.Luminaries.init();
     Site.Expandables.init();
+    Site.Drawers.init();
   },
 
   onResize: function() {
@@ -191,9 +192,8 @@ Site.Expandables = {
     var _this = this;
 
     $('.expandable-toggle').click( function() {
-      // Toggle this button
-      $(this).toggle();
 
+      $(this).toggle();
 
       var $expandableId = $(this).data('exapandable-id');
 
@@ -205,6 +205,45 @@ Site.Expandables = {
       });
 
     });
+  },
+
+};
+
+Site.Drawers = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+
+    _this.$validationError = $('.gform_validation_error');
+    _this.$submitConfirmation = $('.gform_confirmation_message');
+
+    if (_this.$validationError.length) {
+      _this.openSubmitSection(_this.$validationError);
+    }
+
+    if (_this.$submitConfirmation.length) {
+      _this.openSubmitSection(_this.$submitConfirmation);
+    }
+  },
+
+  bind: function() {
+    $('.drawer-toggle').click( function() {
+      var $drawer = $(this).data('drawer-id');
+
+      // Toggle content
+      $('#' + $drawer).slideToggle(Site.animationSpeed);
+    });
+  },
+
+  openSubmitSection: function($target) {
+    for (var x = 0; x < $target.length; x++) {
+      $target.closest('.drawer-content').slideToggle(Site.animationSpeed, function() {
+        $('html, body').animate({
+          scrollTop: $(this).offset().top
+        }, Site.animationSpeed);
+      });
+    }
   },
 
 };

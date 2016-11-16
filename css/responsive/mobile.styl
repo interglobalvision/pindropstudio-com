@@ -2,19 +2,52 @@
 
 // FORMS
 
-input
+input, textarea
   padding: $margin-tiny $margin-small
+
+input[type=file]
+  padding: $margin-small
+
+input[type=radio]
+  margin-right: $margin-small
 
 .connect-form-submit
   padding-top: $margin-tiny
+
+.gform_heading
+  margin-top: $margin-basic
+  margin-bottom: $margin-basic
+
+.gfield
+  margin-bottom: $margin-small
+  label
+    margin-bottom: $margin-small
+  .instruction, #extensions_message, .validation_message
+    margin-top: $margin-tiny
+    font-family: font-stack('Scotch Micro')
+    text-transform: uppercase
+
+.gfield_required
+  color: $color-red
+  padding-left: $margin-tiny
+
+.gform_button
+  display: block
+  width: auto
+  margin: 0 auto
+  background-color: transparent
+
+.validation_error
+  margin-bottom: $margin-small
 
 // ******************************************************
 
 // LINKS
 
-.link-button
+.link-button, .gform_button
   setBorders()
   padding: $margin-tiny $margin-tiny $margin-micro $margin-tiny
+  cursor: pointer
   &:hover
     background-color: $color-gray
 

@@ -2,11 +2,44 @@
 
 // FORMS
 
-input
+input, textarea
   padding: $margin-tiny $margin-small
+
+input[type=file]
+  padding: $margin-small
+
+input[type=radio]
+  margin-right: $margin-small
 
 .connect-form-submit
   padding-top: $margin-tiny
+
+.gform_heading
+  margin-top: $margin-basic
+  margin-bottom: $margin-basic
+
+.gfield
+  margin-bottom: $margin-small
+  clearfix()
+  .gfield_label, .ginput_container
+    float: left
+  .gfield_label
+    width: 30%
+  .ginput_container
+    width: 70%
+  .validation_message
+    width: 70%
+    float: right
+  label
+    margin-bottom: $margin-small
+  .instruction, #extensions_message, .validation_message
+    margin-top: $margin-tiny
+
+.gfield_required
+  padding-left: $margin-tiny
+
+.validation_error
+  margin-bottom: $margin-small
 
 // ******************************************************
 
