@@ -193,35 +193,37 @@ Site.Drawers = {
     var _this = this;
 
     _this.bind();
-    _this.openInvalid();
+
+    _this.$validationError = $('.gform_validation_error');
+    _this.$submitConfirmation = $('.gform_confirmation_message');
+
+    if (_this.$validationError.length) {
+      _this.openSubmitSection(_this.$validationError);
+    }
+
+    if (_this.$submitConfirmation.length) {
+      _this.openSubmitSection(_this.$submitConfirmation);
+    }
   },
 
   bind: function() {
-    var _this = this;
-
     $('.drawer-toggle').click( function() {
-
       var $drawer = $(this).data('drawer-id');
 
       // Toggle content
       $('#' + $drawer).slideToggle(Site.animationSpeed);
-
     });
   },
 
-  openInvalid: function() {
-    var $validationError = $('.gform_validation_error');
-
-    if ($validationError.length) {
-      for(var x = 0; x < $validationError.length; x++) {
-        $validationError.closest('.drawer-content').slideToggle(Site.animationSpeed, function() {
-          $('html, body').animate({
-            scrollTop: $(this).offset().top
-          }, Site.animationSpeed);
-        });
-      }
+  openSubmitSection: function($target) {
+    for (var x = 0; x < $target.length; x++) {
+      $target.closest('.drawer-content').slideToggle(Site.animationSpeed, function() {
+        $('html, body').animate({
+          scrollTop: $(this).offset().top
+        }, Site.animationSpeed);
+      });
     }
-  }
+  },
 
 };
 
