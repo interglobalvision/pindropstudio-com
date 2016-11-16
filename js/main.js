@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Site, imagesLoaded */
+/* global $, document, Site, imagesLoaded, Swiper */
 var Shuffle = window.shuffle;
 
 Site = {
@@ -25,7 +25,7 @@ Site = {
   },
 
   onResize: function() {
-    var _this = this;
+//     var _this = this;
 
   },
 
@@ -102,7 +102,7 @@ Site.Galleries = {
       pagination: '.swiper-pagination',
       paginationType: 'fraction',
       loop: true,
-      onTap: function(swiper, event) {
+      onTap: function(swiper) {
         swiper.slideNext();
       }
     });
@@ -189,8 +189,6 @@ Site.Expandables = {
   },
 
   bind: function() {
-    var _this = this;
-
     $('.expandable-toggle').click( function() {
 
       $(this).toggle();
@@ -203,7 +201,6 @@ Site.Expandables = {
           Site.News.shuffleInstance.update();
         }
       });
-
     });
   },
 
