@@ -45,7 +45,6 @@ get_header();
           $forthcoming_events->the_post();
           get_template_part('partials/custom-pages/home/event-forthcoming');
         }
-      }
     ?>
     </div>
 
@@ -54,6 +53,8 @@ get_header();
     </div>
 
     <?php
+      }
+
       $ad1_text = IGV_get_option('_igv_home_options', '_igv_ad1_text');
       $ad1_image_id = IGV_get_option('_igv_home_options', '_igv_ad1_image_id');
       $ad1_link = IGV_get_option('_igv_home_options', '_igv_ad1_link');
