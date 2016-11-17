@@ -1,6 +1,5 @@
 <?php
   $carousel_posts = IGV_get_option('_igv_home_options', '_igv_carousel_posts');
-  $carousel_posts = explode(', ', $carousel_posts);
 
   if ($carousel_posts) {
 ?>
@@ -10,13 +9,26 @@
       <div class="swiper-wrapper">
       <?php
         global $post;
-        foreach ($carousel_posts as $post) {
+        foreach ($carousel_posts as $carousel_post) {
+          $post = $carousel_post['_igv_carousel_post_id'];
           setup_postdata($post);
       ?>
         <div class="swiper-slide carousel-post">
-          <?php the_post_thumbnail('l-12-carousel'); ?>
+          <?php
+            if (!empty($carousel_post['_igv_carousel_image_override_id'])) {
+              echo wp_get_attachment_image($carousel_post['_igv_carousel_image_override_id'], 'l-12-carousel');
+            } else {
+              the_post_thumbnail('l-12-carousel');
+            }
+          ?>
           <div class="carousel-content align-items-center">
-            <h1><?php the_title(); ?></h1>
+            <h1><?php
+              if (!empty($carousel_post['_igv_carousel_title_override'])) {
+                echo $carousel_post['_igv_carousel_title_override'];
+              } else {
+                the_title();
+              }
+            ?></h1>
           </div>
         </div>
       <?php
