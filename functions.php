@@ -76,4 +76,24 @@ get_template_part( 'lib/functions-filters' );
 get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
 
+
+function fill_igv_event_datetime() {
+  $broken_posts = get_posts( array(
+    'post_type' => 'event',
+    'posts_per_page'   => -1,
+    'meta_query' => array(
+      array(
+        'key' => '_igv_event_datetime',
+        'compare' => 'NOT EXISTS',
+      ),
+    ),
+  ));
+
+  foreach($broken_posts as $post) {
+    update_post_meta($post->ID, '_igv_event_datetime', strtotime($post->post_date));
+  }
+
+
+}
+add_action('save_post', 'fill_igv_event_datetime', 11);
 ?>
