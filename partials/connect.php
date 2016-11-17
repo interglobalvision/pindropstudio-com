@@ -2,17 +2,16 @@
   <?php render_divider('Connect with Pindrop'); ?>
 </div>
 
-<!-- >>> This form needs the url etc to be provided by client -->
-<form>
+<form action="http://modernactivity.createsend.com/t/y/s/cjrdlh/" method="post" id="subForm">
   <div class="grid-row margin-bottom-mid">
     <div class="grid-item item-s-12 item-m-3 offset-m-1">
-      <input type="text" placeholder="First name..." />
+      <input id="fieldName" name="cm-name" type="text" placeholder="First name..." />
     </div>
     <div class="grid-item item-s-12 item-m-3">
-      <input type="text" placeholder="Last Name..." />
+      <input id="fieldcktlkk" name="cm-f-cktlkk" type="text" placeholder="Last Name..." />
     </div>
     <div class="grid-item item-s-12 item-m-3">
-      <input type="email" placeholder="Email address..." />
+      <input id="fieldEmail" name="cm-cjrdlh-cjrdlh" type="email" placeholder="Email address..." required="" />
     </div>
     <div class="grid-item item-s-12 item-m-1">
       <button type="submit" class="connect-form-submit">
