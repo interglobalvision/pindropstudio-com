@@ -25,6 +25,38 @@ $metabox = array(
       'id'   => $prefix . 'carousel_shown',
       'type' => 'checkbox',
     ),
+
+    array(
+      'name' => __( 'Home Carousel', 'IGV' ),
+      'desc' => __( 'Choose up to 3 posts here to show on the carousel', 'IGV' ),
+      'id'   => $prefix . 'carousel_posts',
+      'type' => 'group',
+      'fields' => array(
+        array(
+          'name' => __( 'Post', 'IGV' ),
+          'desc' => __( 'Pick a post', 'IGV' ),
+          'id'   => $prefix . 'carousel_post_id',
+          'type' => 'post_search_text',
+          'post_type' => array('post', 'event', 'luminary'),
+          'select_behavior' => 'replace',
+          'select_type' => 'radio',
+        ),
+        array(
+          'name' => __( 'Title override', 'cmb2' ),
+          'desc' => __( '', 'cmb2' ),
+          'id'   => $prefix . 'carousel_title_override',
+          'type' => 'textarea_code',
+        ),
+        array(
+          'name' => __( 'Image override', 'cmb2' ),
+          'desc' => __( '', 'cmb2' ),
+          'id'   => $prefix . 'carousel_image_override',
+          'type' => 'file',
+        ),
+      ),
+    ),
+
+/*
     array(
       'name' => __( 'Choose up to 3 posts here to show on the carousel', 'IGV' ),
       'desc' => __( '', 'IGV' ),
@@ -32,6 +64,7 @@ $metabox = array(
       'type' => 'post_search_text',
       'post_type' => array('post', 'event', 'luminary'),
     ),
+*/
 
     // Sound & Vision section
     array(

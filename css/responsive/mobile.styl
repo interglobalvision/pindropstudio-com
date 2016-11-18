@@ -138,6 +138,25 @@ input[type=radio]
 
 // ******************************************************
 
+// CAROUSEL
+
+.carousel-links
+  display: inline-block
+  background-color: $color-gray
+  li
+    padding: $margin-micro $margin-tiny
+    &:before
+      padding-left: $margin-small
+      padding-right: $margin-small
+      content: '|'
+    &:first-child
+      &:before
+        padding-left: 0
+        padding-right: 0
+        content: ''
+
+// ******************************************************
+
 // WIDE ADS
 
 .wide-ad-text
