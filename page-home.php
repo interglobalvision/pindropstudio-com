@@ -137,9 +137,11 @@ get_header();
       }
     ?>
 
-    <div class="grid-row">
-    //>>> 2 ads for products?
-    </div>
+    <?php
+      if (IGV_get_option('_igv_home_options', '_igv_tall_ads_shown')) {
+        get_template_part('partials/custom-pages/home/tall-ads');
+      }
+    ?>
 
     <?php get_template_part('partials/connect'); ?>
 
