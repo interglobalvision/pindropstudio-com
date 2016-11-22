@@ -1435,7 +1435,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .quote-pin-holder svg {
   height: 130px;
 }
-.wide-ad {
+.wide-size-ad {
   position: relative;
   color: #fff;
 }
@@ -2223,6 +2223,17 @@ input[type=radio] {
   }
   .live-forthcoming-event-meta {
     margin-top: 70px;
+  }
+  .carousel-links li {
+    padding: 4.666666666666667px 7px;
+  }
+  .carousel-links li:before {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .carousel-links li:first-child:before {
+    padding-left: 0;
+    padding-right: 0;
   }
   .wide-ad-text {
     top: 14px;

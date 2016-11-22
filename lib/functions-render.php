@@ -70,7 +70,7 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
     $link = '<a href="' . $link_external . '" class="link-button font-style-micro" target="_blank" rel="noopener">Read More</a>';
   }
 ?>
-<div class="grid-item item-s-12 wide-ad text-align-center">
+<div class="grid-item item-s-12 wide-size-ad text-align-center">
   <?php echo wp_get_attachment_image($image_id, 'l-12-wide-ad'); ?>
   <h2 class="wide-ad-text"><?php echo $text; ?></h2>
   <?php
