@@ -29,7 +29,7 @@ if( have_posts() ) {
         <div class="expandable-excerpt">
           <?php echo $content_before; ?>
         </div>
-          <p><a class="expandable-toggle" data-exapandable-id="expandable-<?php echo $post->ID; ?>">Read more expander…</a></p>
+          <p class="text-align-right"><a class="font-style-micro font-uppercase font-size-small u-pointer expandable-toggle" data-exapandable-id="expandable-<?php echo $post->ID; ?>">Read more</a></p>
         <div id="expandable-<?php echo $post->ID; ?>" class="expandable-content">
           <?php echo $content_after; ?>
         </div>
