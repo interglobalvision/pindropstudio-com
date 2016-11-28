@@ -1329,7 +1329,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 10%;
+  padding: 0 16%;
   color: #fff;
 }
 .carousel-content {
@@ -1341,7 +1341,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   right: 0;
   bottom: 0;
   left: initial;
-  width: 10%;
+  width: 15%;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -1879,6 +1879,16 @@ input[type=radio] {
   padding-right: 0;
   content: '';
 }
+.home-carousel {
+  height: 420px;
+}
+.home-carousel .swiper-slide {
+  background-position: center center;
+  background-size: cover;
+}
+.carousel-pagination {
+  display: none;
+}
 .wide-ad-text {
   top: 14px;
   left: 14px;
@@ -2234,6 +2244,11 @@ input[type=radio] {
   .carousel-links li:first-child:before {
     padding-left: 0;
     padding-right: 0;
+  }
+  .carousel-pagination {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
   }
   .wide-ad-text {
     top: 14px;
