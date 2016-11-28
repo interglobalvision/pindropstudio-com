@@ -218,6 +218,13 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
 
 // ABOUT PAGE DRAWERS
 
+.about-page-drawer-trigger
+  &:after
+    content: '+'
+    padding-left: 3px
+  &.active:after
+    content: '\2212'
+
 .about-page-drawer
   display: none
   &.active

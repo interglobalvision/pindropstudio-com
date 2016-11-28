@@ -1429,6 +1429,13 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .drawer-content {
   display: none;
 }
+.about-page-drawer-trigger:after {
+  content: '+';
+  padding-left: 3px;
+}
+.about-page-drawer-trigger.active:after {
+  content: '\2212';
+}
 .about-page-drawer {
   display: none;
 }
