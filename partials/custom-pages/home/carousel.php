@@ -12,15 +12,14 @@
         foreach ($carousel_posts as $carousel_post) {
           $post = $carousel_post['_igv_carousel_post_id'];
           setup_postdata($post);
+
+          if (!empty($carousel_post['_igv_carousel_image_override_id'])) {
+            $background_url = wp_get_attachment_image_src($carousel_post['_igv_carousel_image_override_id'], 'l-12-carousel');
+          } else {
+            $background_url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'l-12-carousel');
+          }
       ?>
-        <div class="swiper-slide carousel-post">
-          <?php
-            if (!empty($carousel_post['_igv_carousel_image_override_id'])) {
-              echo wp_get_attachment_image($carousel_post['_igv_carousel_image_override_id'], 'l-12-carousel');
-            } else {
-              the_post_thumbnail('l-12-carousel');
-            }
-          ?>
+        <div class="swiper-slide carousel-post" data-background="<?php echo $background_url[0]; ?>">
           <div class="carousel-content-holder align-items-center">
             <div class="carousel-content">
               <?php

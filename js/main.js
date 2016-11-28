@@ -110,6 +110,16 @@ Site.Galleries = {
 
   initHomeCarousel: function(index, container) {
     var _this = this;
+    var $slides = $(container).find('.swiper-slide');
+
+    $slides.each(function(index, item) {
+      var background = $(item).data('background');
+
+      $(item).css({
+        'background-image': 'url(' + background + ')'
+      });
+
+    });
 
     _this['gallery-instance' + index] = new Swiper(container, {
       speed: 600,
@@ -119,7 +129,6 @@ Site.Galleries = {
       paginationClickable: true,
       loop: true,
       paginationBulletRender: function(swiper, index, className) {
-        console.log(swiper);
         return '<div class="carousel-pagination-item u-pointer ' + className + '"><span class="carousel-pagination-item-number">' + (index + 1) + '</span></div>';
       },
     });
