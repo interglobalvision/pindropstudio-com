@@ -1,52 +1,5 @@
 [
     {
-        "name": "webdevstudios/cmb2",
-        "version": "v2.2.2.1",
-        "version_normalized": "2.2.2.1",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/WebDevStudios/CMB2.git",
-            "reference": "17d60c71f9f6b27f0e1ab2bbbaae2e5da2ffa7b9"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/WebDevStudios/CMB2/zipball/17d60c71f9f6b27f0e1ab2bbbaae2e5da2ffa7b9",
-            "reference": "17d60c71f9f6b27f0e1ab2bbbaae2e5da2ffa7b9",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">5.2.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*"
-        },
-        "suggest": {
-            "composer/installers": "~1.0"
-        },
-        "time": "2016-06-28 01:27:39",
-        "type": "wordpress-plugin",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "WebDevStudios",
-                "email": "contact@webdevstudios.com",
-                "homepage": "https://github.com/WebDevStudios",
-                "role": "Developer"
-            }
-        ],
-        "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
-        "homepage": "https://github.com/WebDevStudios/CMB2",
-        "keywords": [
-            "metabox",
-            "plugin",
-            "wordpress"
-        ]
-    },
-    {
         "name": "webdevstudios/cmb2-post-search-field",
         "version": "v0.2.5",
         "version_normalized": "0.2.5.0",
@@ -93,18 +46,65 @@
         ]
     },
     {
-        "name": "fightbulc/moment",
-        "version": "1.24.0",
-        "version_normalized": "1.24.0.0",
+        "name": "webdevstudios/cmb2",
+        "version": "v2.2.3.1",
+        "version_normalized": "2.2.3.1",
         "source": {
             "type": "git",
-            "url": "https://github.com/fightbulc/moment.php.git",
-            "reference": "33672d90060fdc353235284d0a0edd55a0a451a7"
+            "url": "https://github.com/WebDevStudios/CMB2.git",
+            "reference": "17677cf3aa65b0402ca8084b6b1cf37df6260582"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fightbulc/moment.php/zipball/33672d90060fdc353235284d0a0edd55a0a451a7",
-            "reference": "33672d90060fdc353235284d0a0edd55a0a451a7",
+            "url": "https://api.github.com/repos/WebDevStudios/CMB2/zipball/17677cf3aa65b0402ca8084b6b1cf37df6260582",
+            "reference": "17677cf3aa65b0402ca8084b6b1cf37df6260582",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">5.2.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*"
+        },
+        "suggest": {
+            "composer/installers": "~1.0"
+        },
+        "time": "2016-11-08 15:24:55",
+        "type": "wordpress-plugin",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "WebDevStudios",
+                "email": "contact@webdevstudios.com",
+                "homepage": "https://github.com/WebDevStudios",
+                "role": "Developer"
+            }
+        ],
+        "description": "CMB2 is a metabox, custom fields, and forms library for WordPress that will blow your mind.",
+        "homepage": "https://github.com/WebDevStudios/CMB2",
+        "keywords": [
+            "metabox",
+            "plugin",
+            "wordpress"
+        ]
+    },
+    {
+        "name": "fightbulc/moment",
+        "version": "1.25.0",
+        "version_normalized": "1.25.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fightbulc/moment.php.git",
+            "reference": "de8e0892fa889ae2770b52064f5b2da1b19036ae"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fightbulc/moment.php/zipball/de8e0892fa889ae2770b52064f5b2da1b19036ae",
+            "reference": "de8e0892fa889ae2770b52064f5b2da1b19036ae",
             "shasum": ""
         },
         "require": {
@@ -113,7 +113,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.2.*"
         },
-        "time": "2016-10-17 07:16:43",
+        "time": "2016-11-05 20:36:51",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
