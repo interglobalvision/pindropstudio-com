@@ -14,7 +14,7 @@ if( have_posts() ) {
   ?>
   <article id="page" <?php post_class('container'); ?>>
     <div class="grid-row margin-top-basic margin-bottom-basic">
-      <?php render_divider('<span class="about-page-drawer-trigger" data-target="people">People</span> | <span class="about-page-drawer-trigger" data-target="partners">Partners</span> | <span class="about-page-drawer-trigger active" data-target="about">About</span>'); ?>
+      <?php render_divider('<span class="about-page-drawer-trigger u-pointer" data-target="people">People</span> | <span class="about-page-drawer-trigger u-pointer" data-target="partners">Partners</span> | <span class="about-page-drawer-trigger u-pointer active" data-target="about">About</span>'); ?>
     </div>
     <div id="about-drawer-people" class="grid-row about-page-drawer">
       <?php
