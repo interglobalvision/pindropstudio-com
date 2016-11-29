@@ -222,6 +222,10 @@ Site.Drawers = {
     if (_this.$submitConfirmation.length) {
       _this.openSubmitSection(_this.$submitConfirmation);
     }
+
+    if ($('body').hasClass('page-about')) {
+      _this.About.init();
+    }
   },
 
   bind: function() {
@@ -242,7 +246,40 @@ Site.Drawers = {
       });
     }
   },
-
 };
+
+Site.Drawers.About = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+  },
+
+  bind: function() {
+    var _this = this;
+
+    $('.about-page-drawer-trigger').on('click', function() {
+      _this.toggleDrawer(this)
+    });
+  },
+
+  toggleDrawer: function(clickedTrigger) {
+    var target = $(clickedTrigger).data('target');
+
+    if ($(clickedTrigger).hasClass('active')) {
+      return;
+    }
+
+    $('.about-page-drawer.active').slideUp((Site.animationSpeed + 150), function() {
+      $('#about-drawer-' + target).slideDown(Site.animationSpeed);
+
+      $('.about-page-drawer-trigger.active').removeClass('active');
+      $(clickedTrigger).addClass('active');
+
+      $('.about-page-drawer.active').removeClass('active');
+      $('#about-drawer-' + target).addClass('active');
+    });
+  }
+}
 
 Site.init();
