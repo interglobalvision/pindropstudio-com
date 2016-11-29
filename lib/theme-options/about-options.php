@@ -23,6 +23,10 @@ $metabox = array(
       'desc' => __( '(displays on the About page)', 'IGV' ),
       'id'   => $prefix . 'people',
       'type' => 'group',
+      'options'     => array(
+        'add_button'    => __( 'Add Another Person', 'cmb2' ),
+        'remove_button' => __( 'Remove Person', 'cmb2' ),
+      ),
       'fields' => array(
         array(
           'name' => __( 'Person Name', 'IGV' ),
@@ -51,6 +55,10 @@ $metabox = array(
       'desc' => __( '(displays on the About page)', 'IGV' ),
       'id'   => $prefix . 'partners',
       'type' => 'group',
+      'options'     => array(
+        'add_button'    => __( 'Add Another Partner', 'cmb2' ),
+        'remove_button' => __( 'Remove Partner', 'cmb2' ),
+      ),
       'fields' => array(
         array(
           'name' => __( 'Partner Name', 'IGV' ),
