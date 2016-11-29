@@ -1203,10 +1203,14 @@ p {
 .font-serif {
   font-family: 'Scotch Modern';
 }
-.font-italic {
+.font-italic,
+em,
+i {
   font-style: italic;
 }
-.font-bold {
+.font-bold,
+strong,
+b {
   font-weight: bold;
 }
 .font-small-caps {

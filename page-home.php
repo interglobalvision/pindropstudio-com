@@ -39,7 +39,7 @@ get_header();
       <?php render_divider('Forthcoming Live Events'); ?>
     </div>
 
-    <div class="grid-row">
+    <div class="grid-row justify-center">
     <?php
         while ($forthcoming_events->have_posts()) {
           $forthcoming_events->the_post();

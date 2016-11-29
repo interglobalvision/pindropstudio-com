@@ -72,7 +72,7 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
 ?>
 <div class="grid-item item-s-12 wide-size-ad text-align-center">
   <?php echo wp_get_attachment_image($image_id, 'l-12-wide-ad'); ?>
-  <h2 class="wide-ad-text"><?php echo $text; ?></h2>
+  <h2 class="wide-ad-text font-style-shadow"><?php echo $text; ?></h2>
   <?php
     if ($link) {
   ?>
