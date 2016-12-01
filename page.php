@@ -18,6 +18,8 @@ if( have_posts() ) {
         <?php the_content(); ?>
       </div>
     </div>
+
+    <?php get_template_part('partials/related-posts'); ?>
   </article>
 <?php
   }
