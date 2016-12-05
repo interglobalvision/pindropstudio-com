@@ -11,8 +11,14 @@ function luminaries_archive_query($query) {
 }
 add_action('pre_get_posts','luminaries_archive_query');
 
-// Show menu_order in post lists
+// Add custom query var for sound & vision page luminary filter
+function add_custom_query_var( $vars ){
+  $vars[] = 'luminary';
+  return $vars;
+}
+add_filter( 'query_vars', 'add_custom_query_var' );
 
+// Show menu_order in post lists
 function add_menuorder_col($cols){
   $cols['menuorder'] = __('Sort Order');
   return $cols;
