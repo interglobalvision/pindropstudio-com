@@ -1223,6 +1223,9 @@ b {
 .font-uppercase {
   text-transform: uppercase;
 }
+.font-underline {
+  text-decoration: underline;
+}
 .font-style-shadow {
   text-shadow: rgba(0,0,0,0.6) 0px 1px 2px;
 }

@@ -1,5 +1,7 @@
 <?php
 get_header();
+
+$luminary = get_query_var('luminary');
 ?>
 
 <main id="main-content">
@@ -9,7 +11,7 @@ get_header();
       <?php render_divider('<span class="drawer-toggle u-pointer" data-drawer-id="drawer-luminaries-sort">Sort Luminaries +</span>'); ?>
     </div>
 
-    <div id="drawer-luminaries-sort" class="drawer-content margin-bottom-basic">
+    <div id="drawer-luminaries-sort" class="<?php if (empty($luminary)) {echo 'drawer-content ';} ?>margin-bottom-basic">
       <div class="grid-row">
 <?php
 $luminaries = new WP_Query(array(
@@ -25,7 +27,7 @@ if ($luminaries->have_posts()) {
     $luminaries->the_post();
 ?>
         <div class="grid-item item-s-6 item-m-4 item-l-3">
-          <a href="?luminary=<?php the_id(); ?>"><?php the_title(); ?></a>
+          <a href="?luminary=<?php the_id(); ?>" <?php if ($luminary == $post->ID) {echo 'class="font-underline"';} ?>><?php the_title(); ?></a>
         </div>
 <?php
   }
@@ -38,9 +40,6 @@ if ($luminaries->have_posts()) {
     <div id="shuffle-container" class="grid-row hidden">
 
 <?php
-
-$luminary = get_query_var('luminary');
-
 if (!empty($luminary)) {
   // filter query. gets events which have video or audio meta set and orders them by the datetime meta (which also needs to be set)
   $args = array(
@@ -127,7 +126,15 @@ if( $events_query->have_posts() ) {
   }
 } else {
 ?>
-        <article class="u-alert shuffle-item item-s-12"><?php _e('Sorry, no posts matched your criteria'); ?></article>
+        <article class="u-alert shuffle-item item-s-12">
+          <?php
+            if (!empty($luminary)) {
+              _e('Sorry, this luminary has no recordings yet');
+            } else {
+              _e('Sorry, no posts matched your criteria');
+            }
+          ?>
+        </article>
 <?php
 } ?>
 
