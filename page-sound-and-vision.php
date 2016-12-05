@@ -6,7 +6,30 @@ get_header();
   <section id="posts" class="container">
 
     <div class="grid-row margin-bottom-basic">
-      <?php render_divider(); ?>
+      <?php render_divider('<span>Sort Luminaries</span>'); ?>
+    </div>
+
+    <div class="grid-row margin-bottom-basic">
+<?php
+$luminaries = new WP_Query(array(
+  'post_type' => 'luminaries',
+  'posts_per_page' => -1,
+  'order' => 'ASC',
+  'orderby' => 'meta_value',
+  'meta_key' => '_igv_surname'
+));
+
+if ($luminaries->have_posts()) {
+  while ($luminaries->have_posts()) {
+    $luminaries->the_post();
+?>
+      <div class="grid-item item-s-6 item-m-4 item-l-3">
+        <a href="?luminary=<?php the_id(); ?>"><?php the_title(); ?></a>
+      </div>
+<?php
+  }
+}
+?>
     </div>
 
     <div id="shuffle-preloader"></div>
@@ -14,24 +37,55 @@ get_header();
 
 <?php
 
-// basic query. gets events which have video or audio meta set and orders them by the datetime meta (which also needs to be set)
-$args = array(
-  'post_type' => 'event',
-  'posts_per_page' => get_option('posts_per_page'),
-  'meta_query' => array(
-    'relation' => 'OR',
-    array(
-      'key' => '_igv_vimeo_id',
-      'compare' => 'EXISTS'
+$luminary = get_query_var('luminary');
+
+if (!empty($luminary)) {
+  // filter query. gets events which have video or audio meta set and orders them by the datetime meta (which also needs to be set)
+  $args = array(
+    'post_type' => 'event',
+    'posts_per_page' => get_option('posts_per_page'),
+    'meta_query' => array(
+      array(
+          'key' => '_igv_related_luminaries',
+          'value' => $luminary,
+          'compare' => 'IN'
+      ),
+      array(
+        'relation' => 'OR',
+        array(
+          'key' => '_igv_vimeo_id',
+          'compare' => 'EXISTS'
+        ),
+        array(
+          'key' => '_igv_soundcloud_url',
+          'compare' => 'EXISTS'
+        )
+      )
     ),
-    array(
-      'key' => '_igv_soundcloud_url',
-      'compare' => 'EXISTS'
-    )
-  ),
-  'meta_key' => '_igv_event_datetime',
-  'orderby' => 'meta_value_num',
-);
+    'meta_key' => '_igv_event_datetime',
+    'orderby' => 'meta_value_num',
+  );
+
+} else {
+  // basic query. gets events which have video or audio meta set and orders them by the datetime meta (which also needs to be set)
+  $args = array(
+    'post_type' => 'event',
+    'posts_per_page' => get_option('posts_per_page'),
+    'meta_query' => array(
+      'relation' => 'OR',
+      array(
+        'key' => '_igv_vimeo_id',
+        'compare' => 'EXISTS'
+      ),
+      array(
+        'key' => '_igv_soundcloud_url',
+        'compare' => 'EXISTS'
+      )
+    ),
+    'meta_key' => '_igv_event_datetime',
+    'orderby' => 'meta_value_num',
+  );
+}
 
 $events_query = new WP_Query($args);
 
@@ -71,7 +125,7 @@ if( $events_query->have_posts() ) {
   }
 } else {
 ?>
-        <article class="u-alert grid-item item-s-12"><?php _e('Sorry, no posts matched your criteria'); ?></article>
+        <article class="u-alert shuffle-item item-s-12"><?php _e('Sorry, no posts matched your criteria'); ?></article>
 <?php
 } ?>
 
