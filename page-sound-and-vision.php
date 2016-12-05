@@ -6,10 +6,11 @@ get_header();
   <section id="posts" class="container">
 
     <div class="grid-row margin-bottom-basic">
-      <?php render_divider('<span>Sort Luminaries</span>'); ?>
+      <?php render_divider('<span class="drawer-toggle u-pointer" data-drawer-id="drawer-luminaries-sort">Sort Luminaries +</span>'); ?>
     </div>
 
-    <div class="grid-row margin-bottom-basic">
+    <div id="drawer-luminaries-sort" class="drawer-content margin-bottom-basic">
+      <div class="grid-row">
 <?php
 $luminaries = new WP_Query(array(
   'post_type' => 'luminaries',
@@ -23,13 +24,14 @@ if ($luminaries->have_posts()) {
   while ($luminaries->have_posts()) {
     $luminaries->the_post();
 ?>
-      <div class="grid-item item-s-6 item-m-4 item-l-3">
-        <a href="?luminary=<?php the_id(); ?>"><?php the_title(); ?></a>
-      </div>
+        <div class="grid-item item-s-6 item-m-4 item-l-3">
+          <a href="?luminary=<?php the_id(); ?>"><?php the_title(); ?></a>
+        </div>
 <?php
   }
 }
 ?>
+      </div>
     </div>
 
     <div id="shuffle-preloader"></div>
