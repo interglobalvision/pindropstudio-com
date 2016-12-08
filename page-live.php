@@ -101,7 +101,7 @@ get_header();
 
     <div class="grid-row margin-top-basic margin-bottom-basic">
       <?php
-        $content = '<a href="' . home_url('sound-and-vision') . '" class="link-button">More Sound & Vision Posts +</a>';
+        $content = '<a href="' . home_url('event') . '" class="link-button">More Past Events +</a>';
         render_divider($content);
       ?>
     </div>
