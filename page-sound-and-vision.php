@@ -98,6 +98,8 @@ if( $events_query->have_posts() ) {
     $time_moment = new \Moment\Moment('@' . $time);
 
     $location = get_post_meta($post->ID, '_igv_event_location', true);
+
+    $title_override = get_post_meta($post->ID, '_igv_alt_title', true);
 ?>
         <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
           <div class="card">
@@ -113,7 +115,12 @@ if( $events_query->have_posts() ) {
                   echo ' | ' . $location;
                 }
               ?></h4>
-              <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
+              <h3 class="margin-bottom-small text-align-center"><?php
+                if (!empty($title_override)) {
+                  echo $title_override;
+                } else {
+                  the_title();
+                } ?></h3>
             </a>
 
             <div class="text-align-center">

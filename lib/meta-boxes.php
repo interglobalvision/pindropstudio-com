@@ -93,6 +93,13 @@ function igv_cmb_metaboxes() {
   ) );
 
   $event_metabox->add_field( array(
+    'name'    => 'Alt Title',
+    'description' => __( 'To display on Sound & Vision pages', 'cmb2' ),
+    'id'      => $prefix . 'alt_title',
+    'type'    => 'text',
+  ) );
+
+  $event_metabox->add_field( array(
     'name'    => 'Vimeo video',
     'description' => __( 'Just the ID of the Vimeo video', 'cmb2' ),
     'id'      => $prefix . 'vimeo_id',
