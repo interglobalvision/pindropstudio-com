@@ -100,6 +100,17 @@ get_header();
             'type'    => 'numeric',
             'compare' => '<',
           ),
+          array(
+            'relation' => 'OR',
+            array(
+              'key' => '_igv_vimeo_id',
+              'compare' => 'EXISTS'
+            ),
+            array(
+              'key' => '_igv_soundcloud_url',
+              'compare' => 'EXISTS'
+            )
+          )
         ),
       );
 
