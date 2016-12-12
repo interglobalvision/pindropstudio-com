@@ -22,8 +22,8 @@ if( have_posts() ) {
 
   ?>
   <article id="page" <?php post_class('container'); ?>>
-    <div class="grid-row margin-top-basic margin-bottom-basic">
-      <div class="grid-item item-s-12 item-m-8 offset-m-2 text-align-center">
+    <div class="grid-row margin-bottom-basic">
+      <div class="grid-item item-s-12 item-m-10 offset-m-1 item-l-8 offset-l-2 text-align-center">
         <?php
           if ($gallery) {
             echo do_shortcode($gallery);
