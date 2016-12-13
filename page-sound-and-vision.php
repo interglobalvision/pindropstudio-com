@@ -13,6 +13,8 @@ $luminary = get_query_var('luminary');
 
     <div id="drawer-luminaries-sort" class="<?php if (empty($luminary)) {echo 'drawer-content ';} ?>margin-bottom-basic">
       <div class="grid-row">
+        <div class="grid-item item-s-12">
+          <ul id="luminaries-sort-list">
 <?php
 $luminaries = new WP_Query(array(
   'post_type' => 'luminaries',
@@ -26,13 +28,13 @@ if ($luminaries->have_posts()) {
   while ($luminaries->have_posts()) {
     $luminaries->the_post();
 ?>
-        <div class="grid-item item-s-6 item-m-4 item-l-3">
-          <a href="?luminary=<?php the_id(); ?>" <?php if ($luminary == $post->ID) {echo 'class="font-underline"';} ?>><?php the_title(); ?></a>
-        </div>
+          <li><a href="?luminary=<?php the_id(); ?>" <?php if ($luminary == $post->ID) {echo 'class="font-underline"';} ?>><?php the_title(); ?></a></li>
 <?php
   }
 }
 ?>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -101,6 +103,9 @@ if( $events_query->have_posts() ) {
 
     $soundcloud_url = get_post_meta($post->ID, '_igv_soundcloud_url', true);
     $vimeo_id = get_post_meta($post->ID, '_igv_vimeo_id', true);
+    
+    $title_override = get_post_meta($post->ID, '_igv_alt_title', true);
+
 ?>
         <article <?php post_class('media-item shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>" <?php
           if ($soundcloud_url) {
@@ -124,7 +129,12 @@ if( $events_query->have_posts() ) {
                   echo ' | ' . $location;
                 }
               ?></h4>
-              <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
+              <h3 class="margin-bottom-small text-align-center"><?php
+                if (!empty($title_override)) {
+                  echo $title_override;
+                } else {
+                  the_title();
+                } ?></h3>
             </a>
 
             <div class="text-align-center">

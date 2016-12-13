@@ -2,9 +2,29 @@
 
 // Custom filters (like pre_get_posts etc)
 
+// Only show past events on event archive
+function event_archive_query($query) {
+  if ($query->is_post_type_archive('event') && is_archive() && !is_admin()) {
+    $now = new \Moment\Moment('now', 'Europe/London');
+    $tomorrow = $now->addDays(1);
+    $midnight = $tomorrow->startOf('day');
+    $midnight_timestamp = strtotime($midnight->format());
+
+    $query->set('meta_query', array(
+      array(
+        'key'     => '_igv_event_datetime',
+        'value'   => $midnight_timestamp,
+        'type'    => 'numeric',
+        'compare' => '<',
+      ),
+    ));
+  }
+}
+add_action('pre_get_posts','event_archive_query');
+
 // Show all posts on luminaries archive
 function luminaries_archive_query($query) {
-  if ($query->is_post_type_archive('luminaries') && is_archive()) {
+  if ($query->is_post_type_archive('luminaries') && is_archive() && !is_admin()) {
     $query->set('posts_per_page', -1);
     $query->set('orderby', 'menu_order');
   }

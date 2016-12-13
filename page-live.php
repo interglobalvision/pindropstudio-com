@@ -15,6 +15,8 @@ get_header();
       $forthcoming_events = new WP_Query(array(
         'post_type' => 'event',
         'posts_per_page' => 3,
+        'orderby' => 'meta_value',
+        'meta_key' => '_igv_event_datetime',
 
         'meta_query' => array(
           array(
@@ -101,7 +103,7 @@ get_header();
 
     <div class="grid-row margin-top-basic margin-bottom-basic">
       <?php
-        $content = '<a href="' . home_url('sound-and-vision') . '" class="link-button">More Sound & Vision Posts +</a>';
+        $content = '<a href="' . home_url('event') . '" class="link-button">More Past Events +</a>';
         render_divider($content);
       ?>
     </div>
