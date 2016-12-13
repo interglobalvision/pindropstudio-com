@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Site, imagesLoaded, Swiper */
+/* global $, document, Site, imagesLoaded, Swiper, zenscroll */
 var Shuffle = window.shuffle;
 
 Site = {
@@ -314,6 +314,11 @@ Site.Media = {
           _this.loadMedia($target);
 
           Site.News.shuffleInstance.update();
+
+          clearTimeout(_this.scrollToTimeout);
+          _this.scrollToTimeout = setTimeout(function() {
+            zenscroll.to($target[0]);
+          }, 200)
         }
       });
     }
