@@ -12,7 +12,7 @@ if( have_posts() ) {
   <article id="single-luminary" <?php post_class('container'); ?>>
     <div class="grid-row">
       <div class="grid-item item-s-12 text-align-center">
-        <?php the_post_thumbnail('l-6-square'); ?>
+        <?php the_post_thumbnail('l-4-square'); ?>
       </div>
     </div>
     <div class="grid-row">
