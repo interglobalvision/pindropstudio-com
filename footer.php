@@ -47,8 +47,11 @@
       </div>
     </div>
   </footer>
-
 </section>
+
+<div id="lightbox">
+  <div id="lightbox-content"></div>
+</div>
 
 <?php
   get_template_part('partials/scripts');
