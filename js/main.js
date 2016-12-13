@@ -18,6 +18,7 @@ Site = {
 
     _this.fixWidows();
 
+    Site.Media.init();
     Site.News.init();
     Site.Luminaries.init();
     Site.Expandables.init();
@@ -289,6 +290,59 @@ Site.Drawers.About = {
       $('#about-drawer-' + target).addClass('active');
     });
   }
-}
+};
+
+Site.Media = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+  },
+
+  bind: function() {
+    var _this = this;
+
+    if ($('.page-sound-and-vision').length) {
+      $('.media-item-image-holder').on({
+        'click': function() {
+          var $target = $(this).parents('.media-item');
+
+          $('.media-item.active').removeClass('active');
+          $target.addClass('active');
+
+          Site.News.shuffleInstance.update();
+
+          _this.loadMedia($target);
+        }
+      });
+    }
+  },
+
+  loadMedia: function($item) {
+    var _this = this;
+    var data = $item.data();
+
+    if (data.vimeo) {
+      _this.loadVideo($item, data.vimeo);
+    } else if (data.soundcloud) {
+      _this.loadAudio($item, data.soundcloud);
+    }
+
+  },
+
+  loadVideo: function($item, vimeoId) {
+    var _this = this;
+
+    console.log($item);
+    console.log(vimeoId);
+  },
+
+  loadAudio: function($item, soundcloudUrl) {
+    var _this = this;
+
+    console.log($item);
+    console.log(soundcloudUrl);
+  },
+};
 
 Site.init();

@@ -98,12 +98,23 @@ if( $events_query->have_posts() ) {
     $time_moment = new \Moment\Moment('@' . $time);
 
     $location = get_post_meta($post->ID, '_igv_event_location', true);
+
+    $soundcloud_url = get_post_meta($post->ID, '_igv_soundcloud_url', true);
+    $vimeo_id = get_post_meta($post->ID, '_igv_vimeo_id', true);
 ?>
-        <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('media-item shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>" <?php
+          if ($soundcloud_url) {
+            echo 'data-soundcloud="' . $soundcloud_url . '"';
+          }
+
+          if ($vimeo_id) {
+            echo 'data-vimeo="' . $vimeo_id . '"';
+          }
+        ?>>
           <div class="card">
-            <a href="<?php the_permalink(); ?>">
-              <?php the_post_thumbnail('l-4', array('class' => 'margin-bottom-tiny')); ?>
-            </a>
+            <div class="media-item-image-holder u-pointer margin-bottom-tiny">
+              <?php the_post_thumbnail('l-4', array('class' => 'media-item-image')); ?>
+            </div>
 
             <a href="<?php the_permalink(); ?>">
               <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php
