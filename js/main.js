@@ -307,15 +307,32 @@ Site.Media = {
         'click': function() {
           var $target = $(this).parents('.media-item');
 
-          $('.media-item.active').removeClass('active');
+          _this.unloadActive();
+
           $target.addClass('active');
 
-          Site.News.shuffleInstance.update();
-
           _this.loadMedia($target);
+
+          Site.News.shuffleInstance.update();
         }
       });
     }
+  },
+
+  unloadActive: function() {
+    var _this = this;
+    var $active = $('.media-item.active');
+
+    if ($active.hasClass('playing-video')) {
+      $('#media-item-video-embed').remove();
+      $active.removeClass('playing-video');
+    }
+
+    if ($active.hasClass('playing-audio')) {
+      $active.removeClass('playing-audio');
+    }
+
+    $active.removeClass('active');
   },
 
   loadMedia: function($item) {
@@ -332,9 +349,10 @@ Site.Media = {
 
   loadVideo: function($item, vimeoId) {
     var _this = this;
+    var insert = '<div id="media-item-video-embed" class="u-video-embed-container"><iframe src="https://player.vimeo.com/video/' + vimeoId + '?title=0&byline=0&portrait=0&autoplay=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
 
-    console.log($item);
-    console.log(vimeoId);
+    $item.addClass('playing-video');
+    $item.find('.media-item-image-holder').append(insert);
   },
 
   loadAudio: function($item, soundcloudUrl) {

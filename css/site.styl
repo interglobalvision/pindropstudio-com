@@ -219,9 +219,13 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
 // S&V PAGE
 
 .grid-row
-  .media-item.active
-    width: 100%
-    max-width: 100%
+  .media-item
+    &.active
+      width: 100%
+      max-width: 100%
+    &.playing-video
+      .media-item-image
+        display: none
 
 
 // ******************************************************
