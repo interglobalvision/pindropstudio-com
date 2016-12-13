@@ -21,6 +21,8 @@ get_header();
       $forthcoming_events = new WP_Query(array(
         'post_type' => 'event',
         'posts_per_page' => 3,
+        'orderby' => 'meta_value',
+        'meta_key' => '_igv_event_datetime',
 
         'meta_query' => array(
           array(
@@ -98,6 +100,17 @@ get_header();
             'type'    => 'numeric',
             'compare' => '<',
           ),
+          array(
+            'relation' => 'OR',
+            array(
+              'key' => '_igv_vimeo_id',
+              'compare' => 'EXISTS'
+            ),
+            array(
+              'key' => '_igv_soundcloud_url',
+              'compare' => 'EXISTS'
+            )
+          )
         ),
       );
 
