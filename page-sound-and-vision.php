@@ -13,6 +13,8 @@ $luminary = get_query_var('luminary');
 
     <div id="drawer-luminaries-sort" class="<?php if (empty($luminary)) {echo 'drawer-content ';} ?>margin-bottom-basic">
       <div class="grid-row">
+        <div class="grid-item item-s-12">
+          <ul id="luminaries-sort-list">
 <?php
 $luminaries = new WP_Query(array(
   'post_type' => 'luminaries',
@@ -26,13 +28,13 @@ if ($luminaries->have_posts()) {
   while ($luminaries->have_posts()) {
     $luminaries->the_post();
 ?>
-        <div class="grid-item item-s-6 item-m-4 item-l-3">
-          <a href="?luminary=<?php the_id(); ?>" <?php if ($luminary == $post->ID) {echo 'class="font-underline"';} ?>><?php the_title(); ?></a>
-        </div>
+          <li><a href="?luminary=<?php the_id(); ?>" <?php if ($luminary == $post->ID) {echo 'class="font-underline"';} ?>><?php the_title(); ?></a></li>
 <?php
   }
 }
 ?>
+          </ul>
+        </div>
       </div>
     </div>
 
