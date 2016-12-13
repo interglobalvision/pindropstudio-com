@@ -1436,6 +1436,13 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .drawer-content {
   display: none;
 }
+.grid-row .media-item.active {
+  width: 100%;
+  max-width: 100%;
+}
+.grid-row .media-item.active .media-item-image {
+  display: none;
+}
 .about-page-drawer-trigger:after {
   content: '+';
   padding-left: 3px;

@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Site, imagesLoaded, Swiper */
+/* global $, document, Site, imagesLoaded, Swiper, zenscroll */
 var Shuffle = window.shuffle;
 
 Site = {
@@ -18,6 +18,7 @@ Site = {
 
     _this.fixWidows();
 
+    Site.Media.init();
     Site.News.init();
     Site.Luminaries.init();
     Site.Expandables.init();
@@ -289,6 +290,83 @@ Site.Drawers.About = {
       $('#about-drawer-' + target).addClass('active');
     });
   }
-}
+};
+
+Site.Media = {
+  init: function() {
+    var _this = this;
+
+    _this.bind();
+  },
+
+  bind: function() {
+    var _this = this;
+
+    if ($('.page-sound-and-vision').length) {
+      $('.media-item-image-holder').on({
+        'click': function() {
+          var $target = $(this).parents('.media-item');
+
+          _this.unloadActive();
+
+          $target.addClass('active');
+
+          _this.loadMedia($target);
+
+          Site.News.shuffleInstance.update();
+
+          clearTimeout(_this.scrollToTimeout);
+          _this.scrollToTimeout = setTimeout(function() {
+            zenscroll.to($target[0]);
+          }, 200)
+        }
+      });
+    }
+  },
+
+  unloadActive: function() {
+    var _this = this;
+    var $active = $('.media-item.active');
+
+    if ($active.hasClass('playing-video')) {
+      $('#media-item-video-embed').remove();
+      $active.removeClass('playing-video');
+    }
+
+    if ($active.hasClass('playing-audio')) {
+      $('#media-item-audio-embed').remove();
+      $active.removeClass('playing-audio');
+    }
+
+    $active.removeClass('active');
+  },
+
+  loadMedia: function($item) {
+    var _this = this;
+    var data = $item.data();
+
+    if (data.vimeo) {
+      _this.loadVideo($item, data.vimeo);
+    } else if (data.soundcloud) {
+      _this.loadAudio($item, data.soundcloud);
+    }
+  },
+
+  loadVideo: function($item, vimeoId) {
+    var _this = this;
+    var insert = '<div id="media-item-video-embed" class="u-video-embed-container"><iframe src="https://player.vimeo.com/video/' + vimeoId + '?title=0&byline=0&portrait=0&autoplay=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
+
+    $item.addClass('playing-video');
+    $item.find('.media-item-image-holder').append(insert);
+  },
+
+  loadAudio: function($item, soundcloudUrl) {
+    var _this = this;
+    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(soundcloudUrl) + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
+
+    $item.addClass('playing-audio');
+    $item.find('.media-item-image-holder').append(insert);
+  },
+};
 
 Site.init();
