@@ -334,6 +334,7 @@ Site.Media = {
     }
 
     if ($active.hasClass('playing-audio')) {
+      $('#media-item-audio-embed').remove();
       $active.removeClass('playing-audio');
     }
 
@@ -349,7 +350,6 @@ Site.Media = {
     } else if (data.soundcloud) {
       _this.loadAudio($item, data.soundcloud);
     }
-
   },
 
   loadVideo: function($item, vimeoId) {
@@ -362,9 +362,10 @@ Site.Media = {
 
   loadAudio: function($item, soundcloudUrl) {
     var _this = this;
+    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(soundcloudUrl) + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
 
-    console.log($item);
-    console.log(soundcloudUrl);
+    $item.addClass('playing-audio');
+    $item.find('.media-item-image-holder').append(insert);
   },
 };
 
