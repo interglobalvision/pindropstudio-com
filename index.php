@@ -12,10 +12,13 @@ if( have_posts() ) {
   while( have_posts() ) {
     the_post();
     $explode_content = explode( '<!--more-->', $post->post_content );
+    $lightbox_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'lightbox');
 ?>
         <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
           <div class="card">
-            <?php the_post_thumbnail('l-4', array('class' => 'margin-bottom-tiny')); ?>
+            <div class="u-pointer" data-lightbox="image" data-lightbox-title="<?php the_title(); ?>" data-lightbox-image="<?php echo $lightbox_image[0]; ?>">
+              <?php the_post_thumbnail('l-4', array('class' => 'margin-bottom-tiny')); ?>
+            </div>
 
             <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>
             <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>

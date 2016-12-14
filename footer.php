@@ -50,7 +50,7 @@
 </section>
 
 <div id="lightbox">
-  <div id="lightbox-content"></div>
+  <div id="lightbox-content" class="text-align-center"></div>
 </div>
 
 <?php
