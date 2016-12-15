@@ -19,6 +19,7 @@ Site = {
     _this.fixWidows();
 
     Site.Media.init();
+    Site.Lightbox.init();
     Site.News.init();
     Site.Luminaries.init();
     Site.Expandables.init();
@@ -366,6 +367,70 @@ Site.Media = {
 
     $item.addClass('playing-audio');
     $item.find('.media-item-image-holder').append(insert);
+  },
+};
+
+Site.Lightbox = {
+  init: function() {
+    var _this = this;
+
+    _this.$lightbox = $('#lightbox');
+    _this.$lightboxContent = $('#lightbox-content');
+
+    _this.bind();
+  },
+
+  bind: function() {
+    var _this = this;
+
+    $('[data-lightbox]').on({
+      'click': function() {
+        var data = $(this).data();
+
+        _this.setTitle(data.lightboxTitle);
+
+        if (data.lightbox === 'image') {
+          _this.openImage(data);
+        }
+
+        _this.show();
+      }
+    });
+
+    _this.$lightbox.on({
+      'click': function() {
+        _this.hide();
+      }
+    });
+  },
+
+  show: function() {
+    var _this = this;
+
+    $('body').addClass('lightbox-active');
+    _this.$lightbox.css('display', 'flex');
+  },
+
+  hide: function() {
+    var _this = this;
+
+    _this.$lightbox.hide();
+    $('body').removeClass('lightbox-active');
+    _this.$lightboxContent.html('');
+  },
+
+  setTitle: function(title) {
+    var _this = this;
+    var insert = '<h3 class="margin-bottom-small">' + title + '</h3>';
+
+    _this.$lightboxContent.append(insert);
+  },
+
+  openImage: function(data) {
+    var _this = this;
+    var insert = '<img class="lightbox-image" src="' + data.lightboxImage + '" />';
+
+    _this.$lightboxContent.append(insert);
   },
 };
 
