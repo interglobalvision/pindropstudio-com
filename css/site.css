@@ -1888,6 +1888,9 @@ input[type=radio] {
   padding: 14px;
   background-color: #fff;
 }
+.card.card-big {
+  padding: 28px;
+}
 .live-forthcoming-event-meta {
   margin-top: 70px;
 }
@@ -2285,6 +2288,9 @@ input[type=radio] {
   .card {
     padding: 14px;
   }
+  .card.card-big {
+    padding: 28px;
+  }
   .live-forthcoming-event-meta {
     margin-top: 70px;
   }
@@ -2669,6 +2675,9 @@ input[type=radio] {
   }
   .card {
     padding: 16px;
+  }
+  .card.card-big {
+    padding: 32px;
   }
   .live-forthcoming-event-meta {
     margin-top: 80px;
