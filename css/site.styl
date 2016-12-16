@@ -221,11 +221,11 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
 .grid-row
   .media-item
     &.active
-      max-width: 100%
-      width: 100%
       .media-item-image
         display: none
-
+    &.playing-video
+      max-width: 100%
+      width: 100%
 
 // ******************************************************
 
@@ -294,11 +294,18 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
   display: none
   background-color: $color-dark-gray
 
-#lightbox-content
+#lightbox-inner
+  position: relative
   margin: auto
-  max-height: 90vh
   max-width: 90vw
+  max-height: 90vh
   background-color: $color-white
+
+#lightbox-close
+  position: absolute
+  color: $color-dark-gray
+  font-size: 1.6rem
+  line-height: 1
 
 .lightbox-image
   max-height: 80vh

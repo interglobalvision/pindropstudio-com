@@ -276,7 +276,7 @@ Site.Drawers.About = {
     var _this = this;
 
     $('.about-page-drawer-trigger').on('click', function() {
-      _this.toggleDrawer(this)
+      _this.toggleDrawer(this);
     });
   },
 
@@ -325,7 +325,7 @@ Site.Media = {
           clearTimeout(_this.scrollToTimeout);
           _this.scrollToTimeout = setTimeout(function() {
             zenscroll.to($target[0]);
-          }, 200)
+          }, 200);
         }
       });
     }
@@ -369,7 +369,7 @@ Site.Media = {
 
   loadAudio: function($item, soundcloudUrl) {
     var _this = this;
-    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(soundcloudUrl) + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
+    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(soundcloudUrl) + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
 
     $item.addClass('playing-audio');
     $item.find('.media-item-image-holder').append(insert);
@@ -381,6 +381,7 @@ Site.Lightbox = {
     var _this = this;
 
     _this.$lightbox = $('#lightbox');
+    _this.$lightboxTitle = $('#lightbox-title');
     _this.$lightboxContent = $('#lightbox-content');
 
     _this.bind();
@@ -404,8 +405,10 @@ Site.Lightbox = {
     });
 
     _this.$lightbox.on({
-      'click': function() {
-        _this.hide();
+      'click': function(e) {
+        if (e.target.id === 'lightbox' || e.target.id === 'lightbox-close') {
+          _this.hide();
+        }
       }
     });
   },
@@ -422,14 +425,14 @@ Site.Lightbox = {
 
     _this.$lightbox.hide();
     $('body').removeClass('lightbox-active');
+    _this.$lightboxTitle.html('');
     _this.$lightboxContent.html('');
   },
 
   setTitle: function(title) {
     var _this = this;
-    var insert = '<h3 class="margin-bottom-small">' + title + '</h3>';
 
-    _this.$lightboxContent.append(insert);
+    _this.$lightboxTitle.html(title);
   },
 
   openImage: function(data) {

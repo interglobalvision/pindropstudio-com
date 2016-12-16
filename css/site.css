@@ -1436,12 +1436,12 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .drawer-content {
   display: none;
 }
-.grid-row .media-item.active {
-  max-width: 100%;
-  width: 100%;
-}
 .grid-row .media-item.active .media-item-image {
   display: none;
+}
+.grid-row .media-item.playing-video {
+  max-width: 100%;
+  width: 100%;
 }
 .about-page-drawer-trigger:after {
   padding-left: 3px;
@@ -1489,11 +1489,18 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   display: none;
   background-color: rgba(55,58,60,0.498);
 }
-#lightbox-content {
+#lightbox-inner {
+  position: relative;
   margin: auto;
-  max-height: 90vh;
   max-width: 90vw;
+  max-height: 90vh;
   background-color: #fff;
+}
+#lightbox-close {
+  position: absolute;
+  color: rgba(55,58,60,0.498);
+  font-size: 1.6rem;
+  line-height: 1;
 }
 .lightbox-image {
   max-height: 80vh;
@@ -1948,8 +1955,12 @@ input[type=radio] {
   bottom: 14px;
   right: 14px;
 }
-#lightbox-content {
+#lightbox-inner {
   padding: 14px;
+}
+#lightbox-close {
+  top: 14px;
+  right: 14px;
 }
 @media screen and (min-width: 720px) {
   .margin-top-micro {
@@ -2317,8 +2328,12 @@ input[type=radio] {
     bottom: 14px;
     right: 14px;
   }
-  #lightbox-content {
+  #lightbox-inner {
     padding: 14px;
+  }
+  #lightbox-close {
+    top: 14px;
+    right: 14px;
   }
 }
 @media screen and (min-width: 860px) {
@@ -2678,6 +2693,10 @@ input[type=radio] {
     -moz-column-count: 4;
     column-count: 4;
   }
+  .grid-row .media-item.playing-audio {
+    max-width: 66.66666666666667%;
+    width: 66.66666666666667%;
+  }
   .carousel-links li {
     padding: 5.333333333333333px 8px;
   }
@@ -2697,8 +2716,12 @@ input[type=radio] {
     bottom: 16px;
     right: 16px;
   }
-  #lightbox-content {
+  #lightbox-inner {
     padding: 16px;
+  }
+  #lightbox-close {
+    top: 16px;
+    right: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
