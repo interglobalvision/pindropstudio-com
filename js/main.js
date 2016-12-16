@@ -20,7 +20,7 @@ Site = {
 
     Site.Media.init();
     Site.Lightbox.init();
-    Site.News.init();
+    Site.Shuffle.init();
     Site.Luminaries.init();
     Site.Expandables.init();
     Site.Drawers.init();
@@ -41,7 +41,7 @@ Site = {
   },
 };
 
-Site.News = {
+Site.Shuffle = {
   init: function() {
     var _this = this;
 
@@ -75,9 +75,15 @@ Site.News = {
     });
 
     _this.shuffleContainer.addEventListener('load', function() {
-      _this.shuffleInstance.update();
+      _this.update();
     }, true);
   },
+
+  update: function() {
+    var _this = this;
+
+    _this.shuffleInstance.update();
+  }
 };
 
 Site.Galleries = {
@@ -208,8 +214,8 @@ Site.Expandables = {
 
       // Toggle content
       $('#' + $expandableId).slideToggle(Site.animationSpeed, function() {
-        if(Site.News.shuffleInstance) {
-          Site.News.shuffleInstance.update();
+        if(Site.Stuffle.shuffleInstance) {
+          Site.Stuffle.update();
         }
       });
     });
@@ -314,7 +320,7 @@ Site.Media = {
 
           _this.loadMedia($target);
 
-          Site.News.shuffleInstance.update();
+          Site.Shuffle.update();
 
           clearTimeout(_this.scrollToTimeout);
           _this.scrollToTimeout = setTimeout(function() {
@@ -363,7 +369,7 @@ Site.Media = {
 
   loadAudio: function($item, soundcloudUrl) {
     var _this = this;
-    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(soundcloudUrl) + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
+    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(soundcloudUrl) + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
 
     $item.addClass('playing-audio');
     $item.find('.media-item-image-holder').append(insert);
