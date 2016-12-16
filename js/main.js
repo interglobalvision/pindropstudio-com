@@ -270,7 +270,7 @@ Site.Drawers.About = {
     var _this = this;
 
     $('.about-page-drawer-trigger').on('click', function() {
-      _this.toggleDrawer(this)
+      _this.toggleDrawer(this);
     });
   },
 
@@ -319,7 +319,7 @@ Site.Media = {
           clearTimeout(_this.scrollToTimeout);
           _this.scrollToTimeout = setTimeout(function() {
             zenscroll.to($target[0]);
-          }, 200)
+          }, 200);
         }
       });
     }
