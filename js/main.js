@@ -426,7 +426,7 @@ Site.Lightbox = {
   setTitle: function(title) {
     var _this = this;
 
-    _this.$lightboxTitle.html(title)
+    _this.$lightboxTitle.html(title);
   },
 
   openImage: function(data) {
