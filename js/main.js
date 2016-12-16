@@ -375,6 +375,7 @@ Site.Lightbox = {
     var _this = this;
 
     _this.$lightbox = $('#lightbox');
+    _this.$lightboxTitle = $('#lightbox-title');
     _this.$lightboxContent = $('#lightbox-content');
 
     _this.bind();
@@ -398,8 +399,10 @@ Site.Lightbox = {
     });
 
     _this.$lightbox.on({
-      'click': function() {
-        _this.hide();
+      'click': function(e) {
+        if (e.target.id === 'lightbox' || e.target.id === 'lightbox-close') {
+          _this.hide();
+        }
       }
     });
   },
@@ -416,14 +419,14 @@ Site.Lightbox = {
 
     _this.$lightbox.hide();
     $('body').removeClass('lightbox-active');
+    _this.$lightboxTitle.html('');
     _this.$lightboxContent.html('');
   },
 
   setTitle: function(title) {
     var _this = this;
-    var insert = '<h3 class="margin-bottom-small">' + title + '</h3>';
 
-    _this.$lightboxContent.append(insert);
+    _this.$lightboxTitle.html(title)
   },
 
   openImage: function(data) {
