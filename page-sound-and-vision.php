@@ -118,7 +118,7 @@ if( $events_query->have_posts() ) {
         ?>>
           <div class="card">
             <div class="media-item-image-holder u-pointer margin-bottom-tiny">
-              <?php the_post_thumbnail('l-4', array('class' => 'media-item-image')); ?>
+              <?php the_post_thumbnail('l-4-full', array('class' => 'media-item-image')); ?>
             </div>
 
             <a href="<?php the_permalink(); ?>">
