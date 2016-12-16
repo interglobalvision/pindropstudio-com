@@ -48,15 +48,11 @@
     </div>
   </footer>
 </section>
-
-<div id="lightbox">
-  <div id="lightbox-content" class="text-align-center"></div>
-</div>
-
 <?php
+  get_template_part('partials/lightbox');
+
   get_template_part('partials/scripts');
   get_template_part('partials/schema-org');
 ?>
-
 </body>
 </html>

@@ -1489,11 +1489,18 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   display: none;
   background-color: rgba(55,58,60,0.498);
 }
-#lightbox-content {
+#lightbox-inner {
+  position: relative;
   margin: auto;
-  max-height: 90vh;
   max-width: 90vw;
+  max-height: 90vh;
   background-color: #fff;
+}
+#lightbox-close {
+  position: absolute;
+  color: rgba(55,58,60,0.498);
+  font-size: 1.6rem;
+  line-height: 1;
 }
 .lightbox-image {
   max-height: 80vh;
@@ -1948,8 +1955,12 @@ input[type=radio] {
   bottom: 14px;
   right: 14px;
 }
-#lightbox-content {
+#lightbox-inner {
   padding: 14px;
+}
+#lightbox-close {
+  top: 14px;
+  right: 14px;
 }
 @media screen and (min-width: 720px) {
   .margin-top-micro {
@@ -2317,8 +2328,12 @@ input[type=radio] {
     bottom: 14px;
     right: 14px;
   }
-  #lightbox-content {
+  #lightbox-inner {
     padding: 14px;
+  }
+  #lightbox-close {
+    top: 14px;
+    right: 14px;
   }
 }
 @media screen and (min-width: 860px) {
@@ -2701,8 +2716,12 @@ input[type=radio] {
     bottom: 16px;
     right: 16px;
   }
-  #lightbox-content {
+  #lightbox-inner {
     padding: 16px;
+  }
+  #lightbox-close {
+    top: 16px;
+    right: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
