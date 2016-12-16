@@ -103,9 +103,9 @@ if( $events_query->have_posts() ) {
 
     $soundcloud_url = get_post_meta($post->ID, '_igv_soundcloud_url', true);
     $vimeo_id = get_post_meta($post->ID, '_igv_vimeo_id', true);
-    
-    $title_override = get_post_meta($post->ID, '_igv_alt_title', true);
 
+    $title_override = get_post_meta($post->ID, '_igv_alt_title', true);
+    $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
 ?>
         <article <?php post_class('media-item shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>" <?php
           if ($soundcloud_url) {
@@ -123,7 +123,11 @@ if( $events_query->have_posts() ) {
 
             <a href="<?php the_permalink(); ?>">
               <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php
-                echo $time_moment->format('d F Y');
+                if ($subline_override) {
+                  echo $subline_override;
+                } else {
+                  echo $time_moment->format('d F Y');
+                }
 
                 if ($location) {
                   echo ' | ' . $location;
