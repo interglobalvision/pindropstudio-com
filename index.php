@@ -17,7 +17,7 @@ if( have_posts() ) {
         <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
           <div class="card">
             <div class="u-pointer" data-lightbox="image" data-lightbox-title="<?php the_title(); ?>" data-lightbox-image="<?php echo $lightbox_image[0]; ?>">
-              <?php the_post_thumbnail('l-4', array('class' => 'margin-bottom-tiny')); ?>
+              <?php the_post_thumbnail('l-4-full', array('class' => 'margin-bottom-tiny')); ?>
             </div>
 
             <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>
