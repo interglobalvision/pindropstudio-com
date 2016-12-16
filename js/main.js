@@ -319,7 +319,7 @@ Site.Media = {
           clearTimeout(_this.scrollToTimeout);
           _this.scrollToTimeout = setTimeout(function() {
             zenscroll.to($target[0]);
-          }, 200)
+          }, 250)
         }
       });
     }
