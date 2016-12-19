@@ -16,6 +16,7 @@ get_header();
         'post_type' => 'event',
         'posts_per_page' => 3,
         'orderby' => 'meta_value',
+        'order' => 'ASC',
         'meta_key' => '_igv_event_datetime',
 
         'meta_query' => array(

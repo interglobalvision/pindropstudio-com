@@ -16,6 +16,8 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'l-4-landscape', 417, 278, true );
   add_image_size( 'l-4-full', 417, 9999, false );
 
+  add_image_size( 'l-5-square', 542, 542, true );
+
   add_image_size( 'l-6', 650, 450, false );
   add_image_size( 'l-6-square', 650, 650, true );
 
