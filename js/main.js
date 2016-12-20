@@ -18,9 +18,9 @@ Site = {
 
     _this.fixWidows();
 
+    Site.Shuffle.init();
     Site.Media.init();
     Site.Lightbox.init();
-    Site.Shuffle.init();
     Site.Luminaries.init();
     Site.Expandables.init();
     Site.Drawers.init();
@@ -82,7 +82,9 @@ Site.Shuffle = {
   update: function() {
     var _this = this;
 
-    _this.shuffleInstance.update();
+    if (_this.shuffleInstance) {
+      _this.shuffleInstance.update();
+    }
   }
 };
 
@@ -214,8 +216,8 @@ Site.Expandables = {
 
       // Toggle content
       $('#' + $expandableId).slideToggle(Site.animationSpeed, function() {
-        if(Site.Stuffle.shuffleInstance) {
-          Site.Stuffle.update();
+        if (Site.Shuffle.shuffleInstance) {
+          Site.Shuffle.update();
         }
       });
     });
