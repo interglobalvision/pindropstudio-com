@@ -30,19 +30,21 @@ get_header();
       ));
 
       if ($forthcoming_events->have_posts()) {
+        $post_count = $forthcoming_events->post_count;
     ?>
 
-    <div class="grid-row margin-top-basic margin-bottom-mid">
+    <div class="grid-row margin-top-basic margin-bottom-small">
       <?php render_divider('Forthcoming Live Events'); ?>
     </div>
+
+    <div class="grid-row justify-center">
     <?php
-        $forthcoming_iterator = 0;
         while ($forthcoming_events->have_posts()) {
           $forthcoming_events->the_post();
-          include(locate_template('partials/custom-pages/live/event-forthcoming.php'));
-          $forthcoming_iterator++;
+          get_template_part('partials/custom-pages/event-forthcoming');
         }
     ?>
+    </div>
 
     <?php
       }
