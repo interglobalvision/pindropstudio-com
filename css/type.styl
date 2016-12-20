@@ -131,7 +131,7 @@ p
   a
     text-decoration: underline
 
-font-sizes($size-basic = 16px)
+font-sizes($size-basic = 16px, $modulator = 1)
 
   html
     font-size: $size-basic
@@ -144,17 +144,17 @@ font-sizes($size-basic = 16px)
       font-size: $size-basic * .6875
 
   h1, .font-size-h1
-    font-size: $size-basic * 2.875
+    font-size: $size-basic * (2.875 * $modulator)
     line-height: 1.2
 
   h2, .font-size-h2
-    font-size: $size-basic * 2
+    font-size: $size-basic * (2 * $modulator)
     line-height: 1.1875
 
   h3, .font-size-h3
-    font-size: $size-basic * 1.5
+    font-size: $size-basic * (1.5 * $modulator)
     line-height: 1.166666667
 
   .font-size-big-number
-    font-size: $size-basic * 5.625
+    font-size: $size-basic * (5.625 * $modulator)
     line-height: .866666667

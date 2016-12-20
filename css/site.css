@@ -1777,21 +1777,21 @@ html {
 }
 h1,
 .font-size-h1 {
-  font-size: 46px;
+  font-size: 36.800000000000004px;
   line-height: 1.2;
 }
 h2,
 .font-size-h2 {
-  font-size: 32px;
+  font-size: 25.6px;
   line-height: 1.1875;
 }
 h3,
 .font-size-h3 {
-  font-size: 24px;
+  font-size: 19.200000000000003px;
   line-height: 1.166666667;
 }
 .font-size-big-number {
-  font-size: 90px;
+  font-size: 72px;
   line-height: 0.866666667;
 }
 input,
@@ -2225,6 +2225,36 @@ input[type=radio] {
   .grid-column > .item-m-12 {
     max-height: 100%;
   }
+  html {
+    font-size: 15px;
+  }
+  .font-size-small {
+    font-size: 10.3125px;
+  }
+  .gfield .instruction,
+  .gfield #extensions_message,
+  .gfield .validation_message {
+    font-size: 10.3125px;
+  }
+  h1,
+  .font-size-h1 {
+    font-size: 38.8125px;
+    line-height: 1.2;
+  }
+  h2,
+  .font-size-h2 {
+    font-size: 27px;
+    line-height: 1.1875;
+  }
+  h3,
+  .font-size-h3 {
+    font-size: 20.25px;
+    line-height: 1.166666667;
+  }
+  .font-size-big-number {
+    font-size: 75.9375px;
+    line-height: 0.866666667;
+  }
   .mobile-only {
     display: none;
   }
@@ -2606,6 +2636,36 @@ input[type=radio] {
   }
   .padding-bottom-large {
     padding-bottom: 80px;
+  }
+  html {
+    font-size: 16px;
+  }
+  .font-size-small {
+    font-size: 11px;
+  }
+  .gfield .instruction,
+  .gfield #extensions_message,
+  .gfield .validation_message {
+    font-size: 11px;
+  }
+  h1,
+  .font-size-h1 {
+    font-size: 46px;
+    line-height: 1.2;
+  }
+  h2,
+  .font-size-h2 {
+    font-size: 32px;
+    line-height: 1.1875;
+  }
+  h3,
+  .font-size-h3 {
+    font-size: 24px;
+    line-height: 1.166666667;
+  }
+  .font-size-big-number {
+    font-size: 90px;
+    line-height: 0.866666667;
   }
   .desktop-only {
     display: initial;
