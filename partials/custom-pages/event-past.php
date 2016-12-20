@@ -16,6 +16,6 @@
         the_title();
       } ?></h3>
     </a>
-    <div class="text-align-center"><a href="<?php the_permalink(); ?>" class="link-button">Read More</a></div>
+    <div class="text-align-center"><a href="<?php the_permalink(); ?>" class="link-button font-size-small">Read More</a></div>
   </div>
 </div>

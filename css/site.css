@@ -1844,6 +1844,9 @@ input[type=radio] {
   border-bottom: solid 1px #373a3c;
   border-right: solid 1px #373a3c;
   padding: 7px 7px 4.666666666666667px 7px;
+  font-family: 'Scotch Micro';
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
 }
 .link-button:hover,
@@ -1866,6 +1869,9 @@ input[type=radio] {
   border-bottom: solid 1px #373a3c;
   border-right: solid 1px #373a3c;
   padding: 7px 7px 4.666666666666667px 7px;
+  font-family: 'Scotch Micro';
+  text-transform: uppercase;
+  letter-spacing: 1px;
   margin-left: -1px;
   cursor: pointer;
 }

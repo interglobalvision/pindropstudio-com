@@ -142,7 +142,7 @@ if( $events_query->have_posts() ) {
             </a>
 
             <div class="text-align-center">
-              <a class="link-button" href="<?php the_permalink(); ?>">Read More</a>
+              <a class="link-button font-size-small" href="<?php the_permalink(); ?>">Read More</a>
             </div>
           </div>
         </article>

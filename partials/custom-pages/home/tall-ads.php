@@ -24,9 +24,9 @@
         }
 
         if ($ad1_link_internal && $ad1_link_text) {
-          echo '<a href="' . get_permalink($ad1_link_internal) . '" class="link-button font-style-micro">' . $ad1_link_text . '</a>';
+          echo '<a href="' . get_permalink($ad1_link_internal) . '" class="link-button">' . $ad1_link_text . '</a>';
         } else if ($ad1_link_external && $ad1_link_text) {
-          echo '<a href="' . $ad1_link_external . '" class="link-button font-style-micro">' . $ad1_link_text . '</a>';
+          echo '<a href="' . $ad1_link_external . '" class="link-button">' . $ad1_link_text . '</a>';
         }
       ?>
     </div>
@@ -43,9 +43,9 @@
         }
 
         if ($ad2_link_internal && $ad2_link_text) {
-          echo '<a href="' . get_permalink($ad2_link_internal) . '" class="link-button font-style-micro">' . $ad2_link_text . '</a>';
+          echo '<a href="' . get_permalink($ad2_link_internal) . '" class="link-button">' . $ad2_link_text . '</a>';
         } else if ($ad2_link_external && $ad2_link_text) {
-          echo '<a href="' . $ad2_link_external . '" class="link-button font-style-micro">' . $ad2_link_text . '</a>';
+          echo '<a href="' . $ad2_link_external . '" class="link-button">' . $ad2_link_text . '</a>';
         }
       ?>
     </div>
