@@ -127,10 +127,10 @@ if( $events_query->have_posts() ) {
                   echo $subline_override;
                 } else {
                   echo $time_moment->format('d F Y');
-                }
 
-                if ($location) {
-                  echo ' | ' . $location;
+                  if ($location) {
+                    echo ' | ' . $location;
+                  }
                 }
               ?></h4>
               <h3 class="margin-bottom-small text-align-center"><?php
