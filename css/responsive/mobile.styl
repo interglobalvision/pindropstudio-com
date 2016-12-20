@@ -42,14 +42,31 @@ input[type=radio]
 
 // ******************************************************
 
-// LINKS
+// LINKS & BUTTONS
 
 .link-button, .gform_button
   setBorders()
   padding: $margin-tiny $margin-tiny $margin-micro $margin-tiny
+  font-style-micro()
   cursor: pointer
   &:hover
     background-color: $color-gray
+
+.button-list
+  display: flex
+  justify-content: center
+  li
+    display: inline-block
+    setBorders()
+    padding: $margin-tiny $margin-tiny $margin-micro $margin-tiny
+    font-style-micro()
+    margin-left: -1px
+    cursor: pointer
+    &:first-child()
+      margin-left: 0px
+    &:hover
+      background-color: $color-gray
+
 
 // ******************************************************
 

@@ -93,6 +93,12 @@ function igv_cmb_metaboxes() {
   ) );
 
   $event_metabox->add_field( array(
+    'name' => 'Sold Out?',
+    'id'      => $prefix . 'soldout',
+    'type' => 'checkbox',
+  ) );
+
+  $event_metabox->add_field( array(
     'name'    => 'Alt Title',
     'description' => __( 'To display on Sound & Vision pages', 'cmb2' ),
     'id'      => $prefix . 'alt_title',
@@ -207,81 +213,6 @@ function igv_cmb_metaboxes() {
     'id'         => $prefix . 'related_posts',
     'type'       => 'post_search_text',
     'post_type'  => array('post', 'page', 'event', 'luminaries'),
-  ) );
-
-  // **********************************************************
-
-  // HISTORICAL FOR MIGRATION
-
-  $prefix = '_cmb_';
-
-  $migration_postype_metabox = new_cmb2_box( array(
-    'id'            => $prefix . 'migration_postype_metabox',
-    'title'         => __( 'OLD Event Meta FOR MIGRATION ONLY', 'cmb2' ),
-    'object_types'  => array( 'programme', 'event'), // Post type
-    'context'       => 'normal',
-    'priority'      => 'high',
-    'show_names'    => true, // Show field names on the left
-  ) );
-
-  $migration_postype_metabox->add_field( array(
-    'name' => 'Where?',
-    'id'      => $prefix . 'where',
-    'type' => 'wysiwyg',
-  ) );
-
-  $migration_postype_metabox->add_field( array(
-    'name' => 'Ticket link',
-    'id'      => $prefix . 'tickets',
-    'type' => 'text_url',
-  ) );
-
-  $migration_postype_metabox->add_field( array(
-    'name' => 'Sold Out?',
-    'id'      => $prefix . 'soldout',
-    'type' => 'checkbox',
-  ) );
-
-  $migration_recording_metabox = new_cmb2_box( array(
-    'id'            => $prefix . 'migration_recording_metabox',
-    'title'         => __( 'Meta', 'cmb2' ),
-    'object_types'  => array( 'recording'), // Post type
-    'context'       => 'normal',
-    'priority'      => 'high',
-    'show_names'    => true, // Show field names on the left
-  ) );
-
-  $migration_recording_metabox->add_field( array(
-    'name' => 'Vimeo clip ID [just the numbers not the url]',
-    'id'      => $prefix . 'recording',
-    'type' => 'text',
-  ) );
-
-  $migration_recording_metabox->add_field( array(
-    'name' => 'Audio Recording. insert the Audioboom url here',
-    'id'      => $prefix . 'recording_audio',
-    'type' => 'text',
-  ) );
-
-  $migration_post_metabox = new_cmb2_box( array(
-    'id'            => $prefix . 'migration_post_metabox',
-    'title'         => __( 'Meta', 'cmb2' ),
-    'object_types'  => array( 'post'), // Post type
-    'context'       => 'normal',
-    'priority'      => 'high',
-    'show_names'    => true, // Show field names on the left
-  ) );
-
-  $migration_post_metabox->add_field( array(
-    'name' => 'Vimeo clip ID [just the numbers not the url]',
-    'id'      => $prefix . 'recording',
-    'type' => 'text',
-  ) );
-
-  $migration_post_metabox->add_field( array(
-    'name' => 'Gallery',
-    'id'      => $prefix . 'gallery',
-    'type' => 'wysiwyg',
   ) );
 
 }

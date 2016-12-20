@@ -1844,10 +1844,41 @@ input[type=radio] {
   border-bottom: solid 1px #373a3c;
   border-right: solid 1px #373a3c;
   padding: 7px 7px 4.666666666666667px 7px;
+  font-family: 'Scotch Micro';
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
 }
 .link-button:hover,
 .gform_button:hover {
+  background-color: rgba(62,62,62,0.2);
+}
+.button-list {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+.button-list li {
+  display: inline-block;
+  border-top: solid 1px #373a3c;
+  border-left: solid 1px #373a3c;
+  border-bottom: solid 1px #373a3c;
+  border-right: solid 1px #373a3c;
+  padding: 7px 7px 4.666666666666667px 7px;
+  font-family: 'Scotch Micro';
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-left: -1px;
+  cursor: pointer;
+}
+.button-list li:first-child() {
+  margin-left: 0px;
+}
+.button-list li:hover {
   background-color: rgba(62,62,62,0.2);
 }
 #header {
@@ -2265,6 +2296,9 @@ input[type=radio] {
   .link-button {
     padding: 7px 7px 4.666666666666667px 7px;
   }
+  .button-list li {
+    padding: 7px 7px 4.666666666666667px 7px;
+  }
   #header {
     padding-top: 28px;
     padding-bottom: 14px;
@@ -2667,6 +2701,9 @@ input[type=radio] {
     margin-bottom: 16px;
   }
   .link-button {
+    padding: 8px 8px 5.333333333333333px 8px;
+  }
+  .button-list li {
     padding: 8px 8px 5.333333333333333px 8px;
   }
   #header {
