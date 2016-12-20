@@ -30,18 +30,20 @@
       <h4 class="font-style-micro"><?php echo $time_moment->format('F'); ?></h4>
     </a>
       <div class="margin-top-basic text-align-center">
+        <ul class="button-list font-style-micro">
     <?php
       if ($soldout) {
     ?>
-        <span class="link-button font-style-micro">Fully Booked</span>
+          <li>Fully Booked</li>
     <?php
       } else if ($booking) {
     ?>
-        <a href="<?php echo $booking; ?>" class="link-button font-style-micro" target="_blank" rel="noopener">Booking Now</a>
+          <li><a href="<?php echo $booking; ?>" target="_blank" rel="noopener">Booking Now</a></li>
     <?php
       }
     ?>
-        <a href="<?php the_permalink(); ?>" class="link-button font-style-micro">Read More</a>
+          <li><a href="<?php the_permalink(); ?>" class="">Read More</a></li>
+        </ul>
       </div>
   </div>
 </div>
