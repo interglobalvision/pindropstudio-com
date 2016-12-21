@@ -39,7 +39,21 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
    */
 
- // LUMINARIES METABOXES
+  // GALLERY
+  $gallery_meta = new_cmb2_box( array(
+    'id'            => $prefix . 'gallery_meta',
+    'title'         => esc_html__( 'Gallery', 'cmb2' ),
+    'object_types'  => array( 'post','event', ), // Post type
+  ));
+
+  $gallery_meta->add_field( array(
+    'name'    => 'Gallery',
+    'description' => __( 'a Wordpress gallery', 'cmb2' ),
+    'id'      => $prefix . 'gallery',
+    'type'    => 'wysiwyg',
+  ));
+
+  // LUMINARIES METABOXES
 
   $luminaries_meta = new_cmb2_box( array(
     'id'            => $prefix . 'luminaries_meta',
@@ -151,13 +165,6 @@ function igv_cmb_metaboxes() {
     'id'      => $prefix . 'related_luminaries',
     'type'       => 'post_search_text',
     'post_type'  => array('luminaries'),
-  ) );
-
-  $event_metabox->add_field( array(
-    'name'    => 'Gallery',
-    'description' => __( 'a Wordpress gallery', 'cmb2' ),
-    'id'      => $prefix . 'gallery',
-    'type'    => 'wysiwyg',
   ) );
 
   // PAGE: PARTNERS
