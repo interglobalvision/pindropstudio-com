@@ -401,6 +401,8 @@ Site.Lightbox = {
 
         if (data.lightbox === 'image') {
           _this.openImage(data);
+        } else if (data.lightbox === 'gallery') {
+          _this.openGallery(this);
         }
 
         _this.show();
@@ -421,6 +423,7 @@ Site.Lightbox = {
 
     $('body').addClass('lightbox-active');
     _this.$lightbox.css('display', 'flex');
+    Site.Galleries.init();
   },
 
   hide: function() {
@@ -443,6 +446,14 @@ Site.Lightbox = {
     var insert = '<img class="lightbox-image" src="' + data.lightboxImage + '" />';
 
     _this.$lightboxContent.append(insert);
+  },
+
+  openGallery: function(element) {
+    var _this = this;
+
+    var $gallery = $(element).siblings('.gallery').clone();
+    $gallery.addClass('swiper-container').removeClass('u-hidden');
+    _this.$lightboxContent.append($gallery);
   },
 };
 

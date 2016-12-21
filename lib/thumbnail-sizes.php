@@ -25,6 +25,8 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'l-8-square', 866, 866, true );
   add_image_size( 'l-8-full', 866, 9999, false );
 
+  add_image_size( 'lightbox', 1030, 644, false );
+
   add_image_size( 'l-12-wide-ad', 1300, 253, true );
   add_image_size( 'l-12-carousel', 1284, 470, true );
 }
