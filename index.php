@@ -11,16 +11,20 @@ get_header();
 if ( have_posts() ) {
   while( have_posts() ) {
     the_post();
+    $lightbox_data = null;
     $explode_content = explode( '<!--more-->', $post->post_content );
     $lightbox_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'lightbox');
 
     $gallery = get_post_meta($post->ID, '_igv_gallery', true);
 
-    $data_lightbox = $gallery ? 'gallery' : 'image';
+    if($gallery) {
+      $lightbox_data = ' class="u-pointer" data-lightbox="gallery" data-lightbox-title="' . get_the_title() . '" data-lightbox-image="' . $lightbox_image[0] . '"';
+    }
+
 ?>
         <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
           <div class="card">
-            <div class="u-pointer" data-lightbox="<?php echo $data_lightbox; ?>" data-lightbox-title="<?php the_title(); ?>" data-lightbox-image="<?php echo $lightbox_image[0]; ?>">
+            <div <?php echo $lightbox_data; ?>>
               <?php the_post_thumbnail('l-4-full', array('class' => 'margin-bottom-tiny')); ?>
             </div>
 
