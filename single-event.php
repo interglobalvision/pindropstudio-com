@@ -39,6 +39,8 @@ if( have_posts() ) {
         <h4 class="font-style-micro margin-bottom-small text-align-center"><?php echo $time_meta ? $time->format('d F Y') : get_the_time('d F Y'); ?></h4>
 
         <?php the_content(); ?>
+
+        <?php render_share(get_the_permalink()); ?>
       </div>
     </div>
     <?php
