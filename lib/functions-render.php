@@ -2,6 +2,19 @@
 
 // RENDERS
 
+function render_share($url) {
+  $url = urlencode($url);
+?>
+<div class="share-widget">
+  <span class="link-button share-trigger">Share</span>
+  <ul class="button-list share-list">
+    <li><a href="http://www.facebook.com/sharer/sharer.php?u=<?php echo $url; ?>" target="_blank" rel="noreferrer">Facebook</a></li>
+    <li><a href="https://twitter.com/intent/tweet?url=<?php echo $url; ?>" target="_blank" rel="noreferrer">Twitter</a></li>
+  </ul>
+</div>
+<?php
+}
+
 function render_embed_caption($caption) {
   echo '<h5 class="text-align-center margin-top-tiny margin-bottom-tiny">' . $caption . '</h5>';
 }

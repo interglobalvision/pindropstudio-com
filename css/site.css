@@ -1857,6 +1857,7 @@ input[type=radio] {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  line-height: 1;
   -webkit-justify-content: center;
   -ms-justify-content: center;
   -ms-flex-pack: center;
@@ -1880,6 +1881,16 @@ input[type=radio] {
 }
 .button-list li:hover {
   background-color: rgba(62,62,62,0.2);
+}
+.share-widget {
+  text-align: center;
+}
+.share-widget .share-trigger {
+  display: inline-block;
+  line-height: 1;
+}
+.share-widget .share-list {
+  display: none;
 }
 #header {
   padding-top: 14px;

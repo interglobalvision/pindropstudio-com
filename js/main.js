@@ -24,6 +24,7 @@ Site = {
     Site.Luminaries.init();
     Site.Expandables.init();
     Site.Drawers.init();
+    Site.Share.init();
   },
 
   onResize: function() {
@@ -444,5 +445,41 @@ Site.Lightbox = {
     _this.$lightboxContent.append(insert);
   },
 };
+
+Site.Share = {
+  init: function() {
+    var _this = this;
+
+    if ($('.share-widget').length) {
+      _this.bind();
+    }
+  },
+
+  bind: function() {
+    var _this = this;
+
+    $('.share-trigger').on({
+      'click': function() {
+        var $target = $(this).parent();
+
+        _this.toggle($target);
+      }
+    });
+  },
+
+  toggle: function($shareWidget) {
+    var _this = this;
+
+    if ($shareWidget.data('open')) {
+      $shareWidget.find('.share-trigger').show();
+      $shareWidget.find('.share-list').hide();
+      $shareWidget.data('open', false);
+    } else {
+      $shareWidget.find('.share-trigger').hide();
+      $shareWidget.find('.share-list').css('display', 'flex');
+
+    }
+  }
+}
 
 Site.init();

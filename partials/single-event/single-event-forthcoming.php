@@ -38,6 +38,8 @@ if ($time_meta) {
     </ul>
     <?php the_content(); ?>
 
-    ///>> share goes here
+    <div class="margin-top-mid margin-bottom-mid">
+      <?php render_share(get_the_permalink()); ?>
+    </div>
   </div>
 </div>
