@@ -111,7 +111,7 @@ function render_hidden_gallery($gallery, $post_id) {
 
   $i = 0;
 
-  $output = "<div id='$selector' class='gallery galleryid-{$post_id} lightbox-gallery u-pointer u-hidden'><div class='swiper-wrapper'>";
+  $output = "<div id='$selector' class='gallery galleryid-{$post_id} container u-pointer u-hidden'><div class='swiper-wrapper'>";
 
   foreach ($gallery_ids as $id => $attachment_id) {
 

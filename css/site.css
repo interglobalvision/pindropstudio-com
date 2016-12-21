@@ -1505,9 +1505,6 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .lightbox-image {
   max-height: 80vh;
 }
-.lightbox-gallery {
-  max-width: 1280px;
-}
 .container {
   width: 96%;
 }
