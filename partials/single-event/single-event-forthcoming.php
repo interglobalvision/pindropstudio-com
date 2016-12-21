@@ -19,7 +19,7 @@ if ($time_meta) {
     <header class="margin-bottom-mid text-align-center">
       <h2 class="margin-bottom-small"><?php the_title(); ?></h2>
       <h4 class="margin-bottom-tiny font-style-micro"><?php echo $time->format('H:i'); ?> | <?php echo $time->format('l'); ?></h4>
-      <h1 class="font-size-big-number margin-bottom-tiny"><?php echo $time->format('d'); ?></h1>
+      <h1 class="font-size-big-number margin-top-tiny"><?php echo $time->format('d'); ?></h1>
       <h4 class="font-style-micro"><?php echo $time->format('F'); ?></h4>
     </header>
 
