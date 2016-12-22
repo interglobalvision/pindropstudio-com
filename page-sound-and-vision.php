@@ -118,6 +118,16 @@ if( $events_query->have_posts() ) {
         ?>>
           <div class="card">
             <div class="media-item-image-holder u-pointer margin-bottom-tiny">
+              <div class="media-item-play-holder">
+                <div class="media-item-play">
+                  <div class="media-item-play-text"><?php
+                if ($vimeo_id) {
+                  echo 'Watch';
+                } else {
+                  echo 'Play';
+                } ?></div>
+                </div>
+              </div>
               <?php the_post_thumbnail('l-4-full', array('class' => 'media-item-image')); ?>
             </div>
 
