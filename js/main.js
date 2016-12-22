@@ -401,9 +401,10 @@ Site.Lightbox = {
 
         if (data.lightbox === 'image') {
           _this.openImage(data);
+        } else if (data.lightbox === 'gallery') {
+          _this.openGallery(this);
         }
 
-        _this.show();
       }
     });
 
@@ -421,6 +422,23 @@ Site.Lightbox = {
 
     $('body').addClass('lightbox-active');
     _this.$lightbox.css('display', 'flex');
+
+  },
+
+  showGallery: function(gallery) {
+    var _this = this;
+
+    _this.show();
+
+    new Swiper(gallery, {
+      speed: 400,
+      pagination: '.swiper-pagination',
+      paginationType: 'fraction',
+      loop: true,
+      onTap: function(swiper) {
+        swiper.slideNext();
+      }
+    });
   },
 
   hide: function() {
@@ -443,6 +461,18 @@ Site.Lightbox = {
     var insert = '<img class="lightbox-image" src="' + data.lightboxImage + '" />';
 
     _this.$lightboxContent.append(insert);
+
+    _this.show();
+  },
+
+  openGallery: function(element) {
+    var _this = this;
+
+    var $gallery = $(element).siblings('.gallery').clone();
+    $gallery.addClass('swiper-container').removeClass('u-hidden');
+    _this.$lightboxContent.append($gallery);
+
+    _this.showGallery($gallery);
   },
 };
 

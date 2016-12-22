@@ -98,3 +98,47 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
 </div>
 <?php
 }
+
+function render_hidden_gallery($gallery, $post_id) {
+  if ($gallery === null || $post_id === null) {
+    return false;
+  }
+
+  preg_match('/\[gallery.*ids=.(.*).\]/', $gallery, $gallery_ids);
+  $gallery_ids = explode(",", $gallery_ids[1]);
+
+  $selector = "gallery-{$post_id}";
+
+  $i = 0;
+
+  $output = "<div id='$selector' class='gallery galleryid-{$post_id} container u-pointer u-hidden'><div class='swiper-wrapper'>";
+
+  foreach ($gallery_ids as $id => $attachment_id) {
+
+    $tag = '';
+
+    $img = wp_get_attachment_image($attachment_id, 'lightbox');
+
+    // If caption is set make a variable of it
+
+    /*  WHAT ABUOT CAPTIONS ??
+    if ( $captiontag && trim($attachment->post_excerpt) ) {
+      $tag = "
+        <{$captiontag} class='wp-caption-text gallery-caption'>
+        " . wptexturize($attachment->post_excerpt) . "
+        </{$captiontag}>";
+    } else {
+      $tag = null;
+    }
+     */
+
+    $output .= "<div class='swiper-slide'>{$img}{$tag}</div>";
+  }
+
+  // Finish markup and return
+
+  $output .= "</div><div class='swiper-pagination'></div></div>\n";
+
+  echo $output;
+
+}
