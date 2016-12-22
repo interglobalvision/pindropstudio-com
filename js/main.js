@@ -133,8 +133,8 @@ Site.Galleries = {
     });
 
     _this['gallery-instance' + index] = new Swiper(container, {
-      speed: 600,
-      autoplay: 2000,
+      speed: 1250,
+      autoplay: 3000,
       pagination: '.swiper-pagination',
       paginationType: 'bullets',
       paginationClickable: true,
