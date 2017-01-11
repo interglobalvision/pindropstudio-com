@@ -64,7 +64,7 @@ if ($time_meta) {
 </div>
 <div class="grid-row margin-bottom-mid">
   <div class="grid-item item-s-12 item-m-8 offset-m-2">
-    <iframe src="https://w.soundcloud.com/player/?url=<?php echo urlencode($soundcloud_url); ?>&amp;color=000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false" width="100%" height="120" scrolling="no" frameborder="no"></iframe>
+      <?php render_soundcloud_embed($soundcloud_url); ?>
     <?php
       if ($audio_caption) {
         render_embed_caption($audio_caption);

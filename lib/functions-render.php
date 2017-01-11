@@ -142,3 +142,22 @@ function render_hidden_gallery($gallery, $post_id) {
   echo $output;
 
 }
+
+function render_soundcloud_embed($url) {
+  $url_parts = explode('/',$url);
+
+  // Check for token on url
+  if (sizeof($url_parts) == 6) {
+    // Replace token in path as a parameter
+    $url = str_replace($url_parts[5], '?secret_token=' . $url_parts[5], $url);
+  }
+
+  // Encode url
+  $url = urlencode($url);
+
+  // Form src url
+  $src = 'https://w.soundcloud.com/player/?url='. $url .'&amp;color=000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false';
+
+  // Echo embed
+  echo '<iframe src="' . $src . '" width="100%" height="120" scrolling="no" frameborder="no"></iframe>';
+}

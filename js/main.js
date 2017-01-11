@@ -372,10 +372,26 @@ Site.Media = {
 
   loadAudio: function($item, soundcloudUrl) {
     var _this = this;
-    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + encodeURIComponent(soundcloudUrl) + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
+
+    soundcloudUrl = _this.makeURL(soundcloudUrl);
+
+    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + soundcloudUrl + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
 
     $item.addClass('playing-audio');
     $item.find('.media-item-image-holder').append(insert);
+  },
+
+  makeURL: function(url) {
+    var urlParts = url.split('/');
+
+    // Check if url comes with token
+    if (urlParts.length === 6) {
+
+      // Replace token in path as a query param
+      url = url.replace(urlParts[5],'?secret_token=' + urlParts[5]);
+    }
+
+    return encodeURIComponent(url);
   },
 };
 
