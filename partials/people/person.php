@@ -5,11 +5,13 @@
       <?php the_post_thumbnail('l-4-full', array('class' => 'margin-bottom-tiny')); ?>
     </div>
 
-    <?php if ($title) { ?>
-      <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php echo $title; ?></h4>
-    <?php } ?>
+    <header class="margin-bottom-small text-align-center">
+      <h3><?php the_title(); ?></h3>
 
-    <h3 class="margin-top-small margin-bottom-small text-align-center"><?php the_title(); ?></h3>
+      <?php if ($title) { ?>
+        <h4 class="font-style-micro font-size-small margin-top-tiny"><?php echo $title; ?></h4>
+      <?php } ?>
+    </header>
 
     <?php the_content(); ?>
   </div>
