@@ -165,7 +165,7 @@ function register_cpt_people() {
         'labels' => $labels,
         'hierarchical' => false,
 
-        'supports' => array( 'title', 'editor', 'thumbnail' ),
+        'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes' ),
 
         'public' => true,
         'show_ui' => true,
