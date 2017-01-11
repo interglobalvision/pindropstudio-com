@@ -4,7 +4,7 @@ $prefix = '_igv_';
 $suffix = '_options';
 
 $page_key = $prefix . 'about' . $suffix;
-$page_title = 'People & Partners Options';
+$page_title = 'Partners';
 $metabox = array(
   'id'         => $page_key, // id used as tab page slug, must be unique
   'title'      => $page_title,
@@ -12,12 +12,13 @@ $metabox = array(
   'show_names' => true,
   'fields'     => array(
     // custom page home
-    array(
-      'name' => __( 'People & Partners', 'cmb2' ),
-      'desc' => __( '', 'cmb2' ),
-      'id'   => $prefix . 'home_title',
-      'type' => 'title',
-    ),
+/*
+      array(
+        'name' => __( 'Partners', 'cmb2' ),
+        'desc' => __( '', 'cmb2' ),
+        'id'   => $prefix . 'home_title',
+        'type' => 'title',
+      ),
     array(
       'name' => __( 'People', 'IGV' ),
       'desc' => __( '(displays on the About page)', 'IGV' ),
@@ -50,9 +51,10 @@ $metabox = array(
         ),
       ),
     ),
+*/
     array(
       'name' => __( 'Partners', 'IGV' ),
-      'desc' => __( '(displays on the About page)', 'IGV' ),
+      'desc' => __( '(displays on the About page and Partners page)', 'IGV' ),
       'id'   => $prefix . 'partners',
       'type' => 'group',
       'options'     => array(
