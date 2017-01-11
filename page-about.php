@@ -10,7 +10,6 @@ if( have_posts() ) {
     the_post();
 
     $people = IGV_get_option('_igv_about_options', '_igv_people');
-    $partners = IGV_get_option('_igv_about_options', '_igv_partners');
   ?>
   <article id="page" <?php post_class('container'); ?>>
     <div class="grid-row margin-top-basic margin-bottom-basic">
@@ -42,27 +41,9 @@ if( have_posts() ) {
     </div>
     <div id="about-drawer-partners" class="about-page-drawer">
       <div class="grid-row">
-        <?php
-          if ($partners) {
-            foreach($partners as $partner) {
-        ?>
-        <div class="grid-item item-s-12 item-m-6 text-align-center margin-bottom-basic">
-          <?php
-            if (!empty($partner['_igv_image_id'])) {
-              echo wp_get_attachment_image($partner['_igv_image_id'], 'l-4', false, array('class' => 'margin-bottom-small', 'data' => 'no-lazysizes'));
-            } else if (!empty($partner['_igv_name'])) {
-              echo '<h3 class="margin-bottom-small">' . $partner['_igv_name'] . '</h3>';
-            }
-
-            if (!empty($partner['_igv_text'])) {
-              echo '<p>' . $partner['_igv_text'] . '</p>';
-            }
-          ?>
-        </div>
-        <?php
-            }
-          }
-        ?>
+      <?php
+          render_partners();
+      ?>
       </div>
     </div>
     <div id="about-drawer-about" class="about-page-drawer active">
