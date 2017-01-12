@@ -1,7 +1,7 @@
 <?php
   $title_override = get_post_meta($post->ID, '_igv_alt_title', true);
 ?>
-<div class="grid-item item-s-4 margin-bottom-small text-align-center">
+<div class="grid-item item-s-12 item-m-4 margin-bottom-small text-align-center">
   <div class="card">
     <a href="<?php the_permalink(); ?>">
       <div class="margin-bottom-tiny">
