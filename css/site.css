@@ -1415,19 +1415,19 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   border-top-style: dotted;
   border-top-color: rgba(55,58,60,0.498);
 }
-#shuffle-container {
+.shuffle-container {
   position: relative;
   display: block;
   overflow: hidden;
   height: 0;
   transition: opacity 0.3s;
 }
-#shuffle-container.hidden {
+.shuffle-container.hidden {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
   opacity: 0;
 }
-#shuffle-preloader {
+.shuffle-preloader {
   min-height: 80vh;
 }
 #luminaries-sort-order {

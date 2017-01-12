@@ -4,8 +4,9 @@ get_header();
 
 <main id="main-content">
   <section id="posts" class="container">
-    <div id="shuffle-preloader"></div>
-    <div id="shuffle-container" class="grid-row hidden">
+    <div class="shuffle-section">
+      <div class="stuffle-preloader"></div>
+      <div class="shuffle-container grid-row hidden">
 
 <?php
   $people_core = new WP_Query(array(
@@ -53,6 +54,7 @@ get_header();
     }
   }
 ?>
+      </div>
     </div>
   </section>
 

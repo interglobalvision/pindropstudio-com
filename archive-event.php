@@ -4,8 +4,9 @@ get_header();
 
 <main id="main-content">
   <section id="posts" class="container">
-    <div id="shuffle-preloader"></div>
-    <div id="shuffle-container" class="grid-row hidden">
+    <div class="shuffle-section">
+      <div class="stuffle-preloader"></div>
+      <div class="shuffle-container grid-row hidden">
 
 <?php
 if( have_posts() ) {
@@ -33,7 +34,7 @@ if( have_posts() ) {
         <article class="u-alert grid-item item-s-12"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
 <?php
 } ?>
-
+      </div>
     </div>
   </section>
 

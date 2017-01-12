@@ -45,29 +45,34 @@ Site = {
 Site.Shuffle = {
   init: function() {
     var _this = this;
+    _this.shuffleInstances = [];
 
-    _this.shuffleContainer = document.getElementById('shuffle-container');
-
-    if (_this.shuffleContainer) {
+    if ($('.shuffle-section').length) {
       _this.bind();
     }
+
   },
 
   bind: function() {
     var _this = this;
 
-    imagesLoaded(_this.shuffleContainer, function() {
-      _this.initShuffle();
+    $('.shuffle-section').each(function(index, item) {
+      var $container = $(item).children('.shuffle-container');
+
+      imagesLoaded($container[0], function() {
+        _this.initShuffle($container[0], $(item), index);
+      });
     });
+
   },
 
-  initShuffle: function() {
+  initShuffle: function(container, $section, index) {
     var _this = this;
 
-    $('#shuffle-preloader').remove();
-    $(_this.shuffleContainer).removeClass('hidden');
+    $section.children('.shuffle-preloader').remove();
+    $(container).removeClass('hidden');
 
-    _this.shuffleInstance = new Shuffle(_this.shuffleContainer, {
+    _this.shuffleInstances[index] = new Shuffle(container, {
       itemSelector: '.shuffle-item',
       sizer: '.shuffle-item',
       throttleTime: 200,
@@ -75,17 +80,29 @@ Site.Shuffle = {
       staggerAmountMax: 150,
     });
 
-    _this.shuffleContainer.addEventListener('load', function() {
-      _this.update();
+    container.addEventListener('load', function() {
+      _this.update(index);
     }, true);
+
   },
 
-  update: function() {
+  update: function(index) {
     var _this = this;
 
-    if (_this.shuffleInstance) {
-      _this.shuffleInstance.update();
+    if (index !== undefined) {
+      // if update is called with an index variable just update that shuffle instance
+      if (_this.shuffleInstances[index]) {
+        _this.shuffleInstances[index].update();
+      }
+    } else {
+      // otherwise update all shuffle instances
+      if (_this.shuffleInstances.length > 0) {
+        for (var i = 0; i < _this.shuffleInstances; i++) {
+          _this.shuffleInstances[i].update();
+        }
+      }
     }
+
   }
 };
 
