@@ -7,7 +7,7 @@ $luminary = get_query_var('luminary');
 <main id="main-content">
   <section id="posts" class="container">
 
-    <div class="grid-row margin-bottom-basic">
+    <div class="grid-row margin-bottom-small">
       <?php render_divider('<span class="drawer-toggle u-pointer" data-drawer-id="drawer-luminaries-sort">Sort Luminaries +</span>'); ?>
     </div>
 
