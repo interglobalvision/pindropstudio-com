@@ -161,3 +161,40 @@ function render_soundcloud_embed($url) {
   // Echo embed
   echo '<iframe src="' . $src . '" width="100%" height="120" scrolling="no" frameborder="no"></iframe>';
 }
+
+function render_partners() {
+  $partners = IGV_get_option('_igv_about_options', '_igv_partners');
+
+  if (count($partners) === 0) {
+    return '';
+  }
+
+  $i = 0;
+  foreach($partners as $partner) {
+    if ($i % 2 === 0 && $i != 0) {
+?>
+</div>
+<div class="grid-row margin-bottom-mid">
+<?php render_divider(); ?>
+</div>
+<div class="grid-row margin-bottom-mid">
+<?php
+    }
+?>
+<div class="grid-item item-s-6 text-align-center">
+<?php
+  if (!empty($partner['_igv_image'])) {
+    echo wp_get_attachment_image($partner['_igv_image_id'], 'l-4', false, array('class' => 'margin-bottom-small', 'data' => 'no-lazysizes'));
+  } else if (!empty($partner['_igv_name'])) {
+    echo '<h3 class="margin-bottom-small">' . $partner['_igv_name'] . '</h3>';
+  }
+
+  if (!empty($partner['_igv_text'])) {
+    echo '<p>' . $partner['_igv_text'] . '</p>';
+  }
+?>
+</div>
+<?php
+  $i++;
+  }
+}

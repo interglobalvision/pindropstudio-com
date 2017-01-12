@@ -68,6 +68,26 @@ function igv_cmb_metaboxes() {
     'type'    => 'text',
   ) );
 
+  // PEOPLE METABOX
+
+  $luminaries_meta = new_cmb2_box( array(
+    'id'            => $prefix . 'people_meta',
+    'title'         => esc_html__( 'People Meta', 'cmb2' ),
+    'object_types'  => array( 'people', ), // Post type
+  ) );
+
+  $luminaries_meta->add_field( array(
+    'name'    => 'Title',
+    'id'      => $prefix . 'title',
+    'type'    => 'text',
+  ) );
+
+  $luminaries_meta->add_field( array(
+    'name'    => 'Pindrop Circle?',
+    'desc'    => esc_html__( 'show in circle section not core?', 'cmb2' ),
+    'id'      => $prefix . 'circle',
+    'type'    => 'checkbox',
+  ) );
   /**
    * Events Metaboxes
    * */

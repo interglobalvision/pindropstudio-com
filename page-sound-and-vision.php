@@ -38,8 +38,9 @@ if ($luminaries->have_posts()) {
       </div>
     </div>
 
-    <div id="shuffle-preloader"></div>
-    <div id="shuffle-container" class="grid-row hidden">
+    <div class="shuffle-section">
+      <div class="shuffle-preloader"></div>
+      <div class="shuffle-container grid-row hidden">
 
 <?php
 if (!empty($luminary)) {
@@ -172,7 +173,7 @@ if( $events_query->have_posts() ) {
         </article>
 <?php
 } ?>
-
+      </div>
     </div>
   </section>
 
