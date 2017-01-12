@@ -5,9 +5,38 @@ get_header();
 <main id="main-content">
   <section class="container">
     <div class="grid-row margin-bottom-small">
-      <?php render_divider('<div class="u-pointer"><span id="luminaries-sort-alphabetical">Sort Alphabetical +</span><span id="luminaries-sort-order">Sort Original +</span></div>'); ?>
+      <?php render_divider('<div class="u-pointer"><span id="luminaries-sort-alphabetical">Sort by Luminary +</span><span id="luminaries-sort-order">Sort Original +</span></div>'); ?>
     </div>
-    <div id="posts" class="grid-row">
+
+    <div id="alphabetical-drawer">
+      <div class="grid-row">
+        <div class="grid-item item-s-12">
+          <ul id="luminaries-sort-list">
+<?php
+$luminaries = new WP_Query(array(
+  'post_type' => 'luminaries',
+  'posts_per_page' => -1,
+  'order' => 'ASC',
+  'orderby' => 'meta_value',
+  'meta_key' => '_igv_surname'
+));
+
+if ($luminaries->have_posts()) {
+  while ($luminaries->have_posts()) {
+    $luminaries->the_post();
+?>
+          <li><a href="?luminary=<?php the_id(); ?>"><?php the_title(); ?></a></li>
+<?php
+  }
+}
+?>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="posts-drawer">
+      <div id="posts" class="grid-row">
 
 <?php
 if( have_posts() ) {
@@ -32,6 +61,7 @@ if( have_posts() ) {
 <?php
 } ?>
 
+      </div>
     </div>
 
     <?php
