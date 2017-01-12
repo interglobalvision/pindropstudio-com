@@ -39,7 +39,7 @@ if( have_posts() ) {
           $post = get_post($post_id);
           setup_postdata($post);
     ?>
-      <div class="grid-item item-s-12 item-m-4 text-align-center">
+      <div class="grid-item item-s-6 item-m-4 text-align-center">
         <a href="<?php the_permalink(); ?>">
           <?php the_post_thumbnail('l-4-square', array('class' => 'margin-bottom-basic')); ?>
           <h3 class="margin-bottom-small"><?php the_title(); ?></h3>
