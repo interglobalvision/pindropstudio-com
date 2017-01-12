@@ -1,5 +1,36 @@
 <?php
 get_header();
+
+$people_core = new WP_Query(array(
+  'post_type' => 'people',
+  'posts_per_page' => -1,
+  'orderby' => 'menu_order',
+  'meta_query' => array(
+    'relation' => 'OR',
+    array(
+      'key' => '_igv_circle',
+      'value' => 'on',
+      'compare' => '!='
+    ),
+    array(
+      'key' => '_igv_circle',
+      'compare' => 'NOT EXISTS'
+    )
+  )
+));
+
+$people_circle = new WP_Query(array(
+  'post_type' => 'people',
+  'posts_per_page' => -1,
+  'orderby' => 'menu_order',
+  'meta_query' => array(
+    array(
+      'key' => '_igv_circle',
+      'value' => 'on',
+      'compare' => '='
+    )
+  )
+));
 ?>
 
 <main id="main-content">
@@ -8,36 +39,50 @@ get_header();
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
-
-    $people = IGV_get_option('_igv_about_options', '_igv_people');
   ?>
   <article id="page" <?php post_class('container'); ?>>
     <div class="grid-row margin-top-basic margin-bottom-basic">
       <?php render_divider('<span class="about-page-drawer-trigger u-pointer" data-target="people">People</span> | <span class="about-page-drawer-trigger u-pointer" data-target="partners">Partners</span> | <span class="about-page-drawer-trigger u-pointer active" data-target="about">About</span>'); ?>
     </div>
     <div id="about-drawer-people" class="about-page-drawer">
-      <div class="grid-row">
-        <?php
-          if ($people) {
-            foreach($people as $person) {
-        ?>
-        <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-large">
-          <header class="text-align-center margin-bottom-basic">
-          <?php
-            if (!empty($person['_igv_image_id'])) {
-              echo wp_get_attachment_image($person['_igv_image_id'], 'l-4', false, array('class' => 'margin-bottom-small', 'data' => 'no-lazysizes'));
-            }
-          ?>
-          <h3><?php echo $person['_igv_name']; ?></h3>
-          <h4 class="font-style-micro font-size-small margin-top-tiny"><?php echo $person['_igv_title']; ?></h4>
-          </header>
-          <?php echo apply_filters('the_content', $person['_igv_text'])?>
-        </div>
-        <?php
-            }
-          }
-        ?>
+<?php
+  if ($people_core->have_posts()) {
+?>
+    <div class="shuffle-section">
+      <div class="stuffle-preloader"></div>
+      <div class="shuffle-container grid-row hidden">
+<?php
+    while ($people_core->have_posts()) {
+      $people_core->the_post();
+      get_template_part('partials/people/person');
+    }
+?>
       </div>
+    </div>
+<?php
+  }
+
+  if ($people_circle->have_posts()) {
+?>
+    <div class="grid-row margin-top-basic margin-bottom-small">
+      <?php render_divider('Pindrop Circle'); ?>
+    </div>
+    <div class="shuffle-section">
+      <div class="stuffle-preloader"></div>
+      <div class="shuffle-container grid-row hidden">
+<?php
+    while ($people_circle->have_posts()) {
+      $people_circle->the_post();
+      get_template_part('partials/people/person');
+    }
+?>
+      </div>
+    </div>
+<?php
+  }
+
+  wp_reset_postdata();
+?>
     </div>
     <div id="about-drawer-partners" class="about-page-drawer">
       <div class="grid-row">

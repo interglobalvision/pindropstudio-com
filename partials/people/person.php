@@ -2,7 +2,7 @@
 <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
   <div class="card">
     <div>
-      <?php the_post_thumbnail('l-4-full', array('class' => 'margin-bottom-tiny')); ?>
+      <?php the_post_thumbnail('l-4-full', array('class' => 'margin-bottom-tiny', 'data' => 'no-lazysizes')); ?>
     </div>
 
     <header class="margin-bottom-small text-align-center">
