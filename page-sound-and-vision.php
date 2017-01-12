@@ -39,7 +39,7 @@ if ($luminaries->have_posts()) {
     </div>
 
     <div class="shuffle-section">
-      <div class="stuffle-preloader"></div>
+      <div class="shuffle-preloader"></div>
       <div class="shuffle-container grid-row hidden">
 
 <?php

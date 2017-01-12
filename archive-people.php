@@ -42,7 +42,7 @@ get_header();
   if ($people_core->have_posts()) {
 ?>
     <div class="shuffle-section">
-      <div class="stuffle-preloader"></div>
+      <div class="shuffle-preloader"></div>
       <div class="shuffle-container grid-row hidden">
 <?php
     while ($people_core->have_posts()) {
@@ -61,7 +61,7 @@ get_header();
       <?php render_divider('Pindrop Circle'); ?>
     </div>
     <div class="shuffle-section">
-      <div class="stuffle-preloader"></div>
+      <div class="shuffle-preloader"></div>
       <div class="shuffle-container grid-row hidden">
 <?php
     while ($people_circle->have_posts()) {
