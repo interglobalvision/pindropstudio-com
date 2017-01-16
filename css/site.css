@@ -1526,6 +1526,12 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .wide-ad-link-holder .link-button {
   background-color: rgba(62,62,62,0.2);
 }
+.thumb-for-lightbox {
+  position: relative;
+}
+.thumb-for-lightbox svg {
+  position: absolute;
+}
 #lightbox {
   position: fixed;
   top: 0;
@@ -2051,6 +2057,10 @@ input[type=radio] {
   bottom: 14px;
   right: 14px;
 }
+.thumb-for-lightbox svg {
+  top: 7px;
+  right: 7px;
+}
 #lightbox-inner {
   padding: 14px;
 }
@@ -2464,6 +2474,10 @@ input[type=radio] {
   .wide-ad-link-holder {
     bottom: 14px;
     right: 14px;
+  }
+  .thumb-for-lightbox svg {
+    top: 7px;
+    right: 7px;
   }
   #lightbox-inner {
     padding: 14px;
@@ -2892,6 +2906,10 @@ input[type=radio] {
   .wide-ad-link-holder {
     bottom: 16px;
     right: 16px;
+  }
+  .thumb-for-lightbox svg {
+    top: 8px;
+    right: 8px;
   }
   #lightbox-inner {
     padding: 16px;
