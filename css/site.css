@@ -1430,7 +1430,8 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .shuffle-preloader {
   min-height: 80vh;
 }
-#luminaries-sort-order {
+#luminaries-sort-order,
+#alphabetical-drawer {
   display: none;
 }
 .drawer-content {
