@@ -130,6 +130,25 @@ get_header();
       $past_events = new WP_Query(array(
         'post_type' => 'event',
         'post__in' => $past_event_ids,
+        'meta_query' => array(
+          array(
+            'key'     => '_igv_event_datetime',
+            'value'   => $midnight_timestamp,
+            'type'    => 'numeric',
+            'compare' => '<',
+          ),
+          array(
+            'relation' => 'OR',
+            array(
+              'key' => '_igv_vimeo_id',
+              'compare' => 'EXISTS'
+            ),
+            array(
+              'key' => '_igv_soundcloud_url',
+              'compare' => 'EXISTS'
+            )
+          )
+        ),
       ));
 
       if ($past_events->have_posts()) {
