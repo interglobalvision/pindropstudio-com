@@ -1321,6 +1321,12 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .validation_message {
   color: rgba(255,0,0,0.5);
 }
+.swiper-wrapper {
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
 .swiper-pagination {
   position: initial;
 }
