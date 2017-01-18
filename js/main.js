@@ -97,7 +97,7 @@ Site.Shuffle = {
     } else {
       // otherwise update all shuffle instances
       if (_this.shuffleInstances.length > 0) {
-        for (var i = 0; i < _this.shuffleInstances; i++) {
+        for (var i = 0; i < _this.shuffleInstances.length; i++) {
           _this.shuffleInstances[i].update();
         }
       }
@@ -220,7 +220,7 @@ Site.Expandables = {
 
       // Toggle content
       $('#' + $expandableId).slideToggle(Site.animationSpeed, function() {
-        if (Site.Shuffle.shuffleInstance) {
+        if (Site.Shuffle.shuffleInstances) {
           Site.Shuffle.update();
         }
       });
