@@ -77,7 +77,10 @@ get_header();
       <?php render_divider('Sound & Vision'); ?>
     </div>
 
-    <div class="grid-row justify-center margin-bottom-basic">
+    <div class="shuffle-section media-items margin-bottom-basic">
+      <div class="shuffle-preloader"></div>
+      <div class="shuffle-container grid-row hidden">
+
     <?php
       $overrides = IGV_get_option('_igv_home_options', '_igv_override_events');
       $posts = 3;
@@ -127,12 +130,31 @@ get_header();
       $past_events = new WP_Query(array(
         'post_type' => 'event',
         'post__in' => $past_event_ids,
+        'meta_query' => array(
+          array(
+            'key'     => '_igv_event_datetime',
+            'value'   => $midnight_timestamp,
+            'type'    => 'numeric',
+            'compare' => '<',
+          ),
+          array(
+            'relation' => 'OR',
+            array(
+              'key' => '_igv_vimeo_id',
+              'compare' => 'EXISTS'
+            ),
+            array(
+              'key' => '_igv_soundcloud_url',
+              'compare' => 'EXISTS'
+            )
+          )
+        ),
       ));
 
       if ($past_events->have_posts()) {
         while ($past_events->have_posts()) {
           $past_events->the_post();
-          get_template_part('partials/custom-pages/event-past');
+          get_template_part('partials/custom-pages/event-media');
         }
       }
     ?>
