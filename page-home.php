@@ -77,7 +77,10 @@ get_header();
       <?php render_divider('Sound & Vision'); ?>
     </div>
 
-    <div class="grid-row justify-center margin-bottom-basic">
+    <div class="shuffle-section media-items margin-bottom-basic">
+      <div class="shuffle-preloader"></div>
+      <div class="shuffle-container grid-row hidden">
+
     <?php
       $overrides = IGV_get_option('_igv_home_options', '_igv_override_events');
       $posts = 3;
@@ -132,7 +135,7 @@ get_header();
       if ($past_events->have_posts()) {
         while ($past_events->have_posts()) {
           $past_events->the_post();
-          get_template_part('partials/custom-pages/event-past');
+          get_template_part('partials/custom-pages/event-media');
         }
       }
     ?>

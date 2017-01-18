@@ -315,7 +315,7 @@ Site.Media = {
   bind: function() {
     var _this = this;
 
-    if ($('.page-sound-and-vision').length) {
+    if ($('.media-items').length) {
       $('.media-item-image-holder').on({
         'click': function() {
           var $target = $(this).parents('.media-item');
