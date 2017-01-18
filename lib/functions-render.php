@@ -111,7 +111,7 @@ function render_hidden_gallery($gallery, $post_id) {
 
   $i = 0;
 
-  $output = "<div id='$selector' class='gallery galleryid-{$post_id} container u-pointer u-hidden'><div class='swiper-wrapper'>";
+  $output = "<div id='$selector' class='gallery galleryid-{$post_id} container u-hidden'><nav class='swiper-nav swiper-button-prev'><div>" . url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-gallery-arrow-prev.svg') . "</div></nav><nav class='swiper-nav swiper-button-next'><div>" . url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-gallery-arrow-next.svg') . "</div></nav><div class='swiper-wrapper'>";
 
   foreach ($gallery_ids as $id => $attachment_id) {
 
@@ -132,7 +132,7 @@ function render_hidden_gallery($gallery, $post_id) {
     }
      */
 
-    $output .= "<div class='swiper-slide'>{$img}{$tag}</div>";
+    $output .= "<div class='swiper-slide'>{$img}</div>";
   }
 
   // Finish markup and return

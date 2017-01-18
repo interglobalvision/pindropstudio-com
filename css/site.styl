@@ -110,6 +110,24 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
 .swiper-pagination
   position: initial
 
+.swiper-nav
+  position: absolute
+  display: flex
+  top: 0
+  width: 50%
+  height: 100%
+  background-image: none
+  align-items: center
+  svg
+    filter: drop-shadow(0 0 5px #000);
+
+.swiper-button-prev
+  left: 0
+
+.swiper-button-next
+  right: 0
+  justify-content: flex-end;
+
 // ******************************************************
 
 // CAROUSEL
