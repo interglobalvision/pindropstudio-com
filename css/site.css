@@ -1321,8 +1321,42 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .validation_message {
   color: rgba(255,0,0,0.5);
 }
+.swiper-wrapper {
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
 .swiper-pagination {
   position: initial;
+}
+.swiper-nav {
+  position: absolute;
+  top: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
+  width: 50%;
+  height: 100%;
+  background-image: none;
+}
+.swiper-nav svg {
+  -webkit-filter: drop-shadow(0 0 5px #fff);
+          filter: drop-shadow(0 0 5px #fff);
+}
+.swiper-button-prev {
+  left: 0;
+}
+.swiper-button-next {
+  right: 0;
+  -webkit-justify-content: flex-end;
+  -ms-justify-content: flex-end;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
 }
 .size-l-12-carousel {
   display: block;
@@ -1442,8 +1476,8 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   display: none;
 }
 .grid-row .media-item.playing-video {
-  width: 100%;
   max-width: 100%;
+  width: 100%;
 }
 .grid-row .media-item .media-item-image {
   display: block;
@@ -1453,6 +1487,10 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .media-item-play-holder {
   position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -1464,10 +1502,6 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   -ms-justify-content: center;
   -ms-flex-pack: center;
       justify-content: center;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
 }
 .media-item-play {
   color: #fff;
@@ -1526,6 +1560,12 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .wide-ad-link-holder .link-button {
   background-color: rgba(62,62,62,0.2);
+}
+.thumb-for-lightbox {
+  position: relative;
+}
+.thumb-for-lightbox svg {
+  position: absolute;
 }
 #lightbox {
   position: fixed;
@@ -2017,6 +2057,12 @@ input[type=radio] {
 .footer-menu li {
   margin: 0 7px;
 }
+.swiper-button-prev svg {
+  padding-left: 14px;
+}
+.swiper-button-next svg {
+  padding-right: 14px;
+}
 .carousel-links {
   display: inline-block;
   background-color: rgba(62,62,62,0.2);
@@ -2051,6 +2097,10 @@ input[type=radio] {
 .wide-ad-link-holder {
   bottom: 14px;
   right: 14px;
+}
+.thumb-for-lightbox svg {
+  top: 7px;
+  right: 7px;
 }
 #lightbox-inner {
   padding: 14px;
@@ -2442,6 +2492,12 @@ input[type=radio] {
   .media-item-play {
     padding: 7px 7px 4.666666666666667px 7px;
   }
+  .swiper-button-prev svg {
+    padding-left: 14px;
+  }
+  .swiper-button-next svg {
+    padding-right: 14px;
+  }
   .carousel-links li {
     padding: 4.666666666666667px 7px;
   }
@@ -2465,6 +2521,10 @@ input[type=radio] {
   .wide-ad-link-holder {
     bottom: 14px;
     right: 14px;
+  }
+  .thumb-for-lightbox svg {
+    top: 7px;
+    right: 7px;
   }
   #lightbox-inner {
     padding: 14px;
@@ -2875,6 +2935,12 @@ input[type=radio] {
   .media-item-play {
     padding: 8px 8px 5.333333333333333px 8px;
   }
+  .swiper-button-prev svg {
+    padding-left: 16px;
+  }
+  .swiper-button-next svg {
+    padding-right: 16px;
+  }
   .carousel-links li {
     padding: 5.333333333333333px 8px;
   }
@@ -2893,6 +2959,10 @@ input[type=radio] {
   .wide-ad-link-holder {
     bottom: 16px;
     right: 16px;
+  }
+  .thumb-for-lightbox svg {
+    top: 8px;
+    right: 8px;
   }
   #lightbox-inner {
     padding: 16px;

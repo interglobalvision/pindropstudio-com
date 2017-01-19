@@ -109,7 +109,7 @@ function my_gallery_shortcode($attr) {
 
   $selector = "gallery-{$instance}";
 
-  $gallery_div = "<div id='$selector' class='swiper-container gallery galleryid-{$id} u-pointer'><div class='swiper-wrapper'>";
+  $gallery_div = "<div id='$selector' class='swiper-container gallery galleryid-{$id} u-pointer'><nav class='swiper-nav swiper-button-prev'><div>" . url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-gallery-arrow-prev.svg') . "</div></nav><nav class='swiper-nav swiper-button-next'><div>" . url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-gallery-arrow-next.svg') . "</div></nav><div class='swiper-wrapper'>";
   $output = $gallery_div;
 
   $i = 0;

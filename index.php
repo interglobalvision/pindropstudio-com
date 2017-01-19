@@ -18,15 +18,20 @@ if ( have_posts() ) {
 
     $gallery = get_post_meta($post->ID, '_igv_gallery', true);
 
-    if($gallery) {
-      $lightbox_data = ' class="u-pointer" data-lightbox="gallery" data-lightbox-title="' . get_the_title() . '" data-lightbox-image="' . $lightbox_image[0] . '"';
+    if ($gallery) {
+      $lightbox_data = ' class="thumb-for-lightbox u-pointer" data-lightbox="gallery" data-lightbox-title="' . get_the_title() . '" data-lightbox-image="' . $lightbox_image[0] . '"';
     }
 
 ?>
         <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
           <div class="card">
             <div <?php echo $lightbox_data; ?>>
-              <?php the_post_thumbnail('l-4-full', array('class' => 'margin-bottom-tiny')); ?>
+              <?php
+                if ($gallery) {
+                  echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-icon-lightbox.svg');
+                }
+
+                the_post_thumbnail('l-4-full', array('class' => 'margin-bottom-tiny')); ?>
             </div>
 
             <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>

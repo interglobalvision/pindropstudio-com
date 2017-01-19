@@ -5,6 +5,14 @@ var Shuffle = window.shuffle;
 Site = {
   mobileThreshold: 601,
   animationSpeed: 400,
+  swiperVariables: {
+    speed: 400,
+    pagination: '.swiper-pagination',
+    paginationType: 'fraction',
+    loop: true,
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+  },
   init: function() {
     var _this = this;
 
@@ -125,15 +133,7 @@ Site.Galleries = {
   initGalleryInstance: function(index, container) {
     var _this = this;
 
-    _this['gallery-instance' + index] = new Swiper(container, {
-      speed: 400,
-      pagination: '.swiper-pagination',
-      paginationType: 'fraction',
-      loop: true,
-      onTap: function(swiper) {
-        swiper.slideNext();
-      }
-    });
+    _this['gallery-instance' + index] = new Swiper(container, Site.swiperVariables);
   },
 
   initHomeCarousel: function(index, container) {
@@ -449,15 +449,7 @@ Site.Lightbox = {
 
     _this.show();
 
-    new Swiper(gallery, {
-      speed: 400,
-      pagination: '.swiper-pagination',
-      paginationType: 'fraction',
-      loop: true,
-      onTap: function(swiper) {
-        swiper.slideNext();
-      }
-    });
+    new Swiper(gallery, Site.swiperVariables);
   },
 
   hide: function() {

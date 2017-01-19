@@ -107,8 +107,29 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
 
 // GALLERIES
 
+.swiper-wrapper
+  align-items: center
+
 .swiper-pagination
   position: initial
+
+.swiper-nav
+  position: absolute
+  top: 0
+  display: flex
+  align-items: center
+  width: 50%
+  height: 100%
+  background-image: none
+  svg
+    filter: drop-shadow(0 0 5px $color-white)
+
+.swiper-button-prev
+  left: 0
+
+.swiper-button-next
+  right: 0
+  justify-content: flex-end;
 
 // ******************************************************
 
@@ -225,8 +246,8 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
       .media-item-image, .media-item-play-holder
         display: none
     &.playing-video
-      width: 100%
       max-width: 100%
+      width: 100%
     .media-item-image
       display: block
 
@@ -235,13 +256,13 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
 
 .media-item-play-holder
   position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
   display: flex
   align-items: center
   justify-content: center
-  top: 0
-  left: 0
-  bottom: 0
-  right: 0
 
 .media-item-play
   color: $color-white
@@ -312,6 +333,11 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
 // ******************************************************
 
 // LIGHTBOX
+
+.thumb-for-lightbox
+  position: relative
+  svg
+    position: absolute
 
 #lightbox
   position: fixed
