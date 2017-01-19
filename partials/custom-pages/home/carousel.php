@@ -44,6 +44,10 @@
 
                   echo '</h4>';
 
+                } else if ($post_type === 'luminaries') {
+                  echo '<h4 class="font-style-micro margin-bottom-small">Luminary</h4>';
+                } else if ($post_type === 'post') {
+                  echo '<h4 class="font-style-micro margin-bottom-small">News</h4>';
                 }
               ?>
               <h1><a href="<?php the_permalink(); ?>"><?php
