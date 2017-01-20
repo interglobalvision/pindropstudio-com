@@ -2481,6 +2481,9 @@ input[type=radio] {
   .card.card-big {
     padding: 28px;
   }
+  .event-forthcoming-title {
+    min-height: 3.6em;
+  }
   .live-forthcoming-event-meta {
     margin-top: 70px;
   }
