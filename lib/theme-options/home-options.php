@@ -163,6 +163,12 @@ $metabox = array(
       'type' => 'text',
     ),
     array(
+      'name' => __( 'Ad 1 Subtitle', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'tall_ad1_subtitle',
+      'type' => 'text',
+    ),
+    array(
       'name' => __( 'Ad 1 Image', 'cmb2' ),
       'desc' => __( '', 'cmb2' ),
       'id'   => $prefix . 'tall_ad1_image',
@@ -193,6 +199,12 @@ $metabox = array(
       'name' => __( 'Ad 2 Text', 'cmb2' ),
       'desc' => __( '', 'cmb2' ),
       'id'   => $prefix . 'tall_ad2_text',
+      'type' => 'text',
+    ),
+    array(
+      'name' => __( 'Ad 2 Subtitle', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'tall_ad2_subtitle',
       'type' => 'text',
     ),
     array(

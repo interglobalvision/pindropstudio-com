@@ -99,6 +99,34 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
 <?php
 }
 
+function render_tall_ad($image, $text, $subtitle, $link_internal, $link_external, $link_text) {
+?>
+<div class="grid-item item-s-12 item-m-6">
+  <div class="card card-big text-align-center">
+<?php
+  if ($image) {
+    echo wp_get_attachment_image($image, 'l-4', false, array('class' => 'margin-top-small margin-bottom-basic'));
+  }
+
+  if ($subtitle) {
+    echo '<h4 class="margin-bottom-small">' . $subtitle . '</h4>';
+  }
+
+  if ($text) {
+    echo '<h3 class="tall-ad-title margin-bottom-small">' . $text . '</h3>';
+  }
+
+  if ($link_internal && $link_text) {
+    echo '<a href="' . get_permalink($link_internal) . '" class="link-button">' . $link_text . '</a>';
+  } else if ($link_external && $link_text) {
+    echo '<a href="' . $link_external . '" class="link-button">' . $link_text . '</a>';
+  }
+?>
+  </div>
+</div>
+<?php
+}
+
 function render_hidden_gallery($gallery, $post_id) {
   if ($gallery === null || $post_id === null) {
     return false;
