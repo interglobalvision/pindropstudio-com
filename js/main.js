@@ -25,6 +25,7 @@ Site = {
     });
 
     _this.fixWidows();
+    _this.bindPinScroll();
 
     Site.Shuffle.init();
     Site.Media.init();
@@ -48,6 +49,12 @@ Site = {
       $(this).html(string);
     });
   },
+
+  bindPinScroll: function() {
+    $('#footer-pin-holder').on('click', function() {
+      $('html, body').animate({ scrollTop: 0 }, Site.animationSpeed);
+    });
+  }
 };
 
 Site.Shuffle = {
