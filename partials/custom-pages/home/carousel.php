@@ -20,8 +20,8 @@
           }
       ?>
         <div class="swiper-slide carousel-post" data-background="<?php echo $background_url[0]; ?>">
-          <div class="carousel-content-holder align-items-center">
-            <div class="carousel-content">
+          <div class="carousel-content-holder grid-column align-items-center justify-between">
+            <header class="carousel-header margin-top-small">
               <?php
                 $post_type = get_post_type($post);
 
@@ -50,6 +50,8 @@
                   echo '<h4 class="font-style-micro margin-bottom-small">News</h4>';
                 }
               ?>
+            </header>
+            <div class="carousel-content margin-bottom-small">
               <h1><a href="<?php the_permalink(); ?>"><?php
                 if (!empty($carousel_post['_igv_carousel_title_override'])) {
                   echo $carousel_post['_igv_carousel_title_override'];
