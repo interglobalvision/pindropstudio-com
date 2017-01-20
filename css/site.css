@@ -1367,12 +1367,10 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   right: 0;
   bottom: 0;
   left: 0;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   padding: 0 16%;
   color: #fff;
 }
+.carousel-header,
 .carousel-content {
   width: 100%;
 }
@@ -2084,7 +2082,7 @@ input[type=radio] {
   content: '';
 }
 .home-carousel {
-  height: 470px;
+  height: 520px;
 }
 .home-carousel .swiper-slide {
   background-position: center center;
