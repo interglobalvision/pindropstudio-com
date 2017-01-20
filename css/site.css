@@ -1548,6 +1548,9 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   position: relative;
   color: #fff;
 }
+.wide-size-ad .attachment-l-12-wide-ad {
+  display: block;
+}
 .wide-ad-text {
   position: absolute;
   top: 0;
@@ -1559,6 +1562,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   bottom: 0;
 }
 .wide-ad-link-holder .link-button {
+  border-color: transparent;
   background-color: rgba(62,62,62,0.2);
 }
 .thumb-for-lightbox {
@@ -2518,12 +2522,12 @@ input[type=radio] {
     display: flex;
   }
   .wide-ad-text {
-    top: 14px;
-    left: 14px;
+    top: 21px;
+    left: 21px;
   }
   .wide-ad-link-holder {
-    bottom: 14px;
-    right: 14px;
+    bottom: 21px;
+    right: 21px;
   }
   .tall-ad-title {
     min-height: 2.4em;
@@ -2959,12 +2963,12 @@ input[type=radio] {
     padding-right: 0;
   }
   .wide-ad-text {
-    top: 16px;
-    left: 16px;
+    top: 32px;
+    left: 32px;
   }
   .wide-ad-link-holder {
-    bottom: 16px;
-    right: 16px;
+    bottom: 32px;
+    right: 32px;
   }
   .thumb-for-lightbox svg {
     top: 8px;
