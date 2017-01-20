@@ -1892,6 +1892,9 @@ input[type=file] {
 input[type=radio] {
   margin-right: 14px;
 }
+.connect-form input {
+  margin-bottom: 14px;
+}
 .connect-form-submit {
   padding-top: 7px;
 }
@@ -2411,6 +2414,9 @@ input[type=radio] {
   }
   input[type=radio] {
     margin-right: 14px;
+  }
+  .connect-form input {
+    margin-bottom: 0;
   }
   .connect-form-submit {
     padding-top: 7px;

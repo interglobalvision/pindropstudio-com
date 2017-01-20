@@ -2,7 +2,7 @@
   <?php render_divider('Connect with Pindrop'); ?>
 </div>
 
-<form action="http://modernactivity.createsend.com/t/y/s/cjrdlh/" method="post" id="subForm">
+<form action="http://modernactivity.createsend.com/t/y/s/cjrdlh/" method="post" class="connect-form">
   <div class="grid-row margin-bottom-mid">
     <div class="grid-item item-s-12 item-m-3 offset-m-1">
       <input id="fieldName" name="cm-name" type="text" placeholder="First name..." />
@@ -13,7 +13,7 @@
     <div class="grid-item item-s-12 item-m-3">
       <input id="fieldEmail" name="cm-cjrdlh-cjrdlh" type="email" placeholder="Email address..." required="" />
     </div>
-    <div class="grid-item item-s-12 item-m-1">
+    <div class="grid-item item-s-12 item-m-1 text-align-center">
       <button type="submit" class="connect-form-submit">
         <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-arrow.svg'); ?>
       </button>
