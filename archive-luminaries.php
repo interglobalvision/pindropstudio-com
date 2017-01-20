@@ -25,7 +25,7 @@ if ($luminaries->have_posts()) {
   while ($luminaries->have_posts()) {
     $luminaries->the_post();
 ?>
-          <li><a href="?luminary=<?php the_id(); ?>"><?php the_title(); ?></a></li>
+          <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
 <?php
   }
 }
