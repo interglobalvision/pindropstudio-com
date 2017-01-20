@@ -2525,6 +2525,9 @@ input[type=radio] {
     bottom: 14px;
     right: 14px;
   }
+  .tall-ad-title {
+    min-height: 2.4em;
+  }
   .thumb-for-lightbox svg {
     top: 7px;
     right: 7px;
