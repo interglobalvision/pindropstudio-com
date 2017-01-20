@@ -12,12 +12,12 @@ if( have_posts() ) {
   <article id="single-luminary" <?php post_class('container'); ?>>
     <div class="grid-row">
       <div class="grid-item item-s-12 text-align-center">
-        <?php the_post_thumbnail('l-4-square'); ?>
+        <?php the_post_thumbnail('l-4-square', array('class' => 'margin-bottom-basic')); ?>
       </div>
     </div>
     <div class="grid-row">
-      <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic">
-        <h1 class="text-align-center"><?php the_title(); ?></h1>
+      <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-mid">
+        <h1 class="text-align-center margin-bottom-small"><?php the_title(); ?></h1>
         <?php the_content(); ?>
       </div>
     </div>
