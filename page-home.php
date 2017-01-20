@@ -40,7 +40,7 @@ get_header();
     ?>
 
     <div class="grid-row margin-top-basic margin-bottom-small">
-      <?php render_divider('<a href="' . home_url('live') . '">Forthcoming Live Events</a>'); ?>
+      <?php render_divider('<a href="' . home_url('live') . '">Forthcoming Live Events +</a>'); ?>
     </div>
 
     <div class="grid-row justify-center margin-bottom-large">
@@ -70,7 +70,7 @@ get_header();
     ?>
 
     <div class="grid-row margin-bottom-small">
-      <?php render_divider('<a href="' . home_url('sound-and-vision') . '">Sound & Vision</a>'); ?>
+      <?php render_divider('<a href="' . home_url('sound-and-vision') . '">Sound & Vision +</a>'); ?>
     </div>
 
     <div class="shuffle-section media-items margin-bottom-basic">
@@ -204,7 +204,7 @@ get_header();
       if ($recent_luminaries->have_posts()) {
     ?>
     <div class="grid-row margin-top-large margin-bottom-small">
-      <?php render_divider('<a href="' . home_url('luminaries') . '">Featured Luminaries</a>'); ?>
+      <?php render_divider('<a href="' . home_url('luminaries') . '">Featured Luminaries +</a>'); ?>
     </div>
 
     <div class="grid-row">
