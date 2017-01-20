@@ -1,7 +1,7 @@
   <footer id="footer" class="container">
     <div class="grid-row">
       <div class="grid-item item-s-12 item-m-8 offset-m-2 font-style-micro font-size-small text-align-center">
-        <div id="footer-pin-holder">
+        <div id="footer-pin-holder" class="u-pointer">
           <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-pin.svg'); ?>
         </div>
         <ul class="footer-menu u-inline-list">
