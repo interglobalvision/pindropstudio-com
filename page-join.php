@@ -6,13 +6,21 @@ get_header();
 
 <?php
 if( have_posts() ) {
+
+  $gallery = get_post_meta($post->ID, '_igv_gallery', true);
+
   while( have_posts() ) {
     the_post();
   ?>
   <article id="page-join" <?php post_class('container'); ?>>
     <div class="grid-row">
-      <div class="grid-item item-s-12 text-align-center">
-        <?php the_post_thumbnail('l-8', array('class' => 'margin-bottom-basic')); ?>
+      <div class="grid-item item-s-12 text-align-center margin-bottom-basic">
+        <?php
+          if ($gallery) {
+            echo do_shortcode($gallery);
+          } else {
+            the_post_thumbnail('l-8');
+          } ?>
       </div>
     </div>
     <div class="grid-row">
