@@ -2431,6 +2431,7 @@ input[type=radio] {
     margin-bottom: 14px;
   }
   .gfield label {
+    padding-right: 14px;
     margin-bottom: 14px;
   }
   .gfield .instruction,
@@ -2879,6 +2880,7 @@ input[type=radio] {
     float: left;
   }
   .gfield .gfield_label {
+    padding-right: 16px;
     width: 30%;
   }
   .gfield .ginput_container {
