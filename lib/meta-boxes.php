@@ -187,6 +187,53 @@ function igv_cmb_metaboxes() {
     'post_type'  => array('luminaries'),
   ) );
 
+  // PAGE: JOIN
+
+  $join_metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'join_metabox',
+    'title'         => __( 'Join', 'cmb2' ),
+    'object_types' => array( 'page' ),
+    'show_on'      => array( 'key' => 'id', 'value' => get_id_by_slug('join') ),
+  ) );
+
+  $join_metabox->add_field( array(
+    'name'    => 'Gallery',
+    'description' => __( 'a Wordpress gallery', 'cmb2' ),
+    'id'      => $prefix . 'gallery',
+    'type'    => 'wysiwyg',
+  ));
+
+  $memberships_group = $join_metabox->add_field( array(
+      'id'          => $prefix . 'join_memberships',
+      'type'        => 'group',
+      'description' => __( 'Add Membership Type', 'cmb2' ),
+      'options'     => array(
+        'group_title'   => __( 'Membership Type {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+        'add_button'    => __( 'Add Another Membership Type', 'cmb2' ),
+        'remove_button' => __( 'Remove Membership Type', 'cmb2' ),
+        'sortable'      => true, // beta
+      ),
+  ) );
+
+  $join_metabox->add_group_field( $memberships_group, array(
+    'name' => 'Membership Type Name',
+    'id'   => 'name',
+    'type' => 'text',
+  ) );
+
+  $join_metabox->add_group_field( $memberships_group, array(
+    'name' => 'Membership Type Cost',
+    'description' => __( 'Number only not currency', 'cmb2' ),
+    'id'   => 'cost',
+    'type' => 'text',
+  ) );
+
+  $join_metabox->add_group_field( $memberships_group, array(
+    'name' => 'Membership Type Signup Link',
+    'id'   => 'link',
+    'type' => 'text_url',
+  ) );
+
   // PAGE: PARTNERS
 
   $partners_metabox = new_cmb2_box( array(
