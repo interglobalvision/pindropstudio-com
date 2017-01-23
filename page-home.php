@@ -79,52 +79,62 @@ get_header();
 
     <?php
       $overrides = IGV_get_option('_igv_home_options', '_igv_override_events');
-      $posts = 3;
+      $total_posts = 3;
+      $posts_needed = $total_posts;
       $not_in = array();
 
       if ($overrides) {
         $overrides = explode(', ', $overrides);
 
-        $posts = $posts - count($overrides);
+        $posts_needed = $posts_needed - count($overrides);
         $not_in = $overrides;
       }
 
-      $past_args = array(
-        'post_type' => 'event',
-        'posts_per_page' => $posts,
-        'post__not_in' => $not_in,
+      if ($posts_needed > 0) {
 
-        'meta_query' => array(
-          array(
-            'key'     => '_igv_event_datetime',
-            'value'   => $midnight_timestamp,
-            'type'    => 'numeric',
-            'compare' => '<',
-          ),
-          array(
-            'relation' => 'OR',
+        $past_args = array(
+          'post_type' => 'event',
+          'posts_per_page' => $posts_needed,
+          'post__not_in' => $not_in,
+
+          'meta_query' => array(
             array(
-              'key' => '_igv_vimeo_id',
-              'compare' => 'EXISTS'
+              'key'     => '_igv_event_datetime',
+              'value'   => $midnight_timestamp,
+              'type'    => 'numeric',
+              'compare' => '<',
             ),
             array(
-              'key' => '_igv_soundcloud_url',
-              'compare' => 'EXISTS'
+              'relation' => 'OR',
+              array(
+                'key' => '_igv_vimeo_id',
+                'compare' => 'EXISTS'
+              ),
+              array(
+                'key' => '_igv_soundcloud_url',
+                'compare' => 'EXISTS'
+              )
             )
-          )
-        ),
-      );
+          ),
+        );
 
-      $past_events = get_posts($past_args);
+        $past_events = get_posts($past_args);
 
-      $past_event_ids = array_map('array_map_filter_ids', $past_events);
+        $past_event_ids = array_map('array_map_filter_ids', $past_events);
 
-      if ($overrides) {
-        $past_event_ids = array_merge($overrides, $past_event_ids);
+        if ($overrides) {
+          $past_event_ids = array_merge($overrides, $past_event_ids);
+        }
+
+      } else {
+
+        $past_event_ids = $overrides;
+
       }
 
       $past_events = new WP_Query(array(
         'post_type' => 'event',
+        'posts_per_page' => $total_posts,
         'post__in' => $past_event_ids,
         'meta_query' => array(
           array(
