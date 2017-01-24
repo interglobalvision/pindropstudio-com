@@ -1932,6 +1932,7 @@ input[type=radio] {
 }
 .link-button,
 .gform_button {
+  display: inline-block;
   border-top: solid 1px #373a3c;
   border-left: solid 1px #373a3c;
   border-bottom: solid 1px #373a3c;
@@ -1940,6 +1941,7 @@ input[type=radio] {
   font-family: 'Scotch Micro';
   text-transform: uppercase;
   letter-spacing: 1px;
+  line-height: 1;
   cursor: pointer;
 }
 .link-button:hover,
