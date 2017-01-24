@@ -74,9 +74,13 @@ Site.Shuffle = {
     $('.shuffle-section').each(function(index, item) {
       var $container = $(item).children('.shuffle-container');
 
-      imagesLoaded($container[0], function() {
+      if ($container.find('img').length) {
+        imagesLoaded($container[0], function() {
+          _this.initShuffle($container[0], $(item), index);
+        });
+      } else {
         _this.initShuffle($container[0], $(item), index);
-      });
+      }
     });
 
   },
