@@ -1257,6 +1257,23 @@ a:visited {
 p a {
   text-decoration: underline;
 }
+.post-copy h1,
+.post-copy h2,
+.post-copy h3,
+.post-copy h4,
+.post-copy h5,
+.post-copy h6 {
+  margin-bottom: 1rem;
+}
+.post-copy ul,
+.post-copy ol {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+.post-copy ul li,
+.post-copy ol li {
+  list-style-type: disc;
+}
 html {
   background-color: #f1f1f1;
   color: #373a3c;
