@@ -21,7 +21,9 @@ if( have_posts() ) {
         <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
         <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>
 
-        <?php the_content(); ?>
+        <div class="post-copy">
+          <?php the_content(); ?>
+        </div>
       </div>
     </div>
     <?php

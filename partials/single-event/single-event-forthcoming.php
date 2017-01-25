@@ -36,7 +36,9 @@ if ($time_meta) {
         }
       ?>
     </ul>
-    <?php the_content(); ?>
+    <div class="post-copy">
+      <?php the_content(); ?>
+    </div>
 
     <div class="margin-top-mid margin-bottom-mid">
       <?php render_share(get_the_permalink()); ?>

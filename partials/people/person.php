@@ -22,11 +22,11 @@
       $content_after = apply_filters( 'the_content', $explode_content[1] );
     ?>
       <div class="expandable-post">
-        <div class="expandable-excerpt">
+        <div class="expandable-excerpt post-copy">
           <?php echo $content_before; ?>
         </div>
           <p class="text-align-right"><a class="font-style-micro font-uppercase font-size-small u-pointer expandable-toggle" data-exapandable-id="expandable-<?php echo $post->ID; ?>">Read more</a></p>
-        <div id="expandable-<?php echo $post->ID; ?>" class="expandable-content">
+        <div id="expandable-<?php echo $post->ID; ?>" class="expandable-content post-copy">
           <?php echo $content_after; ?>
         </div>
       </div>
