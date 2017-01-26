@@ -42,10 +42,9 @@
           <li><a <?php echo menuActiveClasses('luminaries', 'postype'); ?>href="<?php echo home_url('luminaries'); ?>">Luminaries</a></li>
           <li><a <?php echo menuActiveClasses('post', 'postype'); ?>href="<?php echo home_url('news'); ?>">News</a></li>
           <li><a href="">Shop</a></li>
-          <li><a <?php echo menuActiveClasses('join', 'page'); ?>href="<?php echo home_url('join'); ?>">Join</a></li>
           <li><a <?php echo menuActiveClasses('submit', 'page'); ?>href="<?php echo home_url('submit'); ?>">Submit</a></li>
           <li><a <?php echo menuActiveClasses('about', 'page'); ?>href="<?php echo home_url('about'); ?>">About</a></li>
-          <li id="menu-item-lock"><a href="<?php echo home_url('members-only'); ?>"><?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-lock.svg'); ?></a></li>
+          <li><a href="<?php echo home_url('members-only'); ?>">Members</li>
         </ul>
       </nav>
     </div>
