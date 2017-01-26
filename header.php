@@ -44,7 +44,7 @@
           <li><a href="">Shop</a></li>
           <li><a <?php echo menuActiveClasses('submit', 'page'); ?>href="<?php echo home_url('submit'); ?>">Submit</a></li>
           <li><a <?php echo menuActiveClasses('about', 'page'); ?>href="<?php echo home_url('about'); ?>">About</a></li>
-          <li><a href="<?php echo home_url('members-only'); ?>">Members</li>
+          <li><a href="<?php echo home_url('members-only'); ?>">Members</a></li>
         </ul>
       </nav>
     </div>
