@@ -2,6 +2,13 @@
 
 // Custom filters (like pre_get_posts etc)
 
+// change Private text
+function remove_private_prefix($title) {
+	$title = str_replace('Private: ', '', $title);
+	return $title;
+}
+add_filter('the_title', 'remove_private_prefix');
+
 // Only show past events on event archive
 function event_archive_query($query) {
   if ($query->is_post_type_archive('event') && is_archive() && !is_admin()) {
