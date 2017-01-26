@@ -51,6 +51,9 @@
 html {
   overflow-y: scroll;
 }
+.u-block {
+  display: block;
+}
 .u-inline-block {
   display: inline-block;
 }
@@ -1277,6 +1280,9 @@ p a {
 html {
   background-color: #f1f1f1;
   color: #373a3c;
+}
+.font-color-gold {
+  color: #bfa255;
 }
 img {
   max-width: 100%;
