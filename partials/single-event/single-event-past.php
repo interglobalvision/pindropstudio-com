@@ -27,7 +27,9 @@ if ($time_meta) {
     <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
     <h4 class="font-style-micro margin-bottom-small text-align-center"><?php echo $time_meta ? $time->format('d F Y') : get_the_time('d F Y'); ?></h4>
 
-    <?php the_content(); ?>
+    <div class="post-copy">
+      <?php the_content(); ?>
+    </div>
 
     <div class="margin-top-small margin-bottom-small">
       <?php render_share(get_the_permalink()); ?>

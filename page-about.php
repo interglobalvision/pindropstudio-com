@@ -93,7 +93,7 @@ if( have_posts() ) {
     </div>
     <div id="about-drawer-about" class="about-page-drawer active">
       <div class="grid-row">
-        <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic">
+        <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic post-copy">
           <?php the_content(); ?>
         </div>
       </div>

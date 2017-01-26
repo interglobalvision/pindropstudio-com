@@ -38,9 +38,10 @@
 <div class="grid-row margin-bottom-mid">
   <div class="grid-item- item-s-12 item-m-8 offset-m-2">
     <h2 class="text-align-center margin-bottom-small"><?php the_title(); ?></h2>
+    <div class="post-copy">
+      <?php the_content(); ?>
+    </div>
     <?php
-      the_content();
-
       if ($booking) {
     ?>
         <div class="margin-top-basic text-align-center"><a href="<?php echo $booking; ?>" class="link-button" target="_blank" rel="noopener">Book Here</a></div>
