@@ -17,6 +17,7 @@
           <li><a href="<?php echo home_url('about'); ?>">About</a></li>
           <li><a href="<?php echo home_url('people'); ?>">People</a></li>
           <li><a href="<?php echo home_url('partners'); ?>">Partners</a></li>
+          <li><a href="<?php echo home_url('contact'); ?>">Contact</a></li>
           <li><a href="<?php echo home_url('credits'); ?>">Credits</a></li>
         </ul>
         <ul id="footer-social-menu" class="footer-menu u-inline-list margin-bottom-mid">
