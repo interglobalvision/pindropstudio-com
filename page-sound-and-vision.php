@@ -16,12 +16,15 @@ $luminary = get_query_var('luminary');
         <div class="grid-item item-s-12">
           <ul id="luminaries-sort-list">
 <?php
+$exclude_category = get_category_by_slug('luminary-without-media');
+
 $luminaries = new WP_Query(array(
   'post_type' => 'luminaries',
   'posts_per_page' => -1,
   'order' => 'ASC',
   'orderby' => 'meta_value',
-  'meta_key' => '_igv_surname'
+  'meta_key' => '_igv_surname',
+  'category__not_in' => $exclude_category->ID,
 ));
 
 if ($luminaries->have_posts()) {
