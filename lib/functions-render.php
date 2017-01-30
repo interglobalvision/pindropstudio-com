@@ -77,24 +77,26 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
 
   $link = false;
 
-  if ($link) {
-    $link = '<a href="' . get_permalink($link) . '" class="link-button font-style-micro">Read More</a>';
+  if ($link_id) {
+    $link = '<a href="' . get_permalink($link_id) . '">';
   } else {
-    $link = '<a href="' . $link_external . '" class="link-button font-style-micro" target="_blank" rel="noopener">Read More</a>';
+    $link = '<a href="' . $link_external . '" target="_blank" rel="noopener">';
   }
 ?>
 <div class="grid-item item-s-12 wide-size-ad text-align-center">
-  <?php echo wp_get_attachment_image($image_id, 'l-12-wide-ad'); ?>
-  <h2 class="wide-ad-text font-style-shadow"><?php echo $text; ?></h2>
-  <?php
-    if ($link) {
-  ?>
-  <div class="wide-ad-link-holder">
-    <?php echo $link; ?>
-  </div>
-  <?php
-    }
-  ?>
+  <?php echo $link; ?>
+    <?php echo wp_get_attachment_image($image_id, 'l-12-wide-ad'); ?>
+    <h2 class="wide-ad-text font-style-shadow"><?php echo $text; ?></h2>
+    <?php
+      if ($link) {
+    ?>
+    <div class="wide-ad-link-holder">
+      <span class="link-button font-style-micro">Read More</span>
+    </div>
+    <?php
+      }
+    ?>
+  </a>
 </div>
 <?php
 }
