@@ -2,6 +2,17 @@
 
 // Custom filters (like pre_get_posts etc)
 
+// "quotes" to <em>s
+function quotes_to_ems( $title ) {
+
+  $title = str_replace('&#8220;', '<em>', $title);
+  $title = str_replace('&#8221;', '</em>', $title);
+
+  return $title;
+
+}
+add_filter( 'the_title', 'quotes_to_ems' );
+
 // change Private text
 function remove_private_prefix($title) {
 	$title = str_replace('Private: ', '', $title);
