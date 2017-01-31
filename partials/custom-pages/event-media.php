@@ -28,7 +28,7 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
 ?>>
 <div class="card">
   <?php
-    if ($members_only) {
+    if ($members_only || !$soundcloud_url && !$vimeo_id) {
   ?>
   <div class="margin-bottom-small">
     <?php the_post_thumbnail('l-4-full', array('class' => 'u-block')); ?>
