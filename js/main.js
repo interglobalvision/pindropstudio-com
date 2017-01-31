@@ -312,6 +312,10 @@ Site.Drawers.About = {
 
       $('.about-page-drawer.active').removeClass('active');
       $('#about-drawer-' + target).addClass('active');
+
+      if (target === 'people' && Site.Shuffle.shuffleInstances) {
+        Site.Shuffle.update();
+      }
     });
   }
 };
