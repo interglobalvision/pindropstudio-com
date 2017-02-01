@@ -59,20 +59,54 @@ get_header();
       <div class="shuffle-container grid-row hidden">
     <?php
       $overrides = IGV_get_option('_igv_live_options', '_igv_override_events');
-      $posts = 5;
+      $total_posts = 5;
+      $posts_needed = $total_posts;
       $not_in = array();
 
       if ($overrides) {
         $overrides = explode(', ', $overrides);
 
-        $posts = $posts - count($overrides);
+        $posts_needed = $posts_needed - count($overrides);
         $not_in = $overrides;
       }
 
-      $past_args = array(
+      pr($posts_needed);
+
+      if ($posts_needed > 0) {
+
+        $past_args = array(
+          'post_type' => 'event',
+          'posts_per_page' => $posts_needed,
+          'post__not_in' => $not_in,
+
+          'meta_query' => array(
+            array(
+              'key'     => '_igv_event_datetime',
+              'value'   => $midnight_timestamp,
+              'type'    => 'numeric',
+              'compare' => '<',
+            ),
+          ),
+        );
+
+        $past_events = get_posts($past_args);
+
+        $past_event_ids = array_map('array_map_filter_ids', $past_events);
+
+        if ($overrides) {
+          $past_event_ids = array_merge($overrides, $past_event_ids);
+        }
+
+      } else {
+
+        $past_event_ids = $overrides;
+
+      }
+
+      $past_events = new WP_Query(array(
         'post_type' => 'event',
-        'posts_per_page' => $posts,
-        'post__not_in' => $not_in,
+        'posts_per_page' => $total_posts,
+        'post__in' => $past_event_ids,
 
         'meta_query' => array(
           array(
@@ -82,19 +116,6 @@ get_header();
             'compare' => '<',
           ),
         ),
-      );
-
-      $past_events = get_posts($past_args);
-
-      $past_event_ids = array_map('array_map_filter_ids', $past_events);
-
-      if ($overrides) {
-        $past_event_ids = array_merge($overrides, $past_event_ids);
-      }
-
-      $past_events = new WP_Query(array(
-        'post_type' => 'event',
-        'post__in' => $past_event_ids,
       ));
 
       if ($past_events->have_posts()) {
