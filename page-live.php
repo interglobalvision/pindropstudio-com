@@ -51,10 +51,12 @@ get_header();
     ?>
 
     <div class="grid-row margin-top-large margin-bottom-basic">
-      <?php render_divider('Past Events'); ?>
+      <?php render_divider('<a href="' . home_url('event') . '">Past Events +</a>'); ?>
     </div>
 
-    <div class="grid-row justify-center margin-top-basic margin-bottom-basic">
+    <div class="shuffle-section media-items margin-top-basic margin-bottom-large">
+      <div class="shuffle-preloader"></div>
+      <div class="shuffle-container grid-row hidden">
     <?php
       $overrides = IGV_get_option('_igv_live_options', '_igv_override_events');
       $posts = 5;
@@ -98,17 +100,11 @@ get_header();
       if ($past_events->have_posts()) {
         while ($past_events->have_posts()) {
           $past_events->the_post();
-          get_template_part('partials/custom-pages/event-past');
+          get_template_part('partials/custom-pages/event-media');
         }
       }
     ?>
-    </div>
-
-    <div class="grid-row margin-top-basic margin-bottom-basic">
-      <?php
-        $content = '<a href="' . home_url('event') . '" class="link-button">More Past Events +</a>';
-        render_divider($content);
-      ?>
+      </div>
     </div>
 
     <?php
