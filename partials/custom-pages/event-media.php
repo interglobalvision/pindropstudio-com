@@ -5,6 +5,12 @@ if ($post->post_status === 'private') {
   $members_only = true;
 }
 
+$thumb_size = 'l-4-full';
+
+if (is_page('home')) {
+  $thumb_size = 'l-4-landscape';
+}
+
 $time = get_post_meta($post->ID, '_igv_event_datetime', true);
 $time_moment = new \Moment\Moment('@' . $time);
 
@@ -31,7 +37,7 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
     if ($members_only) {
   ?>
   <div class="margin-bottom-small">
-    <?php the_post_thumbnail('l-4-full', array('class' => 'u-block')); ?>
+    <?php the_post_thumbnail($thumb_size, array('class' => 'u-block')); ?>
   </div>
   <?php
     } else {
@@ -48,7 +54,7 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
       ?></div>
       </div>
     </div>
-    <?php the_post_thumbnail('l-4-full', array('class' => 'media-item-image')); ?>
+    <?php the_post_thumbnail($thumb_size, array('class' => 'media-item-image')); ?>
   </div>
 
   <?php
