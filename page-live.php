@@ -70,8 +70,6 @@ get_header();
         $not_in = $overrides;
       }
 
-      pr($posts_needed);
-
       if ($posts_needed > 0) {
 
         $past_args = array(
