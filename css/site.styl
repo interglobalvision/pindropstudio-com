@@ -399,7 +399,7 @@ grid(96%, $gutter, s)
 
 space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-font-sizes($font-size-basic, .8)
+font-sizes($font-size-basic, .65)
 
 @import 'responsive/mobile'
 
@@ -420,7 +420,7 @@ font-sizes($font-size-basic, .8)
 
   grid(680px, $gutter, m)
 
-  font-sizes($font-size-basic, .9)
+  font-sizes($font-size-basic, .7)
 
   .mobile-only
     display: none
@@ -429,7 +429,11 @@ font-sizes($font-size-basic, .8)
 
 @media screen and (min-width: 860px)
 
+  $font-size-basic = 16px
+
   grid(750px, false, m)
+
+  font-sizes($font-size-basic, .85)
 
 @media screen and (min-width: 1024px)
 
@@ -448,7 +452,7 @@ font-sizes($font-size-basic, .8)
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-  font-sizes($font-size-basic)
+  font-sizes($font-size-basic, .9)
 
   .desktop-only
     display: initial
@@ -457,7 +461,11 @@ font-sizes($font-size-basic, .8)
 
 @media screen and (min-width: 1280px)
 
+  $font-size-basic = 16px
+
   grid(1100px)
+
+  font-sizes($font-size-basic)
 
 @media screen and (min-width: 1366px)
 
