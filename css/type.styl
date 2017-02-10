@@ -146,16 +146,35 @@ font-sizes($size-basic = 16px, $modulator = 1)
     .instruction, #extensions_message, .validation_message
       font-size: $size-basic * .6875
 
+  $size-h1 = $size-basic * (2.875 * $modulator)
+  $size-h2 = $size-basic * (2 * $modulator)
+  $size-h3 = $size-basic * (1.5 * $modulator)
+
   h1, .font-size-h1
-    font-size: $size-basic * (2.875 * $modulator)
+    if $size-h1 > ($size-basic + 1px)
+      font-size: $size-h1
+    else
+      font-size: ($size-basic + 1px)
+
+  h2, .font-size-h2
+    if $size-h2 > ($size-basic + 1px)
+      font-size: $size-h2
+    else
+      font-size: ($size-basic + 1px)
+
+  h3, .font-size-h3
+    if $size-h3 > ($size-basic + 1px)
+      font-size: $size-h3
+    else
+      font-size: ($size-basic + 1px)
+
+  h1, .font-size-h1
     line-height: 1.2
 
   h2, .font-size-h2
-    font-size: $size-basic * (2 * $modulator)
     line-height: 1.1875
 
   h3, .font-size-h3
-    font-size: $size-basic * (1.5 * $modulator)
     line-height: 1.166666667
 
   .font-size-big-number

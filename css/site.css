@@ -1890,21 +1890,30 @@ html {
 }
 h1,
 .font-size-h1 {
-  font-size: 36.800000000000004px;
+  font-size: 29.900000000000002px;
+}
+h2,
+.font-size-h2 {
+  font-size: 20.8px;
+}
+h3,
+.font-size-h3 {
+  font-size: 17px;
+}
+h1,
+.font-size-h1 {
   line-height: 1.2;
 }
 h2,
 .font-size-h2 {
-  font-size: 25.6px;
   line-height: 1.1875;
 }
 h3,
 .font-size-h3 {
-  font-size: 19.200000000000003px;
   line-height: 1.166666667;
 }
 .font-size-big-number {
-  font-size: 72px;
+  font-size: 58.5px;
   line-height: 0.866666667;
 }
 input,
@@ -2412,21 +2421,30 @@ input[type=radio] {
   }
   h1,
   .font-size-h1 {
-    font-size: 38.8125px;
+    font-size: 30.187499999999996px;
+  }
+  h2,
+  .font-size-h2 {
+    font-size: 21px;
+  }
+  h3,
+  .font-size-h3 {
+    font-size: 16px;
+  }
+  h1,
+  .font-size-h1 {
     line-height: 1.2;
   }
   h2,
   .font-size-h2 {
-    font-size: 27px;
     line-height: 1.1875;
   }
   h3,
   .font-size-h3 {
-    font-size: 20.25px;
     line-height: 1.166666667;
   }
   .font-size-big-number {
-    font-size: 75.9375px;
+    font-size: 59.06249999999999px;
     line-height: 0.866666667;
   }
   .mobile-only {
@@ -2577,6 +2595,45 @@ input[type=radio] {
 @media screen and (min-width: 860px) {
   .container {
     width: 750px;
+  }
+  html {
+    font-size: 16px;
+  }
+  .font-size-small {
+    font-size: 11px;
+  }
+  .gfield .instruction,
+  .gfield #extensions_message,
+  .gfield .validation_message {
+    font-size: 11px;
+  }
+  h1,
+  .font-size-h1 {
+    font-size: 39.1px;
+  }
+  h2,
+  .font-size-h2 {
+    font-size: 27.2px;
+  }
+  h3,
+  .font-size-h3 {
+    font-size: 20.4px;
+  }
+  h1,
+  .font-size-h1 {
+    line-height: 1.2;
+  }
+  h2,
+  .font-size-h2 {
+    line-height: 1.1875;
+  }
+  h3,
+  .font-size-h3 {
+    line-height: 1.166666667;
+  }
+  .font-size-big-number {
+    font-size: 76.5px;
+    line-height: 0.866666667;
   }
 }
 @media screen and (min-width: 1024px) {
@@ -2852,21 +2909,30 @@ input[type=radio] {
   }
   h1,
   .font-size-h1 {
-    font-size: 46px;
+    font-size: 41.4px;
+  }
+  h2,
+  .font-size-h2 {
+    font-size: 28.8px;
+  }
+  h3,
+  .font-size-h3 {
+    font-size: 21.6px;
+  }
+  h1,
+  .font-size-h1 {
     line-height: 1.2;
   }
   h2,
   .font-size-h2 {
-    font-size: 32px;
     line-height: 1.1875;
   }
   h3,
   .font-size-h3 {
-    font-size: 24px;
     line-height: 1.166666667;
   }
   .font-size-big-number {
-    font-size: 90px;
+    font-size: 81px;
     line-height: 0.866666667;
   }
   .desktop-only {
@@ -3016,6 +3082,45 @@ input[type=radio] {
 @media screen and (min-width: 1280px) {
   .container {
     width: 1100px;
+  }
+  html {
+    font-size: 16px;
+  }
+  .font-size-small {
+    font-size: 11px;
+  }
+  .gfield .instruction,
+  .gfield #extensions_message,
+  .gfield .validation_message {
+    font-size: 11px;
+  }
+  h1,
+  .font-size-h1 {
+    font-size: 46px;
+  }
+  h2,
+  .font-size-h2 {
+    font-size: 32px;
+  }
+  h3,
+  .font-size-h3 {
+    font-size: 24px;
+  }
+  h1,
+  .font-size-h1 {
+    line-height: 1.2;
+  }
+  h2,
+  .font-size-h2 {
+    line-height: 1.1875;
+  }
+  h3,
+  .font-size-h3 {
+    line-height: 1.166666667;
+  }
+  .font-size-big-number {
+    font-size: 90px;
+    line-height: 0.866666667;
   }
 }
 @media screen and (min-width: 1366px) {
