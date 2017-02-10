@@ -1,6 +1,7 @@
 // GRID
 
 .container
+  width: 96%
   margin: 0 auto
 
 .grid-row
@@ -109,7 +110,10 @@ grid($width = false, $gutter = false, $size = false, $cols = 12)
 
   if $width
     .container
-      width: $width
+      max-width: $width
+  else
+    .container
+      max-width: initial
 
   if $gutter
     .grid-item, .shuffle-item

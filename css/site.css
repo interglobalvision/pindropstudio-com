@@ -954,6 +954,7 @@ button.swiper-pagination-bullet {
   }
 }
 .container {
+  width: 96%;
   margin: 0 auto;
 }
 .grid-row {
@@ -1619,7 +1620,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   max-height: 80vh;
 }
 .container {
-  width: 96%;
+  max-width: 420px;
 }
 .grid-item,
 .shuffle-item {
@@ -2222,7 +2223,7 @@ input[type=radio] {
     padding-bottom: 70px;
   }
   .container {
-    width: 680px;
+    max-width: initial;
   }
   .grid-item,
   .shuffle-item {
@@ -2594,7 +2595,7 @@ input[type=radio] {
 }
 @media screen and (min-width: 860px) {
   .container {
-    width: 750px;
+    max-width: initial;
   }
   html {
     font-size: 16px;
@@ -2638,7 +2639,7 @@ input[type=radio] {
 }
 @media screen and (min-width: 1024px) {
   .container {
-    width: 900px;
+    max-width: initial;
   }
   .grid-item,
   .shuffle-item {
@@ -3080,9 +3081,6 @@ input[type=radio] {
   }
 }
 @media screen and (min-width: 1280px) {
-  .container {
-    width: 1100px;
-  }
   html {
     font-size: 16px;
   }
@@ -3123,13 +3121,8 @@ input[type=radio] {
     line-height: 0.866666667;
   }
 }
-@media screen and (min-width: 1366px) {
-  .container {
-    width: 1300px;
-  }
-}
 @media screen and (min-width: 1600px) {
   .container {
-    width: 1400px;
+    max-width: 1400px;
   }
 }
