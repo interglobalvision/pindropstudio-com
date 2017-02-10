@@ -11,7 +11,7 @@
     <a href="<?php the_permalink(); ?>">
       <h3 class="margin-bottom-tiny js-fix-widows"><?php
       if (!empty($title_override) && is_page(('home'))) {
-        echo $title_override;
+        echo apply_filters('the_title', $title_override);
       } else {
         the_title();
       } ?></h3>
