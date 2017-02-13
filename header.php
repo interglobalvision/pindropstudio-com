@@ -41,7 +41,14 @@
           <li><a <?php echo menuActiveClasses('sound-and-vision', 'page'); ?>href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>
           <li><a <?php echo menuActiveClasses('luminaries', 'postype'); ?>href="<?php echo home_url('luminaries'); ?>">Luminaries</a></li>
           <li><a <?php echo menuActiveClasses('post', 'postype'); ?>href="<?php echo home_url('news'); ?>">News</a></li>
-          <li><a href="">Shop</a></li>
+          <?php
+            $shop_link = IGV_get_option('_igv_site_options', '_igv_shop_link');
+            if ($shop_link) {
+          ?>
+          <li><a href="<?php echo $shop_link; ?>">Shop</a></li>
+          <?php
+            }
+          ?>
           <li><a <?php echo menuActiveClasses('submit', 'page'); ?>href="<?php echo home_url('submit'); ?>">Submit</a></li>
           <li><a <?php echo menuActiveClasses('about', 'page'); ?>href="<?php echo home_url('about'); ?>">About</a></li>
           <li><a href="<?php echo home_url('members-only'); ?>">Members</a></li>
