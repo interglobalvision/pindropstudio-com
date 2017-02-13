@@ -24,7 +24,7 @@ $luminaries = new WP_Query(array(
   'order' => 'ASC',
   'orderby' => 'meta_value',
   'meta_key' => '_igv_surname',
-  'category__not_in' => $exclude_category->ID,
+  'category__not_in' => $exclude_category->term_id,
 ));
 
 if ($luminaries->have_posts()) {
