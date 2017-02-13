@@ -4,13 +4,25 @@ $prefix = '_igv_';
 $suffix = '_options';
 
 $page_key = $prefix . 'site' . $suffix;
-$page_title = 'Meta, Social & SEO Options';
+$page_title = 'Misc, Meta, Social & SEO Options';
 $metabox = array(
   'id'         => $page_key, // id used as tab page slug, must be unique
   'title'      => $page_title,
   'show_on'    => array( 'key' => 'options-page', 'value' => array( $page_key ), ), //value must be same as id
   'show_names' => true,
   'fields'     => array(
+    array(
+      'name' => __( 'Misc', 'cmb2' ),
+      'desc' => __( '...', 'cmb2' ),
+      'id'   => $prefix . 'mic_title',
+      'type' => 'title',
+    ),
+    array(
+      'name' => __( 'Shop Link', 'IGV' ),
+      'desc' => __( 'link for the Shop item in the header. (If not set link will not show)', 'IGV' ),
+      'id'   => $prefix . 'shop_link',
+      'type' => 'text_url',
+    ),
     array(
       'name' => __( 'Social Media', 'cmb2' ),
       'desc' => __( 'urls and accounts for different social media platforms. For use in menus and metadata', 'cmb2' ),
