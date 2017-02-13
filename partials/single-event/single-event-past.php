@@ -1,4 +1,5 @@
 <?php
+$hide_image = get_post_meta($post->ID, '_igv_no_image', true);
 $gallery = get_post_meta($post->ID, '_igv_gallery', true);
 $vimeo_id = get_post_meta($post->ID, '_igv_vimeo_id', true);
 $soundcloud_url = get_post_meta($post->ID, '_igv_soundcloud_url', true);
@@ -11,6 +12,9 @@ if ($time_meta) {
 
 ?>
 <article id="page" <?php post_class('container'); ?>>
+<?php
+  if (!$hide_image) {
+?>
 <div class="grid-row margin-bottom-basic">
   <div class="grid-item item-s-12 item-m-10 offset-m-1 item-l-8 offset-l-2 text-align-center">
     <?php
@@ -21,6 +25,9 @@ if ($time_meta) {
       } ?>
   </div>
 </div>
+<?php
+  }
+?>
 <div class="grid-row">
   <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic">
 
