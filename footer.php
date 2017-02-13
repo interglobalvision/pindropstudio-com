@@ -43,7 +43,7 @@
           }
         ?>
         </ul>
-        T&C's
+        <a href="<?php echo home_url('terms-and-conditions'); ?>">T&C's</a>
       </div>
     </div>
   </footer>
