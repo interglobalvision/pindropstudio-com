@@ -38,7 +38,7 @@ function my_gallery_shortcode($attr) {
     'id'         => $post->ID,
     'itemtag'    => 'li',
     'icontag'    => 'li',
-    'captiontag' => 'span',
+    'captiontag' => 'div',
     'columns'    => 3,
     'size'       => 'l-8',
     'include'    => '',
