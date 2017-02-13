@@ -101,6 +101,12 @@ function igv_cmb_metaboxes() {
   ) );
 
   $event_metabox->add_field( array(
+    'name'    => 'Hide image/gallery at top of post',
+    'id'      => $prefix . 'no_image',
+    'type'    => 'checkbox',
+  ) );
+
+  $event_metabox->add_field( array(
     'name'    => 'City / Location',
     'id'      => $prefix . 'event_location',
     'type'    => 'text',
