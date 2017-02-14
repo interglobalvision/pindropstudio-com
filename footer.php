@@ -5,7 +5,7 @@
           <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-pin.svg'); ?>
         </div>
         <ul class="footer-menu u-inline-list">
-          <li><a href="<?php echo home_url('live'); ?>">Live</li></li>
+          <li><a href="<?php echo home_url('live'); ?>">Live</a></li>
           <li><a href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>
           <li><a href="<?php echo home_url('luminaries'); ?>">Luminaries</a></li>
           <li>Shop</li>
