@@ -1670,6 +1670,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-1 {
   width: 8.333333333333334%;
+  max-width: 8.333333333333334%;
 }
 .grid-column > .item-s-1 {
   height: 8.333333333333334%;
@@ -1682,6 +1683,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-2 {
   width: 16.666666666666668%;
+  max-width: 16.666666666666668%;
 }
 .grid-column > .item-s-2 {
   height: 16.666666666666668%;
@@ -1694,6 +1696,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-3 {
   width: 25%;
+  max-width: 25%;
 }
 .grid-column > .item-s-3 {
   height: 25%;
@@ -1706,6 +1709,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-4 {
   width: 33.333333333333336%;
+  max-width: 33.333333333333336%;
 }
 .grid-column > .item-s-4 {
   height: 33.333333333333336%;
@@ -1718,6 +1722,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-5 {
   width: 41.66666666666667%;
+  max-width: 41.66666666666667%;
 }
 .grid-column > .item-s-5 {
   height: 41.66666666666667%;
@@ -1730,6 +1735,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-6 {
   width: 50%;
+  max-width: 50%;
 }
 .grid-column > .item-s-6 {
   height: 50%;
@@ -1742,6 +1748,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-7 {
   width: 58.333333333333336%;
+  max-width: 58.333333333333336%;
 }
 .grid-column > .item-s-7 {
   height: 58.333333333333336%;
@@ -1754,6 +1761,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-8 {
   width: 66.66666666666667%;
+  max-width: 66.66666666666667%;
 }
 .grid-column > .item-s-8 {
   height: 66.66666666666667%;
@@ -1766,6 +1774,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-9 {
   width: 75%;
+  max-width: 75%;
 }
 .grid-column > .item-s-9 {
   height: 75%;
@@ -1778,6 +1787,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-10 {
   width: 83.33333333333334%;
+  max-width: 83.33333333333334%;
 }
 .grid-column > .item-s-10 {
   height: 83.33333333333334%;
@@ -1790,6 +1800,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-11 {
   width: 91.66666666666667%;
+  max-width: 91.66666666666667%;
 }
 .grid-column > .item-s-11 {
   height: 91.66666666666667%;
@@ -1802,6 +1813,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .grid-row > .item-s-12 {
   width: 100%;
+  max-width: 100%;
 }
 .grid-column > .item-s-12 {
   height: 100%;
@@ -2273,6 +2285,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-1 {
     width: 8.333333333333334%;
+    max-width: 8.333333333333334%;
   }
   .grid-column > .item-m-1 {
     height: 8.333333333333334%;
@@ -2285,6 +2298,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-2 {
     width: 16.666666666666668%;
+    max-width: 16.666666666666668%;
   }
   .grid-column > .item-m-2 {
     height: 16.666666666666668%;
@@ -2297,6 +2311,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-3 {
     width: 25%;
+    max-width: 25%;
   }
   .grid-column > .item-m-3 {
     height: 25%;
@@ -2309,6 +2324,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-4 {
     width: 33.333333333333336%;
+    max-width: 33.333333333333336%;
   }
   .grid-column > .item-m-4 {
     height: 33.333333333333336%;
@@ -2321,6 +2337,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-5 {
     width: 41.66666666666667%;
+    max-width: 41.66666666666667%;
   }
   .grid-column > .item-m-5 {
     height: 41.66666666666667%;
@@ -2333,6 +2350,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-6 {
     width: 50%;
+    max-width: 50%;
   }
   .grid-column > .item-m-6 {
     height: 50%;
@@ -2345,6 +2363,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-7 {
     width: 58.333333333333336%;
+    max-width: 58.333333333333336%;
   }
   .grid-column > .item-m-7 {
     height: 58.333333333333336%;
@@ -2357,6 +2376,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-8 {
     width: 66.66666666666667%;
+    max-width: 66.66666666666667%;
   }
   .grid-column > .item-m-8 {
     height: 66.66666666666667%;
@@ -2369,6 +2389,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-9 {
     width: 75%;
+    max-width: 75%;
   }
   .grid-column > .item-m-9 {
     height: 75%;
@@ -2381,6 +2402,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-10 {
     width: 83.33333333333334%;
+    max-width: 83.33333333333334%;
   }
   .grid-column > .item-m-10 {
     height: 83.33333333333334%;
@@ -2393,6 +2415,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-11 {
     width: 91.66666666666667%;
+    max-width: 91.66666666666667%;
   }
   .grid-column > .item-m-11 {
     height: 91.66666666666667%;
@@ -2405,6 +2428,7 @@ input[type=radio] {
   }
   .grid-row > .item-m-12 {
     width: 100%;
+    max-width: 100%;
   }
   .grid-column > .item-m-12 {
     height: 100%;
@@ -2689,6 +2713,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-1 {
     width: 8.333333333333334%;
+    max-width: 8.333333333333334%;
   }
   .grid-column > .item-l-1 {
     height: 8.333333333333334%;
@@ -2701,6 +2726,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-2 {
     width: 16.666666666666668%;
+    max-width: 16.666666666666668%;
   }
   .grid-column > .item-l-2 {
     height: 16.666666666666668%;
@@ -2713,6 +2739,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-3 {
     width: 25%;
+    max-width: 25%;
   }
   .grid-column > .item-l-3 {
     height: 25%;
@@ -2725,6 +2752,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-4 {
     width: 33.333333333333336%;
+    max-width: 33.333333333333336%;
   }
   .grid-column > .item-l-4 {
     height: 33.333333333333336%;
@@ -2737,6 +2765,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-5 {
     width: 41.66666666666667%;
+    max-width: 41.66666666666667%;
   }
   .grid-column > .item-l-5 {
     height: 41.66666666666667%;
@@ -2749,6 +2778,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-6 {
     width: 50%;
+    max-width: 50%;
   }
   .grid-column > .item-l-6 {
     height: 50%;
@@ -2761,6 +2791,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-7 {
     width: 58.333333333333336%;
+    max-width: 58.333333333333336%;
   }
   .grid-column > .item-l-7 {
     height: 58.333333333333336%;
@@ -2773,6 +2804,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-8 {
     width: 66.66666666666667%;
+    max-width: 66.66666666666667%;
   }
   .grid-column > .item-l-8 {
     height: 66.66666666666667%;
@@ -2785,6 +2817,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-9 {
     width: 75%;
+    max-width: 75%;
   }
   .grid-column > .item-l-9 {
     height: 75%;
@@ -2797,6 +2830,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-10 {
     width: 83.33333333333334%;
+    max-width: 83.33333333333334%;
   }
   .grid-column > .item-l-10 {
     height: 83.33333333333334%;
@@ -2809,6 +2843,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-11 {
     width: 91.66666666666667%;
+    max-width: 91.66666666666667%;
   }
   .grid-column > .item-l-11 {
     height: 91.66666666666667%;
@@ -2821,6 +2856,7 @@ input[type=radio] {
   }
   .grid-row > .item-l-12 {
     width: 100%;
+    max-width: 100%;
   }
   .grid-column > .item-l-12 {
     height: 100%;
