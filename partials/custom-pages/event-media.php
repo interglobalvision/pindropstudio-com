@@ -45,13 +45,9 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
   <div class="media-item-image-holder u-pointer margin-bottom-small">
     <div class="media-item-play-holder">
       <div class="media-item-play">
-        <div class="media-item-play-text"><?php
-          if ($vimeo_id) {
-            echo 'Watch';
-          } else {
-            echo 'Play';
-          }
-      ?></div>
+        <div class="media-item-play-text">
+          Play
+        </div>
       </div>
     </div>
     <?php the_post_thumbnail($thumb_size, array('class' => 'media-item-image')); ?>
