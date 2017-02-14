@@ -114,7 +114,7 @@ function render_tall_ad($image, $text, $subtitle, $link_internal, $link_external
   <div class="card card-big text-align-center">
 <?php
   if ($image) {
-    echo wp_get_attachment_image($image, 'l-4', false, array('class' => 'margin-top-small margin-bottom-basic'));
+    echo wp_get_attachment_image($image, 'l-4-tall-ad', false, array('class' => 'margin-top-small margin-bottom-basic'));
   }
 
   if ($subtitle) {

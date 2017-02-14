@@ -15,6 +15,7 @@ if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'l-4-square', 467, 467, true );
   add_image_size( 'l-4-landscape', 467, 311, true ); // 467 @ .666666667 = 311.33333333
   add_image_size( 'l-4-full', 467, 9999, false );
+  add_image_size( 'l-4-tall-ad', 467, 320, false );
 
   add_image_size( 'l-5-square', 542, 542, true ); // 584
 
