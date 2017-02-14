@@ -8,7 +8,7 @@ if ($post->post_status === 'private') {
 $thumb_size = 'l-4-full';
 
 if (is_page('home')) {
-  $thumb_size = 'l-4-landscape';
+  $thumb_size = 'l-4-square';
 }
 
 $time = get_post_meta($post->ID, '_igv_event_datetime', true);

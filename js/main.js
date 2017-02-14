@@ -334,12 +334,13 @@ Site.Media = {
       $('.media-item-image-holder').on({
         'click': function() {
           var $target = $(this).parents('.media-item');
+          var targetHeight = $target.find('.media-item-image').height();
 
           _this.unloadActive();
 
           $target.addClass('active');
 
-          _this.loadMedia($target);
+          _this.loadMedia($target, targetHeight);
 
           Site.Shuffle.update();
 
@@ -369,14 +370,14 @@ Site.Media = {
     $active.removeClass('active');
   },
 
-  loadMedia: function($item) {
+  loadMedia: function($item, targetHeight) {
     var _this = this;
     var data = $item.data();
 
     if (data.vimeo) {
       _this.loadVideo($item, data.vimeo);
     } else if (data.soundcloud) {
-      _this.loadAudio($item, data.soundcloud);
+      _this.loadAudio($item, data.soundcloud, targetHeight);
     }
   },
 
@@ -388,12 +389,12 @@ Site.Media = {
     $item.find('.media-item-image-holder').append(insert);
   },
 
-  loadAudio: function($item, soundcloudUrl) {
+  loadAudio: function($item, soundcloudUrl, targetHeight) {
     var _this = this;
 
     soundcloudUrl = _this.makeURL(soundcloudUrl);
 
-    var insert = '<div id="media-item-audio-embed"><iframe width="100%" height="400" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + soundcloudUrl + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
+    var insert = '<div id="media-item-audio-embed" style="height: ' + targetHeight + 'px;"><iframe width="100%" height="' + targetHeight + '" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=' + soundcloudUrl + '&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe></div>';
 
     $item.addClass('playing-audio');
     $item.find('.media-item-image-holder').append(insert);

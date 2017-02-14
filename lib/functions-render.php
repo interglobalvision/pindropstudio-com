@@ -104,10 +104,17 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
 function render_tall_ad($image, $text, $subtitle, $link_internal, $link_external, $link_text) {
 ?>
 <div class="grid-item item-s-12 item-m-6">
+<?php
+  if ($link_internal && $link_text) {
+    echo '<a href="' . get_permalink($link_internal) . '">';
+  } else if ($link_external && $link_text) {
+    echo '<a href="' . $link_external . '">';
+  }
+?>
   <div class="card card-big text-align-center">
 <?php
   if ($image) {
-    echo wp_get_attachment_image($image, 'l-4', false, array('class' => 'margin-top-small margin-bottom-basic'));
+    echo wp_get_attachment_image($image, 'l-4-tall-ad', false, array('class' => 'margin-top-small margin-bottom-basic'));
   }
 
   if ($subtitle) {
@@ -118,13 +125,16 @@ function render_tall_ad($image, $text, $subtitle, $link_internal, $link_external
     echo '<h3 class="tall-ad-title margin-bottom-small">' . $text . '</h3>';
   }
 
-  if ($link_internal && $link_text) {
-    echo '<a href="' . get_permalink($link_internal) . '" class="link-button">' . $link_text . '</a>';
-  } else if ($link_external && $link_text) {
-    echo '<a href="' . $link_external . '" class="link-button">' . $link_text . '</a>';
+  if (($link_internal && $link_text) || ($link_external && $link_text)) {
+    echo '<span class="link-button">' . $link_text . '</span>';
   }
 ?>
   </div>
+<?php
+  if (($link_internal && $link_text) || ($link_external && $link_text)) {
+    echo '</a>';
+  }
+?>
 </div>
 <?php
 }
