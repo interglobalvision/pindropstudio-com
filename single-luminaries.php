@@ -21,6 +21,9 @@ if( have_posts() ) {
         <div class="post-copy">
           <?php the_content(); ?>
         </div>
+        <div class="margin-top-small margin-bottom-small">
+          <?php render_share(get_the_permalink()); ?>
+        </div>
       </div>
     </div>
     <?php

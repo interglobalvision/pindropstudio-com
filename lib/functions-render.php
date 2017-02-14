@@ -5,7 +5,7 @@
 function render_share($url) {
   $url = urlencode($url);
 ?>
-<div class="share-widget">
+<div class="share-widget font-size-small">
   <span class="link-button share-trigger">Share</span>
   <ul class="button-list share-list">
     <li><a href="http://www.facebook.com/sharer/sharer.php?u=<?php echo $url; ?>" target="_blank" rel="noreferrer">Facebook</a></li>
