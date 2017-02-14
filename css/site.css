@@ -1493,9 +1493,15 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .drawer-content {
   display: none;
 }
+.button-list .media-stop-button {
+  display: none;
+}
 .grid-row .media-item.active .media-item-image,
 .grid-row .media-item.active .media-item-play-holder {
   display: none;
+}
+.grid-row .media-item.active .media-stop-button {
+  display: initial;
 }
 .grid-row .media-item.playing-video {
   max-width: 100%;

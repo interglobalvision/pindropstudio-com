@@ -83,7 +83,10 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
   </a>
 
   <div class="text-align-center">
-    <a class="link-button font-size-small" href="<?php the_permalink(); ?>">Read More</a>
+    <ul class="button-list font-size-small">
+      <li><a href="<?php the_permalink(); ?>">Read More</a></li>
+      <li class="media-stop-button">Stop</li>
+    </ul>
   </div>
 </div>
 </article>

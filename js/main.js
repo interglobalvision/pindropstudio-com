@@ -350,6 +350,22 @@ Site.Media = {
           }, 200);
         }
       });
+
+      $('.media-stop-button').on({
+        'click': function() {
+          var $target = $(this).parents('.media-item');
+
+          _this.unloadActive();
+
+          Site.Shuffle.update();
+
+          clearTimeout(_this.scrollToTimeout);
+          _this.scrollToTimeout = setTimeout(function() {
+            zenscroll.to($target[0]);
+          }, 200);
+        }
+      });
+
     }
   },
 
