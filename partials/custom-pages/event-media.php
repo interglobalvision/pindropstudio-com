@@ -74,7 +74,7 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
       }
     ?></h4>
     <h3 class="margin-bottom-small text-align-center"><?php
-      if (!empty($title_override)) {
+      if (!empty($title_override) && !is_page('live')) {
         echo apply_filters('the_title', $title_override);
       } else {
         the_title();
