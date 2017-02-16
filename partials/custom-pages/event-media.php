@@ -46,7 +46,7 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
     <div class="media-item-play-holder">
       <div class="media-item-play">
         <div class="media-item-play-text">
-          Play
+          <span>Play</span>
         </div>
       </div>
     </div>
