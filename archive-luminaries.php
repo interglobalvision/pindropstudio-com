@@ -5,7 +5,7 @@ get_header();
 <main id="main-content">
   <section class="container">
     <div class="grid-row margin-bottom-small">
-      <?php render_divider('<div class="u-pointer"><span id="luminaries-sort-alphabetical">Sort by Luminary +</span><span id="luminaries-sort-order">Sort Original +</span></div>'); ?>
+      <?php render_divider('<div class="u-pointer"><span id="luminaries-sort-alphabetical">Sort Alphabetically +</span><span id="luminaries-sort-order">Sort Original +</span></div>'); ?>
     </div>
 
     <div id="alphabetical-drawer">

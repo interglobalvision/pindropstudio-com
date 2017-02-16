@@ -42,7 +42,7 @@ add_action('pre_get_posts','event_archive_query');
 
 // Show all posts on luminaries archive
 function luminaries_archive_query($query) {
-  if ($query->is_post_type_archive('luminaries') && is_archive() && !is_admin()) {
+  if ($query->is_post_type_archive('luminaries') && is_archive() && !is_admin() && $query->is_main_query()) {
     $query->set('posts_per_page', -1);
     $query->set('orderby', 'menu_order');
   }
