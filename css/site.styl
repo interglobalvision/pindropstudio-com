@@ -252,11 +252,17 @@ input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button
 
 // S&V PAGE
 
+.button-list
+  .media-stop-button
+    display: none
+
 .grid-row
   .media-item
     &.active
       .media-item-image, .media-item-play-holder
         display: none
+      .media-stop-button
+        display: initial
     &.playing-video
       max-width: 100%
       width: 100%
