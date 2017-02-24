@@ -1369,8 +1369,8 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   background-image: none;
 }
 .swiper-nav svg {
-  -webkit-filter: drop-shadow(0 0 5px #fff);
-          filter: drop-shadow(0 0 5px #fff);
+  -webkit-filter: drop-shadow(0 0 8px #373a3c);
+          filter: drop-shadow(0 0 8px #373a3c);
 }
 .swiper-button-prev {
   left: 0;
