@@ -1261,6 +1261,10 @@ a:visited {
 p a {
   text-decoration: underline;
 }
+.post-copy {
+  max-width: 620px;
+  margin: 0 auto;
+}
 .post-copy h1,
 .post-copy h2,
 .post-copy h3,

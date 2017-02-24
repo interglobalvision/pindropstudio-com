@@ -39,8 +39,10 @@ if( have_posts() ) {
         if (!empty($submission['_igv_submission_desc'])) {
       ?>
     <div class="grid-row u-flex-center">
-      <div class="grid-item item-s-12 item-m-8 margin-bottom-basic post-copy">
-        <?php echo apply_filters('the_content', $submission['_igv_submission_desc']); ?>
+      <div class="grid-item item-s-12 item-m-8 margin-bottom-basic">
+        <div class="post-copy">
+          <?php echo apply_filters('the_content', $submission['_igv_submission_desc']); ?>
+        </div>
       </div>
     </div>
       <?php
