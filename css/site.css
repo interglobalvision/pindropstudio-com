@@ -1597,6 +1597,21 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   border-color: transparent;
   background-color: rgba(62,62,62,0.2);
 }
+.tall-ad-image-wrapper {
+  position: relative;
+  padding-bottom: 52.9032258%;
+}
+.tall-ad-image-holder {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.tall-ad-image {
+  max-height: 100%;
+  width: auto;
+}
 .thumb-for-lightbox {
   position: relative;
 }
