@@ -43,7 +43,7 @@ get_header();
       <?php render_divider('<a href="' . home_url('live') . '">Forthcoming Live Events +</a>'); ?>
     </div>
 
-    <div class="grid-row justify-center margin-bottom-large">
+    <div class="grid-row justify-center margin-bottom-mid">
     <?php
         while ($forthcoming_events->have_posts()) {
           $forthcoming_events->the_post();
@@ -196,7 +196,7 @@ get_header();
 
       if ($ad2_text && $ad2_image_id) {
     ?>
-    <div class="grid-row margin-bottom-mid">
+    <div class="grid-row margin-bottom-basic">
       <?php render_ad($ad2_text, $ad2_image_id, $ad2_link, $ad2_link_external); ?>
     </div>
     <?php

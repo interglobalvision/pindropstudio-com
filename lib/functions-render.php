@@ -103,7 +103,7 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
 
 function render_tall_ad($image, $text, $subtitle, $link_internal, $link_external, $link_text) {
 ?>
-<div class="grid-item item-s-12 item-m-6">
+<div class="grid-item item-s-12 item-m-6 margin-bottom-small">
 <?php
   if ($link_internal && $link_text) {
     echo '<a href="' . get_permalink($link_internal) . '">';
