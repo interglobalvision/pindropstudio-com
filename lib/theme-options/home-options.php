@@ -53,6 +53,12 @@ $metabox = array(
           'id'   => $prefix . 'carousel_image_override',
           'type' => 'file',
         ),
+        array(
+          'name' => __( 'Link to media?', 'cmb2' ),
+          'desc' => __( '', 'cmb2' ),
+          'id'   => $prefix . 'link_media',
+          'type' => 'checkbox',
+        ),
       ),
     ),
 
