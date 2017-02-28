@@ -37,7 +37,7 @@ $metabox = array(
           'desc' => __( 'Pick a post', 'IGV' ),
           'id'   => $prefix . 'carousel_post_id',
           'type' => 'post_search_text',
-          'post_type' => array('post', 'event', 'luminaries'),
+          'post_type' => array('post', 'event', 'luminaries', 'page'),
           'select_behavior' => 'replace',
           'select_type' => 'radio',
         ),
