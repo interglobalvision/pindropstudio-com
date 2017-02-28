@@ -115,6 +115,12 @@ $metabox = array(
       'select_behavior' => 'replace',
       'select_type' => 'radio',
     ),
+    array(
+      'name' => __( 'Ad 1 Link to media?', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'ad1_link_media',
+      'type' => 'checkbox',
+    ),
      array(
       'name' => __( 'Ad 1 External Link', 'cmb2' ),
       'desc' => __( 'if linking outside of the website put the URL here', 'cmb2' ),
@@ -141,6 +147,12 @@ $metabox = array(
       'post_type'  => array('post', 'page', 'event', 'luminaries'),
       'select_behavior' => 'replace',
       'select_type' => 'radio',
+    ),
+    array(
+      'name' => __( 'Ad 2 Link to media?', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'ad2_link_media',
+      'type' => 'checkbox',
     ),
      array(
       'name' => __( 'Ad 2 External Link', 'cmb2' ),
@@ -189,13 +201,19 @@ $metabox = array(
       'select_behavior' => 'replace',
       'select_type' => 'radio',
     ),
+    array(
+      'name' => __( 'Ad 1 Link to media?', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'tall_ad1_link_media',
+      'type' => 'checkbox',
+    ),
      array(
       'name' => __( 'Ad 1 External Link', 'cmb2' ),
       'desc' => __( 'if linking outside of the website put the URL here', 'cmb2' ),
       'id'   => $prefix . 'tall_ad1_link_external',
       'type' => 'text_url',
     ),
-      array(
+    array(
       'name' => __( 'Ad 1 Button Text', 'cmb2' ),
       'desc' => __( '', 'cmb2' ),
       'id'   => $prefix . 'tall_ad1_button',
@@ -228,13 +246,19 @@ $metabox = array(
       'select_behavior' => 'replace',
       'select_type' => 'radio',
     ),
+    array(
+      'name' => __( 'Ad 2 Link to media?', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'tall_ad2_link_media',
+      'type' => 'checkbox',
+    ),
      array(
       'name' => __( 'Ad 2 External Link', 'cmb2' ),
       'desc' => __( 'if linking outside of the website put the URL here', 'cmb2' ),
       'id'   => $prefix . 'tall_ad2_link_external',
       'type' => 'text_url',
     ),
-      array(
+    array(
       'name' => __( 'Ad 2 Button Text', 'cmb2' ),
       'desc' => __( '', 'cmb2' ),
       'id'   => $prefix . 'tall_ad2_button',

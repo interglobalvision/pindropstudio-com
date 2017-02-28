@@ -70,7 +70,7 @@ function render_quote($text = null, $person = null, $luminary = null) {
 <?php
 }
 
-function render_ad($text = null, $image_id = null, $link_id = null, $link_external = null) {
+function render_ad($text = null, $image_id = null, $link_id = null, $autoplay = false, $link_external = null) {
   if ($text === null || $image_id === null) {
     return false;
   }
@@ -78,7 +78,12 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
   $link = false;
 
   if ($link_id) {
-    $link = '<a href="' . get_permalink($link_id) . '">';
+
+    if ($autoplay) {
+      $link = '<a href="' . get_permalink($link_id) . '/?autoplay">';
+    } else {
+      $link = '<a href="' . get_permalink($link_id) . '">';
+    }
   } else {
     $link = '<a href="' . $link_external . '" target="_blank" rel="noopener">';
   }
@@ -102,12 +107,16 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
 <?php
 }
 
-function render_tall_ad($image, $text, $subtitle, $link_internal, $link_external, $link_text) {
+function render_tall_ad($image, $text, $subtitle, $link_internal, $autoplay = false, $link_external, $link_text) {
 ?>
 <div class="grid-item item-s-12 item-m-6 margin-bottom-small">
 <?php
   if ($link_internal && $link_text) {
-    echo '<a href="' . get_permalink($link_internal) . '">';
+    if ($autoplay) {
+      echo '<a href="' . get_permalink($link_internal) . '?autoplay">';
+    } else {
+      echo '<a href="' . get_permalink($link_internal) . '">';
+    }
   } else if ($link_external && $link_text) {
     echo '<a href="' . $link_external . '">';
   }

@@ -58,12 +58,13 @@ get_header();
       $ad1_text = IGV_get_option('_igv_home_options', '_igv_ad1_text');
       $ad1_image_id = IGV_get_option('_igv_home_options', '_igv_ad1_image_id');
       $ad1_link = IGV_get_option('_igv_home_options', '_igv_ad1_link');
+      $ad1_link_autoplay = IGV_get_option('_igv_home_options', '_igv_ad1_link_media');
       $ad1_link_external = IGV_get_option('_igv_home_options', '_igv_ad1_link_external');
 
       if ($ad1_text && $ad1_image_id) {
     ?>
     <div class="grid-row margin-bottom-mid">
-      <?php render_ad($ad1_text, $ad1_image_id, $ad1_link, $ad1_link_external); ?>
+      <?php render_ad($ad1_text, $ad1_image_id, $ad1_link, $ad1_link_autoplay, $ad1_link_external); ?>
     </div>
     <?php
       }
@@ -192,12 +193,13 @@ get_header();
       $ad2_text = IGV_get_option('_igv_home_options', '_igv_ad2_text');
       $ad2_image_id = IGV_get_option('_igv_home_options', '_igv_ad2_image_id');
       $ad2_link = IGV_get_option('_igv_home_options', '_igv_ad2_link');
+      $ad2_link_autoplay = IGV_get_option('_igv_home_options', '_igv_ad2_link_media');
       $ad2_link_external = IGV_get_option('_igv_home_options', '_igv_ad2_link_external');
 
       if ($ad2_text && $ad2_image_id) {
     ?>
     <div class="grid-row margin-bottom-basic">
-      <?php render_ad($ad2_text, $ad2_image_id, $ad2_link, $ad2_link_external); ?>
+      <?php render_ad($ad2_text, $ad2_image_id, $ad2_link, $ad2_link_autoplay, $ad2_link_external); ?>
     </div>
     <?php
       }
