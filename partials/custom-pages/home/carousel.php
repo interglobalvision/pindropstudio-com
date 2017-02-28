@@ -13,6 +13,12 @@
           $post = $carousel_post['_igv_carousel_post_id'];
           setup_postdata($post);
 
+          $link = get_the_permalink();
+
+          if ($carousel_post['_igv_link_media']) {
+            $link = $link . '?autoplay';
+          }
+
           if (!empty($carousel_post['_igv_carousel_image_override_id'])) {
             $background_url = wp_get_attachment_image_src($carousel_post['_igv_carousel_image_override_id'], 'l-12-carousel');
           } else {
@@ -20,7 +26,7 @@
           }
       ?>
         <div class="swiper-slide carousel-post" data-background="<?php echo $background_url[0]; ?>">
-          <a href="<?php the_permalink(); ?>">
+          <a href="<?php echo $link; ?>">
             <div class="carousel-content-holder grid-column align-items-center justify-between">
               <header class="carousel-header margin-top-small">
                 <?php

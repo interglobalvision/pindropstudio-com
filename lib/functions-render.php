@@ -184,7 +184,7 @@ function render_hidden_gallery($gallery, $post_id) {
 
 }
 
-function render_soundcloud_embed($url) {
+function render_soundcloud_embed($url, $autoplay = false) {
   $url_parts = explode('/',$url);
 
   // Check for token on url
@@ -198,6 +198,11 @@ function render_soundcloud_embed($url) {
 
   // Form src url
   $src = 'https://w.soundcloud.com/player/?url='. $url .'&amp;color=000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false';
+
+  // Append url for autoplay if true
+  if ($autoplay) {
+    $src = $src . '&amp;auto_play=true';
+  }
 
   // Echo embed
   echo '<iframe src="' . $src . '" width="100%" height="120" scrolling="no" frameborder="no"></iframe>';
