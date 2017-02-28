@@ -325,6 +325,10 @@ Site.Media = {
     var _this = this;
 
     _this.bind();
+
+    if (window.location.href.split('?')[1] === 'autoplay') {
+      _this.handleAutoplay();
+    }
   },
 
   bind: function() {
@@ -414,6 +418,20 @@ Site.Media = {
 
     $item.addClass('playing-audio');
     $item.find('.media-item-image-holder').append(insert);
+  },
+
+  handleAutoplay: function() {
+
+    if ($('#s-and-v-video').length) {
+      window.setTimeout(function() {
+        zenscroll.to($('#s-and-v-video')[0]);
+      }, Site.animationSpeed);
+    } else if ($('#s-and-v-audio').length) {
+      window.setTimeout(function() {
+        zenscroll.to($('#s-and-v-audio')[0]);
+      }, Site.animationSpeed);
+    }
+
   },
 
   makeURL: function(url) {
