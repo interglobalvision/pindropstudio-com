@@ -230,8 +230,11 @@ input[type=radio]
 
   // HOME CAROUSEL
 
+$carousel-header-offset = 102px + $margin-small
+
 .home-carousel
-  height: 520px
+  max-height: 680px
+  height: "calc(100vh - %s)" % $carousel-header-offset
   .swiper-slide
     background-position: center center
     background-size: cover

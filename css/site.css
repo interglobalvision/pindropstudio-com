@@ -2175,7 +2175,8 @@ input[type=radio] {
   content: '';
 }
 .home-carousel {
-  height: 520px;
+  max-height: 680px;
+  height: calc(100vh - 116px);
 }
 .home-carousel .swiper-slide {
   background-position: center center;
@@ -2622,6 +2623,9 @@ input[type=radio] {
   }
   .swiper-button-next svg {
     padding-right: 14px;
+  }
+  .home-carousel {
+    height: 520px;
   }
   .carousel-links li {
     padding: 4.666666666666667px 7px;
