@@ -10,6 +10,20 @@ if ($time_meta) {
   $time = new \Moment\Moment('@' . $time_meta);
 }
 
+$query_string = $_SERVER['QUERY_STRING'];
+$autoplay = false;
+$autoplay_target = null;
+
+if ($query_string == 'autoplay') {
+  $autoplay = true;
+}
+
+if ($vimeo_id && $autoplay) {
+  $autoplay_target = 'video';
+} else if ($soundcloud_url && $autoplay) {
+  $autoplay_target = 'audio';
+}
+
 ?>
 <article id="page" <?php post_class('container'); ?>>
 <?php
@@ -46,14 +60,19 @@ if ($time_meta) {
 <?php
   if ($vimeo_id) {
     $video_caption = get_post_meta($post->ID, '_igv_video_caption', true);
+    $video_url = 'https://player.vimeo.com/video/' . $vimeo_id . '?title=0&byline=0&portrait=0';
+
+    if ($autoplay_target === 'video') {
+      $video_url = $video_url . '&autoplay=1';
+    }
 ?>
 <div class="grid-row margin-bottom-mid">
   <?php render_divider(); ?>
 </div>
-<div class="grid-row margin-bottom-mid">
+<div id="s-and-v-video" class="grid-row margin-bottom-mid">
   <div class="grid-item item-s-12 item-m-8 offset-m-2">
     <div class="u-video-embed-container">
-      <iframe src="https://player.vimeo.com/video/<?php echo $vimeo_id; ?>?title=0&byline=0&portrait=0" width="100%" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <iframe src="<?php echo $video_url; ?>" width="100%" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </div>
     <?php
       if ($video_caption) {
@@ -71,10 +90,14 @@ if ($time_meta) {
 <div class="grid-row margin-bottom-mid">
   <?php render_divider(); ?>
 </div>
-<div class="grid-row margin-bottom-mid">
+<div id="s-and-v-audio" class="grid-row margin-bottom-mid">
   <div class="grid-item item-s-12 item-m-8 offset-m-2">
-      <?php render_soundcloud_embed($soundcloud_url); ?>
     <?php
+      if ($autoplay_target === 'audio') {
+        render_soundcloud_embed($soundcloud_url, true);
+      } else {
+        render_soundcloud_embed($soundcloud_url);
+      }
       if ($audio_caption) {
         render_embed_caption($audio_caption);
       }

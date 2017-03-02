@@ -70,7 +70,7 @@ function render_quote($text = null, $person = null, $luminary = null) {
 <?php
 }
 
-function render_ad($text = null, $image_id = null, $link_id = null, $link_external = null) {
+function render_ad($text = null, $image_id = null, $link_id = null, $autoplay = false, $link_external = null) {
   if ($text === null || $image_id === null) {
     return false;
   }
@@ -78,7 +78,12 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
   $link = false;
 
   if ($link_id) {
-    $link = '<a href="' . get_permalink($link_id) . '">';
+
+    if ($autoplay) {
+      $link = '<a href="' . get_permalink($link_id) . '/?autoplay">';
+    } else {
+      $link = '<a href="' . get_permalink($link_id) . '">';
+    }
   } else {
     $link = '<a href="' . $link_external . '" target="_blank" rel="noopener">';
   }
@@ -102,12 +107,16 @@ function render_ad($text = null, $image_id = null, $link_id = null, $link_extern
 <?php
 }
 
-function render_tall_ad($image, $text, $subtitle, $link_internal, $link_external, $link_text) {
+function render_tall_ad($image, $text, $subtitle, $link_internal, $autoplay = false, $link_external, $link_text) {
 ?>
 <div class="grid-item item-s-12 item-m-6 margin-bottom-small">
 <?php
   if ($link_internal && $link_text) {
-    echo '<a href="' . get_permalink($link_internal) . '">';
+    if ($autoplay) {
+      echo '<a href="' . get_permalink($link_internal) . '?autoplay">';
+    } else {
+      echo '<a href="' . get_permalink($link_internal) . '">';
+    }
   } else if ($link_external && $link_text) {
     echo '<a href="' . $link_external . '">';
   }
@@ -184,7 +193,7 @@ function render_hidden_gallery($gallery, $post_id) {
 
 }
 
-function render_soundcloud_embed($url) {
+function render_soundcloud_embed($url, $autoplay = false) {
   $url_parts = explode('/',$url);
 
   // Check for token on url
@@ -198,6 +207,11 @@ function render_soundcloud_embed($url) {
 
   // Form src url
   $src = 'https://w.soundcloud.com/player/?url='. $url .'&amp;color=000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false';
+
+  // Append url for autoplay if true
+  if ($autoplay) {
+    $src = $src . '&amp;auto_play=true';
+  }
 
   // Echo embed
   echo '<iframe src="' . $src . '" width="100%" height="120" scrolling="no" frameborder="no"></iframe>';
