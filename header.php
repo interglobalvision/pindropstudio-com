@@ -28,6 +28,9 @@
 <section id="main-container">
 
   <header id="header" class="container">
+    <nav id="menu-hamburger" class="mobile-only u-pointer">
+      <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/hamburger.svg'); ?>
+    </nav>
     <div class="grid-row">
       <div id="menu-item-logo" class="grid-item item-s-12 item-m-2">
         <a href="<?php echo home_url(); ?>">
@@ -35,7 +38,7 @@
           <?php echo url_get_contents(get_bloginfo('stylesheet_directory') . '/img/dist/pindrop-logo.svg'); ?>
         </a>
       </div>
-      <nav class="grid-item item-s-12 item-m-10">
+      <nav id="menu-links" class="grid-item item-s-12 item-m-10">
         <ul id="menu" class="font-style-micro font-size-small u-inline-list">
           <li><a <?php echo menuActiveClasses('live', 'page'); ?>href="<?php echo home_url('live'); ?>">Live</a></li>
           <li><a <?php echo menuActiveClasses('sound-and-vision', 'page'); ?>href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>

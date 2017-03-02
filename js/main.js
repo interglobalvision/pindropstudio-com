@@ -27,6 +27,7 @@ Site = {
     _this.fixWidows();
     _this.bindPinScroll();
 
+    Site.Menu.init();
     Site.Shuffle.init();
     Site.Media.init();
     Site.Lightbox.init();
@@ -53,6 +54,23 @@ Site = {
   bindPinScroll: function() {
     $('#footer-pin-holder').on('click', function() {
       $('html, body').animate({ scrollTop: 0 }, Site.animationSpeed);
+    });
+  }
+};
+
+Site.Menu = {
+  $menuHamburger: $('#menu-hamburger'),
+  $header: $('#header'),
+
+  init: function() {
+    this.bind();
+  },
+
+  bind: function() {
+    var _this = this;
+
+    _this.$menuHamburger.on('click', function() {
+      _this.$header.toggleClass('mobile-active');
     });
   }
 };

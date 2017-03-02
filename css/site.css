@@ -2058,33 +2058,50 @@ input[type=radio] {
   display: none;
 }
 #header {
+  position: relative;
   padding-top: 7px;
   padding-bottom: 7px;
 }
+#menu-hamburger {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 100;
+}
+#menu-hamburger svg {
+  width: 18px;
+  height: 11px;
+}
 #menu-item-logo svg {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 #menu {
   padding-top: 7px;
   text-align: left;
 }
 #menu li {
-  margin-right: 7px;
-  margin-bottom: 7px;
+  margin-right: 14px;
+  margin-bottom: 14px;
 }
 #menu li:last-child {
   margin-right: 0;
 }
 #menu a:hover,
 #menu a.active {
-  border-bottom: 1px solid #373a3c;
   padding-bottom: 3px;
+  border-bottom: 1px solid #373a3c;
+}
+#menu-links {
+  display: none;
+}
+#header.mobile-active #menu-links {
+  display: initial;
 }
 #menu-item-lock svg {
+  margin-top: -3px;
   width: 11px;
   height: 17px;
-  margin-top: -3px;
   vertical-align: middle;
 }
 .dotted-divider-side {
@@ -2158,7 +2175,8 @@ input[type=radio] {
   content: '';
 }
 .home-carousel {
-  height: 520px;
+  max-height: 680px;
+  height: calc(100vh - 116px);
 }
 .home-carousel .swiper-slide {
   background-position: center center;
@@ -2552,6 +2570,9 @@ input[type=radio] {
     width: 142px;
     height: 130px;
   }
+  #menu-links {
+    display: initial;
+  }
   #menu {
     width: 67%;
     padding-top: 61px;
@@ -2602,6 +2623,9 @@ input[type=radio] {
   }
   .swiper-button-next svg {
     padding-right: 14px;
+  }
+  .home-carousel {
+    height: 520px;
   }
   .carousel-links li {
     padding: 4.666666666666667px 7px;

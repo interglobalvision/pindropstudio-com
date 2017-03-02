@@ -87,31 +87,48 @@ input[type=radio]
 // HEADER
 
 #header
+  position: relative
   padding-top: $margin-tiny
   padding-bottom: $margin-tiny
 
+#menu-hamburger
+  position: absolute
+  top: $margin-small
+  right: $margin-small
+  z-index: 100
+  svg
+    width: 18px
+    height: 11px
+
 #menu-item-logo
   svg
-    width: 100px
-    height: 100px
+    width: 80px
+    height: 80px
 
 #menu
   padding-top: $margin-tiny
   text-align: left
   li
-    margin-right: $margin-tiny
-    margin-bottom: $margin-tiny
+    margin-right: $margin-small
+    margin-bottom: $margin-small
     &:last-child
       margin-right: 0
   a:hover, a.active
-    border-bottom: 1px solid $color-black
     padding-bottom: 3px
+    border-bottom: 1px solid $color-black
+
+#menu-links
+  display: none
+
+#header.mobile-active
+  #menu-links
+    display: initial
 
 #menu-item-lock
   svg
+    margin-top: -3px
     width: 11px
     height: 17px
-    margin-top: -3px
     vertical-align: middle
 
 // ******************************************************
@@ -213,8 +230,11 @@ input[type=radio]
 
   // HOME CAROUSEL
 
+$carousel-header-offset = 102px + $margin-small
+
 .home-carousel
-  height: 520px
+  max-height: 680px
+  height: "calc(100vh - %s)" % $carousel-header-offset
   .swiper-slide
     background-position: center center
     background-size: cover
