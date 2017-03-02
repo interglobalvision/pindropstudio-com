@@ -2060,6 +2060,16 @@ input[type=radio] {
 #header {
   padding-top: 7px;
   padding-bottom: 7px;
+  position: relative;
+}
+#menu-hamburger {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+#menu-hamburger svg {
+  width: 18px;
+  height: 11px;
 }
 #menu-item-logo svg {
   width: 100px;
