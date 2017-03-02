@@ -2066,22 +2066,23 @@ input[type=radio] {
   position: absolute;
   top: 14px;
   right: 14px;
+  z-index: 100;
 }
 #menu-hamburger svg {
   width: 18px;
   height: 11px;
 }
 #menu-item-logo svg {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 #menu {
   padding-top: 7px;
   text-align: left;
 }
 #menu li {
-  margin-right: 7px;
-  margin-bottom: 7px;
+  margin-right: 14px;
+  margin-bottom: 14px;
 }
 #menu li:last-child {
   margin-right: 0;
@@ -2090,6 +2091,12 @@ input[type=radio] {
 #menu a.active {
   border-bottom: 1px solid #373a3c;
   padding-bottom: 3px;
+}
+#menu-links {
+  display: none;
+}
+#header.mobile-active #menu-links {
+  display: initial;
 }
 #menu-item-lock svg {
   width: 11px;
@@ -2561,6 +2568,9 @@ input[type=radio] {
   #menu-item-logo svg {
     width: 142px;
     height: 130px;
+  }
+  #menu-links {
+    display: initial;
   }
   #menu {
     width: 67%;
