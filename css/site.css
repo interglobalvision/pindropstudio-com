@@ -2058,9 +2058,9 @@ input[type=radio] {
   display: none;
 }
 #header {
+  position: relative;
   padding-top: 7px;
   padding-bottom: 7px;
-  position: relative;
 }
 #menu-hamburger {
   position: absolute;
@@ -2089,8 +2089,8 @@ input[type=radio] {
 }
 #menu a:hover,
 #menu a.active {
-  border-bottom: 1px solid #373a3c;
   padding-bottom: 3px;
+  border-bottom: 1px solid #373a3c;
 }
 #menu-links {
   display: none;
@@ -2099,9 +2099,9 @@ input[type=radio] {
   display: initial;
 }
 #menu-item-lock svg {
+  margin-top: -3px;
   width: 11px;
   height: 17px;
-  margin-top: -3px;
   vertical-align: middle;
 }
 .dotted-divider-side {
