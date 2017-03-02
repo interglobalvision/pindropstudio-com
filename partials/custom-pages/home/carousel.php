@@ -1,7 +1,7 @@
 <?php
   $carousel_posts = IGV_get_option('_igv_home_options', '_igv_carousel_posts');
 
-  if ($carousel_posts) {
+  if (!empty($carousel_posts)) {
 ?>
 <div class="grid-row margin-bottom-large">
   <div class="grid-item item-s-12">
@@ -15,7 +15,7 @@
 
           $link = get_the_permalink();
 
-          if ($carousel_post['_igv_link_media']) {
+          if (!empty($carousel_post['_igv_link_media'])) {
             $link = $link . '?autoplay';
           }
 
