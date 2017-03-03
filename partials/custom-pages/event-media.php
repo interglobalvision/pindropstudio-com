@@ -12,7 +12,9 @@ if (is_page('home')) {
 }
 
 $time = get_post_meta($post->ID, '_igv_event_datetime', true);
-$time_moment = new \Moment\Moment('@' . $time);
+if ($time) {
+  $time_moment = new \Moment\Moment('@' . $time);
+}
 
 $location = get_post_meta($post->ID, '_igv_event_location', true);
 
@@ -65,7 +67,7 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
 
       if ($subline_override) {
         echo $subline_override;
-      } else {
+      } else if ($time) {
         echo $time_moment->format('d F Y');
 
         if ($location) {
