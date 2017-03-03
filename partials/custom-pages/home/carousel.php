@@ -39,7 +39,12 @@
                     $midnight_timestamp = strtotime($midnight->format());
 
                     $time_meta = get_post_meta($post, '_igv_event_datetime', true);
-                    $time_moment = new \Moment\Moment('@' . $time_meta);
+
+                    if ($time_meta) {
+                      $time_moment = new \Moment\Moment('@' . $time_meta);
+                    } else {
+                      $time_moment = new \Moment\Moment('@' . strtotime($post->post_date));
+                    }
 
                     echo '<h4 class="font-style-micro margin-bottom-small">';
 
