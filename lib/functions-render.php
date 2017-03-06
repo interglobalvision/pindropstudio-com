@@ -118,7 +118,7 @@ function render_tall_ad($image, $text, $subtitle, $link_internal, $autoplay = fa
       echo '<a href="' . get_permalink($link_internal) . '">';
     }
   } else if ($link_external && $link_text) {
-    echo '<a href="' . $link_external . '">';
+    echo '<a href="' . $link_external . '" target="_blank" rel="noopener">';
   }
 ?>
   <div class="card card-big text-align-center">
