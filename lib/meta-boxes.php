@@ -266,7 +266,7 @@ function igv_cmb_metaboxes() {
     'desc'       => esc_html__( 'select multiple other posts here to display as related posts', 'cmb2' ),
     'id'         => $prefix . 'related_posts',
     'type'       => 'post_search_text',
-    'post_type'  => array('post', 'page', 'event', 'luminaries'),
+    'post_type'  => array('post', 'page', 'event', 'recording', 'luminaries'),
   ) );
 
 }

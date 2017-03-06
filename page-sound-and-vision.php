@@ -49,7 +49,7 @@ if ($luminaries->have_posts()) {
 if (!empty($luminary)) {
   // filter query. gets events which have video or audio meta set and orders them by the datetime meta (which also needs to be set)
   $args = array(
-    'post_type' => 'event',
+    'post_type' => array('event', 'recording'),
     'posts_per_page' => get_option('posts_per_page'),
     'meta_query' => array(
       array(
@@ -76,7 +76,7 @@ if (!empty($luminary)) {
 } else {
   // basic query. gets events which have video or audio meta set and orders them by the datetime meta (which also needs to be set)
   $args = array(
-    'post_type' => 'event',
+    'post_type' => array('event', 'recording'),
     'posts_per_page' => get_option('posts_per_page'),
     'meta_query' => array(
       'relation' => 'OR',
