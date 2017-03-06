@@ -124,7 +124,7 @@ function render_tall_ad($image, $text, $subtitle, $link_internal, $autoplay = fa
   <div class="card card-big text-align-center">
 <?php
   if ($image) {
-    echo '<div class="tall-ad-image-wrapper margin-top-small margin-bottom-basic"><div class="tall-ad-image-holder">' . wp_get_attachment_image($image, 'l-4-tall-ad', null, array('class' => 'tall-ad-image')) . '</div></div>';
+    echo '<div class="tall-ad-image-wrapper margin-bottom-basic"><div class="tall-ad-image-holder">' . wp_get_attachment_image($image, 'l-4-tall-ad', null, array('class' => 'tall-ad-image')) . '</div></div>';
   }
 
   if ($subtitle) {
