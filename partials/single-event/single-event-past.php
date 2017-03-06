@@ -46,7 +46,13 @@ if ($vimeo_id && $autoplay) {
   <div class="grid-item item-s-12 item-m-8 offset-m-2 margin-bottom-basic">
 
     <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
+    <?php
+      if (is_singular('event')) {
+    ?>
     <h4 class="font-style-micro margin-bottom-small text-align-center"><?php echo $time_meta ? $time->format('d F Y') : get_the_time('d F Y'); ?></h4>
+    <?php
+      }
+    ?>
 
     <div class="post-copy">
       <?php the_content(); ?>
