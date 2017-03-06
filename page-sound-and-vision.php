@@ -8,7 +8,7 @@ $luminary = get_query_var('luminary');
   <section id="posts" class="container">
 
     <div class="grid-row margin-bottom-small">
-      <?php render_divider('<span class="drawer-toggle u-pointer" data-drawer-id="drawer-luminaries-sort">Sort Luminaries +</span>'); ?>
+      <?php render_divider('<span class="drawer-toggle u-pointer" data-drawer-id="drawer-luminaries-sort">Sort by Luminary +</span>'); ?>
     </div>
 
     <div id="drawer-luminaries-sort" class="<?php if (empty($luminary)) {echo 'drawer-content ';} ?>margin-bottom-basic">
