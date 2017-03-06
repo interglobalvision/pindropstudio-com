@@ -10,7 +10,7 @@ if( have_posts() ) {
     the_post();
   ?>
   <article id="page" <?php post_class('container'); ?>>
-    <div class="grid-row margin-top-basic margin-bottom-basic">
+    <div class="grid-row margin-bottom-basic">
       <?php render_divider(get_the_title()); ?>
     </div>
     <div class="grid-row">

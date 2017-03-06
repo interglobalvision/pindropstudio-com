@@ -33,7 +33,7 @@ get_header();
         $post_count = $forthcoming_events->post_count;
     ?>
 
-    <div class="grid-row margin-top-basic margin-bottom-small">
+    <div class="grid-row margin-bottom-small">
       <?php render_divider('Forthcoming Live Events'); ?>
     </div>
 

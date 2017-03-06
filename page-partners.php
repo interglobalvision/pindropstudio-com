@@ -11,7 +11,7 @@ if( have_posts() ) {
     $partners = get_post_meta($post->ID, '_igv_partners_metabox_group', true);
   ?>
   <article id="page" <?php post_class('container'); ?>>
-    <div class="grid-row margin-top-basic margin-bottom-basic">
+    <div class="grid-row margin-bottom-basic">
       <?php render_divider('Partners'); ?>
     </div>
     <div class="grid-row">
