@@ -43,6 +43,49 @@ function register_cpt_event() {
 }
 add_action( 'init', 'register_cpt_event' );
 
+// Register Custom Post: Recording
+function register_cpt_recording() {
+
+  $labels = array(
+    'name' => _x( 'Recordings', 'recording' ),
+    'singular_name' => _x( 'Recording', 'recording' ),
+    'add_new' => _x( 'Add New', 'recording' ),
+    'add_new_item' => _x( 'Add New Recording', 'recording' ),
+    'edit_item' => _x( 'Edit Recording', 'recording' ),
+    'new_item' => _x( 'New Recording', 'recording' ),
+    'view_item' => _x( 'View Recording', 'recording' ),
+    'search_items' => _x( 'Search Recordings', 'recording' ),
+    'not_found' => _x( 'No recordings found', 'project' ),
+    'not_found_in_trash' => _x( 'No recordings found in Trash', 'project' ),
+    'parent_item_colon' => _x( 'Parent recording:', 'recording' ),
+    'menu_name' => _x( 'Recordings', 'recording' ),
+  );
+
+  $args = array(
+    'labels' => $labels,
+    'hierarchical' => false,
+
+    'supports' => array( 'title', 'editor', 'thumbnail' ),
+    'taxonomies' => array( 'category', 'post_tag' ),
+    'public' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'menu_position' => 5,
+    'menu_icon'             => 'dashicons-video-alt3',
+    'show_in_nav_menus' => true,
+    'publicly_queryable' => true,
+    'exclude_from_search' => false,
+    'has_archive' => true,
+    'query_var' => true,
+    'can_export' => true,
+    'rewrite' => true,
+    'capability_type' => 'post'
+  );
+
+  register_post_type( 'recording', $args );
+}
+add_action( 'init', 'register_cpt_recording' );
+
 // Register Custom Post: Luminaries
 function luminaries() {
 
