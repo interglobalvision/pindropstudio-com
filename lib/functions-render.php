@@ -128,7 +128,7 @@ function render_tall_ad($image, $text, $subtitle, $link_internal, $autoplay = fa
   }
 
   if ($subtitle) {
-    echo '<h4 class="margin-bottom-small">' . $subtitle . '</h4>';
+    echo '<h4 class="tall-ad-subtitle margin-bottom-small">' . $subtitle . '</h4>';
   }
 
   if ($text) {
