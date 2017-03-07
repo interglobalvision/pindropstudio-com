@@ -41,8 +41,8 @@ if( have_posts() ) {
     the_post();
   ?>
   <article id="page" <?php post_class('container'); ?>>
-    <div class="grid-row margin-top-basic margin-bottom-basic">
-      <?php render_divider('<span class="about-page-drawer-trigger u-pointer" data-target="people">People</span> | <span class="about-page-drawer-trigger u-pointer" data-target="partners">Partners</span> | <span class="about-page-drawer-trigger u-pointer active" data-target="about">About</span>'); ?>
+    <div class="grid-row margin-bottom-basic">
+      <?php render_divider('<span class="about-page-drawer-trigger u-pointer active" data-target="about">About</span> | <span class="about-page-drawer-trigger u-pointer" data-target="partners">Partners</span> | <span class="about-page-drawer-trigger u-pointer" data-target="people">People</span>'); ?>
     </div>
     <div id="about-drawer-people" class="about-page-drawer">
 <?php

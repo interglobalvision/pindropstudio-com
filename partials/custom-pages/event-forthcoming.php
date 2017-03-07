@@ -36,7 +36,7 @@
     <?php
       } else if ($booking) {
     ?>
-          <li><a href="<?php echo $booking; ?>" target="_blank" rel="noopener">Booking Now</a></li>
+          <li><a href="<?php echo $booking; ?>" target="_blank" rel="noopener">Book Now</a></li>
     <?php
       }
     ?>

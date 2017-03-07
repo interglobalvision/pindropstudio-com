@@ -4,6 +4,10 @@ get_header();
 
 <main id="main-content">
   <section id="posts" class="container">
+    <div class="grid-row margin-bottom-basic">
+      <?php render_divider('Past Events'); ?>
+    </div>
+
     <div class="shuffle-section">
       <div class="shuffle-preloader"></div>
       <div class="shuffle-container grid-row hidden">

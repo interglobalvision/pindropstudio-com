@@ -14,7 +14,7 @@ if( have_posts() ) {
     the_post();
   ?>
   <article id="page" <?php post_class('container'); ?>>
-    <div class="grid-row margin-top-basic margin-bottom-basic">
+    <div class="grid-row margin-bottom-basic">
       <div class="grid-item item-s-12">
         <h2 class="text-align-center"><?php the_title(); ?></h2>
       </div>

@@ -92,7 +92,7 @@ function render_ad($text = null, $image_id = null, $link_id = null, $autoplay = 
   <?php echo $link; ?>
     <?php echo wp_get_attachment_image($image_id, 'l-12-wide-ad', null, array('class' => 'desktop-only')); ?>
     <?php echo wp_get_attachment_image($image_id, 'l-6', null, array('class' => 'mobile-only')); ?>
-    <h2 class="wide-ad-text font-style-shadow"><?php echo $text; ?></h2>
+    <h2 class="wide-ad-text font-style-shadow font-size-h1"><?php echo $text; ?></h2>
     <?php
       if ($link) {
     ?>
@@ -118,13 +118,13 @@ function render_tall_ad($image, $text, $subtitle, $link_internal, $autoplay = fa
       echo '<a href="' . get_permalink($link_internal) . '">';
     }
   } else if ($link_external && $link_text) {
-    echo '<a href="' . $link_external . '">';
+    echo '<a href="' . $link_external . '" target="_blank" rel="noopener">';
   }
 ?>
   <div class="card card-big text-align-center">
 <?php
   if ($image) {
-    echo '<div class="tall-ad-image-wrapper margin-top-small margin-bottom-basic"><div class="tall-ad-image-holder">' . wp_get_attachment_image($image, 'l-4-tall-ad', null, array('class' => 'tall-ad-image')) . '</div></div>';
+    echo '<div class="tall-ad-image-wrapper margin-bottom-basic"><div class="tall-ad-image-holder">' . wp_get_attachment_image($image, 'l-4-tall-ad', null, array('class' => 'tall-ad-image')) . '</div></div>';
   }
 
   if ($subtitle) {

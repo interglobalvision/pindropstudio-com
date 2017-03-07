@@ -117,7 +117,9 @@ if ($vimeo_id && $autoplay) {
 ?>
 <div class="grid-row margin-bottom-basic">
   <div class="grid-item item-s-12 item-m-8 offset-m-2">
-    <?php echo apply_filters('the_content', $extra_content); ?>
+    <div class="post-copy">
+      <?php echo apply_filters('the_content', $extra_content); ?>
+    </div>
   </div>
 </div>
 <?php
