@@ -79,7 +79,7 @@ get_template_part( 'lib/functions-utility' );
 
 function fill_igv_event_datetime() {
   $broken_posts = get_posts( array(
-    'post_type' => 'event',
+    'post_type' => array('event', 'recording'),
     'posts_per_page'   => -1,
     'meta_query' => array(
       array(

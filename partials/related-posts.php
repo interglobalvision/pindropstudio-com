@@ -15,7 +15,8 @@
       $post = get_post($post_id);
       if ($post) {
         setup_postdata($post);
-        if (get_post_type($post->ID) === 'event') {
+        $post_type = get_post_type($post->ID);
+        if ($post_type === 'event' || $post_type === 'recording') {
           get_template_part('partials/custom-pages/event-media');
         } else {
           get_template_part('partials/shuffle/shuffle-post');

@@ -88,9 +88,11 @@ function igv_cmb_metaboxes() {
     'id'      => $prefix . 'circle',
     'type'    => 'checkbox',
   ) );
+
   /**
    * Events Metaboxes
    * */
+
   $event_metabox = new_cmb2_box( array(
     'id'            => $prefix . 'event_meta',
     'title'         => __( 'Event Meta', 'cmb2' ),
@@ -98,12 +100,6 @@ function igv_cmb_metaboxes() {
     'context'       => 'normal',
     'priority'      => 'high',
     'show_names'    => true, // Show field names on the left
-  ) );
-
-  $event_metabox->add_field( array(
-    'name'    => 'Hide image/gallery at top of post',
-    'id'      => $prefix . 'no_image',
-    'type'    => 'checkbox',
   ) );
 
   $event_metabox->add_field( array(
@@ -138,56 +134,73 @@ function igv_cmb_metaboxes() {
     'type' => 'checkbox',
   ) );
 
-  $event_metabox->add_field( array(
+  // RECORDINGS META
+
+  $recording_metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'recording_meta',
+    'title'         => __( 'Recording Meta', 'cmb2' ),
+    'object_types'  => array( 'event', 'recording', ), // Post type
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+  ) );
+
+  $recording_metabox->add_field( array(
+    'name'    => 'Hide image/gallery at top of post',
+    'id'      => $prefix . 'no_image',
+    'type'    => 'checkbox',
+  ) );
+
+  $recording_metabox->add_field( array(
     'name'    => 'Alt Title',
     'description' => __( 'To display on Sound & Vision pages', 'cmb2' ),
     'id'      => $prefix . 'alt_title',
     'type'    => 'text',
   ) );
 
-  $event_metabox->add_field( array(
+  $recording_metabox->add_field( array(
     'name'    => 'Alt Subline',
     'description' => __( 'To display on Sound & Vision pages', 'cmb2' ),
     'id'      => $prefix . 'alt_subline',
     'type'    => 'text',
   ) );
 
-  $event_metabox->add_field( array(
+  $recording_metabox->add_field( array(
     'name'    => 'Vimeo video',
     'description' => __( 'Just the ID of the Vimeo video', 'cmb2' ),
     'id'      => $prefix . 'vimeo_id',
     'type'    => 'text',
   ) );
 
-  $event_metabox->add_field( array(
+  $recording_metabox->add_field( array(
     'name'    => 'Video caption (optional)',
     'id'      => $prefix . 'video_caption',
     'type'    => 'text',
   ) );
 
-  $event_metabox->add_field( array(
+  $recording_metabox->add_field( array(
     'name'    => 'Soundcloud audio',
     'description' => __( 'the URL of the Soundcloud recording', 'cmb2' ),
     'id'      => $prefix . 'soundcloud_url',
     'type'    => 'text_url',
   ) );
 
-  $event_metabox->add_field( array(
+  $recording_metabox->add_field( array(
     'name'    => 'Audio caption (optional)',
     'id'      => $prefix . 'audio_caption',
     'type'    => 'text',
   ) );
 
-  $event_metabox->add_field( array(
+  $recording_metabox->add_field( array(
     'name'    => 'Copy after embeds',
     'description' => __( 'optional copy after the embed blocks', 'cmb2' ),
     'id'      => $prefix . 'extra_content',
     'type'    => 'wysiwyg',
   ) );
 
-  $event_metabox->add_field( array(
+  $recording_metabox->add_field( array(
     'name'    => 'Luminary',
-    'description' => __( 'one (or more) Luminaries to related to this event', 'cmb2' ),
+    'description' => __( 'one (or more) Luminaries to related to this event/recording', 'cmb2' ),
     'id'      => $prefix . 'related_luminaries',
     'type'       => 'post_search_text',
     'post_type'  => array('luminaries'),
@@ -253,7 +266,7 @@ function igv_cmb_metaboxes() {
     'desc'       => esc_html__( 'select multiple other posts here to display as related posts', 'cmb2' ),
     'id'         => $prefix . 'related_posts',
     'type'       => 'post_search_text',
-    'post_type'  => array('post', 'page', 'event', 'luminaries'),
+    'post_type'  => array('post', 'page', 'event', 'recording', 'luminaries'),
   ) );
 
 }

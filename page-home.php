@@ -94,7 +94,7 @@ get_header();
       if ($posts_needed > 0) {
 
         $past_args = array(
-          'post_type' => 'event',
+          'post_type' => array('event', 'recording'),
           'posts_per_page' => $posts_needed,
           'post__not_in' => $not_in,
 
@@ -134,7 +134,7 @@ get_header();
       }
 
       $past_events = new WP_Query(array(
-        'post_type' => 'event',
+        'post_type' => array('event', 'recording'),
         'posts_per_page' => $total_posts,
         'post__in' => $past_event_ids,
         'meta_query' => array(
