@@ -28,6 +28,11 @@ $luminaries = new WP_Query(array(
 ));
 
 if ($luminaries->have_posts()) {
+
+  if (!empty($luminary)) {
+    echo '<li><a href="' . home_url('sound-and-vision') .'">All</a></li><li>&nbsp;</li>';
+  }
+
   while ($luminaries->have_posts()) {
     $luminaries->the_post();
 ?>
