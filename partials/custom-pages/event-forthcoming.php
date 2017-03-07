@@ -11,6 +11,8 @@
     echo ' item-m-4';
   } else if ($post_count === 2) {
     echo ' item-m-6 item-l-5';
+  } else {
+    echo ' item-m-12';
   }
 ?> margin-bottom-small text-align-center">
   <div class="card card-big">
@@ -22,7 +24,7 @@
           the_post_thumbnail('l-4-square');
         }
       ?>
-      <h2 class="event-forthcoming-title margin-top-small margin-bottom-small item-s-6 item-m-5"><?php the_title(); ?></h2>
+      <h2 class="event-forthcoming-title margin-top-small margin-bottom-small"><?php the_title(); ?></h2>
       <h4 class="margin-bottom-tiny font-style-micro"><?php echo $time_moment->format('H:i'); ?> | <?php echo $time_moment->format('l'); ?></h4>
       <h1 class="font-size-big-number margin-bottom-tiny"><?php echo $time_moment->format('d'); ?></h1>
       <h4 class="font-style-micro"><?php echo $time_moment->format('F'); ?></h4>

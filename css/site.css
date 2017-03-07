@@ -2607,6 +2607,9 @@ input[type=radio] {
   .event-forthcoming-title {
     min-height: 3.6em;
   }
+  .item-m-12 .event-forthcoming-title {
+    min-height: initial;
+  }
   .live-forthcoming-event-meta {
     margin-top: 70px;
   }
