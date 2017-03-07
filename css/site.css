@@ -1599,7 +1599,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .tall-ad-image-wrapper {
   position: relative;
-  padding-bottom: 52.9032258%;
+  padding-bottom: 58%;
 }
 .tall-ad-image-holder {
   position: absolute;
@@ -1611,6 +1611,11 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 .tall-ad-image {
   max-height: 100%;
   width: auto;
+}
+.tall-ad-subtitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .thumb-for-lightbox {
   position: relative;
@@ -2607,6 +2612,9 @@ input[type=radio] {
   .event-forthcoming-title {
     min-height: 3.6em;
   }
+  .item-m-12 .event-forthcoming-title {
+    min-height: initial;
+  }
   .live-forthcoming-event-meta {
     margin-top: 70px;
   }
@@ -2652,7 +2660,7 @@ input[type=radio] {
     right: 21px;
   }
   .tall-ad-title {
-    min-height: 2.4em;
+    min-height: 3.5em;
   }
   .thumb-for-lightbox svg {
     top: 7px;
