@@ -8,8 +8,7 @@ get_header();
 
     <?php
       $now = new \Moment\Moment('now', 'Europe/London');
-      $tomorrow = $now->addDays(1);
-      $midnight = $tomorrow->startOf('day');
+      $midnight = $now->startOf('day');
       $midnight_timestamp = strtotime($midnight->format());
 
       $forthcoming_events = new WP_Query(array(
