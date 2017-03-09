@@ -265,6 +265,21 @@ $metabox = array(
       'type' => 'text',
     ),
 
+    // Luminaries section
+    array(
+      'name' => __( 'Luminaries override', 'cmb2' ),
+      'desc' => __( '', 'cmb2' ),
+      'id'   => $prefix . 'luminaries_title',
+      'type' => 'title',
+    ),
+    array(
+      'name' => __( 'Choose up to 4 luminaries here to override the display of most recent luminaries', 'IGV' ),
+      'desc' => __( '', 'IGV' ),
+      'id'   => $prefix . 'override_luminaries',
+      'type' => 'post_search_text',
+      'post_type' => array('luminaries'),
+    ),
+
   )
 );
 
