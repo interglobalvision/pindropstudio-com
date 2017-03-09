@@ -53,6 +53,7 @@ get_header();
     </div>
 
     <?php
+        wp_reset_postdata();
       }
 
       $ad1_text = IGV_get_option('_igv_home_options', '_igv_ad1_text');
@@ -163,6 +164,7 @@ get_header();
           $past_events->the_post();
           get_template_part('partials/custom-pages/event-media');
         }
+        wp_reset_postdata();
       }
     ?>
     </div>
@@ -206,9 +208,42 @@ get_header();
     ?>
 
     <?php
+      $overrides = IGV_get_option('_igv_home_options', '_igv_override_luminaries');
+      $total_posts = 4;
+      $posts_needed = $total_posts;
+      $not_in = array();
+
+      if ($overrides) {
+        $overrides = explode(', ', $overrides);
+
+        $posts_needed = $posts_needed - count($overrides);
+        $not_in = $overrides;
+      }
+
+      if ($posts_needed > 0) {
+
+        $recent_luminaries = get_posts(array(
+          'post_type' => array('luminaries'),
+          'posts_per_page' => $posts_needed,
+          'post__not_in' => $not_in,
+        ));
+
+        $luminaries_ids = array_map('array_map_filter_ids', $recent_luminaries);
+
+        if ($overrides) {
+          $luminaries_ids = array_merge($overrides, $luminaries_ids);
+        }
+
+      } else {
+
+        $luminaries_ids = $overrides;
+
+      }
+
       $args = array(
-        'posts_per_page' => 4,
-        'post_type' => 'luminaries',
+        'post_type' => array('luminaries'),
+        'posts_per_page' => $total_posts,
+        'post__in' => $luminaries_ids,
       );
 
       $recent_luminaries = new WP_Query($args);
