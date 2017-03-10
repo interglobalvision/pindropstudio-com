@@ -1,7 +1,7 @@
 <?php
 $members_only = false;
 
-if ($post->post_status === 'private') {
+if (!current_user_can('mepr_auth') || in_category(451)) {
   $members_only = true;
 }
 

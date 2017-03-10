@@ -64,7 +64,7 @@ if ($vimeo_id && $autoplay) {
   </div>
 </div>
 <?php
-  if ($vimeo_id) {
+  if ($vimeo_id && current_user_can('mepr_auth')) {
     $video_caption = get_post_meta($post->ID, '_igv_video_caption', true);
     $video_url = 'https://player.vimeo.com/video/' . $vimeo_id . '?title=0&byline=0&portrait=0';
 
@@ -90,7 +90,7 @@ if ($vimeo_id && $autoplay) {
 <?php
   }
 
-  if ($soundcloud_url) {
+  if ($soundcloud_url && current_user_can('mepr_auth')) {
     $audio_caption = get_post_meta($post->ID, '_igv_audio_caption', true);
 ?>
 <div class="grid-row margin-bottom-mid">
@@ -113,7 +113,7 @@ if ($vimeo_id && $autoplay) {
 <?php
   }
 
-  if ($extra_content) {
+  if ($extra_content && current_user_can('mepr_auth')) {
 ?>
 <div class="grid-row margin-bottom-basic">
   <div class="grid-item item-s-12 item-m-8 offset-m-2">
