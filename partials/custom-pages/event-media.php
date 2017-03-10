@@ -36,7 +36,7 @@ $subline_override = get_post_meta($post->ID, '_igv_alt_subline', true);
 ?>>
 <div class="card">
   <?php
-    if ((!$soundcloud_url && !$vimeo_id) || ($members_only && !is_user_logged_in())) {
+    if ((!$soundcloud_url && !$vimeo_id) || ($members_only && !current_user_can('mepr_auth'))) {
   ?>
   <div class="margin-bottom-small">
     <?php the_post_thumbnail($thumb_size, array('class' => 'u-block')); ?>
