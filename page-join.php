@@ -48,8 +48,8 @@ if( have_posts() ) {
           echo 'offset-m-2 ';
         }
       ?>margin-bottom-basic">
-        <h1 class="font-size-big-number margin-bottom-tiny">£<?php echo $membership['cost']; ?></h1>
         <h3 class="margin-bottom-small"><?php echo $membership['name']; ?></h3>
+        <h1 class="font-size-big-number margin-top-small margin-bottom-tiny">£<?php echo $membership['cost']; ?></h1>
         <a href="<?php echo $membership['link']; ?>" class="link-button">Sign Up Here</a>
       </div>
     <?php
