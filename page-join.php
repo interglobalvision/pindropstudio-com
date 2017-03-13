@@ -58,12 +58,6 @@ if( have_posts() ) {
         }
     ?>
         </div>
-    <div class="grid-row margin-top-basic margin-bottom-basic">
-      <div class="grid-item item-s-12 text-align-center">
-        Payments handled by Stripe.<br />
-        <img src="<?php bloginfo('stylesheet_directory'); ?>/img/dist/cards.png" alt="Visa/Mastercard/Amex" />
-      </div>
-    </div>
     <?php
       }
 
