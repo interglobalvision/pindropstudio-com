@@ -46,7 +46,7 @@ if ( have_posts() ) {
         <div class="expandable-excerpt">
           <?php echo $content_before; ?>
         </div>
-          <p class="text-align-right"><a class="font-style-micro font-uppercase font-size-small u-pointer expandable-toggle" data-exapandable-id="expandable-<?php echo $post->ID; ?>">Read more</a></p>
+          <p class="text-align-center"><a class="font-style-micro font-uppercase font-size-small u-pointer expandable-toggle" data-exapandable-id="expandable-<?php echo $post->ID; ?>">Read more</a></p>
         <div id="expandable-<?php echo $post->ID; ?>" class="expandable-content">
           <?php echo $content_after; ?>
         </div>
@@ -60,6 +60,9 @@ if ( have_posts() ) {
       render_hidden_gallery($gallery, $post->ID);
     }
     ?>
+            <div class="margin-top-small margin-bottom-tiny">
+              <?php render_share(get_the_permalink()); ?>
+            </div>
           </div>
         </article>
 
