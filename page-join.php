@@ -67,7 +67,10 @@ if( have_posts() ) {
     <?php
       }
 
-      get_template_part('partials/connect'); ?>
+      get_template_part('partials/connect');
+
+      get_template_part('partials/related-posts');
+    ?>
   </article>
 <?php
   }
