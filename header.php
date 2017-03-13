@@ -48,7 +48,7 @@
             $shop_link = IGV_get_option('_igv_site_options', '_igv_shop_link');
             if ($shop_link) {
           ?>
-          <li><a href="<?php echo $shop_link; ?>">Shop</a></li>
+          <li><a href="<?php echo $shop_link; ?>" target="_blank" rel="noopener">Shop</a></li>
           <?php
             }
           ?>
