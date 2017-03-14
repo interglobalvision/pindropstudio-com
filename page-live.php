@@ -118,7 +118,7 @@ get_header();
       if ($past_events->have_posts()) {
         while ($past_events->have_posts()) {
           $past_events->the_post();
-          get_template_part('partials/custom-pages/event-media');
+          get_template_part('partials/custom-pages/event-archive');
         }
       }
     ?>
