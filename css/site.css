@@ -2192,11 +2192,13 @@ input[type=radio] {
 }
 .wide-ad-text {
   top: 14px;
+  right: 14px;
   left: 14px;
 }
 .wide-ad-link-holder {
-  bottom: 14px;
   right: 14px;
+  bottom: 14px;
+  left: 14px;
 }
 .thumb-for-lightbox svg {
   top: 7px;
@@ -2610,7 +2612,7 @@ input[type=radio] {
     padding: 56px;
   }
   .event-forthcoming-title {
-    min-height: 3.6em;
+    min-height: 4.75em;
   }
   .item-m-12 .event-forthcoming-title {
     min-height: initial;
@@ -2653,11 +2655,13 @@ input[type=radio] {
   }
   .wide-ad-text {
     top: 21px;
+    right: 21px;
     left: 21px;
   }
   .wide-ad-link-holder {
-    bottom: 21px;
     right: 21px;
+    bottom: 21px;
+    left: 21px;
   }
   .tall-ad-title {
     min-height: 3.5em;
@@ -3155,11 +3159,13 @@ input[type=radio] {
   }
   .wide-ad-text {
     top: 32px;
+    right: 32px;
     left: 32px;
   }
   .wide-ad-link-holder {
-    bottom: 32px;
     right: 32px;
+    bottom: 32px;
+    left: 32px;
   }
   .thumb-for-lightbox svg {
     top: 8px;

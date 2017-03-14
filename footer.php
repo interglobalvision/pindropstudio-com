@@ -8,7 +8,14 @@
           <li><a href="<?php echo home_url('live'); ?>">Live</a></li>
           <li><a href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>
           <li><a href="<?php echo home_url('luminaries'); ?>">Luminaries</a></li>
-          <li>Shop</li>
+          <?php
+            $shop_link = IGV_get_option('_igv_site_options', '_igv_shop_link');
+            if ($shop_link) {
+          ?>
+          <li><a href="<?php echo $shop_link; ?>" target="_blank" rel="noopener">Shop</a></li>
+          <?php
+            }
+          ?>
           <li><a href="<?php echo home_url('join'); ?>">Join</a></li>
           <li><a href="<?php echo home_url('submit'); ?>">Submit</a></li>
           <li><a href="<?php echo home_url('news'); ?>">News</a></li>

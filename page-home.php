@@ -225,6 +225,7 @@ get_header();
           'post_type' => array('luminaries'),
           'posts_per_page' => $posts_needed,
           'post__not_in' => $not_in,
+          'orderby' => 'menu_order',
         ));
 
         $luminaries_ids = array_map('array_map_filter_ids', $recent_luminaries);
@@ -243,6 +244,7 @@ get_header();
         'post_type' => array('luminaries'),
         'posts_per_page' => $total_posts,
         'post__in' => $luminaries_ids,
+        'orderby' => 'menu_order',
       );
 
       $recent_luminaries = new WP_Query($args);
