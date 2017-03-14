@@ -48,8 +48,8 @@ if( have_posts() ) {
           echo 'offset-m-2 ';
         }
       ?>margin-bottom-basic">
-        <h1 class="font-size-big-number margin-bottom-tiny">£<?php echo $membership['cost']; ?></h1>
         <h3 class="margin-bottom-small"><?php echo $membership['name']; ?></h3>
+        <h1 class="font-size-big-number margin-top-small margin-bottom-tiny">£<?php echo $membership['cost']; ?></h1>
         <a href="<?php echo $membership['link']; ?>" class="link-button">Sign Up Here</a>
       </div>
     <?php
@@ -58,16 +58,13 @@ if( have_posts() ) {
         }
     ?>
         </div>
-    <div class="grid-row margin-top-basic margin-bottom-basic">
-      <div class="grid-item item-s-12 text-align-center">
-        Payments handled by Stripe.<br />
-        <img src="<?php bloginfo('stylesheet_directory'); ?>/img/dist/cards.png" alt="Visa/Mastercard/Amex" />
-      </div>
-    </div>
     <?php
       }
 
-      get_template_part('partials/connect'); ?>
+      get_template_part('partials/connect');
+
+      get_template_part('partials/related-posts');
+    ?>
   </article>
 <?php
   }
