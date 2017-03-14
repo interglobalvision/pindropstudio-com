@@ -3,6 +3,7 @@ $hide_image = get_post_meta($post->ID, '_igv_no_image', true);
 $time_meta = get_post_meta($post->ID, '_igv_event_datetime', true);
 $soldout = get_post_meta($post->ID, '_igv_soldout', true);
 $booking = get_post_meta($post->ID, '_igv_event_booking_url', true);
+$address = get_post_meta($post->ID, '_igv_event_address', true);
 
 if ($time_meta) {
   $time = new \Moment\Moment('@' . $time_meta);
@@ -25,6 +26,13 @@ if ($time_meta) {
 
     <header class="margin-bottom-mid text-align-center">
       <h2 class="margin-bottom-small"><?php the_title(); ?></h2>
+      <?php
+        if ($address) {
+      ?>
+      <h4 class="margin-bottom-small font-style-micro"><?php echo $address; ?></h4>
+      <?php
+        }
+      ?>
       <h4 class="margin-bottom-tiny font-style-micro"><?php echo $time->format('H:i'); ?> | <?php echo $time->format('l'); ?></h4>
       <h1 class="font-size-big-number margin-top-tiny"><?php echo $time->format('d'); ?></h1>
       <h4 class="font-style-micro"><?php echo $time->format('F'); ?></h4>
