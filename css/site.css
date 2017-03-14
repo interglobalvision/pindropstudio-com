@@ -2012,7 +2012,7 @@ input[type=radio] {
   border-left: solid 1px #373a3c;
   border-bottom: solid 1px #373a3c;
   border-right: solid 1px #373a3c;
-  padding: 7px 7px 4.666666666666667px 7px;
+  padding: 0.6em 0.72em 0.46em 0.72em;
   font-family: 'Scotch Micro';
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -2039,7 +2039,7 @@ input[type=radio] {
   border-left: solid 1px #373a3c;
   border-bottom: solid 1px #373a3c;
   border-right: solid 1px #373a3c;
-  padding: 7px 7px 4.666666666666667px 7px;
+  padding: 0.6em 0.72em 0.46em 0.72em;
   font-family: 'Scotch Micro';
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -2562,12 +2562,6 @@ input[type=radio] {
   }
   .validation_error {
     margin-bottom: 14px;
-  }
-  .link-button {
-    padding: 7px 7px 4.666666666666667px 7px;
-  }
-  .button-list li {
-    padding: 7px 7px 4.666666666666667px 7px;
   }
   #header {
     padding-top: 28px;
@@ -3092,12 +3086,6 @@ input[type=radio] {
   }
   .validation_error {
     margin-bottom: 16px;
-  }
-  .link-button {
-    padding: 8px 8px 5.333333333333333px 8px;
-  }
-  .button-list li {
-    padding: 8px 8px 5.333333333333333px 8px;
   }
   #header {
     padding-top: 32px;

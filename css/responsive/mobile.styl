@@ -48,10 +48,12 @@ input[type=radio]
 
 // LINKS & BUTTONS
 
+$button-padding = .6em .72em .46em .72em
+
 .link-button, .gform_button
   display: inline-block
   setBorders()
-  padding: $margin-tiny $margin-tiny $margin-micro $margin-tiny
+  padding: $button-padding
   font-style-micro()
   line-height: 1
   cursor: pointer
@@ -65,7 +67,7 @@ input[type=radio]
   li
     display: inline-block
     setBorders()
-    padding: $margin-tiny $margin-tiny $margin-micro $margin-tiny
+    padding: $button-padding
     font-style-micro()
     margin-left: -1px
     cursor: pointer
