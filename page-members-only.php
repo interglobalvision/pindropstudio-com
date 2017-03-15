@@ -25,9 +25,7 @@ if( have_posts() ) {
       $member_posts = new WP_Query(array(
         'post_type' => array('event', 'recording'),
         'posts_per_page' => -1,
-/*         'category__in' => 451, */
-        'category__in' => 51,
-
+        'category__in' => 451,
       ));
 
       if ($member_posts->have_posts()) {
