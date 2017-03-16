@@ -455,6 +455,9 @@ font-sizes($font-size-basic, .65)
   .mobile-only
     display: none
 
+  .desktop-only
+    display: initial
+
   @import 'responsive/tablet'
 
 @media screen and (min-width: 860px)
@@ -483,9 +486,6 @@ font-sizes($font-size-basic, .65)
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
   font-sizes($font-size-basic, .9)
-
-  .desktop-only
-    display: initial
 
   @import 'responsive/desktop'
 

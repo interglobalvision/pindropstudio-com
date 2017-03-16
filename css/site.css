@@ -2525,6 +2525,9 @@ input[type=radio] {
   .mobile-only {
     display: none;
   }
+  .desktop-only {
+    display: initial;
+  }
   input,
   textarea {
     padding: 7px 14px;
@@ -3026,9 +3029,6 @@ input[type=radio] {
   .font-size-big-number {
     font-size: 81px;
     line-height: 0.866666667;
-  }
-  .desktop-only {
-    display: initial;
   }
   input,
   textarea {
