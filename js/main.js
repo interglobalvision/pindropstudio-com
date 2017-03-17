@@ -176,7 +176,7 @@ Site.Layout = {
 
       $(targets).each(function(index, targetClass) {
         var maxHeight = 0;
-        var $matchingItems = $('.' + targetClass);
+        var $matchingItems = $(group).find('.' + targetClass);
 
         $matchingItems.css('height', 'auto');
 
