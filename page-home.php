@@ -42,7 +42,7 @@ get_header();
       <?php render_divider('<a href="' . home_url('live') . '">Forthcoming Live Events +</a>'); ?>
     </div>
 
-    <div class="grid-row justify-center margin-bottom-mid js-match-height-group" data-match-height-targets='["event-forthcoming-title", "event-forthcoming-buttons"]'>
+    <div class="grid-row justify-center margin-bottom-mid js-match-height-group" data-match-height-targets='["event-forthcoming-title", "event-forthcoming-datetime", "event-forthcoming-buttons"]'>
     <?php
         while ($forthcoming_events->have_posts()) {
           $forthcoming_events->the_post();
