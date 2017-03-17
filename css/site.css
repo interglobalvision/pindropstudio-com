@@ -2608,12 +2608,6 @@ input[type=radio] {
   .card.card-big {
     padding: 42px;
   }
-  .event-forthcoming-title {
-    min-height: 4.75em;
-  }
-  .item-m-12 .event-forthcoming-title {
-    min-height: initial;
-  }
   .live-forthcoming-event-meta {
     margin-top: 70px;
   }
