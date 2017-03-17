@@ -39,20 +39,6 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
    */
 
-  // GALLERY
-  $gallery_meta = new_cmb2_box( array(
-    'id'            => $prefix . 'gallery_meta',
-    'title'         => esc_html__( 'Gallery', 'cmb2' ),
-    'object_types'  => array( 'post','event', ), // Post type
-  ));
-
-  $gallery_meta->add_field( array(
-    'name'    => 'Gallery',
-    'description' => __( 'a Wordpress gallery', 'cmb2' ),
-    'id'      => $prefix . 'gallery',
-    'type'    => 'wysiwyg',
-  ));
-
   // LUMINARIES METABOXES
 
   $luminaries_meta = new_cmb2_box( array(
@@ -89,6 +75,23 @@ function igv_cmb_metaboxes() {
     'type'    => 'checkbox',
   ) );
 
+  $event_recording_metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'event_recording_meta',
+    'title'         => __( 'Date Meta', 'cmb2' ),
+    'object_types'  => array( 'event', 'recording' ), // Post type
+    'context'       => 'normal',
+    'priority'      => 'high',
+    'show_names'    => true, // Show field names on the left
+  ) );
+
+  $event_recording_metabox->add_field( array(
+    'name' => 'Date / Time',
+    'id'      => $prefix . 'event_datetime',
+    'type' => 'text_datetime_timestamp',
+    // 'timezone_meta_key' => 'wiki_test_timezone',
+    // 'date_format' => 'l jS \of F Y',
+  ) );
+
   /**
    * Events Metaboxes
    * */
@@ -112,14 +115,6 @@ function igv_cmb_metaboxes() {
     'name'    => 'Address',
     'id'      => $prefix . 'event_address',
     'type'    => 'textarea',
-  ) );
-
-  $event_metabox->add_field( array(
-    'name' => 'Date / Time',
-    'id'      => $prefix . 'event_datetime',
-    'type' => 'text_datetime_timestamp',
-    // 'timezone_meta_key' => 'wiki_test_timezone',
-    // 'date_format' => 'l jS \of F Y',
   ) );
 
   $event_metabox->add_field( array(
@@ -205,6 +200,20 @@ function igv_cmb_metaboxes() {
     'type'       => 'post_search_text',
     'post_type'  => array('luminaries'),
   ) );
+
+  // GALLERY
+  $gallery_meta = new_cmb2_box( array(
+    'id'            => $prefix . 'gallery_meta',
+    'title'         => esc_html__( 'Gallery', 'cmb2' ),
+    'object_types'  => array( 'post','event', ), // Post type
+  ));
+
+  $gallery_meta->add_field( array(
+    'name'    => 'Gallery',
+    'description' => __( 'a Wordpress gallery', 'cmb2' ),
+    'id'      => $prefix . 'gallery',
+    'type'    => 'wysiwyg',
+  ));
 
   // PAGE: JOIN
 
