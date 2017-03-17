@@ -25,11 +25,11 @@
         }
       ?>
       <h2 class="event-forthcoming-title margin-top-small margin-bottom-small"><?php the_title(); ?></h2>
-      <h4 class="margin-bottom-tiny font-style-micro"><?php echo $time_moment->format('H:i'); ?> | <?php echo $time_moment->format('l'); ?></h4>
+      <h4 class="event-forthcoming-datetime margin-bottom-tiny font-style-micro"><?php echo $time_moment->format('H:i'); ?> | <?php echo $time_moment->format('l'); ?></h4>
       <h1 class="font-size-big-number margin-bottom-tiny"><?php echo $time_moment->format('d'); ?></h1>
       <h4 class="font-style-micro"><?php echo $time_moment->format('F'); ?></h4>
     </a>
-      <div class="margin-top-basic text-align-center">
+      <div class="event-forthcoming-buttons margin-top-basic text-align-center">
         <ul class="button-list">
     <?php
       if ($soldout) {

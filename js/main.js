@@ -28,6 +28,7 @@ Site = {
     _this.bindPinScroll();
 
     Site.Menu.init();
+    Site.Layout.init();
     Site.Shuffle.init();
     Site.Media.init();
     Site.Lightbox.init();
@@ -141,6 +142,58 @@ Site.Shuffle = {
     }
 
   }
+};
+
+Site.Layout = {
+  $matchHeightGroups: $('.js-match-height-group'),
+  init: function() {
+    var _this = this;
+
+    if (_this.$matchHeightGroups.length) {
+      _this.matchHeights();
+    }
+
+    _this.bind();
+
+  },
+
+  bind: function() {
+    var _this = this;
+
+    if (_this.$matchHeightGroups.length) {
+      $(window).resize(function() {
+        _this.matchHeights();
+      });
+    }
+
+  },
+
+  matchHeights: function() {
+    var _this = this;
+
+    _this.$matchHeightGroups.each(function(index, group) {
+      var targets = $(group).data('match-height-targets');
+
+      $(targets).each(function(index, targetClass) {
+        var maxHeight = 0;
+        var $matchingItems = $(group).find('.' + targetClass);
+
+        $matchingItems.css('height', 'auto');
+
+        $matchingItems.each(function(index, item) {
+          var height = $(item).innerHeight();
+
+          if (height > maxHeight) {
+            maxHeight = height;
+          }
+        });
+
+        $matchingItems.css('height', maxHeight + 'px');
+      });
+
+    });
+
+  },
 };
 
 Site.Galleries = {
