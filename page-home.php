@@ -42,7 +42,7 @@ get_header();
       <?php render_divider('<a href="' . home_url('live') . '">Forthcoming Live Events +</a>'); ?>
     </div>
 
-    <div class="grid-row justify-center margin-bottom-mid js-match-height-group" data-match-height-targets='["event-forthcoming-title"]'>
+    <div class="grid-row justify-center margin-bottom-mid js-match-height-group" data-match-height-targets='["event-forthcoming-title", "tall-ad-subtitle"]'>
     <?php
         while ($forthcoming_events->have_posts()) {
           $forthcoming_events->the_post();
@@ -76,7 +76,7 @@ get_header();
 
     <div class="shuffle-section media-items margin-bottom-basic">
       <div class="shuffle-preloader"></div>
-      <div class="shuffle-container grid-row hidden">
+      <div class="shuffle-container grid-row hidden js-match-height-group" data-match-height-targets='["media-post-title"]'>
 
     <?php
       $overrides = IGV_get_option('_igv_home_options', '_igv_override_events');

@@ -1612,11 +1612,6 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   max-height: 100%;
   width: auto;
 }
-.tall-ad-subtitle {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .thumb-for-lightbox {
   position: relative;
 }
@@ -2653,9 +2648,6 @@ input[type=radio] {
     right: 21px;
     bottom: 21px;
     left: 21px;
-  }
-  .tall-ad-title {
-    min-height: 3.5em;
   }
   .thumb-for-lightbox svg {
     top: 7px;
