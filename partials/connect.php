@@ -1,5 +1,5 @@
 <div class="grid-row margin-top-mid margin-bottom-basic">
-  <?php render_divider('Connect with Pindrop'); ?>
+  <?php render_divider('Sign up to our newsletter'); ?>
 </div>
 
 <form action="http://modernactivity.createsend.com/t/y/s/cjrdlh/" method="post" class="connect-form">
