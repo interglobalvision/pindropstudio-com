@@ -40,9 +40,9 @@ if( have_posts() ) {
       'posts_per_page' => -1,
       'meta_query' => array(
         array(
-            'key' => '_igv_related_luminaries',
+            'key' => '_igv_related_luminaries_array',
             'value' => $post->ID,
-            'compare' => 'IN'
+            'compare' => 'LIKE'
         )
       ),
       'meta_key' => '_igv_event_datetime',
