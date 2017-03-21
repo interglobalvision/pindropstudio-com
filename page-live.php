@@ -13,7 +13,7 @@ get_header();
 
       $forthcoming_events = new WP_Query(array(
         'post_type' => 'event',
-        'posts_per_page' => 3,
+        'posts_per_page' => -1,
         'orderby' => 'meta_value',
         'order' => 'ASC',
         'meta_key' => '_igv_event_datetime',
