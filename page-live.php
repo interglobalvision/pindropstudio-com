@@ -36,7 +36,7 @@ get_header();
       <?php render_divider('Forthcoming Live Events'); ?>
     </div>
 
-    <div class="grid-row justify-center">
+    <div class="grid-row justify-center js-match-height-group" data-match-height-targets='["event-forthcoming-title", "event-forthcoming-datetime", "event-forthcoming-buttons"]'>
     <?php
         while ($forthcoming_events->have_posts()) {
           $forthcoming_events->the_post();
