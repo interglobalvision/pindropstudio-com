@@ -6,7 +6,7 @@ Site = {
   mobileThreshold: 601,
   animationSpeed: 400,
   swiperVariables: {
-    speed: 400,
+    speed: 600,
     pagination: '.swiper-pagination',
     paginationType: 'fraction',
     loop: true,
