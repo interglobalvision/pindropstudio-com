@@ -58,7 +58,7 @@ get_header();
       <div class="shuffle-container grid-row hidden">
     <?php
       $overrides = IGV_get_option('_igv_live_options', '_igv_override_events');
-      $total_posts = 5;
+      $total_posts = 15;
       $posts_needed = $total_posts;
       $not_in = array();
 
