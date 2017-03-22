@@ -35,7 +35,7 @@
     $social_divider_content .= '&nbsp;<a href="' . $facebook . '" class="link-button" target="_blank" rel="noreferrer">Facebook</a>';
   }
   if ($instagram) {
-    $social_divider_content .= '&nbsp;<a href="https://instagram.com/' . $twitter . '" class="link-button" target="_blank" rel="noreferrer">Instagram</a>';
+    $social_divider_content .= '&nbsp;<a href="https://instagram.com/' . $instagram . '" class="link-button" target="_blank" rel="noreferrer">Instagram</a>';
   }
 ?>
 
