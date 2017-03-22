@@ -7,9 +7,9 @@
   $time_moment = new \Moment\Moment('@' . $time);
 ?>
 <div class="grid-item item-s-12<?php
-  if ($post_count === 3) {
+  if ($post_count === 3 || $post_count > 5) {
     echo ' item-m-4';
-  } else if ($post_count === 2) {
+  } else if ($post_count === 2 || $post_count === 4) {
     echo ' item-m-6 item-l-5';
   } else {
     echo ' item-m-12';
