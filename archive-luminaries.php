@@ -48,7 +48,7 @@ if( have_posts() ) {
         <article <?php post_class('grid-item item-s-6 item-m-3 margin-bottom-small'); ?> id="post-<?php the_ID(); ?>" data-sort-order="<?php echo ($i + $post->menu_order); ?>" data-sort-alphabetical="<?php echo strtolower($surname ? $surname : 'zz'); ?>">
           <a href="<?php the_permalink(); ?>">
             <?php the_post_thumbnail('l-3-square'); ?>
-            <h3 class="text-align-center"><?php the_title(); ?></h3>
+            <h4 class="text-align-center"><?php the_title(); ?></h4>
           </a>
         </article>
 
