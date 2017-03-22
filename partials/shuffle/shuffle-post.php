@@ -5,9 +5,15 @@
     </div>
 
     <a href="<?php the_permalink(); ?>">
+      <?php
+        if (!is_page() && get_post_type() !== 'luminary') {
+      ?>
       <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center">
         <?php the_time('d F Y'); ?>
       </h4>
+      <?php
+        }
+      ?>
       <h3 class="margin-bottom-small text-align-center">
         <?php the_title(); ?>
       </h3>

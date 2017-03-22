@@ -1,9 +1,21 @@
+<?php
+$time = get_post_meta($post->ID, '_igv_event_datetime', true);
+if ($time) {
+  $time_moment = new \Moment\Moment('@' . $time);
+}
+?>
 <article <?php post_class('shuffle-item item-s-12 item-m-6 item-l-4'); ?> id="post-<?php the_ID(); ?>">
   <div class="card">
     <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('l-4-full', array('class' => 'margin-bottom-tiny')); ?></a>
 
     <a href="<?php the_permalink(); ?>">
-      <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php the_time('d F Y'); ?></h4>
+      <h4 class="font-style-micro font-size-small margin-bottom-small text-align-center"><?php
+        if ($time) {
+          echo $time_moment->format('d F Y');
+        } else {
+          the_time('d F Y');
+        }
+      ?></h4>
       <h3 class="margin-bottom-small text-align-center"><?php the_title(); ?></h3>
     </a>
 
