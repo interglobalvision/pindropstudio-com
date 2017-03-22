@@ -58,9 +58,9 @@ if (!empty($luminary)) {
     'posts_per_page' => get_option('posts_per_page'),
     'meta_query' => array(
       array(
-          'key' => '_igv_related_luminaries',
-          'value' => $luminary,
-          'compare' => 'IN'
+        'key' => '_igv_related_luminaries_array',
+        'value' => '"' . $luminary . '"',
+        'compare' => 'LIKE'
       ),
       array(
         'relation' => 'OR',

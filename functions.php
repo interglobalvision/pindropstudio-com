@@ -77,23 +77,43 @@ get_template_part( 'lib/functions-hooks' );
 get_template_part( 'lib/functions-utility' );
 
 
-function fill_igv_event_datetime() {
+function fix_luminary_meta($post_id) {
+
+  if (get_post_type($post_id) === 'event' || get_post_type($post_id) === 'recording') {
+
+    $related_string = get_post_meta($post_id, '_igv_related_luminaries', true);
+
+    if ($related_string) {
+      $related_array = explode(', ', $related_string);
+      update_post_meta($post_id, '_igv_related_luminaries_array', $related_array);
+    }
+
+  }
+
+  // temp fix broken posts
+
   $broken_posts = get_posts( array(
     'post_type' => array('event', 'recording'),
     'posts_per_page'   => -1,
     'meta_query' => array(
       array(
-        'key' => '_igv_event_datetime',
+        'key' => '_igv_related_luminaries_array',
         'compare' => 'NOT EXISTS',
       ),
     ),
   ));
 
   foreach($broken_posts as $post) {
-    update_post_meta($post->ID, '_igv_event_datetime', strtotime($post->post_date));
+
+    $related_string = get_post_meta($post->ID, '_igv_related_luminaries', true);
+
+    if ($related_string) {
+      $related_array = explode(', ', $related_string);
+      update_post_meta($post->ID, '_igv_related_luminaries_array', $related_array);
+    }
+
   }
 
-
 }
-add_action('save_post', 'fill_igv_event_datetime', 11);
+add_action('save_post', 'fix_luminary_meta', 11);
 ?>
