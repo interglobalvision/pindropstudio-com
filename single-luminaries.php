@@ -41,7 +41,7 @@ if( have_posts() ) {
       'meta_query' => array(
         array(
             'key' => '_igv_related_luminaries_array',
-            'value' => $post->ID,
+            'value' => '"' . $post->ID . '"',
             'compare' => 'LIKE'
         )
       ),
