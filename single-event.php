@@ -22,16 +22,16 @@ if( have_posts() ) {
     } else {
       get_template_part('partials/single-event/single-event-past');
     }
-?>
-    <div class="grid-row">
-      <?php render_divider(); ?>
-    </div>
-<?php
+
     $luminaries = get_post_meta($post->ID, '_igv_related_luminaries', true);
 
     if ($luminaries) {
       $luminaries = explode(', ', $luminaries);
     ?>
+    <div class="grid-row">
+      <?php render_divider(); ?>
+    </div>
+
     <div class="grid-row justify-center margin-top-large margin-bottom-large">
     <?php
         global $post;
