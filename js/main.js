@@ -642,6 +642,6 @@ Site.Share = {
 
     }
   }
-}
+};
 
 Site.init();
