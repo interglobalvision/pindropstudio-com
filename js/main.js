@@ -633,7 +633,7 @@ Site.Lightbox = {
 
     $('#lightbox-content .attachment-lightbox').first().on('load', function() {
       _this.setImageHeights();
-      _this.gallery.slideTo(0);
+      _this.gallery.slideTo(1);
     });
 
   },

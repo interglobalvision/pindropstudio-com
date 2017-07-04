@@ -167,7 +167,7 @@ function render_hidden_gallery($gallery, $post_id) {
 
     $tag = '';
 
-    $img = wp_get_attachment_image($attachment_id, 'lightbox');
+    $img = wp_get_attachment_image($attachment_id, 'lightbox', null, array('data-no-lazysizes' => true) );
 
     // If caption is set make a variable of it
 
