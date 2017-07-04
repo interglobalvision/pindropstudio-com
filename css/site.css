@@ -2615,9 +2615,6 @@ input[type=radio] {
   .media-item-play {
     padding: 7px 7px 4.666666666666667px 7px;
   }
-  .swiper-slide {
-    margin: 0 -1px;
-  }
   .swiper-button-prev svg {
     padding-left: 14px;
   }
