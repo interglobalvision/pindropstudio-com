@@ -1566,6 +1566,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .about-page-drawer {
   display: none;
+  width: 100%;
 }
 .about-page-drawer.active {
   display: initial;
