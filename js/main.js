@@ -39,8 +39,7 @@ Site = {
   },
 
   onResize: function() {
-//     var _this = this;
-
+    Site.Lightbox.onResize();
   },
 
   fixWidows: function() {
@@ -520,10 +519,13 @@ Site.Media = {
 };
 
 Site.Lightbox = {
+  imageHeight: 300,
+
   init: function() {
     var _this = this;
 
     _this.$lightbox = $('#lightbox');
+    _this.$lightboxInner = $('#lightbox-inner');
     _this.$lightboxTitle = $('#lightbox-title');
     _this.$lightboxContent = $('#lightbox-content');
 
@@ -557,20 +559,32 @@ Site.Lightbox = {
     });
   },
 
+  onResize: function() {
+    var _this = this;
+
+    _this.setImageHeights();
+  },
+
+  setImageHeights: function() {
+    var _this = this;
+
+    $('.attachment-lightbox, .lightbox-image').css('max-height', '100%');
+
+    _this.imageHeight = _this.$lightboxInner.height() - _this.$lightboxTitle.outerHeight(true);
+
+    if ($('#lightbox-content .swiper-pagination').length) {
+      _this.imageHeight = _this.imageHeight - $('#lightbox-content .swiper-pagination').outerHeight(true);
+    }
+
+    $('.attachment-lightbox, .lightbox-image').css('max-height', _this.imageHeight + 'px');
+  },
+
   show: function() {
     var _this = this;
 
     $('body').addClass('lightbox-active');
     _this.$lightbox.css('display', 'flex');
 
-  },
-
-  showGallery: function(gallery) {
-    var _this = this;
-
-    _this.show();
-
-    new Swiper(gallery, Site.swiperVariables);
   },
 
   hide: function() {
@@ -595,16 +609,33 @@ Site.Lightbox = {
     _this.$lightboxContent.append(insert);
 
     _this.show();
+
+    _this.setImageHeights();
   },
 
   openGallery: function(element) {
     var _this = this;
-
     var $gallery = $(element).siblings('.gallery').clone();
+
     $gallery.addClass('swiper-container').removeClass('u-hidden');
+
     _this.$lightboxContent.append($gallery);
 
     _this.showGallery($gallery);
+  },
+
+  showGallery: function(gallery) {
+    var _this = this;
+
+    _this.show();
+
+    _this.gallery = new Swiper(gallery, Site.swiperVariables);
+
+    $('#lightbox-content .attachment-lightbox').first().on('load', function() {
+      _this.setImageHeights();
+      _this.gallery.slideTo(1);
+    });
+
   },
 };
 
