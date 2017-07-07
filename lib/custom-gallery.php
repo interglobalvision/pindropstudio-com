@@ -120,7 +120,7 @@ function my_gallery_shortcode($attr) {
 
     $tag = '';
 
-    $img = wp_get_attachment_image($id, $size);
+    $img = wp_get_attachment_image($id, $size, null, array('data-no-lazysizes' => true));
 
     // If caption is set make a variable of it
 

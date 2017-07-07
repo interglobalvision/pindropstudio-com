@@ -1566,6 +1566,7 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 }
 .about-page-drawer {
   display: none;
+  width: 100%;
 }
 .about-page-drawer.active {
   display: initial;
@@ -1641,8 +1642,10 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
   font-size: 1.6rem;
   line-height: 1;
 }
-.lightbox-image {
+.lightbox-image,
+.attachment-lightbox {
   max-height: 80vh;
+  width: auto;
 }
 .container {
   max-width: 420px;
