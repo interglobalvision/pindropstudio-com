@@ -2160,6 +2160,10 @@ input[type=radio] {
 .swiper-button-next svg {
   padding-right: 14px;
 }
+.gallery .attachment-l-8 {
+  max-height: 240px;
+  width: auto;
+}
 .carousel-links {
   display: inline-block;
   background-color: rgba(62,62,62,0.2);
@@ -2622,6 +2626,9 @@ input[type=radio] {
   }
   .swiper-button-next svg {
     padding-right: 14px;
+  }
+  .gallery .attachment-l-8 {
+    max-height: initial;
   }
   .home-carousel {
     height: 520px;
