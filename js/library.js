@@ -9,7 +9,7 @@
 	/*jshint eqnull:true */
 	if(!document.getElementsByClassName){return;}
 
-	var lazySizesConfig;
+	var lazysizes, lazySizesConfig;
 
 	var docElem = document.documentElement;
 
@@ -70,7 +70,13 @@
 	var triggerEvent = function(elem, name, detail, noBubbles, noCancelable){
 		var event = document.createEvent('CustomEvent');
 
-		event.initCustomEvent(name, !noBubbles, !noCancelable, detail || {});
+		if(!detail){
+			detail = {};
+		}
+
+		detail.instance = lazysizes;
+
+		event.initCustomEvent(name, !noBubbles, !noCancelable, detail);
 
 		elem.dispatchEvent(event);
 		return event;
@@ -102,24 +108,30 @@
 
 	var rAF = (function(){
 		var running, waiting;
-		var fns = [];
+		var firstFns = [];
+		var secondFns = [];
+		var fns = firstFns;
 
 		var run = function(){
-			var fn;
+			var runFns = fns;
+
+			fns = firstFns.length ? secondFns : firstFns;
+
 			running = true;
 			waiting = false;
-			while(fns.length){
-				fn = fns.shift();
-				fn[0].apply(fn[1], fn[2]);
+
+			while(runFns.length){
+				runFns.shift()();
 			}
+
 			running = false;
 		};
 
-		var rafBatch = function(fn){
-			if(running){
+		var rafBatch = function(fn, queue){
+			if(running && !queue){
 				fn.apply(this, arguments);
 			} else {
-				fns.push([fn, this, arguments]);
+				fns.push(fn);
 
 				if(!waiting){
 					waiting = true;
@@ -151,21 +163,21 @@
 	var throttle = function(fn){
 		var running;
 		var lastTime = 0;
-		var gDelay = 125;
-		var RIC_DEFAULT_TIMEOUT = 666;
-		var rICTimeout = RIC_DEFAULT_TIMEOUT;
+		var gDelay = lazySizesConfig.throttleDelay;
+		var rICTimeout = lazySizesConfig.ricTimeout;
 		var run = function(){
 			running = false;
 			lastTime = Date.now();
 			fn();
 		};
-		var idleCallback = requestIdleCallback ?
+		var idleCallback = requestIdleCallback && rICTimeout > 49 ?
 			function(){
 				requestIdleCallback(run, {timeout: rICTimeout});
-				if(rICTimeout !== RIC_DEFAULT_TIMEOUT){
-					rICTimeout = RIC_DEFAULT_TIMEOUT;
+
+				if(rICTimeout !== lazySizesConfig.ricTimeout){
+					rICTimeout = lazySizesConfig.ricTimeout;
 				}
-			}:
+			} :
 			rAFIt(function(){
 				setTimeout(run);
 			}, true)
@@ -173,8 +185,9 @@
 
 		return function(isPriority){
 			var delay;
+
 			if((isPriority = isPriority === true)){
-				rICTimeout = 44;
+				rICTimeout = 33;
 			}
 
 			if(running){
@@ -189,7 +202,7 @@
 				delay = 0;
 			}
 
-			if(isPriority || (delay < 9 && requestIdleCallback)){
+			if(isPriority || delay < 9){
 				idleCallback();
 			} else {
 				setTimeout(idleCallback, delay);
@@ -224,9 +237,51 @@
 		};
 	};
 
+	(function(){
+		var prop;
+
+		var lazySizesDefaults = {
+			lazyClass: 'lazyload',
+			loadedClass: 'lazyloaded',
+			loadingClass: 'lazyloading',
+			preloadClass: 'lazypreload',
+			errorClass: 'lazyerror',
+			//strictClass: 'lazystrict',
+			autosizesClass: 'lazyautosizes',
+			srcAttr: 'data-src',
+			srcsetAttr: 'data-srcset',
+			sizesAttr: 'data-sizes',
+			//preloadAfterLoad: false,
+			minSize: 40,
+			customMedia: {},
+			init: true,
+			expFactor: 1.5,
+			hFac: 0.8,
+			loadMode: 2,
+			loadHidden: true,
+			ricTimeout: 0,
+			throttleDelay: 125,
+		};
+
+		lazySizesConfig = window.lazySizesConfig || window.lazysizesConfig || {};
+
+		for(prop in lazySizesDefaults){
+			if(!(prop in lazySizesConfig)){
+				lazySizesConfig[prop] = lazySizesDefaults[prop];
+			}
+		}
+
+		window.lazySizesConfig = lazySizesConfig;
+
+		setTimeout(function(){
+			if(lazySizesConfig.init){
+				init();
+			}
+		});
+	})();
 
 	var loader = (function(){
-		var lazyloadElems, preloadElems, isCompleted, resetPreloadingTimer, loadMode, started;
+		var preloadElems, isCompleted, resetPreloadingTimer, loadMode, started;
 
 		var eLvW, elvH, eLtop, eLleft, eLright, eLbottom;
 
@@ -283,6 +338,8 @@
 		var checkElements = function() {
 			var eLlen, i, rect, autoLoadElem, loadedSomething, elemExpand, elemNegativeExpand, elemExpandVal, beforeExpandVal;
 
+			var lazyloadElems = lazysizes.elements;
+
 			if((loadMode = lazySizesConfig.loadMode) && isLoading < 8 && (eLlen = lazyloadElems.length)){
 
 				i = 0;
@@ -331,6 +388,7 @@
 						(eLright = rect.right) >= elemNegativeExpand * hFac &&
 						(eLleft = rect.left) <= eLvW &&
 						(eLbottom || eLright || eLleft || eLtop) &&
+						(lazySizesConfig.loadHidden || getCSS(lazyloadElems[i], 'visibility') != 'hidden') &&
 						((isCompleted && isLoading < 3 && !elemExpandVal && (loadMode < 3 || lowRuns < 4)) || isNestedVisible(lazyloadElems[i], elemExpand))){
 						unveilElement(lazyloadElems[i]);
 						loadedSomething = true;
@@ -355,6 +413,7 @@
 			addClass(e.target, lazySizesConfig.loadedClass);
 			removeClass(e.target, lazySizesConfig.loadingClass);
 			addRemoveLoadEvents(e.target, rafSwitchLoadingClass);
+			triggerEvent(e.target, 'lazyloaded');
 		};
 		var rafedSwitchLoadingClass = rAFIt(switchLoadingClass);
 		var rafSwitchLoadingClass = function(e){
@@ -370,7 +429,7 @@
 		};
 
 		var handleSources = function(source){
-			var customMedia, parent;
+			var customMedia;
 
 			var sourceSrcset = source[_getAttribute](lazySizesConfig.srcsetAttr);
 
@@ -380,13 +439,6 @@
 
 			if(sourceSrcset){
 				source.setAttribute('srcset', sourceSrcset);
-			}
-
-			//https://bugzilla.mozilla.org/show_bug.cgi?id=1170572
-			if(customMedia){
-				parent = source.parentNode;
-				parent.insertBefore(source.cloneNode(), source);
-				parent.removeChild(source);
 			}
 		};
 
@@ -438,18 +490,18 @@
 					}
 				}
 
-				if(srcset || isPicture){
+				if(isImg && (srcset || isPicture)){
 					updatePolyfill(elem, {src: src});
 				}
 			}
 
-			rAF(function(){
-				if(elem._lazyRace){
-					delete elem._lazyRace;
-				}
-				removeClass(elem, lazySizesConfig.lazyClass);
+			if(elem._lazyRace){
+				delete elem._lazyRace;
+			}
+			removeClass(elem, lazySizesConfig.lazyClass);
 
-				if( !firesLoad || elem.complete ){
+			rAF(function(){
+				if( !firesLoad || (elem.complete && elem.naturalWidth > 1)){
 					if(firesLoad){
 						resetPreloading(event);
 					} else {
@@ -457,7 +509,7 @@
 					}
 					switchLoadingClass(event);
 				}
-			});
+			}, true);
 		});
 
 		var unveilElement = function (elem){
@@ -469,7 +521,7 @@
 			var sizes = isImg && (elem[_getAttribute](lazySizesConfig.sizesAttr) || elem[_getAttribute]('sizes'));
 			var isAuto = sizes == 'auto';
 
-			if( (isAuto || !isCompleted) && isImg && (elem.src || elem.srcset) && !elem.complete && !hasClass(elem, lazySizesConfig.errorClass)){return;}
+			if( (isAuto || !isCompleted) && isImg && (elem[_getAttribute]('src') || elem.srcset) && !elem.complete && !hasClass(elem, lazySizesConfig.errorClass) && hasClass(elem, lazySizesConfig.lazyClass)){return;}
 
 			detail = triggerEvent(elem, 'lazyunveilread').detail;
 
@@ -512,7 +564,7 @@
 			_: function(){
 				started = Date.now();
 
-				lazyloadElems = document.getElementsByClassName(lazySizesConfig.lazyClass);
+				lazysizes.elements = document.getElementsByClassName(lazySizesConfig.lazyClass);
 				preloadElems = document.getElementsByClassName(lazySizesConfig.lazyClass + ' ' + lazySizesConfig.preloadClass);
 				hFac = lazySizesConfig.hFac;
 
@@ -543,8 +595,9 @@
 					setTimeout(onload, 20000);
 				}
 
-				if(lazyloadElems.length){
+				if(lazysizes.elements.length){
 					checkElements();
+					rAF._lsFlush();
 				} else {
 					throttledCheckElements();
 				}
@@ -626,47 +679,7 @@
 		}
 	};
 
-	(function(){
-		var prop;
-
-		var lazySizesDefaults = {
-			lazyClass: 'lazyload',
-			loadedClass: 'lazyloaded',
-			loadingClass: 'lazyloading',
-			preloadClass: 'lazypreload',
-			errorClass: 'lazyerror',
-			//strictClass: 'lazystrict',
-			autosizesClass: 'lazyautosizes',
-			srcAttr: 'data-src',
-			srcsetAttr: 'data-srcset',
-			sizesAttr: 'data-sizes',
-			//preloadAfterLoad: false,
-			minSize: 40,
-			customMedia: {},
-			init: true,
-			expFactor: 1.5,
-			hFac: 0.8,
-			loadMode: 2
-		};
-
-		lazySizesConfig = window.lazySizesConfig || window.lazysizesConfig || {};
-
-		for(prop in lazySizesDefaults){
-			if(!(prop in lazySizesConfig)){
-				lazySizesConfig[prop] = lazySizesDefaults[prop];
-			}
-		}
-
-		window.lazySizesConfig = lazySizesConfig;
-
-		setTimeout(function(){
-			if(lazySizesConfig.init){
-				init();
-			}
-		});
-	})();
-
-	return {
+	lazysizes = {
 		cfg: lazySizesConfig,
 		autoSizer: autoSizer,
 		loader: loader,
@@ -679,11 +692,13 @@
 		gW: getWidth,
 		rAF: rAF,
 	};
+
+	return lazysizes;
 }
 ));
 
 /**
- * EvEmitter v1.0.3
+ * EvEmitter v1.1.0
  * Lil' event emitter
  * MIT License
  */
@@ -763,13 +778,14 @@ proto.emitEvent = function( eventName, args ) {
   if ( !listeners || !listeners.length ) {
     return;
   }
-  var i = 0;
-  var listener = listeners[i];
+  // copy over to avoid interference if .off() in listener
+  listeners = listeners.slice(0);
   args = args || [];
   // once stuff
   var onceListeners = this._onceEvents && this._onceEvents[ eventName ];
 
-  while ( listener ) {
+  for ( var i=0; i < listeners.length; i++ ) {
+    var listener = listeners[i]
     var isOnce = onceListeners && onceListeners[ listener ];
     if ( isOnce ) {
       // remove listener
@@ -780,175 +796,187 @@ proto.emitEvent = function( eventName, args ) {
     }
     // trigger listener
     listener.apply( this, args );
-    // get next listener
-    i += isOnce ? 0 : 1;
-    listener = listeners[i];
   }
 
   return this;
+};
+
+proto.allOff = function() {
+  delete this._events;
+  delete this._onceEvents;
 };
 
 return EvEmitter;
 
 }));
 
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["shuffle"] = factory();
-	else
-		root["shuffle"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-/******/
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global.shuffle = factory());
+}(this, (function () { 'use strict';
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__get_number__ = __webpack_require__(2);
+// Polyfill for creating CustomEvents on IE9/10/11
 
+// code pulled from:
+// https://github.com/d4tocchini/customevent-polyfill
+// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
 
+try {
+    var ce = new window.CustomEvent('test');
+    ce.preventDefault();
+    if (ce.defaultPrevented !== true) {
+        // IE has problems with .preventDefault() on custom events
+        // http://stackoverflow.com/questions/23349191
+        throw new Error('Could not prevent default');
+    }
+} catch(e) {
+  var CustomEvent$1 = function(event, params) {
+    var evt, origPrevent;
+    params = params || {
+      bubbles: false,
+      cancelable: false,
+      detail: undefined
+    };
 
+    evt = document.createEvent("CustomEvent");
+    evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+    origPrevent = evt.preventDefault;
+    evt.preventDefault = function () {
+      origPrevent.call(this);
+      try {
+        Object.defineProperty(this, 'defaultPrevented', {
+          get: function () {
+            return true;
+          }
+        });
+      } catch(e) {
+        this.defaultPrevented = true;
+      }
+    };
+    return evt;
+  };
 
-/**
- * Represents a coordinate pair.
- * @param {number} [x=0] X.
- * @param {number} [y=0] Y.
- */
-var Point = function Point(x, y) {
-  this.x = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(x);
-  this.y = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(y);
-};
-
-/**
- * Whether two points are equal.
- * @param {Point} a Point A.
- * @param {Point} b Point B.
- * @return {boolean}
- */
-Point.equals = function (a, b) {
-  return a.x === b.x && a.y === b.y;
-};
-
-/* harmony default export */ __webpack_exports__["a"] = Point;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = {
-  BASE: 'shuffle',
-  SHUFFLE_ITEM: 'shuffle-item',
-  VISIBLE: 'shuffle-item--visible',
-  HIDDEN: 'shuffle-item--hidden'
-};
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = getNumber;
-
-
-/**
- * Always returns a numeric value, given a value. Logic from jQuery's `isNumeric`.
- * @param {*} value Possibly numeric value.
- * @return {number} `value` or zero if `value` isn't numeric.
- */
-
-function getNumber(value) {
-  return parseFloat(value) || 0;
+  CustomEvent$1.prototype = window.Event.prototype;
+  window.CustomEvent = CustomEvent$1; // expose definition to window
 }
 
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
+var proto = Element.prototype;
+var vendor = proto.matches
+  || proto.matchesSelector
+  || proto.webkitMatchesSelector
+  || proto.mozMatchesSelector
+  || proto.msMatchesSelector
+  || proto.oMatchesSelector;
 
-module.exports = extend
+var index = match;
+
+/**
+ * Match `el` to `selector`.
+ *
+ * @param {Element} el
+ * @param {String} selector
+ * @return {Boolean}
+ * @api public
+ */
+
+function match(el, selector) {
+  if (vendor) return vendor.call(el, selector);
+  var nodes = el.parentNode.querySelectorAll(selector);
+  for (var i = 0; i < nodes.length; i++) {
+    if (nodes[i] == el) return true;
+  }
+  return false;
+}
+
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+
+
+
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var index$1 = createCommonjsModule(function (module) {
+'use strict';
+
+// there's 3 implementations written in increasing order of efficiency
+
+// 1 - no Set type is defined
+function uniqNoSet(arr) {
+	var ret = [];
+
+	for (var i = 0; i < arr.length; i++) {
+		if (ret.indexOf(arr[i]) === -1) {
+			ret.push(arr[i]);
+		}
+	}
+
+	return ret;
+}
+
+// 2 - a simple Set type is defined
+function uniqSet(arr) {
+	var seen = new Set();
+	return arr.filter(function (el) {
+		if (!seen.has(el)) {
+			seen.add(el);
+			return true;
+		}
+
+		return false;
+	});
+}
+
+// 3 - a standard Set type is defined and it has a forEach method
+function uniqSetWithForEach(arr) {
+	var ret = [];
+
+	(new Set(arr)).forEach(function (el) {
+		ret.push(el);
+	});
+
+	return ret;
+}
+
+// V8 currently has a broken implementation
+// https://github.com/joyent/node/issues/8449
+function doesForEachActuallyWork() {
+	var ret = false;
+
+	(new Set([true])).forEach(function (el) {
+		ret = el;
+	});
+
+	return ret === true;
+}
+
+if ('Set' in commonjsGlobal) {
+	if (typeof Set.prototype.forEach === 'function' && doesForEachActuallyWork()) {
+		module.exports = uniqSetWithForEach;
+	} else {
+		module.exports = uniqSet;
+	}
+} else {
+	module.exports = uniqNoSet;
+}
+});
+
+var immutable = extend;
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function extend() {
-    var target = {}
+    var target = {};
 
     for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i]
+        var source = arguments[i];
 
         for (var key in source) {
             if (hasOwnProperty.call(source, key)) {
-                target[key] = source[key]
+                target[key] = source[key];
             }
         }
     }
@@ -956,68 +984,553 @@ function extend() {
     return target
 }
 
+var index$2 = throttle;
 
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/**
+ * Returns a new function that, when invoked, invokes `func` at most once per `wait` milliseconds.
+ *
+ * @param {Function} func Function to wrap.
+ * @param {Number} wait Number of milliseconds that must elapse between `func` invocations.
+ * @return {Function} A new function that wraps the `func` function passed in.
+ */
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_custom_event_polyfill__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_custom_event_polyfill___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_custom_event_polyfill__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_matches_selector__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_matches_selector___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_matches_selector__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_array_uniq__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_array_uniq___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_array_uniq__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_xtend__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_xtend___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_xtend__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_throttleit__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_throttleit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_throttleit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_array_parallel__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_array_parallel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_array_parallel__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__point__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shuffle_item__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__classes__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__get_number_style__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__sorter__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__on_transition_end__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__layout__ = __webpack_require__(9);
+function throttle (func, wait) {
+  var ctx, args, rtn, timeoutID; // caching
+  var last = 0;
+
+  return function throttled () {
+    ctx = this;
+    args = arguments;
+    var delta = new Date() - last;
+    if (!timeoutID)
+      if (delta >= wait) call();
+      else timeoutID = setTimeout(call, wait - delta);
+    return rtn;
+  };
+
+  function call () {
+    timeoutID = 0;
+    last = +new Date();
+    rtn = func.apply(ctx, args);
+    ctx = null;
+    args = null;
+  }
+}
+
+var index$3 = function parallel(fns, context, callback) {
+  if (!callback) {
+    if (typeof context === 'function') {
+      callback = context;
+      context = null;
+    } else {
+      callback = noop;
+    }
+  }
+
+  var pending = fns && fns.length;
+  if (!pending) return callback(null, []);
+
+  var finished = false;
+  var results = new Array(pending);
+
+  fns.forEach(context ? function (fn, i) {
+    fn.call(context, maybeDone(i));
+  } : function (fn, i) {
+    fn(maybeDone(i));
+  });
+
+  function maybeDone(i) {
+    return function (err, result) {
+      if (finished) return;
+
+      if (err) {
+        callback(err, results);
+        finished = true;
+        return
+      }
+
+      results[i] = result;
+
+      if (!--pending) callback(null, results);
+    }
+  }
+};
+
+function noop() {}
+
+/**
+ * Always returns a numeric value, given a value. Logic from jQuery's `isNumeric`.
+ * @param {*} value Possibly numeric value.
+ * @return {number} `value` or zero if `value` isn't numeric.
+ */
+function getNumber(value) {
+  return parseFloat(value) || 0;
+}
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+var Point = function () {
+
+  /**
+   * Represents a coordinate pair.
+   * @param {number} [x=0] X.
+   * @param {number} [y=0] Y.
+   */
+  function Point(x, y) {
+    classCallCheck(this, Point);
+
+    this.x = getNumber(x);
+    this.y = getNumber(y);
+  }
+
+  /**
+   * Whether two points are equal.
+   * @param {Point} a Point A.
+   * @param {Point} b Point B.
+   * @return {boolean}
+   */
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+  createClass(Point, null, [{
+    key: 'equals',
+    value: function equals(a, b) {
+      return a.x === b.x && a.y === b.y;
+    }
+  }]);
+  return Point;
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var Classes = {
+  BASE: 'shuffle',
+  SHUFFLE_ITEM: 'shuffle-item',
+  VISIBLE: 'shuffle-item--visible',
+  HIDDEN: 'shuffle-item--hidden'
+};
 
+var id$1 = 0;
 
+var ShuffleItem = function () {
+  function ShuffleItem(element) {
+    classCallCheck(this, ShuffleItem);
 
+    id$1 += 1;
+    this.id = id$1;
+    this.element = element;
+    this.isVisible = true;
+  }
 
+  createClass(ShuffleItem, [{
+    key: 'show',
+    value: function show() {
+      this.isVisible = true;
+      this.element.classList.remove(Classes.HIDDEN);
+      this.element.classList.add(Classes.VISIBLE);
+    }
+  }, {
+    key: 'hide',
+    value: function hide() {
+      this.isVisible = false;
+      this.element.classList.remove(Classes.VISIBLE);
+      this.element.classList.add(Classes.HIDDEN);
+    }
+  }, {
+    key: 'init',
+    value: function init() {
+      this.addClasses([Classes.SHUFFLE_ITEM, Classes.VISIBLE]);
+      this.applyCss(ShuffleItem.Css.INITIAL);
+      this.scale = ShuffleItem.Scale.VISIBLE;
+      this.point = new Point();
+    }
+  }, {
+    key: 'addClasses',
+    value: function addClasses(classes) {
+      var _this = this;
 
+      classes.forEach(function (className) {
+        _this.element.classList.add(className);
+      });
+    }
+  }, {
+    key: 'removeClasses',
+    value: function removeClasses(classes) {
+      var _this2 = this;
 
+      classes.forEach(function (className) {
+        _this2.element.classList.remove(className);
+      });
+    }
+  }, {
+    key: 'applyCss',
+    value: function applyCss(obj) {
+      var _this3 = this;
 
+      Object.keys(obj).forEach(function (key) {
+        _this3.element.style[key] = obj[key];
+      });
+    }
+  }, {
+    key: 'dispose',
+    value: function dispose() {
+      this.removeClasses([Classes.HIDDEN, Classes.VISIBLE, Classes.SHUFFLE_ITEM]);
 
+      this.element.removeAttribute('style');
+      this.element = null;
+    }
+  }]);
+  return ShuffleItem;
+}();
 
+ShuffleItem.Css = {
+  INITIAL: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    visibility: 'visible',
+    'will-change': 'transform'
+  },
+  VISIBLE: {
+    before: {
+      opacity: 1,
+      visibility: 'visible'
+    },
+    after: {}
+  },
+  HIDDEN: {
+    before: {
+      opacity: 0
+    },
+    after: {
+      visibility: 'hidden'
+    }
+  }
+};
 
+ShuffleItem.Scale = {
+  VISIBLE: 1,
+  HIDDEN: 0.001
+};
 
+var element = document.body || document.documentElement;
+var e$1 = document.createElement('div');
+e$1.style.cssText = 'width:10px;padding:2px;box-sizing:border-box;';
+element.appendChild(e$1);
 
+var width = window.getComputedStyle(e$1, null).width;
+var ret = width === '10px';
 
+element.removeChild(e$1);
 
+/**
+ * Retrieve the computed style for an element, parsed as a float.
+ * @param {Element} element Element to get style for.
+ * @param {string} style Style property.
+ * @param {CSSStyleDeclaration} [styles] Optionally include clean styles to
+ *     use instead of asking for them again.
+ * @return {number} The parsed computed value or zero if that fails because IE
+ *     will return 'auto' when the element doesn't have margins instead of
+ *     the computed style.
+ */
+function getNumberStyle(element, style) {
+  var styles = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : window.getComputedStyle(element, null);
 
-function toArray(arrayLike) {
-  return Array.prototype.slice.call(arrayLike);
+  var value = getNumber(styles[style]);
+
+  // Support IE<=11 and W3C spec.
+  if (!ret && style === 'width') {
+    value += getNumber(styles.paddingLeft) + getNumber(styles.paddingRight) + getNumber(styles.borderLeftWidth) + getNumber(styles.borderRightWidth);
+  } else if (!ret && style === 'height') {
+    value += getNumber(styles.paddingTop) + getNumber(styles.paddingBottom) + getNumber(styles.borderTopWidth) + getNumber(styles.borderBottomWidth);
+  }
+
+  return value;
+}
+
+/**
+ * Fisher-Yates shuffle.
+ * http://stackoverflow.com/a/962890/373422
+ * https://bost.ocks.org/mike/shuffle/
+ * @param {Array} array Array to shuffle.
+ * @return {Array} Randomly sorted array.
+ */
+function randomize(array) {
+  var n = array.length;
+
+  while (n) {
+    n -= 1;
+    var i = Math.floor(Math.random() * (n + 1));
+    var temp = array[i];
+    array[i] = array[n];
+    array[n] = temp;
+  }
+
+  return array;
+}
+
+var defaults$1 = {
+  // Use array.reverse() to reverse the results
+  reverse: false,
+
+  // Sorting function
+  by: null,
+
+  // If true, this will skip the sorting and return a randomized order in the array
+  randomize: false,
+
+  // Determines which property of each item in the array is passed to the
+  // sorting method.
+  key: 'element'
+};
+
+// You can return `undefined` from the `by` function to revert to DOM order.
+function sorter(arr, options) {
+  var opts = immutable(defaults$1, options);
+  var original = [].slice.call(arr);
+  var revert = false;
+
+  if (!arr.length) {
+    return [];
+  }
+
+  if (opts.randomize) {
+    return randomize(arr);
+  }
+
+  // Sort the elements by the opts.by function.
+  // If we don't have opts.by, default to DOM order
+  if (typeof opts.by === 'function') {
+    arr.sort(function (a, b) {
+      // Exit early if we already know we want to revert
+      if (revert) {
+        return 0;
+      }
+
+      var valA = opts.by(a[opts.key]);
+      var valB = opts.by(b[opts.key]);
+
+      // If both values are undefined, use the DOM order
+      if (valA === undefined && valB === undefined) {
+        revert = true;
+        return 0;
+      }
+
+      if (valA < valB || valA === 'sortFirst' || valB === 'sortLast') {
+        return -1;
+      }
+
+      if (valA > valB || valA === 'sortLast' || valB === 'sortFirst') {
+        return 1;
+      }
+
+      return 0;
+    });
+  }
+
+  // Revert to the original array if necessary
+  if (revert) {
+    return original;
+  }
+
+  if (opts.reverse) {
+    arr.reverse();
+  }
+
+  return arr;
+}
+
+var transitions = {};
+var eventName = 'transitionend';
+var count = 0;
+
+function uniqueId() {
+  count += 1;
+  return eventName + count;
+}
+
+function cancelTransitionEnd(id) {
+  if (transitions[id]) {
+    transitions[id].element.removeEventListener(eventName, transitions[id].listener);
+    transitions[id] = null;
+    return true;
+  }
+
+  return false;
+}
+
+function onTransitionEnd(element, callback) {
+  var id = uniqueId();
+  var listener = function listener(evt) {
+    if (evt.currentTarget === evt.target) {
+      cancelTransitionEnd(id);
+      callback(evt);
+    }
+  };
+
+  element.addEventListener(eventName, listener);
+
+  transitions[id] = { element: element, listener: listener };
+
+  return id;
 }
 
 function arrayMax(array) {
-  return Math.max.apply(Math, array);
+  return Math.max.apply(Math, array); // eslint-disable-line prefer-spread
+}
+
+function arrayMin(array) {
+  return Math.min.apply(Math, array); // eslint-disable-line prefer-spread
+}
+
+/**
+ * Determine the number of columns an items spans.
+ * @param {number} itemWidth Width of the item.
+ * @param {number} columnWidth Width of the column (includes gutter).
+ * @param {number} columns Total number of columns
+ * @param {number} threshold A buffer value for the size of the column to fit.
+ * @return {number}
+ */
+function getColumnSpan(itemWidth, columnWidth, columns, threshold) {
+  var columnSpan = itemWidth / columnWidth;
+
+  // If the difference between the rounded column span number and the
+  // calculated column span number is really small, round the number to
+  // make it fit.
+  if (Math.abs(Math.round(columnSpan) - columnSpan) < threshold) {
+    // e.g. columnSpan = 4.0089945390298745
+    columnSpan = Math.round(columnSpan);
+  }
+
+  // Ensure the column span is not more than the amount of columns in the whole layout.
+  return Math.min(Math.ceil(columnSpan), columns);
+}
+
+/**
+ * Retrieves the column set to use for placement.
+ * @param {number} columnSpan The number of columns this current item spans.
+ * @param {number} columns The total columns in the grid.
+ * @return {Array.<number>} An array of numbers represeting the column set.
+ */
+function getAvailablePositions(positions, columnSpan, columns) {
+  // The item spans only one column.
+  if (columnSpan === 1) {
+    return positions;
+  }
+
+  // The item spans more than one column, figure out how many different
+  // places it could fit horizontally.
+  // The group count is the number of places within the positions this block
+  // could fit, ignoring the current positions of items.
+  // Imagine a 2 column brick as the second item in a 4 column grid with
+  // 10px height each. Find the places it would fit:
+  // [20, 10, 10, 0]
+  //  |   |   |
+  //  *   *   *
+  //
+  // Then take the places which fit and get the bigger of the two:
+  // max([20, 10]), max([10, 10]), max([10, 0]) = [20, 10, 0]
+  //
+  // Next, find the first smallest number (the short column).
+  // [20, 10, 0]
+  //          |
+  //          *
+  //
+  // And that's where it should be placed!
+  //
+  // Another example where the second column's item extends past the first:
+  // [10, 20, 10, 0] => [20, 20, 10] => 10
+  var available = [];
+
+  // For how many possible positions for this item there are.
+  for (var i = 0; i <= columns - columnSpan; i++) {
+    // Find the bigger value for each place it could fit.
+    available.push(arrayMax(positions.slice(i, i + columnSpan)));
+  }
+
+  return available;
+}
+
+/**
+ * Find index of short column, the first from the left where this item will go.
+ *
+ * @param {Array.<number>} positions The array to search for the smallest number.
+ * @param {number} buffer Optional buffer which is very useful when the height
+ *     is a percentage of the width.
+ * @return {number} Index of the short column.
+ */
+function getShortColumn(positions, buffer) {
+  var minPosition = arrayMin(positions);
+  for (var i = 0, len = positions.length; i < len; i++) {
+    if (positions[i] >= minPosition - buffer && positions[i] <= minPosition + buffer) {
+      return i;
+    }
+  }
+
+  return 0;
+}
+
+/**
+ * Determine the location of the next item, based on its size.
+ * @param {Object} itemSize Object with width and height.
+ * @param {Array.<number>} positions Positions of the other current items.
+ * @param {number} gridSize The column width or row height.
+ * @param {number} total The total number of columns or rows.
+ * @param {number} threshold Buffer value for the column to fit.
+ * @param {number} buffer Vertical buffer for the height of items.
+ * @return {Point}
+ */
+function getItemPosition(_ref) {
+  var itemSize = _ref.itemSize,
+      positions = _ref.positions,
+      gridSize = _ref.gridSize,
+      total = _ref.total,
+      threshold = _ref.threshold,
+      buffer = _ref.buffer;
+
+  var span = getColumnSpan(itemSize.width, gridSize, total, threshold);
+  var setY = getAvailablePositions(positions, span, total);
+  var shortColumnIndex = getShortColumn(setY, buffer);
+
+  // Position the item
+  var point = new Point(Math.round(gridSize * shortColumnIndex), Math.round(setY[shortColumnIndex]));
+
+  // Update the columns array with the new values for each column.
+  // e.g. before the update the columns could be [250, 0, 0, 0] for an item
+  // which spans 2 columns. After it would be [250, itemHeight, itemHeight, 0].
+  var setHeight = setY[shortColumnIndex] + itemSize.height;
+  for (var i = 0; i < span; i++) {
+    positions[shortColumnIndex + i] = setHeight;
+  }
+
+  return point;
+}
+
+function toArray$$1(arrayLike) {
+  return Array.prototype.slice.call(arrayLike);
 }
 
 function arrayIncludes(array, obj) {
-  if (arguments.length === 2) {
-    return arrayIncludes(array)(obj);
-  }
-
-  return function (obj) {
-    return array.indexOf(obj) > -1;
-  };
+  return array.indexOf(obj) > -1;
 }
 
 // Used for unique instance variables
@@ -1034,14 +1547,14 @@ var Shuffle = function () {
    */
   function Shuffle(element) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    classCallCheck(this, Shuffle);
 
-    _classCallCheck(this, Shuffle);
-
-    this.options = __WEBPACK_IMPORTED_MODULE_3_xtend___default()(Shuffle.options, options);
+    this.options = immutable(Shuffle.options, options);
 
     this.useSizer = false;
     this.lastSort = {};
-    this.group = this.lastFilter = Shuffle.ALL_ITEMS;
+    this.group = Shuffle.ALL_ITEMS;
+    this.lastFilter = Shuffle.ALL_ITEMS;
     this.isEnabled = true;
     this.isDestroyed = false;
     this.isInitialized = false;
@@ -1049,20 +1562,21 @@ var Shuffle = function () {
     this.isTransitioning = false;
     this._queue = [];
 
-    element = this._getElementOption(element);
+    var el = this._getElementOption(element);
 
-    if (!element) {
+    if (!el) {
       throw new TypeError('Shuffle needs to be initialized with an element.');
     }
 
-    this.element = element;
-    this.id = 'shuffle_' + id++;
+    this.element = el;
+    this.id = 'shuffle_' + id;
+    id += 1;
 
     this._init();
     this.isInitialized = true;
   }
 
-  _createClass(Shuffle, [{
+  createClass(Shuffle, [{
     key: '_init',
     value: function _init() {
       this.items = this._getItems();
@@ -1101,7 +1615,7 @@ var Shuffle = function () {
       // doesn't see the first layout. Set them now that the first layout is done.
       // First, however, a synchronous layout must be caused for the previous
       // styles to be applied without transitions.
-      this.element.offsetWidth; // jshint ignore: line
+      this.element.offsetWidth; // eslint-disable-line no-unused-expressions
       this._setTransitions();
       this.element.style.transition = 'height ' + this.options.speed + 'ms ' + this.options.easing;
     }
@@ -1182,10 +1696,10 @@ var Shuffle = function () {
       var category = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.lastFilter;
       var collection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.items;
 
-      var set = this._getFilteredSets(category, collection);
+      var set$$1 = this._getFilteredSets(category, collection);
 
       // Individually add/remove hidden/visible classes
-      this._toggleFilterClasses(set);
+      this._toggleFilterClasses(set$$1);
 
       // Save the last filter in case elements are appended.
       this.lastFilter = category;
@@ -1196,7 +1710,7 @@ var Shuffle = function () {
         this.group = category;
       }
 
-      return set;
+      return set$$1;
     }
 
     /**
@@ -1248,21 +1762,26 @@ var Shuffle = function () {
   }, {
     key: '_doesPassFilter',
     value: function _doesPassFilter(category, element) {
-
       if (typeof category === 'function') {
         return category.call(element, element, this);
+      }
 
-        // Check each element's data-groups attribute against the given category.
-      } else {
-        var attr = element.getAttribute('data-' + Shuffle.FILTER_ATTRIBUTE_KEY);
-        var keys = this.options.delimeter ? attr.split(this.options.delimeter) : JSON.parse(attr);
+      // Check each element's data-groups attribute against the given category.
+      var attr = element.getAttribute('data-' + Shuffle.FILTER_ATTRIBUTE_KEY);
+      var keys = this.options.delimeter ? attr.split(this.options.delimeter) : JSON.parse(attr);
 
-        if (Array.isArray(category)) {
-          return category.some(arrayIncludes(keys));
-        }
-
+      function testCategory(category) {
         return arrayIncludes(keys, category);
       }
+
+      if (Array.isArray(category)) {
+        if (this.options.filterMode === Shuffle.FilterMode.ANY) {
+          return category.some(testCategory);
+        }
+        return category.every(testCategory);
+      }
+
+      return arrayIncludes(keys, category);
     }
 
     /**
@@ -1344,12 +1863,7 @@ var Shuffle = function () {
       var speed = this.options.speed;
       var easing = this.options.easing;
 
-      var str;
-      if (this.options.useTransforms) {
-        str = 'transform ' + speed + 'ms ' + easing + ', opacity ' + speed + 'ms ' + easing;
-      } else {
-        str = 'top ' + speed + 'ms ' + easing + ', left ' + speed + 'ms ' + easing + ', opacity ' + speed + 'ms ' + easing;
-      }
+      var str = this.options.useTransforms ? 'transform ' + speed + 'ms ' + easing + ', opacity ' + speed + 'ms ' + easing : 'top ' + speed + 'ms ' + easing + ', left ' + speed + 'ms ' + easing + ', opacity ' + speed + 'ms ' + easing;
 
       items.forEach(function (item) {
         item.element.style.transition = str;
@@ -1360,10 +1874,10 @@ var Shuffle = function () {
     value: function _getItems() {
       var _this2 = this;
 
-      return toArray(this.element.children).filter(function (el) {
-        return __WEBPACK_IMPORTED_MODULE_1_matches_selector___default()(el, _this2.options.itemSelector);
+      return toArray$$1(this.element.children).filter(function (el) {
+        return index(el, _this2.options.itemSelector);
       }).map(function (el) {
-        return new __WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */](el);
+        return new ShuffleItem(el);
       });
     }
 
@@ -1376,7 +1890,7 @@ var Shuffle = function () {
     key: '_updateItemsOrder',
     value: function _updateItemsOrder() {
       var children = this.element.children;
-      this.items = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__sorter__["a" /* default */])(this.items, {
+      this.items = sorter(this.items, {
         by: function by(element) {
           return Array.prototype.indexOf.call(children, element);
         }
@@ -1408,7 +1922,7 @@ var Shuffle = function () {
   }, {
     key: '_getColumnSize',
     value: function _getColumnSize(containerWidth, gutterSize) {
-      var size;
+      var size = void 0;
 
       // If the columnWidth property is a function, then the grid is fluid
       if (typeof this.options.columnWidth === 'function') {
@@ -1449,11 +1963,11 @@ var Shuffle = function () {
   }, {
     key: '_getGutterSize',
     value: function _getGutterSize(containerWidth) {
-      var size;
+      var size = void 0;
       if (typeof this.options.gutterWidth === 'function') {
         size = this.options.gutterWidth(containerWidth);
       } else if (this.useSizer) {
-        size = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__get_number_style__["a" /* default */])(this.options.sizer, 'marginLeft');
+        size = getNumberStyle(this.options.sizer, 'marginLeft');
       } else {
         size = this.options.gutterWidth;
       }
@@ -1517,8 +2031,8 @@ var Shuffle = function () {
 
   }, {
     key: '_getStaggerAmount',
-    value: function _getStaggerAmount(index) {
-      return Math.min(index * this.options.staggerAmount, this.options.staggerAmountMax);
+    value: function _getStaggerAmount(index$$1) {
+      return Math.min(index$$1 * this.options.staggerAmount, this.options.staggerAmountMax);
     }
 
     /**
@@ -1531,7 +2045,7 @@ var Shuffle = function () {
       var details = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       if (this.isDestroyed) {
-        return;
+        return false;
       }
 
       details.shuffle = this;
@@ -1552,7 +2066,8 @@ var Shuffle = function () {
     value: function _resetCols() {
       var i = this.cols;
       this.positions = [];
-      while (i--) {
+      while (i) {
+        i -= 1;
         this.positions.push(0);
       }
     }
@@ -1577,22 +2092,23 @@ var Shuffle = function () {
 
         function callback() {
           item.element.style.transitionDelay = '';
-          item.applyCss(__WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */].Css.VISIBLE.after);
+          item.applyCss(ShuffleItem.Css.VISIBLE.after);
         }
 
         // If the item will not change its position, do not add it to the render
         // queue. Transitions don't fire when setting a property to the same value.
-        if (__WEBPACK_IMPORTED_MODULE_6__point__["a" /* default */].equals(currPos, pos) && currScale === __WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */].Scale.VISIBLE) {
+        if (Point.equals(currPos, pos) && currScale === ShuffleItem.Scale.VISIBLE) {
+          item.applyCss(ShuffleItem.Css.VISIBLE.before);
           callback();
           return;
         }
 
         item.point = pos;
-        item.scale = __WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */].Scale.VISIBLE;
+        item.scale = ShuffleItem.Scale.VISIBLE;
 
         // Use xtend here to clone the object so that the `before` object isn't
         // modified when the transition delay is added.
-        var styles = __WEBPACK_IMPORTED_MODULE_3_xtend___default()(__WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */].Css.VISIBLE.before);
+        var styles = immutable(ShuffleItem.Css.VISIBLE.before);
         styles.transitionDelay = _this3._getStaggerAmount(count) + 'ms';
 
         _this3._queue.push({
@@ -1601,7 +2117,7 @@ var Shuffle = function () {
           callback: callback
         });
 
-        count++;
+        count += 1;
       });
     }
 
@@ -1615,7 +2131,7 @@ var Shuffle = function () {
   }, {
     key: '_getItemPosition',
     value: function _getItemPosition(itemSize) {
-      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_12__layout__["a" /* getItemPosition */])({
+      return getItemPosition({
         itemSize: itemSize,
         positions: this.positions,
         gridSize: this.colWidth,
@@ -1641,7 +2157,7 @@ var Shuffle = function () {
       var count = 0;
       collection.forEach(function (item) {
         function callback() {
-          item.applyCss(__WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */].Css.HIDDEN.after);
+          item.applyCss(ShuffleItem.Css.HIDDEN.after);
         }
 
         // Continuing would add a transitionend event listener to the element, but
@@ -1650,14 +2166,15 @@ var Shuffle = function () {
         // The callback is executed here because it is not guaranteed to be called
         // after the transitionend event because the transitionend could be
         // canceled if another animation starts.
-        if (item.scale === __WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */].Scale.HIDDEN) {
+        if (item.scale === ShuffleItem.Scale.HIDDEN) {
+          item.applyCss(ShuffleItem.Css.HIDDEN.before);
           callback();
           return;
         }
 
-        item.scale = __WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */].Scale.HIDDEN;
+        item.scale = ShuffleItem.Scale.HIDDEN;
 
-        var styles = __WEBPACK_IMPORTED_MODULE_3_xtend___default()(__WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */].Css.HIDDEN.before);
+        var styles = immutable(ShuffleItem.Css.HIDDEN.before);
         styles.transitionDelay = _this4._getStaggerAmount(count) + 'ms';
 
         _this4._queue.push({
@@ -1666,7 +2183,7 @@ var Shuffle = function () {
           callback: callback
         });
 
-        count++;
+        count += 1;
       });
     }
 
@@ -1735,7 +2252,7 @@ var Shuffle = function () {
   }, {
     key: '_whenTransitionDone',
     value: function _whenTransitionDone(element, itemCallback, done) {
-      var id = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__on_transition_end__["a" /* onTransitionEnd */])(element, function (evt) {
+      var id = onTransitionEnd(element, function (evt) {
         itemCallback();
         done(null, evt);
       });
@@ -1812,13 +2329,13 @@ var Shuffle = function () {
         return _this6._getTransitionFunction(obj);
       });
 
-      __WEBPACK_IMPORTED_MODULE_5_array_parallel___default()(callbacks, this._movementFinished.bind(this));
+      index$3(callbacks, this._movementFinished.bind(this));
     }
   }, {
     key: '_cancelMovement',
     value: function _cancelMovement() {
       // Remove the transition end event for each listener.
-      this._transitions.forEach(__WEBPACK_IMPORTED_MODULE_11__on_transition_end__["b" /* cancelTransitionEnd */]);
+      this._transitions.forEach(cancelTransitionEnd);
 
       // Reset the array.
       this._transitions.length = 0;
@@ -1879,7 +2396,7 @@ var Shuffle = function () {
       }
 
       if (!category || category && category.length === 0) {
-        category = Shuffle.ALL_ITEMS;
+        category = Shuffle.ALL_ITEMS; // eslint-disable-line no-param-reassign
       }
 
       this._filter(category);
@@ -1911,7 +2428,7 @@ var Shuffle = function () {
       this._resetCols();
 
       var items = this._getFilteredItems();
-      items = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10__sorter__["a" /* default */])(items, opts);
+      items = sorter(items, opts);
 
       this._layout(items);
 
@@ -1935,7 +2452,6 @@ var Shuffle = function () {
     key: 'update',
     value: function update(isOnlyLayout) {
       if (this.isEnabled) {
-
         if (!isOnlyLayout) {
           // Get updated colCount
           this._setColumns();
@@ -1967,18 +2483,18 @@ var Shuffle = function () {
   }, {
     key: 'add',
     value: function add(newItems) {
-      newItems = __WEBPACK_IMPORTED_MODULE_2_array_uniq___default()(newItems).map(function (el) {
-        return new __WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */](el);
+      var items = index$1(newItems).map(function (el) {
+        return new ShuffleItem(el);
       });
 
       // Add classes and set initial positions.
-      this._initItems(newItems);
+      this._initItems(items);
 
       // Add transition to each item.
-      this._setTransitions(newItems);
+      this._setTransitions(items);
 
       // Update the list of items.
-      this.items = this.items.concat(newItems);
+      this.items = this.items.concat(items);
       this._updateItemsOrder();
       this.filter(this.lastFilter);
     }
@@ -2009,21 +2525,21 @@ var Shuffle = function () {
 
     /**
      * Remove 1 or more shuffle items
-     * @param {Array.<Element>} collection An array containing one or more
+     * @param {Array.<Element>} elements An array containing one or more
      *     elements in shuffle
      * @return {Shuffle} The shuffle object
      */
 
   }, {
     key: 'remove',
-    value: function remove(collection) {
+    value: function remove(elements) {
       var _this8 = this;
 
-      if (!collection.length) {
+      if (!elements.length) {
         return;
       }
 
-      collection = __WEBPACK_IMPORTED_MODULE_2_array_uniq___default()(collection);
+      var collection = index$1(elements);
 
       var oldItems = collection.map(function (element) {
         return _this8.getItemByElement(element);
@@ -2041,10 +2557,6 @@ var Shuffle = function () {
         });
 
         _this8._dispatch(Shuffle.EventType.REMOVED, { collection: collection });
-
-        // Let it get garbage collected
-        collection = null;
-        oldItems = null;
       };
 
       // Hide collection first.
@@ -2141,14 +2653,14 @@ var Shuffle = function () {
     value: function getSize(element, includeMargins) {
       // Store the styles so that they can be used by others without asking for it again.
       var styles = window.getComputedStyle(element, null);
-      var width = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__get_number_style__["a" /* default */])(element, 'width', styles);
-      var height = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__get_number_style__["a" /* default */])(element, 'height', styles);
+      var width = getNumberStyle(element, 'width', styles);
+      var height = getNumberStyle(element, 'height', styles);
 
       if (includeMargins) {
-        var marginLeft = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__get_number_style__["a" /* default */])(element, 'marginLeft', styles);
-        var marginRight = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__get_number_style__["a" /* default */])(element, 'marginRight', styles);
-        var marginTop = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__get_number_style__["a" /* default */])(element, 'marginTop', styles);
-        var marginBottom = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_9__get_number_style__["a" /* default */])(element, 'marginBottom', styles);
+        var marginLeft = getNumberStyle(element, 'marginLeft', styles);
+        var marginRight = getNumberStyle(element, 'marginRight', styles);
+        var marginTop = getNumberStyle(element, 'marginTop', styles);
+        var marginBottom = getNumberStyle(element, 'marginBottom', styles);
         width += marginLeft + marginRight;
         height += marginTop + marginBottom;
       }
@@ -2191,7 +2703,7 @@ var Shuffle = function () {
       callback();
 
       // Cause reflow.
-      elements[0].offsetWidth; // jshint ignore:line
+      elements[0].offsetWidth; // eslint-disable-line no-unused-expressions
 
       // Put the duration back
       elements.forEach(function (element, i) {
@@ -2200,11 +2712,10 @@ var Shuffle = function () {
       });
     }
   }]);
-
   return Shuffle;
 }();
 
-Shuffle.ShuffleItem = __WEBPACK_IMPORTED_MODULE_7__shuffle_item__["a" /* default */];
+Shuffle.ShuffleItem = ShuffleItem;
 
 Shuffle.ALL_ITEMS = 'all';
 Shuffle.FILTER_ATTRIBUTE_KEY = 'groups';
@@ -2218,7 +2729,15 @@ Shuffle.EventType = {
 };
 
 /** @enum {string} */
-Shuffle.Classes = __WEBPACK_IMPORTED_MODULE_8__classes__["a" /* default */];
+Shuffle.Classes = Classes;
+
+/**
+ * @enum {string}
+ */
+Shuffle.FilterMode = {
+  ANY: 'any',
+  ALL: 'all'
+};
 
 // Overrideable options
 Shuffle.options = {
@@ -2264,7 +2783,7 @@ Shuffle.options = {
 
   // By default, shuffle will throttle resize events. This can be changed or
   // removed.
-  throttle: __WEBPACK_IMPORTED_MODULE_4_throttleit___default.a,
+  throttle: index$2,
 
   // How often shuffle can be called on resize (in milliseconds).
   throttleTime: 300,
@@ -2276,781 +2795,50 @@ Shuffle.options = {
   staggerAmountMax: 250,
 
   // Whether to use transforms or absolute positioning.
-  useTransforms: true
+  useTransforms: true,
+
+  // Affects using an array with filter. e.g. `filter(['one', 'two'])`. With "any",
+  // the element passes the test if any of its groups are in the array. With "all",
+  // the element only passes if all groups are in the array.
+  filterMode: Shuffle.FilterMode.ANY
 };
 
 // Expose for testing. Hack at your own risk.
-Shuffle.__Point = __WEBPACK_IMPORTED_MODULE_6__point__["a" /* default */];
-Shuffle.__sorter = __WEBPACK_IMPORTED_MODULE_10__sorter__["a" /* default */];
-Shuffle.__getColumnSpan = __WEBPACK_IMPORTED_MODULE_12__layout__["b" /* getColumnSpan */];
-Shuffle.__getAvailablePositions = __WEBPACK_IMPORTED_MODULE_12__layout__["c" /* getAvailablePositions */];
-Shuffle.__getShortColumn = __WEBPACK_IMPORTED_MODULE_12__layout__["d" /* getShortColumn */];
-
-/* harmony default export */ __webpack_exports__["default"] = Shuffle;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = function parallel(fns, context, callback) {
-  if (!callback) {
-    if (typeof context === 'function') {
-      callback = context
-      context = null
-    } else {
-      callback = noop
-    }
-  }
-
-  var pending = fns && fns.length
-  if (!pending) return callback(null, []);
-
-  var finished = false
-  var results = new Array(pending)
-
-  fns.forEach(context ? function (fn, i) {
-    fn.call(context, maybeDone(i))
-  } : function (fn, i) {
-    fn(maybeDone(i))
-  })
-
-  function maybeDone(i) {
-    return function (err, result) {
-      if (finished) return;
-
-      if (err) {
-        callback(err, results)
-        finished = true
-        return
-      }
-
-      results[i] = result
-
-      if (!--pending) callback(null, results);
-    }
-  }
-}
-
-function noop() {}
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
-// there's 3 implementations written in increasing order of efficiency
-
-// 1 - no Set type is defined
-function uniqNoSet(arr) {
-	var ret = [];
-
-	for (var i = 0; i < arr.length; i++) {
-		if (ret.indexOf(arr[i]) === -1) {
-			ret.push(arr[i]);
-		}
-	}
-
-	return ret;
-}
-
-// 2 - a simple Set type is defined
-function uniqSet(arr) {
-	var seen = new Set();
-	return arr.filter(function (el) {
-		if (!seen.has(el)) {
-			seen.add(el);
-			return true;
-		}
-
-		return false;
-	});
-}
-
-// 3 - a standard Set type is defined and it has a forEach method
-function uniqSetWithForEach(arr) {
-	var ret = [];
-
-	(new Set(arr)).forEach(function (el) {
-		ret.push(el);
-	});
-
-	return ret;
-}
-
-// V8 currently has a broken implementation
-// https://github.com/joyent/node/issues/8449
-function doesForEachActuallyWork() {
-	var ret = false;
-
-	(new Set([true])).forEach(function (el) {
-		ret = el;
-	});
-
-	return ret === true;
-}
-
-if ('Set' in global) {
-	if (typeof Set.prototype.forEach === 'function' && doesForEachActuallyWork()) {
-		module.exports = uniqSetWithForEach;
-	} else {
-		module.exports = uniqSet;
-	}
-} else {
-	module.exports = uniqNoSet;
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-var element = document.body || document.documentElement;
-var e = document.createElement('div');
-e.style.cssText = 'width:10px;padding:2px;box-sizing:border-box;';
-element.appendChild(e);
-
-var width = window.getComputedStyle(e, null).width;
-var ret = width === '10px';
-
-element.removeChild(e);
-
-/* harmony default export */ __webpack_exports__["a"] = ret;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__get_number__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__computed_size__ = __webpack_require__(7);
-/* harmony export (immutable) */ __webpack_exports__["a"] = getNumberStyle;
-
-
-
-
-
-/**
- * Retrieve the computed style for an element, parsed as a float.
- * @param {Element} element Element to get style for.
- * @param {string} style Style property.
- * @param {CSSStyleDeclaration} [styles] Optionally include clean styles to
- *     use instead of asking for them again.
- * @return {number} The parsed computed value or zero if that fails because IE
- *     will return 'auto' when the element doesn't have margins instead of
- *     the computed style.
- */
-function getNumberStyle(element, style) {
-  var styles = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : window.getComputedStyle(element, null);
-
-  var value = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles[style]);
-
-  // Support IE<=11 and W3C spec.
-  if (!__WEBPACK_IMPORTED_MODULE_1__computed_size__["a" /* default */] && style === 'width') {
-    value += __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles.paddingLeft) + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles.paddingRight) + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles.borderLeftWidth) + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles.borderRightWidth);
-  } else if (!__WEBPACK_IMPORTED_MODULE_1__computed_size__["a" /* default */] && style === 'height') {
-    value += __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles.paddingTop) + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles.paddingBottom) + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles.borderTopWidth) + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__get_number__["a" /* default */])(styles.borderBottomWidth);
-  }
-
-  return value;
-}
-
-/***/ }),
-/* 9 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__point__ = __webpack_require__(0);
-/* harmony export (immutable) */ __webpack_exports__["a"] = getItemPosition;
-/* harmony export (immutable) */ __webpack_exports__["b"] = getColumnSpan;
-/* harmony export (immutable) */ __webpack_exports__["c"] = getAvailablePositions;
-/* harmony export (immutable) */ __webpack_exports__["d"] = getShortColumn;
-
-
-
-
-function arrayMax(array) {
-  return Math.max.apply(Math, array);
-}
-
-function arrayMin(array) {
-  return Math.min.apply(Math, array);
-}
-
-/**
- * Determine the location of the next item, based on its size.
- * @param {Object} itemSize Object with width and height.
- * @param {Array.<number>} positions Positions of the other current items.
- * @param {number} gridSize The column width or row height.
- * @param {number} total The total number of columns or rows.
- * @param {number} threshold Buffer value for the column to fit.
- * @param {number} buffer Vertical buffer for the height of items.
- * @return {Point}
- */
-function getItemPosition(_ref) {
-  var itemSize = _ref.itemSize,
-      positions = _ref.positions,
-      gridSize = _ref.gridSize,
-      total = _ref.total,
-      threshold = _ref.threshold,
-      buffer = _ref.buffer;
-
-  var span = getColumnSpan(itemSize.width, gridSize, total, threshold);
-  var setY = getAvailablePositions(positions, span, total);
-  var shortColumnIndex = getShortColumn(setY, buffer);
-
-  // Position the item
-  var point = new __WEBPACK_IMPORTED_MODULE_0__point__["a" /* default */](Math.round(gridSize * shortColumnIndex), Math.round(setY[shortColumnIndex]));
-
-  // Update the columns array with the new values for each column.
-  // e.g. before the update the columns could be [250, 0, 0, 0] for an item
-  // which spans 2 columns. After it would be [250, itemHeight, itemHeight, 0].
-  var setHeight = setY[shortColumnIndex] + itemSize.height;
-  for (var i = 0; i < span; i++) {
-    positions[shortColumnIndex + i] = setHeight;
-  }
-
-  return point;
-}
-
-/**
- * Determine the number of columns an items spans.
- * @param {number} itemWidth Width of the item.
- * @param {number} columnWidth Width of the column (includes gutter).
- * @param {number} columns Total number of columns
- * @param {number} threshold A buffer value for the size of the column to fit.
- * @return {number}
- */
-function getColumnSpan(itemWidth, columnWidth, columns, threshold) {
-  var columnSpan = itemWidth / columnWidth;
-
-  // If the difference between the rounded column span number and the
-  // calculated column span number is really small, round the number to
-  // make it fit.
-  if (Math.abs(Math.round(columnSpan) - columnSpan) < threshold) {
-    // e.g. columnSpan = 4.0089945390298745
-    columnSpan = Math.round(columnSpan);
-  }
-
-  // Ensure the column span is not more than the amount of columns in the whole layout.
-  return Math.min(Math.ceil(columnSpan), columns);
-}
-
-/**
- * Retrieves the column set to use for placement.
- * @param {number} columnSpan The number of columns this current item spans.
- * @param {number} columns The total columns in the grid.
- * @return {Array.<number>} An array of numbers represeting the column set.
- */
-function getAvailablePositions(positions, columnSpan, columns) {
-  // The item spans only one column.
-  if (columnSpan === 1) {
-    return positions;
-  }
-
-  // The item spans more than one column, figure out how many different
-  // places it could fit horizontally.
-  // The group count is the number of places within the positions this block
-  // could fit, ignoring the current positions of items.
-  // Imagine a 2 column brick as the second item in a 4 column grid with
-  // 10px height each. Find the places it would fit:
-  // [20, 10, 10, 0]
-  //  |   |   |
-  //  *   *   *
-  //
-  // Then take the places which fit and get the bigger of the two:
-  // max([20, 10]), max([10, 10]), max([10, 0]) = [20, 10, 0]
-  //
-  // Next, find the first smallest number (the short column).
-  // [20, 10, 0]
-  //          |
-  //          *
-  //
-  // And that's where it should be placed!
-  //
-  // Another example where the second column's item extends past the first:
-  // [10, 20, 10, 0] => [20, 20, 10] => 10
-  var available = [];
-
-  // For how many possible positions for this item there are.
-  for (var i = 0; i <= columns - columnSpan; i++) {
-    // Find the bigger value for each place it could fit.
-    available.push(arrayMax(positions.slice(i, i + columnSpan)));
-  }
-
-  return available;
-}
-
-/**
- * Find index of short column, the first from the left where this item will go.
- *
- * @param {Array.<number>} positions The array to search for the smallest number.
- * @param {number} buffer Optional buffer which is very useful when the height
- *     is a percentage of the width.
- * @return {number} Index of the short column.
- */
-function getShortColumn(positions, buffer) {
-  var minPosition = arrayMin(positions);
-  for (var i = 0, len = positions.length; i < len; i++) {
-    if (positions[i] >= minPosition - buffer && positions[i] <= minPosition + buffer) {
-      return i;
-    }
-  }
-
-  return 0;
-}
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = onTransitionEnd;
-/* harmony export (immutable) */ __webpack_exports__["b"] = cancelTransitionEnd;
-
-
-var transitions = {};
-var eventName = 'transitionend';
-var count = 0;
-
-function uniqueId() {
-  return eventName + count++;
-}
-
-function onTransitionEnd(element, callback) {
-  var id = uniqueId();
-  var listener = function listener(evt) {
-    if (evt.currentTarget === evt.target) {
-      cancelTransitionEnd(id);
-      callback(evt);
-    }
-  };
-
-  element.addEventListener(eventName, listener);
-
-  transitions[id] = { element: element, listener: listener };
-
-  return id;
-}
-
-function cancelTransitionEnd(id) {
-  if (transitions[id]) {
-    transitions[id].element.removeEventListener(eventName, transitions[id].listener);
-    transitions[id] = null;
-    return true;
-  }
-
-  return false;
-}
-
-/***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__point__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__classes__ = __webpack_require__(1);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-
-
-
-var id = 0;
-
-var ShuffleItem = function () {
-  function ShuffleItem(element) {
-    _classCallCheck(this, ShuffleItem);
-
-    this.id = id++;
-    this.element = element;
-    this.isVisible = true;
-  }
-
-  _createClass(ShuffleItem, [{
-    key: 'show',
-    value: function show() {
-      this.isVisible = true;
-      this.element.classList.remove(__WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].HIDDEN);
-      this.element.classList.add(__WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].VISIBLE);
-    }
-  }, {
-    key: 'hide',
-    value: function hide() {
-      this.isVisible = false;
-      this.element.classList.remove(__WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].VISIBLE);
-      this.element.classList.add(__WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].HIDDEN);
-    }
-  }, {
-    key: 'init',
-    value: function init() {
-      this.addClasses([__WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].SHUFFLE_ITEM, __WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].VISIBLE]);
-      this.applyCss(ShuffleItem.Css.INITIAL);
-      this.scale = ShuffleItem.Scale.VISIBLE;
-      this.point = new __WEBPACK_IMPORTED_MODULE_0__point__["a" /* default */]();
-    }
-  }, {
-    key: 'addClasses',
-    value: function addClasses(classes) {
-      var _this = this;
-
-      classes.forEach(function (className) {
-        _this.element.classList.add(className);
-      });
-    }
-  }, {
-    key: 'removeClasses',
-    value: function removeClasses(classes) {
-      var _this2 = this;
-
-      classes.forEach(function (className) {
-        _this2.element.classList.remove(className);
-      });
-    }
-  }, {
-    key: 'applyCss',
-    value: function applyCss(obj) {
-      for (var key in obj) {
-        this.element.style[key] = obj[key];
-      }
-    }
-  }, {
-    key: 'dispose',
-    value: function dispose() {
-      this.removeClasses([__WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].HIDDEN, __WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].VISIBLE, __WEBPACK_IMPORTED_MODULE_1__classes__["a" /* default */].SHUFFLE_ITEM]);
-
-      this.element.removeAttribute('style');
-      this.element = null;
-    }
-  }]);
-
-  return ShuffleItem;
-}();
-
-ShuffleItem.Css = {
-  INITIAL: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    visibility: 'visible',
-    'will-change': 'transform'
-  },
-  VISIBLE: {
-    before: {
-      opacity: 1,
-      visibility: 'visible'
-    },
-    after: {}
-  },
-  HIDDEN: {
-    before: {
-      opacity: 0
-    },
-    after: {
-      visibility: 'hidden'
-    }
-  }
-};
-
-ShuffleItem.Scale = {
-  VISIBLE: 1,
-  HIDDEN: 0.001
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ShuffleItem;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_xtend__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_xtend___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_xtend__);
-/* harmony export (immutable) */ __webpack_exports__["a"] = sorter;
-
-
-
-
-// http://stackoverflow.com/a/962890/373422
-function randomize(array) {
-  var tmp;
-  var current;
-  var top = array.length;
-
-  if (!top) {
-    return array;
-  }
-
-  while (--top) {
-    current = Math.floor(Math.random() * (top + 1));
-    tmp = array[current];
-    array[current] = array[top];
-    array[top] = tmp;
-  }
-
-  return array;
-}
-
-var defaults = {
-  // Use array.reverse() to reverse the results
-  reverse: false,
-
-  // Sorting function
-  by: null,
-
-  // If true, this will skip the sorting and return a randomized order in the array
-  randomize: false,
-
-  // Determines which property of each item in the array is passed to the
-  // sorting method.
-  key: 'element'
-};
-
-// You can return `undefined` from the `by` function to revert to DOM order.
-function sorter(arr, options) {
-  var opts = __WEBPACK_IMPORTED_MODULE_0_xtend___default()(defaults, options);
-  var original = [].slice.call(arr);
-  var revert = false;
-
-  if (!arr.length) {
-    return [];
-  }
-
-  if (opts.randomize) {
-    return randomize(arr);
-  }
-
-  // Sort the elements by the opts.by function.
-  // If we don't have opts.by, default to DOM order
-  if (typeof opts.by === 'function') {
-    arr.sort(function (a, b) {
-
-      // Exit early if we already know we want to revert
-      if (revert) {
-        return 0;
-      }
-
-      var valA = opts.by(a[opts.key]);
-      var valB = opts.by(b[opts.key]);
-
-      // If both values are undefined, use the DOM order
-      if (valA === undefined && valB === undefined) {
-        revert = true;
-        return 0;
-      }
-
-      if (valA < valB || valA === 'sortFirst' || valB === 'sortLast') {
-        return -1;
-      }
-
-      if (valA > valB || valA === 'sortLast' || valB === 'sortFirst') {
-        return 1;
-      }
-
-      return 0;
-    });
-  }
-
-  // Revert to the original array if necessary
-  if (revert) {
-    return original;
-  }
-
-  if (opts.reverse) {
-    arr.reverse();
-  }
-
-  return arr;
-}
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-// Polyfill for creating CustomEvents on IE9/10/11
-
-// code pulled from:
-// https://github.com/d4tocchini/customevent-polyfill
-// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent#Polyfill
-
-try {
-    var ce = new window.CustomEvent('test');
-    ce.preventDefault();
-    if (ce.defaultPrevented !== true) {
-        // IE has problems with .preventDefault() on custom events
-        // http://stackoverflow.com/questions/23349191
-        throw new Error('Could not prevent default');
-    }
-} catch(e) {
-  var CustomEvent = function(event, params) {
-    var evt, origPrevent;
-    params = params || {
-      bubbles: false,
-      cancelable: false,
-      detail: undefined
-    };
-
-    evt = document.createEvent("CustomEvent");
-    evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
-    origPrevent = evt.preventDefault;
-    evt.preventDefault = function () {
-      origPrevent.call(this);
-      try {
-        Object.defineProperty(this, 'defaultPrevented', {
-          get: function () {
-            return true;
-          }
-        });
-      } catch(e) {
-        this.defaultPrevented = true;
-      }
-    };
-    return evt;
-  };
-
-  CustomEvent.prototype = window.Event.prototype;
-  window.CustomEvent = CustomEvent; // expose definition to window
-}
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var proto = Element.prototype;
-var vendor = proto.matches
-  || proto.matchesSelector
-  || proto.webkitMatchesSelector
-  || proto.mozMatchesSelector
-  || proto.msMatchesSelector
-  || proto.oMatchesSelector;
-
-module.exports = match;
-
-/**
- * Match `el` to `selector`.
- *
- * @param {Element} el
- * @param {String} selector
- * @return {Boolean}
- * @api public
- */
-
-function match(el, selector) {
-  if (vendor) return vendor.call(el, selector);
-  var nodes = el.parentNode.querySelectorAll(selector);
-  for (var i = 0; i < nodes.length; i++) {
-    if (nodes[i] == el) return true;
-  }
-  return false;
-}
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-module.exports = throttle;
-
-/**
- * Returns a new function that, when invoked, invokes `func` at most once per `wait` milliseconds.
- *
- * @param {Function} func Function to wrap.
- * @param {Number} wait Number of milliseconds that must elapse between `func` invocations.
- * @return {Function} A new function that wraps the `func` function passed in.
- */
-
-function throttle (func, wait) {
-  var ctx, args, rtn, timeoutID; // caching
-  var last = 0;
-
-  return function throttled () {
-    ctx = this;
-    args = arguments;
-    var delta = new Date() - last;
-    if (!timeoutID)
-      if (delta >= wait) call();
-      else timeoutID = setTimeout(call, wait - delta);
-    return rtn;
-  };
-
-  function call () {
-    timeoutID = 0;
-    last = +new Date();
-    rtn = func.apply(ctx, args);
-    ctx = null;
-    args = null;
-  }
-}
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(4).default;
-
-/***/ })
-/******/ ]);
-});
+Shuffle.__Point = Point;
+Shuffle.__sorter = sorter;
+Shuffle.__getColumnSpan = getColumnSpan;
+Shuffle.__getAvailablePositions = getAvailablePositions;
+Shuffle.__getShortColumn = getShortColumn;
+
+return Shuffle;
+
+})));
 //# sourceMappingURL=shuffle.js.map
+
 /**
- * Swiper 3.4.1
+ * Swiper 3.4.2
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * 
  * http://www.idangero.us/swiper/
  * 
- * Copyright 2016, Vladimir Kharlampidi
+ * Copyright 2017, Vladimir Kharlampidi
  * The iDangero.us
  * http://www.idangero.us/
  * 
  * Licensed under MIT
  * 
- * Released on: December 13, 2016
+ * Released on: March 10, 2017
  */
 (function () {
     'use strict';
     var $;
+
     /*===========================
     Swiper
     ===========================*/
     var Swiper = function (container, params) {
         if (!(this instanceof Swiper)) return new Swiper(container, params);
+    
 
         var defaults = {
             direction: 'horizontal',
@@ -3251,6 +3039,8 @@ module.exports = __webpack_require__(4).default;
             Callbacks:
             onInit: function (swiper)
             onDestroy: function (swiper)
+            onBeforeResize: function (swiper)
+            onAfterResize: function (swiper)
             onClick: function (swiper, e)
             onTap: function (swiper, e)
             onDoubleTap: function (swiper, e)
@@ -3273,6 +3063,7 @@ module.exports = __webpack_require__(4).default;
             onAutoplayStop: function (swiper),
             onLazyImageLoad: function (swiper, slide, image)
             onLazyImageReady: function (swiper, slide, image)
+            onKeyPress: function (swiper, keyCode)
             */
         
         };
@@ -3435,7 +3226,6 @@ module.exports = __webpack_require__(4).default;
             s.params.centeredSlides = false;
             s.params.spaceBetween = 0;
             s.params.virtualTranslate = true;
-            s.params.setWrapperSize = false;
         }
         if (s.params.effect === 'fade' || s.params.effect === 'flip') {
             s.params.slidesPerView = 1;
@@ -3443,7 +3233,6 @@ module.exports = __webpack_require__(4).default;
             s.params.slidesPerGroup = 1;
             s.params.watchSlidesProgress = true;
             s.params.spaceBetween = 0;
-            s.params.setWrapperSize = false;
             if (typeof initialVirtualTranslate === 'undefined') {
                 s.params.virtualTranslate = true;
             }
@@ -3870,6 +3659,7 @@ module.exports = __webpack_require__(4).default;
         
                 if (s.params.centeredSlides) {
                     slidePosition = slidePosition + slideSize / 2 + prevSlideSize / 2 + spaceBetween;
+                    if(prevSlideSize === 0 && i !== 0) slidePosition = slidePosition - s.size / 2 - spaceBetween;
                     if (i === 0) slidePosition = slidePosition - s.size / 2 - spaceBetween;
                     if (Math.abs(slidePosition) < 1 / 1000) slidePosition = 0;
                     if ((index) % s.params.slidesPerGroup === 0) s.snapGrid.push(slidePosition);
@@ -4259,6 +4049,7 @@ module.exports = __webpack_require__(4).default;
             if (s.params.scrollbar && s.scrollbar) {
                 s.scrollbar.set();
             }
+            var newTranslate;
             function forceSetTranslate() {
                 var translate = s.rtl ? -s.translate : s.translate;
                 newTranslate = Math.min(Math.max(s.translate, s.maxTranslate()), s.minTranslate());
@@ -4267,7 +4058,7 @@ module.exports = __webpack_require__(4).default;
                 s.updateClasses();
             }
             if (updateTranslate) {
-                var translated, newTranslate;
+                var translated;
                 if (s.controller && s.controller.spline) {
                     s.controller.spline = undefined;
                 }
@@ -4298,6 +4089,7 @@ module.exports = __webpack_require__(4).default;
           Resize Handler
           ===========================*/
         s.onResize = function (forceUpdatePagination) {
+            if (s.params.onBeforeResize) s.params.onBeforeResize(s);
             //Breakpoints
             if (s.params.breakpoints) {
                 s.setBreakpoint();
@@ -4343,6 +4135,7 @@ module.exports = __webpack_require__(4).default;
             // Return locks after resize
             s.params.allowSwipeToPrev = allowSwipeToPrev;
             s.params.allowSwipeToNext = allowSwipeToNext;
+            if (s.params.onAfterResize) s.params.onAfterResize(s);
         };
         
         /*=========================
@@ -4671,7 +4464,7 @@ module.exports = __webpack_require__(4).default;
             if (isScrolling) {
                 s.emit('onTouchMoveOpposite', s, e);
             }
-            if (typeof startMoving === 'undefined' && s.browser.ieTouch) {
+            if (typeof startMoving === 'undefined') {
                 if (s.touches.currentX !== s.touches.startX || s.touches.currentY !== s.touches.startY) {
                     startMoving = true;
                 }
@@ -4681,7 +4474,7 @@ module.exports = __webpack_require__(4).default;
                 isTouched = false;
                 return;
             }
-            if (!startMoving && s.browser.ieTouch) {
+            if (!startMoving) {
                 return;
             }
             s.allowClick = false;
@@ -5805,6 +5598,7 @@ module.exports = __webpack_require__(4).default;
                 }
             }
         };
+        
 
         /*=========================
           Images Lazy Loading
@@ -5831,6 +5625,7 @@ module.exports = __webpack_require__(4).default;
                         srcset = _img.attr('data-srcset'),
                         sizes = _img.attr('data-sizes');
                     s.loadImage(_img[0], (src || background), srcset, sizes, false, function () {
+                        if (typeof s === 'undefined' || s === null || !s) return;
                         if (background) {
                             _img.css('background-image', 'url("' + background + '")');
                             _img.removeAttr('data-background');
@@ -6117,12 +5912,27 @@ module.exports = __webpack_require__(4).default;
                 s.scrollbar.drag.transition(duration);
             }
         };
+        
 
         /*=========================
           Controller
           ===========================*/
         s.controller = {
             LinearSpline: function (x, y) {
+                var binarySearch = (function() {
+                    var maxIndex, minIndex, guess;
+                    return function(array, val) {
+                        minIndex = -1;
+                        maxIndex = array.length;
+                        while (maxIndex - minIndex > 1)
+                            if (array[guess = maxIndex + minIndex >> 1] <= val) {
+                                minIndex = guess;
+                            } else {
+                                maxIndex = guess;
+                            }
+                        return maxIndex;
+                    };
+                })();
                 this.x = x;
                 this.y = y;
                 this.lastIndex = x.length - 1;
@@ -6143,21 +5953,6 @@ module.exports = __webpack_require__(4).default;
                     // y2 := ((x2−x1) × (y3−y1)) ÷ (x3−x1) + y1
                     return ((x2 - this.x[i1]) * (this.y[i3] - this.y[i1])) / (this.x[i3] - this.x[i1]) + this.y[i1];
                 };
-        
-                var binarySearch = (function() {
-                    var maxIndex, minIndex, guess;
-                    return function(array, val) {
-                        minIndex = -1;
-                        maxIndex = array.length;
-                        while (maxIndex - minIndex > 1)
-                            if (array[guess = maxIndex + minIndex >> 1] <= val) {
-                                minIndex = guess;
-                            } else {
-                                maxIndex = guess;
-                            }
-                        return maxIndex;
-                    };
-                })();
             },
             //xxx: for now i will just save one spline function to to
             getInterpolateFunction: function(c){
@@ -6193,7 +5988,7 @@ module.exports = __webpack_require__(4).default;
                     c.setWrapperTranslate(controlledTranslate, false, s);
                     c.updateActiveIndex();
                }
-               if (s.isArray(controlled)) {
+               if (Array.isArray(controlled)) {
                    for (var i = 0; i < controlled.length; i++) {
                        if (controlled[i] !== byController && controlled[i] instanceof Swiper) {
                            setControlledTranslate(controlled[i]);
@@ -6222,7 +6017,7 @@ module.exports = __webpack_require__(4).default;
                         });
                     }
                 }
-                if (s.isArray(controlled)) {
+                if (Array.isArray(controlled)) {
                     for (i = 0; i < controlled.length; i++) {
                         if (controlled[i] !== byController && controlled[i] instanceof Swiper) {
                             setControlledTransition(controlled[i]);
@@ -6234,6 +6029,7 @@ module.exports = __webpack_require__(4).default;
                 }
             }
         };
+        
 
         /*=========================
           Hash Navigation
@@ -6281,6 +6077,7 @@ module.exports = __webpack_require__(4).default;
                 if (s.params.hashnavWatchState) s.hashnav.attachEvents(true);
             }
         };
+        
 
         /*=========================
           History Api with fallback to Hashnav
@@ -6348,6 +6145,7 @@ module.exports = __webpack_require__(4).default;
                 }
             }
         };
+        
 
         /*=========================
           Keyboard Control
@@ -6416,6 +6214,7 @@ module.exports = __webpack_require__(4).default;
                 if (kc === 40) s.slideNext();
                 if (kc === 38) s.slidePrev();
             }
+            s.emit('onKeyPress', s, kc);
         }
         s.disableKeyboardControl = function () {
             s.params.keyboardControl = false;
@@ -6434,18 +6233,6 @@ module.exports = __webpack_require__(4).default;
             event: false,
             lastScrollTime: (new window.Date()).getTime()
         };
-        if (s.params.mousewheelControl) {
-            /**
-             * The best combination if you prefer spinX + spinY normalization.  It favors
-             * the older DOMMouseScroll for Firefox, as FF does not include wheelDelta with
-             * 'wheel' event, making spin speed determination impossible.
-             */
-            s.mousewheel.event = (navigator.userAgent.indexOf('firefox') > -1) ?
-                'DOMMouseScroll' :
-                isEventSupported() ?
-                    'wheel' : 'mousewheel';
-        }
-        
         function isEventSupported() {
             var eventName = 'onwheel';
             var isSupported = eventName in document;
@@ -6468,115 +6255,6 @@ module.exports = __webpack_require__(4).default;
         
             return isSupported;
         }
-        
-        function handleMousewheel(e) {
-            if (e.originalEvent) e = e.originalEvent; //jquery fix
-            var delta = 0;
-            var rtlFactor = s.rtl ? -1 : 1;
-        
-            var data = normalizeWheel( e );
-        
-            if (s.params.mousewheelForceToAxis) {
-                if (s.isHorizontal()) {
-                    if (Math.abs(data.pixelX) > Math.abs(data.pixelY)) delta = data.pixelX * rtlFactor;
-                    else return;
-                }
-                else {
-                    if (Math.abs(data.pixelY) > Math.abs(data.pixelX)) delta = data.pixelY;
-                    else return;
-                }
-            }
-            else {
-                delta = Math.abs(data.pixelX) > Math.abs(data.pixelY) ? - data.pixelX * rtlFactor : - data.pixelY;
-            }
-        
-            if (delta === 0) return;
-        
-            if (s.params.mousewheelInvert) delta = -delta;
-        
-            if (!s.params.freeMode) {
-                if ((new window.Date()).getTime() - s.mousewheel.lastScrollTime > 60) {
-                    if (delta < 0) {
-                        if ((!s.isEnd || s.params.loop) && !s.animating) {
-                            s.slideNext();
-                            s.emit('onScroll', s, e);
-                        }
-                        else if (s.params.mousewheelReleaseOnEdges) return true;
-                    }
-                    else {
-                        if ((!s.isBeginning || s.params.loop) && !s.animating) {
-                            s.slidePrev();
-                            s.emit('onScroll', s, e);
-                        }
-                        else if (s.params.mousewheelReleaseOnEdges) return true;
-                    }
-                }
-                s.mousewheel.lastScrollTime = (new window.Date()).getTime();
-        
-            }
-            else {
-                //Freemode or scrollContainer:
-                var position = s.getWrapperTranslate() + delta * s.params.mousewheelSensitivity;
-                var wasBeginning = s.isBeginning,
-                    wasEnd = s.isEnd;
-        
-                if (position >= s.minTranslate()) position = s.minTranslate();
-                if (position <= s.maxTranslate()) position = s.maxTranslate();
-        
-                s.setWrapperTransition(0);
-                s.setWrapperTranslate(position);
-                s.updateProgress();
-                s.updateActiveIndex();
-        
-                if (!wasBeginning && s.isBeginning || !wasEnd && s.isEnd) {
-                    s.updateClasses();
-                }
-        
-                if (s.params.freeModeSticky) {
-                    clearTimeout(s.mousewheel.timeout);
-                    s.mousewheel.timeout = setTimeout(function () {
-                        s.slideReset();
-                    }, 300);
-                }
-                else {
-                    if (s.params.lazyLoading && s.lazy) {
-                        s.lazy.load();
-                    }
-                }
-                // Emit event
-                s.emit('onScroll', s, e);
-        
-                // Stop autoplay
-                if (s.params.autoplay && s.params.autoplayDisableOnInteraction) s.stopAutoplay();
-        
-                // Return page scroll on edge positions
-                if (position === 0 || position === s.maxTranslate()) return;
-            }
-        
-            if (e.preventDefault) e.preventDefault();
-            else e.returnValue = false;
-            return false;
-        }
-        s.disableMousewheelControl = function () {
-            if (!s.mousewheel.event) return false;
-            var target = s.container;
-            if (s.params.mousewheelEventsTarged !== 'container') {
-                target = $(s.params.mousewheelEventsTarged);
-            }
-            target.off(s.mousewheel.event, handleMousewheel);
-            return true;
-        };
-        
-        s.enableMousewheelControl = function () {
-            if (!s.mousewheel.event) return false;
-            var target = s.container;
-            if (s.params.mousewheelEventsTarged !== 'container') {
-                target = $(s.params.mousewheelEventsTarged);
-            }
-            target.on(s.mousewheel.event, handleMousewheel);
-            return true;
-        };
-        
         /**
          * Mouse wheel (and 2-finger trackpad) support on the web sucks.  It is
          * complicated, thus this doc is long and (hopefully) detailed enough to answer
@@ -6741,6 +6419,127 @@ module.exports = __webpack_require__(4).default;
                 pixelY: pY
             };
         }
+        if (s.params.mousewheelControl) {
+            /**
+             * The best combination if you prefer spinX + spinY normalization.  It favors
+             * the older DOMMouseScroll for Firefox, as FF does not include wheelDelta with
+             * 'wheel' event, making spin speed determination impossible.
+             */
+            s.mousewheel.event = (navigator.userAgent.indexOf('firefox') > -1) ?
+                'DOMMouseScroll' :
+                isEventSupported() ?
+                    'wheel' : 'mousewheel';
+        }
+        function handleMousewheel(e) {
+            if (e.originalEvent) e = e.originalEvent; //jquery fix
+            var delta = 0;
+            var rtlFactor = s.rtl ? -1 : 1;
+        
+            var data = normalizeWheel( e );
+        
+            if (s.params.mousewheelForceToAxis) {
+                if (s.isHorizontal()) {
+                    if (Math.abs(data.pixelX) > Math.abs(data.pixelY)) delta = data.pixelX * rtlFactor;
+                    else return;
+                }
+                else {
+                    if (Math.abs(data.pixelY) > Math.abs(data.pixelX)) delta = data.pixelY;
+                    else return;
+                }
+            }
+            else {
+                delta = Math.abs(data.pixelX) > Math.abs(data.pixelY) ? - data.pixelX * rtlFactor : - data.pixelY;
+            }
+        
+            if (delta === 0) return;
+        
+            if (s.params.mousewheelInvert) delta = -delta;
+        
+            if (!s.params.freeMode) {
+                if ((new window.Date()).getTime() - s.mousewheel.lastScrollTime > 60) {
+                    if (delta < 0) {
+                        if ((!s.isEnd || s.params.loop) && !s.animating) {
+                            s.slideNext();
+                            s.emit('onScroll', s, e);
+                        }
+                        else if (s.params.mousewheelReleaseOnEdges) return true;
+                    }
+                    else {
+                        if ((!s.isBeginning || s.params.loop) && !s.animating) {
+                            s.slidePrev();
+                            s.emit('onScroll', s, e);
+                        }
+                        else if (s.params.mousewheelReleaseOnEdges) return true;
+                    }
+                }
+                s.mousewheel.lastScrollTime = (new window.Date()).getTime();
+        
+            }
+            else {
+                //Freemode or scrollContainer:
+                var position = s.getWrapperTranslate() + delta * s.params.mousewheelSensitivity;
+                var wasBeginning = s.isBeginning,
+                    wasEnd = s.isEnd;
+        
+                if (position >= s.minTranslate()) position = s.minTranslate();
+                if (position <= s.maxTranslate()) position = s.maxTranslate();
+        
+                s.setWrapperTransition(0);
+                s.setWrapperTranslate(position);
+                s.updateProgress();
+                s.updateActiveIndex();
+        
+                if (!wasBeginning && s.isBeginning || !wasEnd && s.isEnd) {
+                    s.updateClasses();
+                }
+        
+                if (s.params.freeModeSticky) {
+                    clearTimeout(s.mousewheel.timeout);
+                    s.mousewheel.timeout = setTimeout(function () {
+                        s.slideReset();
+                    }, 300);
+                }
+                else {
+                    if (s.params.lazyLoading && s.lazy) {
+                        s.lazy.load();
+                    }
+                }
+                // Emit event
+                s.emit('onScroll', s, e);
+        
+                // Stop autoplay
+                if (s.params.autoplay && s.params.autoplayDisableOnInteraction) s.stopAutoplay();
+        
+                // Return page scroll on edge positions
+                if (position === 0 || position === s.maxTranslate()) return;
+            }
+        
+            if (e.preventDefault) e.preventDefault();
+            else e.returnValue = false;
+            return false;
+        }
+        s.disableMousewheelControl = function () {
+            if (!s.mousewheel.event) return false;
+            var target = s.container;
+            if (s.params.mousewheelEventsTarged !== 'container') {
+                target = $(s.params.mousewheelEventsTarged);
+            }
+            target.off(s.mousewheel.event, handleMousewheel);
+            s.params.mousewheelControl = false;
+            return true;
+        };
+        
+        s.enableMousewheelControl = function () {
+            if (!s.mousewheel.event) return false;
+            var target = s.container;
+            if (s.params.mousewheelEventsTarged !== 'container') {
+                target = $(s.params.mousewheelEventsTarged);
+            }
+            target.on(s.mousewheel.event, handleMousewheel);
+            s.params.mousewheelControl = true;
+            return true;
+        };
+        
 
         /*=========================
           Parallax
@@ -7171,6 +6970,7 @@ module.exports = __webpack_require__(4).default;
                 s.zoom.attachEvents(true);
             }
         };
+        
 
         /*=========================
           Plugins API. Collect all and init all plugins
@@ -7188,6 +6988,7 @@ module.exports = __webpack_require__(4).default;
                 }
             }
         };
+        
 
         /*=========================
           Events/Callbacks/Plugins Emitter
@@ -7250,6 +7051,7 @@ module.exports = __webpack_require__(4).default;
             s.on(eventName, _handler);
             return s;
         };
+        
 
         // Accessibility tools
         s.a11y = {
@@ -8277,6 +8079,7 @@ module.exports = __webpack_require__(4).default;
     else {
     	domLib = Dom7;
     }
+    
 
     /*===========================
     Add .swiper plugin from Dom libraries
@@ -8346,9 +8149,11 @@ module.exports = __webpack_require__(4).default;
             };
         }
     }
+    
 
     window.Swiper = Swiper;
 })();
+
 /*===========================
 Swiper AMD Export
 ===========================*/
@@ -8362,6 +8167,7 @@ else if (typeof define === 'function' && define.amd) {
         return window.Swiper;
     });
 }
+
 //# sourceMappingURL=maps/swiper.js.map
 
 /**
@@ -8667,7 +8473,7 @@ else if (typeof define === 'function' && define.amd) {
 }));
 
 /*!
- * imagesLoaded v4.1.1
+ * imagesLoaded v4.1.4
  * JavaScript is all like "You images are done yet or what?"
  * MIT License
  */
@@ -8698,7 +8504,7 @@ else if (typeof define === 'function' && define.amd) {
     );
   }
 
-})( window,
+})( typeof window !== 'undefined' ? window : this,
 
 // --------------------------  factory -------------------------- //
 
@@ -8719,22 +8525,23 @@ function extend( a, b ) {
   return a;
 }
 
+var arraySlice = Array.prototype.slice;
+
 // turn element or nodeList into an array
 function makeArray( obj ) {
-  var ary = [];
   if ( Array.isArray( obj ) ) {
     // use object if already an array
-    ary = obj;
-  } else if ( typeof obj.length == 'number' ) {
-    // convert nodeList to array
-    for ( var i=0; i < obj.length; i++ ) {
-      ary.push( obj[i] );
-    }
-  } else {
-    // array of single index
-    ary.push( obj );
+    return obj;
   }
-  return ary;
+
+  var isArrayLike = typeof obj == 'object' && typeof obj.length == 'number';
+  if ( isArrayLike ) {
+    // convert nodeList to array
+    return arraySlice.call( obj );
+  }
+
+  // array of single index
+  return [ obj ];
 }
 
 // -------------------------- imagesLoaded -------------------------- //
@@ -8750,13 +8557,19 @@ function ImagesLoaded( elem, options, onAlways ) {
     return new ImagesLoaded( elem, options, onAlways );
   }
   // use elem as selector string
+  var queryElem = elem;
   if ( typeof elem == 'string' ) {
-    elem = document.querySelectorAll( elem );
+    queryElem = document.querySelectorAll( elem );
+  }
+  // bail if bad element
+  if ( !queryElem ) {
+    console.error( 'Bad element for imagesLoaded ' + ( queryElem || elem ) );
+    return;
   }
 
-  this.elements = makeArray( elem );
+  this.elements = makeArray( queryElem );
   this.options = extend( {}, this.options );
-
+  // shift arguments if no options set
   if ( typeof options == 'function' ) {
     onAlways = options;
   } else {
@@ -8775,9 +8588,7 @@ function ImagesLoaded( elem, options, onAlways ) {
   }
 
   // HACK check async to allow time to bind listeners
-  setTimeout( function() {
-    this.check();
-  }.bind( this ));
+  setTimeout( this.check.bind( this ) );
 }
 
 ImagesLoaded.prototype = Object.create( EvEmitter.prototype );
@@ -8945,7 +8756,9 @@ LoadingImage.prototype.check = function() {
 };
 
 LoadingImage.prototype.getIsImageComplete = function() {
-  return this.img.complete && this.img.naturalWidth !== undefined;
+  // check for non-zero, non-undefined naturalWidth
+  // fixes Safari+InfiniteScroll+Masonry bug infinite-scroll#671
+  return this.img.complete && this.img.naturalWidth;
 };
 
 LoadingImage.prototype.confirm = function( isLoaded, message ) {
