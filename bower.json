@@ -19,7 +19,8 @@
     "imagesloaded": "^4.1.4",
     "shufflejs": "^4.2.0",
     "swiper": "^3.4.2",
-    "zenscroll": "^3.3.0"
+    "zenscroll": "^3.3.0",
+    "picturefill": "2.3.1"
   },
   "overrides": {
     "zenscroll": {
