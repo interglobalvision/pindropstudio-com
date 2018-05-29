@@ -46,8 +46,8 @@
           <li><a <?php echo menuActiveClasses('live', 'page'); ?>href="<?php echo home_url('live'); ?>">Live</a></li>
           <li><a <?php echo menuActiveClasses('sound-and-vision', 'page'); ?>href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>
           <li><a <?php echo menuActiveClasses('luminaries', 'postype'); ?>href="<?php echo home_url('luminaries'); ?>">Luminaries</a></li>
-           <li><a <?php echo menuActiveClasses('post', 'postype'); ?>href="<?php echo home_url('a-short-affairan-anthology-of-original-short-fictionpublished-12th-july-2018'); ?>">A Short Affair</a></li>
-                   <li><a <?php echo menuActiveClasses('post', 'postype'); ?>href="<?php echo home_url('news'); ?>">News</a></li>
+          <li><a <?php echo menuActiveClasses('a-short-affairan-anthology-of-original-short-fictionpublished-12th-july-2018', 'page'); ?>href="<?php echo home_url('a-short-affairan-anthology-of-original-short-fictionpublished-12th-july-2018'); ?>">A Short Affair</a></li>
+          <li><a <?php echo menuActiveClasses('post', 'postype'); ?>href="<?php echo home_url('news'); ?>">News</a></li>
           <?php
             $shop_link = IGV_get_option('_igv_site_options', '_igv_shop_link');
             if ($shop_link) {
