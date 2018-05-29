@@ -26,6 +26,7 @@
           <li><a href="<?php echo home_url('partners'); ?>">Partners</a></li>
           <li><a href="<?php echo home_url('contact'); ?>">Contact</a></li>
           <li><a href="<?php echo home_url('credits'); ?>">Credits</a></li>
+          <li><a href="<?php echo home_url('privacy'); ?>">Privacy</a></li>
         </ul>
         <ul id="footer-social-menu" class="footer-menu u-inline-list margin-bottom-mid">
         <?php
