@@ -21,6 +21,9 @@
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
   <?php } ?>
   <?php wp_head(); ?>
+
+
+
 </head>
 <body <?php body_class(); ?>>
 <!--[if lt IE 9]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
@@ -43,6 +46,7 @@
           <li><a <?php echo menuActiveClasses('live', 'page'); ?>href="<?php echo home_url('live'); ?>">Live</a></li>
           <li><a <?php echo menuActiveClasses('sound-and-vision', 'page'); ?>href="<?php echo home_url('sound-and-vision'); ?>">Sound & Vision</a></li>
           <li><a <?php echo menuActiveClasses('luminaries', 'postype'); ?>href="<?php echo home_url('luminaries'); ?>">Luminaries</a></li>
+          <li><a <?php echo menuActiveClasses('a-short-affairan-anthology-of-original-short-fictionpublished-12th-july-2018', 'page'); ?>href="<?php echo home_url('a-short-affairan-anthology-of-original-short-fictionpublished-12th-july-2018'); ?>">A Short Affair</a></li>
           <li><a <?php echo menuActiveClasses('post', 'postype'); ?>href="<?php echo home_url('news'); ?>">News</a></li>
           <?php
             $shop_link = IGV_get_option('_igv_site_options', '_igv_shop_link');
@@ -52,7 +56,7 @@
           <?php
             }
           ?>
-          <li><a <?php echo menuActiveClasses('submit', 'page'); ?>href="<?php echo home_url('submit'); ?>">Submit</a></li>
+          <li><a <?php echo menuActiveClasses('submit', 'page'); ?>href="<?php echo home_url('submit'); ?>">Award</a></li>
           <li><a <?php echo menuActiveClasses('about', 'page'); ?>href="<?php echo home_url('about'); ?>">About</a></li>
           <li><a href="<?php echo home_url('members-only'); ?>">Members</a></li>
         </ul>
