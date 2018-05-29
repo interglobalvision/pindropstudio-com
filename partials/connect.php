@@ -44,29 +44,3 @@
 <div class="grid-row margin-bottom-basic">
   <?php render_divider($social_divider_content); ?>
 </div>
-
-
-
-
-
-<!--
-<form id="subForm" class="js-cm-form" action="https://www.createsend.com/t/subscribeerror?description=" method="post" data-id="191722FC90141D02184CB1B62AB3DC262F95B3347CC1ABDEF250925282703F163395E69468AD5F876CF8A8F96F467779A1A001B7E165D7A1C2E1654A34F6CA93">
-    
-    <p>
-        <label for="fieldName">Name</label><br />
-        <input id="fieldName" name="cm-name" type="text" />
-    </p>
-    <p>
-        <label for="fieldEmail">Email</label><br />
-        <input id="fieldEmail" class="js-cm-email-input" name="cm-gdhtyl-gdhtyl" type="email" required /> 
-    </p>
-    <p>
-        <label for="fieldsduwd">Lastname</label><br />
-        <input id="fieldsduwd" name="cm-f-sduwd" type="text" />
-    </p>
-    <p>
-        <button class="js-cm-submit-button" type="submit">Subscribe</button> 
-    </p>
-</form>
-    <script type="text/javascript" src="https://js.createsend1.com/javascript/copypastesubscribeformlogic.js"></script>
--->
