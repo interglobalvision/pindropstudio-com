@@ -2164,9 +2164,6 @@ input[type=radio] {
   .padding-bottom-large {
     padding-bottom: 70px;
   }
-  .container {
-    max-width: initial;
-  }
   .grid-item,
   .shuffle-item {
     padding: 0 7px;
@@ -2535,9 +2532,6 @@ input[type=radio] {
   }
 }
 @media screen and (min-width: 860px) {
-  .container {
-    max-width: initial;
-  }
   html {
     font-size: 16px;
   }
@@ -2579,9 +2573,6 @@ input[type=radio] {
   }
 }
 @media screen and (min-width: 1024px) {
-  .container {
-    max-width: initial;
-  }
   .grid-item,
   .shuffle-item {
     padding: 0 8px;
